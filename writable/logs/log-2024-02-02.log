@@ -1,0 +1,27 @@
+CRITICAL - 2024-02-02 02:00:36 --> Attempt to read property "data" on null
+in APPPATH\Controllers\Settings.php on line 1315.
+ 1 APPPATH\Controllers\Settings.php(1315): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "data" on null', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Settings.php', 1315)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->edit_workflow()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-02 02:01:46 --> Undefined variable $dashboard_info
+in APPPATH\Views\workflows\edit\index.php on line 81.
+ 1 APPPATH\Views\workflows\edit\index.php(81): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $dashboard_info', 'D:\\projects\\visaalliance-crm\\app\\Views\\workflows\\edit\\index.php', 81)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\workflows\\edit\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('workflows/edit/index', [], true)
+ 5 APPPATH\Views\layout\index.php(59): view('workflows/edit/index')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(22): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Settings.php(1319): App\Libraries\Template->rander('workflows/edit/index', [...])
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->edit_workflow()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-02 02:42:00 --> Cannot redeclare App\Controllers\Settings::_make_widgets_row()
+in APPPATH\Controllers\Settings.php on line 1776.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()

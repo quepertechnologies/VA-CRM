@@ -1,0 +1,173 @@
+CRITICAL - 2024-01-17 06:12:59 --> Undefined variable $show_own_clients_only_user_id
+in APPPATH\Views\students\overview\index.php on line 4.
+ 1 APPPATH\Views\students\overview\index.php(4): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $show_own_clients_only_user_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\students\\overview\\index.php', 4)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\overview\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/overview/index', [], true)
+ 5 APPPATH\Views\students\clients_list.php(9): view('students/overview/index')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\clients_list.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/clients_list', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('students/clients_list', [...])
+10 APPPATH\Controllers\Students.php(2112): App\Libraries\Template->view('students/clients_list', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->clients_list()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 06:49:35 --> Undefined variable $tab
+in APPPATH\Controllers\Students.php on line 2129.
+ 1 APPPATH\Controllers\Students.php(2129): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $tab', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Students.php', 2129)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->clients_list()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 06:49:38 --> Undefined variable $tab
+in APPPATH\Controllers\Students.php on line 2129.
+ 1 APPPATH\Controllers\Students.php(2129): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $tab', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Students.php', 2129)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->clients_list()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 07:41:25 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 348
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(348): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(293): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->waiting_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 07:41:45 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 348
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(348): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(255): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 07:47:58 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 348
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(348): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(293): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->waiting_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 07:49:17 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 348
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(348): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(293): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->waiting_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 07:50:30 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 348
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(348): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(293): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->waiting_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 07:54:54 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 348
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(348): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(293): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->waiting_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 07:58:41 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('check_in/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 07:58:44 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 348
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(348): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(293): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->waiting_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 08:01:07 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 348
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(348): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(293): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->waiting_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 08:10:12 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 372
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(372): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(317): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->waiting_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 08:23:10 --> Undefined property: mysqli::$type
+in APPPATH\Controllers\Security_Controller.php on line 376.
+ 1 APPPATH\Controllers\Security_Controller.php(376): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: mysqli::$type', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Security_Controller.php', 376)
+ 2 APPPATH\Controllers\Check_in.php(107): App\Controllers\Security_Controller->get_clients_dropdown()
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 08:23:51 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 347
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(347): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(292): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->waiting_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 08:23:53 --> Undefined property: mysqli::$type
+in APPPATH\Controllers\Security_Controller.php on line 376.
+ 1 APPPATH\Controllers\Security_Controller.php(376): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: mysqli::$type', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Security_Controller.php', 376)
+ 2 APPPATH\Controllers\Check_in.php(107): App\Controllers\Security_Controller->get_clients_dropdown()
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 08:27:20 --> Undefined property: mysqli::$type
+in APPPATH\Controllers\Security_Controller.php on line 376.
+ 1 APPPATH\Controllers\Security_Controller.php(376): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: mysqli::$type', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Security_Controller.php', 376)
+ 2 APPPATH\Controllers\Check_in.php(107): App\Controllers\Security_Controller->get_clients_dropdown()
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 08:28:22 --> Object of class CodeIgniter\Database\MySQLi\Result could not be converted to string
+in APPPATH\Controllers\Security_Controller.php on line 376.
+ 1 APPPATH\Controllers\Check_in.php(107): App\Controllers\Security_Controller->get_clients_dropdown()
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 08:30:09 --> Array to string conversion
+in APPPATH\Views\check_in\client_form_fields.php on line 62.
+ 1 APPPATH\Views\check_in\client_form_fields.php(62): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\client_form_fields.php', 62)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\client_form_fields.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/client_form_fields', [], true)
+ 5 APPPATH\Views\check_in\modal_form.php(21): view('check_in/client_form_fields')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/modal_form', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('check_in/modal_form', [...])
+10 APPPATH\Controllers\Check_in.php(115): App\Libraries\Template->view('check_in/modal_form', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-17 08:39:06 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 347
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(347): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(254): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

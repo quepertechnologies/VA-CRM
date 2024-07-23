@@ -1,0 +1,34 @@
+<?php echo form_open(get_uri("organizations/save_file"), array("id" => "file-form", "class" => "general-form", "role" => "form")); ?>
+<div class="modal-body clearfix">
+    <div class="container-fluid">
+        <input type="hidden" name="client_id" value="<?php echo $client_id; ?>" />
+        <?php
+        if ($client_info->account_type) {
+            echo view("includes/multi_file_uploader", array(
+                "upload_url" => get_uri("organizations/upload_file"),
+                "validation_url" => get_uri("organizations/validate_file"),
+                'account_type' => $client_info->account_type
+            ));
+        }
+        ?>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default cancel-upload" data-bs-dismiss="modal"><span data-feather="x" class="icon-16"></span> <?php echo app_lang('close'); ?></button>
+    <button type="submit" disabled="disabled" class="btn btn-primary start-upload"><span data-feather="check-circle" class="icon-16"></span> <?php echo app_lang('save'); ?></button>
+</div>
+<?php echo form_close(); ?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#file-form").appForm({
+            onSuccess: function(result) {
+                $("#client-file-table").appTable({
+                    reload: true
+                });
+            }
+        });
+
+    });
+</script>

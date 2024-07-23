@@ -1,0 +1,58 @@
+[
+  {
+    "label": "Passport",
+    "required": true
+  },
+  {
+    "label": "Visa Grant Letter",
+    "required": true
+  },
+  {
+    "label": "Skill Assessment",
+    "required": true
+  },
+  {
+    "label": "Naati Certificate",
+    "required": true
+  },
+  {
+    "label": "English Language Test Scores (IELTS / PTE / TOEFL)",
+    "required": true
+  },
+  {
+    "label": "Australian Academic Certificates (Completion Letter)",
+    "required": true
+  },
+  {
+    "label": "Transcripts",
+    "required": true
+  },
+  {
+    "label": "Resume / CV",
+    "required": true
+  },
+  {
+    "label": "Proof of Address (Utility Bill / Photo Id / License / Bank Statement)",
+    "required": true
+  },
+  {
+    "label": "Tax invoice",
+    "required": false
+  },
+  {
+    "label": "Payment Receipt",
+    "required": false
+  },
+  {
+    "label": "Draft Application For Review",
+    "required": false
+  },
+  {
+    "label": "EOI Lodged Evidence and the EOI Points Breakdown",
+    "required": false
+  },
+  {
+    "label": "ROI Lodged Snapshot and send it to Client",
+    "required": false
+  }
+]

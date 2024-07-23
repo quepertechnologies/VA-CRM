@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "Client Documents",
+    "doc_check_list": true
+  },
+  {
+    "id": 2,
+    "title": "Application Commenced"
+  },
+  {
+    "id": 3,
+    "title": "Application Lodged to DHA"
+  },
+  {
+    "id": 4,
+    "title": "Information Request S56 from DHA"
+  },
+  {
+    "id": 5,
+    "title": "Visa Approved / Refused"
+  },
+  {
+    "id": 6,
+    "title": "Client Notification --- Complete"
+  }
+]

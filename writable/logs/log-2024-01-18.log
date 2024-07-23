@@ -1,0 +1,434 @@
+CRITICAL - 2024-01-18 00:08:18 --> Undefined property: stdClass::$vat_number
+in APPPATH\Views\leads\lead_form_fields.php on line 191.
+ 1 APPPATH\Views\leads\lead_form_fields.php(191): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$vat_number', 'D:\\projects\\visaalliance-crm\\app\\Views\\leads\\lead_form_fields.php', 191)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\leads\\lead_form_fields.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('leads/lead_form_fields', [], true)
+ 5 APPPATH\Views\leads\modal_form.php(4): view('leads/lead_form_fields')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\leads\\modal_form.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('leads/modal_form', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('leads/modal_form', [...])
+10 APPPATH\Controllers\Leads.php(57): App\Libraries\Template->view('leads/modal_form', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Leads->modal_form()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Leads))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-01-18 00:08:21 --> mysqli_sql_exception: Unknown column 'rise_clients.sort' in 'field list' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_cli...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_cli...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_cli...')
+#3 D:\projects\visaalliance-crm\app\Models\Clients_model.php(429): CodeIgniter\Database\BaseConnection->query('SELECT rise_cli...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Leads.php(981): App\Models\Clients_model->get_leads_kanban_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Leads->all_leads_kanban_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Leads))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-01-18 00:08:21 --> Unknown column 'rise_clients.sort' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_clients.id, rise_clients.company_name, rise_clients.sort, IF(rise_clients.sort!=0, rise_clients.sort, rise_clients.id) AS new_sort, rise_clients.lead_status_id, rise_clients.owner_id,
+                (SELECT rise_users.image FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\' AND rise_users.is_primary_contact=1) AS primary_contact_avatar,
+                (SELECT COUNT(rise_users.id) FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\') AS total_contacts_count,
+                (SELECT COUNT(rise_events.id) FROM rise_events WHERE rise_events.deleted=0 AND rise_events.client_id=rise_clients.id) AS total_events_count,
+                (SELECT COUNT(rise_notes.id) FROM rise_notes WHERE rise_notes.deleted=0 AND rise_notes.client_id=rise_clients.id) AS total_notes_count,
+                (SELECT COUNT(rise_estimates.id) FROM rise_estimates WHERE rise_estimates.deleted=0 AND rise_estimates.client_id=rise_clients.id) AS total_estimates_count,
+                (SELECT COUNT(rise_general_files.id) FROM rise_general_files WHERE rise_general_files.deleted=0 AND rise_general_files.client_id=rise_clients.id) AS total_files_count,
+                (SELECT COUNT(rise_estimate_requests.id) FROM rise_estimate_requests WHERE rise_estimate_requests.deleted=0 AND rise_estimate_requests.client_id=rise_clients.id) AS total_estimate_requests_count,
+                rise_lead_source.title AS lead_source_title,
+                CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name
+        FROM rise_clients 
+        LEFT JOIN rise_lead_source ON rise_clients.lead_source_id = rise_lead_source.id 
+        LEFT JOIN rise_users ON rise_users.id = rise_clients.owner_id AND rise_users.deleted=0 AND rise_users.user_type=\'staff\' 
+        WHERE rise_clients.deleted=0 AND rise_clients.is_lead=1  
+        ORDER BY new_sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_clients.id, rise_clients.company_name, rise_clients.sort, IF(rise_clients.sort!=0, rise_clients.sort, rise_clients.id) AS new_sort, rise_clients.lead_status_id, rise_clients.owner_id,
+                (SELECT rise_users.image FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\' AND rise_users.is_primary_contact=1) AS primary_contact_avatar,
+                (SELECT COUNT(rise_users.id) FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\') AS total_contacts_count,
+                (SELECT COUNT(rise_events.id) FROM rise_events WHERE rise_events.deleted=0 AND rise_events.client_id=rise_clients.id) AS total_events_count,
+                (SELECT COUNT(rise_notes.id) FROM rise_notes WHERE rise_notes.deleted=0 AND rise_notes.client_id=rise_clients.id) AS total_notes_count,
+                (SELECT COUNT(rise_estimates.id) FROM rise_estimates WHERE rise_estimates.deleted=0 AND rise_estimates.client_id=rise_clients.id) AS total_estimates_count,
+                (SELECT COUNT(rise_general_files.id) FROM rise_general_files WHERE rise_general_files.deleted=0 AND rise_general_files.client_id=rise_clients.id) AS total_files_count,
+                (SELECT COUNT(rise_estimate_requests.id) FROM rise_estimate_requests WHERE rise_estimate_requests.deleted=0 AND rise_estimate_requests.client_id=rise_clients.id) AS total_estimate_requests_count,
+                rise_lead_source.title AS lead_source_title,
+                CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name
+        FROM rise_clients 
+        LEFT JOIN rise_lead_source ON rise_clients.lead_source_id = rise_lead_source.id 
+        LEFT JOIN rise_users ON rise_users.id = rise_clients.owner_id AND rise_users.deleted=0 AND rise_users.user_type=\'staff\' 
+        WHERE rise_clients.deleted=0 AND rise_clients.is_lead=1  
+        ORDER BY new_sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_clients.id, rise_clients.company_name, rise_clients.sort, IF(rise_clients.sort!=0, rise_clients.sort, rise_clients.id) AS new_sort, rise_clients.lead_status_id, rise_clients.owner_id,
+                (SELECT rise_users.image FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\' AND rise_users.is_primary_contact=1) AS primary_contact_avatar,
+                (SELECT COUNT(rise_users.id) FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\') AS total_contacts_count,
+                (SELECT COUNT(rise_events.id) FROM rise_events WHERE rise_events.deleted=0 AND rise_events.client_id=rise_clients.id) AS total_events_count,
+                (SELECT COUNT(rise_notes.id) FROM rise_notes WHERE rise_notes.deleted=0 AND rise_notes.client_id=rise_clients.id) AS total_notes_count,
+                (SELECT COUNT(rise_estimates.id) FROM rise_estimates WHERE rise_estimates.deleted=0 AND rise_estimates.client_id=rise_clients.id) AS total_estimates_count,
+                (SELECT COUNT(rise_general_files.id) FROM rise_general_files WHERE rise_general_files.deleted=0 AND rise_general_files.client_id=rise_clients.id) AS total_files_count,
+                (SELECT COUNT(rise_estimate_requests.id) FROM rise_estimate_requests WHERE rise_estimate_requests.deleted=0 AND rise_estimate_requests.client_id=rise_clients.id) AS total_estimate_requests_count,
+                rise_lead_source.title AS lead_source_title,
+                CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name
+        FROM rise_clients 
+        LEFT JOIN rise_lead_source ON rise_clients.lead_source_id = rise_lead_source.id 
+        LEFT JOIN rise_users ON rise_users.id = rise_clients.owner_id AND rise_users.deleted=0 AND rise_users.user_type=\'staff\' 
+        WHERE rise_clients.deleted=0 AND rise_clients.is_lead=1  
+        ORDER BY new_sort ASC')
+ 4 APPPATH\Models\Clients_model.php(429): CodeIgniter\Database\BaseConnection->query('SELECT rise_clients.id, rise_clients.company_name, rise_clients.sort, IF(rise_clients.sort!=0, rise_clients.sort, rise_clients.id) AS new_sort, rise_clients.lead_status_id, rise_clients.owner_id,
+                (SELECT rise_users.image FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\' AND rise_users.is_primary_contact=1) AS primary_contact_avatar,
+                (SELECT COUNT(rise_users.id) FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\') AS total_contacts_count,
+                (SELECT COUNT(rise_events.id) FROM rise_events WHERE rise_events.deleted=0 AND rise_events.client_id=rise_clients.id) AS total_events_count,
+                (SELECT COUNT(rise_notes.id) FROM rise_notes WHERE rise_notes.deleted=0 AND rise_notes.client_id=rise_clients.id) AS total_notes_count,
+                (SELECT COUNT(rise_estimates.id) FROM rise_estimates WHERE rise_estimates.deleted=0 AND rise_estimates.client_id=rise_clients.id) AS total_estimates_count,
+                (SELECT COUNT(rise_general_files.id) FROM rise_general_files WHERE rise_general_files.deleted=0 AND rise_general_files.client_id=rise_clients.id) AS total_files_count,
+                (SELECT COUNT(rise_estimate_requests.id) FROM rise_estimate_requests WHERE rise_estimate_requests.deleted=0 AND rise_estimate_requests.client_id=rise_clients.id) AS total_estimate_requests_count,
+                rise_lead_source.title AS lead_source_title,
+                CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name
+        FROM rise_clients 
+        LEFT JOIN rise_lead_source ON rise_clients.lead_source_id = rise_lead_source.id 
+        LEFT JOIN rise_users ON rise_users.id = rise_clients.owner_id AND rise_users.deleted=0 AND rise_users.user_type=\'staff\' 
+        WHERE rise_clients.deleted=0 AND rise_clients.is_lead=1  
+        ORDER BY new_sort ASC')
+ 5 APPPATH\Controllers\Leads.php(981): App\Models\Clients_model->get_leads_kanban_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Leads->all_leads_kanban_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Leads))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:08:23 --> Undefined property: stdClass::$vat_number
+in APPPATH\Views\leads\lead_form_fields.php on line 191.
+ 1 APPPATH\Views\leads\lead_form_fields.php(191): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$vat_number', 'D:\\projects\\visaalliance-crm\\app\\Views\\leads\\lead_form_fields.php', 191)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\leads\\lead_form_fields.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('leads/lead_form_fields', [], true)
+ 5 APPPATH\Views\leads\modal_form.php(4): view('leads/lead_form_fields')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\leads\\modal_form.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('leads/modal_form', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('leads/modal_form', [...])
+10 APPPATH\Controllers\Leads.php(57): App\Libraries\Template->view('leads/modal_form', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Leads->modal_form()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Leads))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:08:28 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 347
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(347): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(292): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->waiting_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:08:31 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 347
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(347): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(254): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:08:50 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 347
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(347): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(254): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:08:53 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 347
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(347): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(254): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:08:56 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 347
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(347): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(254): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:10:08 --> Invalid file: "attendance/modal_form.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('attendance/modal_form.php')
+ 2 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('attendance/modal_form', [], true)
+ 3 APPPATH\Libraries\Template.php(38): view('attendance/modal_form', [...])
+ 4 APPPATH\Controllers\Attendance.php(86): App\Libraries\Template->view('attendance/modal_form', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Attendance->modal_form()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Attendance))
+ 7 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:10:11 --> Invalid file: "attendance/custom_list.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('attendance/custom_list.php')
+ 2 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('attendance/custom_list', [], true)
+ 3 APPPATH\Libraries\Template.php(38): view('attendance/custom_list', [...])
+ 4 APPPATH\Controllers\Attendance.php(320): App\Libraries\Template->view('attendance/custom_list', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Attendance->custom()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Attendance))
+ 7 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:11:56 --> Invalid file: "check_in/quick_filters_dropdown.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('check_in/quick_filters_dropdown.php')
+ 2 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/quick_filters_dropdown', [], true)
+ 3 APPPATH\Views\check_in\waiting_list.php(18): view('check_in/quick_filters_dropdown')
+ 4 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\waiting_list.php')
+ 5 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/waiting_list', [], true)
+ 7 APPPATH\Views\check_in\index.php(20): view('check_in/waiting_list')
+ 8 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\index.php')
+ 9 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+10 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/index', [], true)
+11 APPPATH\Views\layout\index.php(59): view('check_in/index')
+12 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+13 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+14 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+15 APPPATH\Libraries\Template.php(38): view('layout/index', [...])
+16 APPPATH\Libraries\Template.php(22): App\Libraries\Template->view('layout/index', [...])
+17 APPPATH\Controllers\Check_in.php(56): App\Libraries\Template->rander('check_in/index', [...])
+18 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->index()
+19 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+20 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+21 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:18:28 --> Invalid file: "attendance/modal_form.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('attendance/modal_form.php')
+ 2 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('attendance/modal_form', [], true)
+ 3 APPPATH\Libraries\Template.php(38): view('attendance/modal_form', [...])
+ 4 APPPATH\Controllers\Attendance.php(86): App\Libraries\Template->view('attendance/modal_form', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Attendance->modal_form()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Attendance))
+ 7 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:24:21 --> Undefined variable $ticket_id
+in APPPATH\Views\check_in\modal_form.php on line 20.
+ 1 APPPATH\Views\check_in\modal_form.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $ticket_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php', 20)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(38): view('check_in/modal_form', [...])
+ 6 APPPATH\Controllers\Check_in.php(92): App\Libraries\Template->view('check_in/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:24:24 --> Undefined variable $ticket_id
+in APPPATH\Views\check_in\modal_form.php on line 20.
+ 1 APPPATH\Views\check_in\modal_form.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $ticket_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php', 20)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(38): view('check_in/modal_form', [...])
+ 6 APPPATH\Controllers\Check_in.php(92): App\Libraries\Template->view('check_in/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 00:24:33 --> Undefined variable $ticket_id
+in APPPATH\Views\check_in\modal_form.php on line 20.
+ 1 APPPATH\Views\check_in\modal_form.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $ticket_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php', 20)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(38): view('check_in/modal_form', [...])
+ 6 APPPATH\Controllers\Check_in.php(92): App\Libraries\Template->view('check_in/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 01:59:02 --> date_format(): Argument #1 ($object) must be of type DateTimeInterface, string given
+in APPPATH\Controllers\Check_in.php on line 327.
+ 1 APPPATH\Controllers\Check_in.php(327): date_format('2024-01-18 07:13:26', 'D')
+ 2 APPPATH\Controllers\Check_in.php(251): App\Controllers\Check_in->_make_row(Object(stdClass))
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-01-18 02:00:32 --> mysqli_sql_exception: Unknown column 'Waiting' in 'where clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_att...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_att...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_att...')
+#3 D:\projects\visaalliance-crm\app\Models\Attendance_model.php(108): CodeIgniter\Database\BaseConnection->query('SELECT rise_att...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(251): App\Models\Attendance_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-01-18 02:00:32 --> Unknown column 'Waiting' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_attendance.*,  CONCAT(rise_users.first_name, \' \',rise_users.last_name) AS created_by_user, rise_users.image as created_by_avatar, rise_users.id as user_id, rise_users.job_title as user_job_title
+        FROM rise_attendance
+        LEFT JOIN rise_users ON rise_users.id = rise_attendance.user_id
+        WHERE rise_attendance.deleted=0  AND rise_attendance.status=Waiting
+        ORDER BY rise_attendance.in_time DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_attendance.*,  CONCAT(rise_users.first_name, \' \',rise_users.last_name) AS created_by_user, rise_users.image as created_by_avatar, rise_users.id as user_id, rise_users.job_title as user_job_title
+        FROM rise_attendance
+        LEFT JOIN rise_users ON rise_users.id = rise_attendance.user_id
+        WHERE rise_attendance.deleted=0  AND rise_attendance.status=Waiting
+        ORDER BY rise_attendance.in_time DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_attendance.*,  CONCAT(rise_users.first_name, \' \',rise_users.last_name) AS created_by_user, rise_users.image as created_by_avatar, rise_users.id as user_id, rise_users.job_title as user_job_title
+        FROM rise_attendance
+        LEFT JOIN rise_users ON rise_users.id = rise_attendance.user_id
+        WHERE rise_attendance.deleted=0  AND rise_attendance.status=Waiting
+        ORDER BY rise_attendance.in_time DESC')
+ 4 APPPATH\Models\Attendance_model.php(108): CodeIgniter\Database\BaseConnection->query('SELECT rise_attendance.*,  CONCAT(rise_users.first_name, \' \',rise_users.last_name) AS created_by_user, rise_users.image as created_by_avatar, rise_users.id as user_id, rise_users.job_title as user_job_title
+        FROM rise_attendance
+        LEFT JOIN rise_users ON rise_users.id = rise_attendance.user_id
+        WHERE rise_attendance.deleted=0  AND rise_attendance.status=Waiting
+        ORDER BY rise_attendance.in_time DESC')
+ 5 APPPATH\Controllers\Check_in.php(251): App\Models\Attendance_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 02:00:55 --> date_format(): Argument #1 ($object) must be of type DateTimeInterface, string given
+in APPPATH\Controllers\Check_in.php on line 331.
+ 1 APPPATH\Controllers\Check_in.php(331): date_format('2024-01-18 07:13:26', 'D')
+ 2 APPPATH\Controllers\Check_in.php(255): App\Controllers\Check_in->_make_row(Object(stdClass))
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 02:02:48 --> date(): Argument #2 ($timestamp) must be of type ?int, string given
+in APPPATH\Controllers\Check_in.php on line 331.
+ 1 APPPATH\Controllers\Check_in.php(331): date('D', '2024-01-18 07:13:26')
+ 2 APPPATH\Controllers\Check_in.php(255): App\Controllers\Check_in->_make_row(Object(stdClass))
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-01-18 03:02:55 --> [DEPRECATED] abs(): Passing null to parameter #1 ($num) of type int|float is deprecated in APPPATH\Controllers\Check_in.php on line 457.
+ 1 APPPATH\Controllers\Check_in.php(457): abs(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-01-18 03:02:55 --> [DEPRECATED] abs(): Passing null to parameter #1 ($num) of type int|float is deprecated in APPPATH\Controllers\Check_in.php on line 480.
+ 1 APPPATH\Controllers\Check_in.php(480): abs(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-01-18 03:02:55 --> [DEPRECATED] abs(): Passing null to parameter #1 ($num) of type int|float is deprecated in APPPATH\Controllers\Check_in.php on line 484.
+ 1 APPPATH\Controllers\Check_in.php(484): abs(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 03:02:55 --> Undefined property: stdClass::$start_date
+in APPPATH\Controllers\Check_in.php on line 489.
+ 1 APPPATH\Controllers\Check_in.php(489): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$start_date', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Check_in.php', 489)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-01-18 03:38:42 --> [DEPRECATED] abs(): Passing null to parameter #1 ($num) of type int|float is deprecated in APPPATH\Controllers\Check_in.php on line 457.
+ 1 APPPATH\Controllers\Check_in.php(457): abs(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-01-18 03:38:42 --> [DEPRECATED] abs(): Passing null to parameter #1 ($num) of type int|float is deprecated in APPPATH\Controllers\Check_in.php on line 480.
+ 1 APPPATH\Controllers\Check_in.php(480): abs(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-01-18 03:38:42 --> [DEPRECATED] abs(): Passing null to parameter #1 ($num) of type int|float is deprecated in APPPATH\Controllers\Check_in.php on line 484.
+ 1 APPPATH\Controllers\Check_in.php(484): abs(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 03:38:42 --> Undefined property: stdClass::$start_date
+in APPPATH\Controllers\Check_in.php on line 489.
+ 1 APPPATH\Controllers\Check_in.php(489): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$start_date', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Check_in.php', 489)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-01-18 03:38:55 --> [DEPRECATED] abs(): Passing null to parameter #1 ($num) of type int|float is deprecated in APPPATH\Controllers\Check_in.php on line 457.
+ 1 APPPATH\Controllers\Check_in.php(457): abs(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-01-18 03:38:55 --> [DEPRECATED] abs(): Passing null to parameter #1 ($num) of type int|float is deprecated in APPPATH\Controllers\Check_in.php on line 480.
+ 1 APPPATH\Controllers\Check_in.php(480): abs(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-01-18 03:38:55 --> [DEPRECATED] abs(): Passing null to parameter #1 ($num) of type int|float is deprecated in APPPATH\Controllers\Check_in.php on line 484.
+ 1 APPPATH\Controllers\Check_in.php(484): abs(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 03:38:55 --> Undefined property: stdClass::$start_date
+in APPPATH\Controllers\Check_in.php on line 489.
+ 1 APPPATH\Controllers\Check_in.php(489): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$start_date', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Check_in.php', 489)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 03:45:56 --> Undefined property: stdClass::$client_id
+in APPPATH\Controllers\Check_in.php on line 343.
+ 1 APPPATH\Controllers\Check_in.php(343): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$client_id', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Check_in.php', 343)
+ 2 APPPATH\Controllers\Check_in.php(468): App\Controllers\Check_in->_make_completed_row(Object(stdClass))
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->completed_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 03:46:42 --> Undefined property: stdClass::$client_id
+in APPPATH\Controllers\Check_in.php on line 343.
+ 1 APPPATH\Controllers\Check_in.php(343): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$client_id', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Check_in.php', 343)
+ 2 APPPATH\Controllers\Check_in.php(469): App\Controllers\Check_in->_make_completed_row(Object(stdClass))
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->completed_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 03:47:09 --> Array to string conversion
+in APPPATH\Controllers\Check_in.php on line 467.
+ 1 APPPATH\Controllers\Check_in.php(467): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Check_in.php', 467)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->completed_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 03:47:37 --> Undefined property: stdClass::$client_id
+in APPPATH\Controllers\Check_in.php on line 343.
+ 1 APPPATH\Controllers\Check_in.php(343): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$client_id', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Check_in.php', 343)
+ 2 APPPATH\Controllers\Check_in.php(471): App\Controllers\Check_in->_make_completed_row(Object(stdClass))
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->completed_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-01-18 03:49:41 --> [DEPRECATED] abs(): Passing null to parameter #1 ($num) of type int|float is deprecated in APPPATH\Controllers\Check_in.php on line 509.
+ 1 APPPATH\Controllers\Check_in.php(509): abs(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-01-18 03:49:41 --> [DEPRECATED] abs(): Passing null to parameter #1 ($num) of type int|float is deprecated in APPPATH\Controllers\Check_in.php on line 532.
+ 1 APPPATH\Controllers\Check_in.php(532): abs(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-01-18 03:49:41 --> [DEPRECATED] abs(): Passing null to parameter #1 ($num) of type int|float is deprecated in APPPATH\Controllers\Check_in.php on line 536.
+ 1 APPPATH\Controllers\Check_in.php(536): abs(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-18 03:49:41 --> Undefined property: stdClass::$start_date
+in APPPATH\Controllers\Check_in.php on line 541.
+ 1 APPPATH\Controllers\Check_in.php(541): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$start_date', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Check_in.php', 541)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

@@ -1,0 +1,11 @@
+CRITICAL - 2024-04-23 02:20:37 --> number_format(): Argument #1 ($num) must be of type float, string given
+in APPPATH\Helpers\currency_helper.php on line 53.
+ 1 APPPATH\Helpers\currency_helper.php(53): number_format('2000 fee', 2, '.', ',')
+ 2 APPPATH\Libraries\Cron_job.php(309): to_currency('2000 fee')
+ 3 APPPATH\Libraries\Cron_job.php(108): App\Libraries\Cron_job->_create_partner_invoice(Object(stdClass))
+ 4 APPPATH\Libraries\Cron_job.php(56): App\Libraries\Cron_job->manage_payment_schedule()
+ 5 APPPATH\Controllers\Cron.php(24): App\Libraries\Cron_job->run()
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Cron->index()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Cron))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

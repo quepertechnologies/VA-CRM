@@ -1,0 +1,58 @@
+CRITICAL - 2024-07-05 01:48:08 --> Array to string conversion
+in APPPATH\Helpers\app_files_helper.php on line 538.
+ 1 APPPATH\Helpers\app_files_helper.php(538): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\projects\\visaalliance-crm\\app\\Helpers\\app_files_helper.php', 538)
+ 2 APPPATH\Helpers\app_files_helper.php(567): get_onedrive_access_token()
+ 3 APPPATH\Helpers\app_files_helper.php(608): list_ms_onedrive_directory_items('Clients/Clients/')
+ 4 APPPATH\Controllers\Projects.php(3904): get_client_drive_items('Clients/')
+ 5 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->files_list_data('20')
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 7 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-05 04:44:32 --> foreach() argument must be of type array|object, null given
+in APPPATH\Views\projects\files\index.php on line 41.
+ 1 APPPATH\Views\projects\files\index.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, null given', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\index.php', 41)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/files/index', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('projects/files/index', [...])
+ 6 APPPATH\Controllers\Projects.php(3491): App\Libraries\Template->view('projects/files/index', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->files('20')
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-05 04:45:06 --> foreach() argument must be of type array|object, null given
+in APPPATH\Views\projects\files\index.php on line 41.
+ 1 APPPATH\Views\projects\files\index.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, null given', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\index.php', 41)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/files/index', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('projects/files/index', [...])
+ 6 APPPATH\Controllers\Projects.php(3491): App\Libraries\Template->view('projects/files/index', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->files('20')
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-05 04:46:18 --> foreach() argument must be of type array|object, null given
+in APPPATH\Views\projects\files\index.php on line 41.
+ 1 APPPATH\Views\projects\files\index.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, null given', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\index.php', 41)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/files/index', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('projects/files/index', [...])
+ 6 APPPATH\Controllers\Projects.php(3491): App\Libraries\Template->view('projects/files/index', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->files('20')
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-05 04:47:20 --> foreach() argument must be of type array|object, null given
+in APPPATH\Views\projects\files\index.php on line 41.
+ 1 APPPATH\Views\projects\files\index.php(41): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, null given', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\index.php', 41)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/files/index', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('projects/files/index', [...])
+ 6 APPPATH\Controllers\Projects.php(3491): App\Libraries\Template->view('projects/files/index', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->files('20')
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()

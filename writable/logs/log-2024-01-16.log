@@ -1,0 +1,24 @@
+CRITICAL - 2024-01-16 03:29:37 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 348
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(348): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(293): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->waiting_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-16 03:30:33 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 348
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(348): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(255): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-16 04:58:32 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('students/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

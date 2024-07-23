@@ -1,0 +1,90 @@
+[
+  {
+    "label": "Passport",
+    "required": true
+  },
+  {
+    "label": "Australian Academic Certificates (Completion Letter)",
+    "required": true
+  },
+  {
+    "label": "Proof of Relationship",
+    "required": true
+  },
+  {
+    "label": "Skill Assessment",
+    "required": true
+  },
+  {
+    "label": "Visa Grant Letter",
+    "required": true
+  },
+  {
+    "label": "English Language Test Scores (IELTS/ PTE/ TOEFL)",
+    "required": true
+  },
+  {
+    "label": "Health Insurance OVHC (I will help to organise this )",
+    "required": true
+  },
+  {
+    "label": "Work Reference Letter",
+    "required": true
+  },
+  {
+    "label": "Travel Stamps on the Passport",
+    "required": true
+  },
+  {
+    "label": "Australian Federal Police Certificate",
+    "required": true
+  },
+  {
+    "label": "Proof of Address (Utility Bill/ Photo Id/ Licence/ Bank Statement)",
+    "required": true
+  },
+  {
+    "label": "Travel History with Dates",
+    "required": true
+  },
+  {
+    "label": "Address History with Dates",
+    "required": true
+  },
+  {
+    "label": "GTE Letter",
+    "required": true
+  },
+  {
+    "label": "Overseas Academic Certificates",
+    "required": true
+  },
+  {
+    "label": "Financial Document",
+    "required": true
+  },
+  {
+    "label": "Health Insurance (OSHC)",
+    "required": true
+  },
+  {
+    "label": "Naati Certificate",
+    "required": true
+  },
+  {
+    "label": "Professional Year Program Certificate",
+    "required": true
+  },
+  {
+    "label": "HAP ID (from immi portal)",
+    "required": false
+  },
+  {
+    "label": "Visa refusal letter",
+    "required": false
+  },
+  {
+    "label": "Bridging Visa Grant or Visa Grant",
+    "required": false
+  }
+]

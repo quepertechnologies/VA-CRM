@@ -1,0 +1,15 @@
+[
+  {
+    "id": 1,
+    "title": "Application",
+    "doc_check_list": true
+  },
+  {
+    "id": 2,
+    "title": "Payment"
+  },
+  {
+    "id": 3,
+    "title": "Confirmation"
+  }
+]

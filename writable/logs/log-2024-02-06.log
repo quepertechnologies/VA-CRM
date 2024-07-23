@@ -1,0 +1,258 @@
+CRITICAL - 2024-02-06 03:09:00 --> Undefined variable $page_view
+in APPPATH\Views\workflows\index.php on line 1.
+ 1 APPPATH\Views\workflows\index.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $page_view', 'D:\\projects\\visaalliance-crm\\app\\Views\\workflows\\index.php', 1)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\workflows\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('workflows/index', [], true)
+ 5 APPPATH\Views\layout\index.php(59): view('workflows/index')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(22): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Settings.php(1287): App\Libraries\Template->rander('workflows/index', [])
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->workflows()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-06 03:09:48 --> Undefined variable $client_id
+in APPPATH\Views\workflows\index.php on line 7.
+ 1 APPPATH\Views\workflows\index.php(7): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\workflows\\index.php', 7)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\workflows\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('workflows/index', [], true)
+ 5 APPPATH\Views\layout\index.php(59): view('workflows/index')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(22): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Settings.php(1287): App\Libraries\Template->rander('workflows/index', [])
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->workflows()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-06 03:58:47 --> mysqli_sql_exception: Unknown column 'workflow' in 'where clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_gen...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_gen...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_gen...')
+#3 D:\projects\visaalliance-crm\app\Models\General_files_model.php(46): CodeIgniter\Database\BaseConnection->query('SELECT rise_gen...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Settings.php(1302): App\Models\General_files_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Settings->workflows_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-02-06 03:58:47 --> Unknown column 'workflow' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_general_files.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS uploaded_by_user_name, rise_users.image AS uploaded_by_user_image, rise_users.user_type AS uploaded_by_user_type
+        FROM rise_general_files
+        LEFT JOIN rise_users ON rise_users.id= rise_general_files.uploaded_by
+        WHERE rise_general_files.deleted=0  AND rise_general_files.file_type = workflow', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_general_files.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS uploaded_by_user_name, rise_users.image AS uploaded_by_user_image, rise_users.user_type AS uploaded_by_user_type
+        FROM rise_general_files
+        LEFT JOIN rise_users ON rise_users.id= rise_general_files.uploaded_by
+        WHERE rise_general_files.deleted=0  AND rise_general_files.file_type = workflow')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_general_files.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS uploaded_by_user_name, rise_users.image AS uploaded_by_user_image, rise_users.user_type AS uploaded_by_user_type
+        FROM rise_general_files
+        LEFT JOIN rise_users ON rise_users.id= rise_general_files.uploaded_by
+        WHERE rise_general_files.deleted=0  AND rise_general_files.file_type = workflow')
+ 4 APPPATH\Models\General_files_model.php(46): CodeIgniter\Database\BaseConnection->query('SELECT rise_general_files.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS uploaded_by_user_name, rise_users.image AS uploaded_by_user_image, rise_users.user_type AS uploaded_by_user_type
+        FROM rise_general_files
+        LEFT JOIN rise_users ON rise_users.id= rise_general_files.uploaded_by
+        WHERE rise_general_files.deleted=0  AND rise_general_files.file_type = workflow')
+ 5 APPPATH\Controllers\Settings.php(1302): App\Models\General_files_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->workflows_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-06 04:52:28 --> Undefined property: stdClass::$workflow_id
+in APPPATH\Views\projects\modal_form.php on line 68.
+ 1 APPPATH\Views\projects\modal_form.php(68): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$workflow_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\modal_form.php', 68)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(38): view('projects/modal_form', [...])
+ 6 APPPATH\Controllers\Projects.php(283): App\Libraries\Template->view('projects/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-06 04:52:32 --> Undefined property: stdClass::$workflow_id
+in APPPATH\Views\projects\modal_form.php on line 68.
+ 1 APPPATH\Views\projects\modal_form.php(68): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$workflow_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\modal_form.php', 68)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(38): view('projects/modal_form', [...])
+ 6 APPPATH\Controllers\Projects.php(283): App\Libraries\Template->view('projects/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-06 05:02:52 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Views\projects\project_progress_chart_info.php on line 20
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Views\projects\project_progress_chart_info.php(20): anchor('http://localhost/visaalliance-crm/index.php/clients/view/1', null)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\project_progress_chart_info.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/project_progress_chart_info', [], true)
+ 5 APPPATH\Views\projects\overview.php(7): view('projects/project_progress_chart_info')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\overview.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/overview', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('projects/overview', [...])
+10 APPPATH\Controllers\Projects.php(1097): App\Libraries\Template->view('projects/overview', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->overview('1')
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-06 05:03:26 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Views\projects\project_progress_chart_info.php on line 20
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Views\projects\project_progress_chart_info.php(20): anchor('http://localhost/visaalliance-crm/index.php/clients/view/1', null)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\project_progress_chart_info.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/project_progress_chart_info', [], true)
+ 5 APPPATH\Views\projects\overview.php(7): view('projects/project_progress_chart_info')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\overview.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/overview', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('projects/overview', [...])
+10 APPPATH\Controllers\Projects.php(1097): App\Libraries\Template->view('projects/overview', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->overview('1')
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-06 05:09:09 --> Undefined property: stdClass::$first_name
+in APPPATH\Views\projects\project_progress_chart_info.php on line 20.
+ 1 APPPATH\Views\projects\project_progress_chart_info.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$first_name', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\project_progress_chart_info.php', 20)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\project_progress_chart_info.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/project_progress_chart_info', [], true)
+ 5 APPPATH\Views\projects\overview.php(7): view('projects/project_progress_chart_info')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\overview.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/overview', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('projects/overview', [...])
+10 APPPATH\Controllers\Projects.php(1097): App\Libraries\Template->view('projects/overview', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->overview('1')
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-06 05:15:10 --> Undefined property: stdClass::$first_name
+in APPPATH\Controllers\Projects.php on line 916.
+ 1 APPPATH\Controllers\Projects.php(916): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$first_name', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 916)
+ 2 APPPATH\Controllers\Projects.php(786): App\Controllers\Projects->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-06 05:27:59 --> Undefined property: stdClass::$first_name
+in APPPATH\Views\projects\project_progress_chart_info.php on line 20.
+ 1 APPPATH\Views\projects\project_progress_chart_info.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$first_name', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\project_progress_chart_info.php', 20)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\project_progress_chart_info.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/project_progress_chart_info', [], true)
+ 5 APPPATH\Views\projects\overview.php(7): view('projects/project_progress_chart_info')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\overview.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/overview', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('projects/overview', [...])
+10 APPPATH\Controllers\Projects.php(1107): App\Libraries\Template->view('projects/overview', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->overview('2')
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-06 05:28:21 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Views\projects\project_progress_chart_info.php on line 20
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Views\projects\project_progress_chart_info.php(20): anchor('http://localhost/visaalliance-crm/index.php/clients/view/2', null)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\project_progress_chart_info.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/project_progress_chart_info', [], true)
+ 5 APPPATH\Views\projects\overview.php(7): view('projects/project_progress_chart_info')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\overview.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/overview', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('projects/overview', [...])
+10 APPPATH\Controllers\Projects.php(1107): App\Libraries\Template->view('projects/overview', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->overview('2')
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-06 05:35:09 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.currency_symbol,  total_points_table.total_points, completed_points_table.co...' at line 1 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_pro...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_pro...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_pro...')
+#3 D:\projects\visaalliance-crm\app\Models\Projects_model.php(117): CodeIgniter\Database\BaseConnection->query('SELECT rise_pro...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Projects.php(1039): App\Models\Projects_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Projects.php(957): App\Controllers\Projects->_get_project_info_data('2')
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->view('2')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-06 05:35:09 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.currency_symbol,  total_points_table.total_points, completed_points_table.co...' at line 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_projects.*, rise_clients.company_name, rise_clients.first_name, rise_clients.last_name rise_clients.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, rise_project_status.key_name AS status_key_name, rise_project_status.title_language_key, rise_project_status.title AS status_title,  rise_project_status.icon AS status_icon, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_projects.labels)) AS labels_list 
+        FROM rise_projects
+        LEFT JOIN rise_clients ON rise_clients.id= rise_projects.client_id
+        LEFT JOIN (SELECT project_id, SUM(points) AS total_points FROM rise_tasks WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= rise_projects.id
+        LEFT JOIN (SELECT project_id, SUM(points) AS completed_points FROM rise_tasks WHERE deleted=0 AND status_id=3 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= rise_projects.id
+        LEFT JOIN rise_project_status ON rise_projects.status_id = rise_project_status.id 
+           
+            
+        WHERE rise_projects.deleted=0  AND rise_projects.id=2  
+        ORDER BY rise_projects.start_date DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_projects.*, rise_clients.company_name, rise_clients.first_name, rise_clients.last_name rise_clients.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, rise_project_status.key_name AS status_key_name, rise_project_status.title_language_key, rise_project_status.title AS status_title,  rise_project_status.icon AS status_icon, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_projects.labels)) AS labels_list 
+        FROM rise_projects
+        LEFT JOIN rise_clients ON rise_clients.id= rise_projects.client_id
+        LEFT JOIN (SELECT project_id, SUM(points) AS total_points FROM rise_tasks WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= rise_projects.id
+        LEFT JOIN (SELECT project_id, SUM(points) AS completed_points FROM rise_tasks WHERE deleted=0 AND status_id=3 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= rise_projects.id
+        LEFT JOIN rise_project_status ON rise_projects.status_id = rise_project_status.id 
+           
+            
+        WHERE rise_projects.deleted=0  AND rise_projects.id=2  
+        ORDER BY rise_projects.start_date DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_projects.*, rise_clients.company_name, rise_clients.first_name, rise_clients.last_name rise_clients.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, rise_project_status.key_name AS status_key_name, rise_project_status.title_language_key, rise_project_status.title AS status_title,  rise_project_status.icon AS status_icon, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_projects.labels)) AS labels_list 
+        FROM rise_projects
+        LEFT JOIN rise_clients ON rise_clients.id= rise_projects.client_id
+        LEFT JOIN (SELECT project_id, SUM(points) AS total_points FROM rise_tasks WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= rise_projects.id
+        LEFT JOIN (SELECT project_id, SUM(points) AS completed_points FROM rise_tasks WHERE deleted=0 AND status_id=3 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= rise_projects.id
+        LEFT JOIN rise_project_status ON rise_projects.status_id = rise_project_status.id 
+           
+            
+        WHERE rise_projects.deleted=0  AND rise_projects.id=2  
+        ORDER BY rise_projects.start_date DESC')
+ 4 APPPATH\Models\Projects_model.php(117): CodeIgniter\Database\BaseConnection->query('SELECT rise_projects.*, rise_clients.company_name, rise_clients.first_name, rise_clients.last_name rise_clients.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, rise_project_status.key_name AS status_key_name, rise_project_status.title_language_key, rise_project_status.title AS status_title,  rise_project_status.icon AS status_icon, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_projects.labels)) AS labels_list 
+        FROM rise_projects
+        LEFT JOIN rise_clients ON rise_clients.id= rise_projects.client_id
+        LEFT JOIN (SELECT project_id, SUM(points) AS total_points FROM rise_tasks WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= rise_projects.id
+        LEFT JOIN (SELECT project_id, SUM(points) AS completed_points FROM rise_tasks WHERE deleted=0 AND status_id=3 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= rise_projects.id
+        LEFT JOIN rise_project_status ON rise_projects.status_id = rise_project_status.id 
+           
+            
+        WHERE rise_projects.deleted=0  AND rise_projects.id=2  
+        ORDER BY rise_projects.start_date DESC')
+ 5 APPPATH\Controllers\Projects.php(1039): App\Models\Projects_model->get_details([...])
+ 6 APPPATH\Controllers\Projects.php(957): App\Controllers\Projects->_get_project_info_data('2')
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->view('2')
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-06 05:35:21 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Views\projects\project_progress_chart_info.php on line 20
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Views\projects\project_progress_chart_info.php(20): anchor('http://localhost/visaalliance-crm/index.php/clients/view/2', null)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\project_progress_chart_info.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/project_progress_chart_info', [], true)
+ 5 APPPATH\Views\projects\overview.php(7): view('projects/project_progress_chart_info')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\overview.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/overview', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('projects/overview', [...])
+10 APPPATH\Controllers\Projects.php(1107): App\Libraries\Template->view('projects/overview', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->overview('2')
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

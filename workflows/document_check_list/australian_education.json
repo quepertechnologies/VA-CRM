@@ -1,0 +1,42 @@
+[
+  {
+    "label": "Passport",
+    "required": true
+  },
+  {
+    "label": "Visa Grant Letter",
+    "required": true
+  },
+  {
+    "label": "Australian Academic Certificates (Completion Letter)",
+    "required": true
+  },
+  {
+    "label": "Overseas Academic Certificates",
+    "required": true
+  },
+  {
+    "label": "English Language Test Scores (IELTS / PTE / TOEFL)",
+    "required": true
+  },
+  {
+    "label": "Health Insurance (OSHC)",
+    "required": true
+  },
+  {
+    "label": "Financial Document",
+    "required": true
+  },
+  {
+    "label": "Offer Letter",
+    "required": false
+  },
+  {
+    "label": "CoE",
+    "required": false
+  },
+  {
+    "label": "Payment Receipt",
+    "required": false
+  }
+]

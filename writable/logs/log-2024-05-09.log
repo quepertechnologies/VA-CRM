@@ -1,0 +1,99 @@
+WARNING - 2024-05-09 00:35:16 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(630): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-05-09 00:41:42 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(630): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-05-09 00:49:22 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(630): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-05-09 00:57:45 --> Call to undefined method App\Models\Projects_model::get_data
+in SYSTEMPATH\Model.php on line 838.
+ 1 APPPATH\Controllers\Students.php(394): CodeIgniter\Model->__call('get_data', [...])
+ 2 APPPATH\Controllers\Students.php(366): App\Controllers\Students->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-05-09 00:57:58 --> Call to undefined method App\Models\Projects_model::get_data
+in SYSTEMPATH\Model.php on line 838.
+ 1 APPPATH\Controllers\Students.php(394): CodeIgniter\Model->__call('get_data', [...])
+ 2 APPPATH\Controllers\Students.php(366): App\Controllers\Students->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-05-09 01:30:17 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(630): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-05-09 03:41:15 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AND rise_users.deleted=0 AND rise_users.id NOT IN (SELECT rise_project_member...' at line 4 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_use...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_use...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_use...')
+#3 D:\projects\visaalliance-crm\app\Models\Project_members_model.php(136): CodeIgniter\Database\BaseConnection->query('SELECT rise_use...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Projects.php(1806): App\Models\Project_members_model->get_rest_team_members_for_a_project('14')
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->project_member_modal_form()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-05-09 03:41:15 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AND rise_users.deleted=0 AND rise_users.id NOT IN (SELECT rise_project_member...' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_users.id, CONCAT(rise_users.first_name, \' \',rise_users.last_name) AS member_name
+        FROM rise_users
+        LEFT JOIN rise_project_members ON rise_project_members.user_id=rise_users.id
+        WHERE rise_users.user_type=\'staff\' AND  AND rise_users.deleted=0 AND rise_users.id NOT IN (SELECT rise_project_members.user_id FROM rise_project_members WHERE rise_project_members.project_id=\'14\' AND deleted=0)
+        ORDER BY rise_users.first_name ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_users.id, CONCAT(rise_users.first_name, \' \',rise_users.last_name) AS member_name
+        FROM rise_users
+        LEFT JOIN rise_project_members ON rise_project_members.user_id=rise_users.id
+        WHERE rise_users.user_type=\'staff\' AND  AND rise_users.deleted=0 AND rise_users.id NOT IN (SELECT rise_project_members.user_id FROM rise_project_members WHERE rise_project_members.project_id=\'14\' AND deleted=0)
+        ORDER BY rise_users.first_name ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_users.id, CONCAT(rise_users.first_name, \' \',rise_users.last_name) AS member_name
+        FROM rise_users
+        LEFT JOIN rise_project_members ON rise_project_members.user_id=rise_users.id
+        WHERE rise_users.user_type=\'staff\' AND  AND rise_users.deleted=0 AND rise_users.id NOT IN (SELECT rise_project_members.user_id FROM rise_project_members WHERE rise_project_members.project_id=\'14\' AND deleted=0)
+        ORDER BY rise_users.first_name ASC')
+ 4 APPPATH\Models\Project_members_model.php(136): CodeIgniter\Database\BaseConnection->query('SELECT rise_users.id, CONCAT(rise_users.first_name, \' \',rise_users.last_name) AS member_name
+        FROM rise_users
+        LEFT JOIN rise_project_members ON rise_project_members.user_id=rise_users.id
+        WHERE rise_users.user_type=\'staff\' AND  AND rise_users.deleted=0 AND rise_users.id NOT IN (SELECT rise_project_members.user_id FROM rise_project_members WHERE rise_project_members.project_id=\'14\' AND deleted=0)
+        ORDER BY rise_users.first_name ASC')
+ 5 APPPATH\Controllers\Projects.php(1806): App\Models\Project_members_model->get_rest_team_members_for_a_project('14')
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->project_member_modal_form()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-05-09 08:13:42 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('project_status/list_data', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-05-09 08:13:45 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('project_status/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

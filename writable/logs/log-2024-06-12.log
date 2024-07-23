@@ -1,0 +1,197 @@
+ERROR - 2024-06-12 02:24:30 --> mysqli_sql_exception: Unknown column 'rise_tickets.location_ids' in 'where clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(ri...')
+#3 D:\projects\visaalliance-crm\app\Models\Tickets_model.php(271): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(ri...')
+#4 D:\projects\visaalliance-crm\app\Helpers\widget_helper.php(1037): App\Models\Tickets_model->count_tickets(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(1147): ticket_status_widget_small(Array)
+#6 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(1089): App\Controllers\Dashboard->_get_widgets_for_staffs('open_tickets', Array)
+#7 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(1065): App\Controllers\Dashboard->_make_dashboard_widgets('open_tickets')
+#8 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(411): App\Controllers\Dashboard->make_dashboard(Array)
+#9 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(36): App\Controllers\Dashboard->view('1')
+#10 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Dashboard->index()
+#11 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#12 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#14 {main}
+CRITICAL - 2024-06-12 02:24:30 --> Unknown column 'rise_tickets.location_ids' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(rise_tickets.id) AS total
+        FROM rise_tickets
+        WHERE rise_tickets.deleted=0  AND rise_tickets.location_ids=2 AND FIND_IN_SET(rise_tickets.status, \'open\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(rise_tickets.id) AS total
+        FROM rise_tickets
+        WHERE rise_tickets.deleted=0  AND rise_tickets.location_ids=2 AND FIND_IN_SET(rise_tickets.status, \'open\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(rise_tickets.id) AS total
+        FROM rise_tickets
+        WHERE rise_tickets.deleted=0  AND rise_tickets.location_ids=2 AND FIND_IN_SET(rise_tickets.status, \'open\')')
+ 4 APPPATH\Models\Tickets_model.php(271): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(rise_tickets.id) AS total
+        FROM rise_tickets
+        WHERE rise_tickets.deleted=0  AND rise_tickets.location_ids=2 AND FIND_IN_SET(rise_tickets.status, \'open\')')
+ 5 APPPATH\Helpers\widget_helper.php(1037): App\Models\Tickets_model->count_tickets([...])
+ 6 APPPATH\Controllers\Dashboard.php(1147): ticket_status_widget_small([...])
+ 7 APPPATH\Controllers\Dashboard.php(1089): App\Controllers\Dashboard->_get_widgets_for_staffs('open_tickets', [...])
+ 8 APPPATH\Controllers\Dashboard.php(1065): App\Controllers\Dashboard->_make_dashboard_widgets('open_tickets')
+ 9 APPPATH\Controllers\Dashboard.php(411): App\Controllers\Dashboard->make_dashboard([...])
+10 APPPATH\Controllers\Dashboard.php(36): App\Controllers\Dashboard->view('1')
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Dashboard->index()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-06-12 02:24:38 --> mysqli_sql_exception: Unknown column 'rise_tickets.location_id' in 'where clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(ri...')
+#3 D:\projects\visaalliance-crm\app\Models\Tickets_model.php(271): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(ri...')
+#4 D:\projects\visaalliance-crm\app\Helpers\widget_helper.php(1037): App\Models\Tickets_model->count_tickets(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(1147): ticket_status_widget_small(Array)
+#6 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(1089): App\Controllers\Dashboard->_get_widgets_for_staffs('open_tickets', Array)
+#7 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(1065): App\Controllers\Dashboard->_make_dashboard_widgets('open_tickets')
+#8 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(411): App\Controllers\Dashboard->make_dashboard(Array)
+#9 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(36): App\Controllers\Dashboard->view('1')
+#10 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Dashboard->index()
+#11 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#12 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#14 {main}
+CRITICAL - 2024-06-12 02:24:38 --> Unknown column 'rise_tickets.location_id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(rise_tickets.id) AS total
+        FROM rise_tickets
+        WHERE rise_tickets.deleted=0  AND rise_tickets.location_id=2 AND FIND_IN_SET(rise_tickets.status, \'open\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(rise_tickets.id) AS total
+        FROM rise_tickets
+        WHERE rise_tickets.deleted=0  AND rise_tickets.location_id=2 AND FIND_IN_SET(rise_tickets.status, \'open\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(rise_tickets.id) AS total
+        FROM rise_tickets
+        WHERE rise_tickets.deleted=0  AND rise_tickets.location_id=2 AND FIND_IN_SET(rise_tickets.status, \'open\')')
+ 4 APPPATH\Models\Tickets_model.php(271): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(rise_tickets.id) AS total
+        FROM rise_tickets
+        WHERE rise_tickets.deleted=0  AND rise_tickets.location_id=2 AND FIND_IN_SET(rise_tickets.status, \'open\')')
+ 5 APPPATH\Helpers\widget_helper.php(1037): App\Models\Tickets_model->count_tickets([...])
+ 6 APPPATH\Controllers\Dashboard.php(1147): ticket_status_widget_small([...])
+ 7 APPPATH\Controllers\Dashboard.php(1089): App\Controllers\Dashboard->_get_widgets_for_staffs('open_tickets', [...])
+ 8 APPPATH\Controllers\Dashboard.php(1065): App\Controllers\Dashboard->_make_dashboard_widgets('open_tickets')
+ 9 APPPATH\Controllers\Dashboard.php(411): App\Controllers\Dashboard->make_dashboard([...])
+10 APPPATH\Controllers\Dashboard.php(36): App\Controllers\Dashboard->view('1')
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Dashboard->index()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-12 04:36:09 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('students/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-12 04:48:42 --> Undefined property: stdClass::$consultancy_type
+in APPPATH\Views\students\client_form_fields.php on line 1173.
+ 1 APPPATH\Views\students\client_form_fields.php(1173): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$consultancy_type', 'D:\\projects\\visaalliance-crm\\app\\Views\\students\\client_form_fields.php', 1173)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\client_form_fields.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/client_form_fields', [], true)
+ 5 APPPATH\Views\students\modal_form.php(21): view('students/client_form_fields')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\modal_form.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/modal_form', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('students/modal_form', [...])
+10 APPPATH\Controllers\Students.php(106): App\Libraries\Template->view('students/modal_form', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->modal_form()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-12 04:48:47 --> Undefined property: stdClass::$consultancy_type
+in APPPATH\Views\students\client_form_fields.php on line 1173.
+ 1 APPPATH\Views\students\client_form_fields.php(1173): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$consultancy_type', 'D:\\projects\\visaalliance-crm\\app\\Views\\students\\client_form_fields.php', 1173)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\client_form_fields.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/client_form_fields', [], true)
+ 5 APPPATH\Views\students\modal_form.php(21): view('students/client_form_fields')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\modal_form.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/modal_form', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('students/modal_form', [...])
+10 APPPATH\Controllers\Students.php(106): App\Libraries\Template->view('students/modal_form', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->modal_form()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-12 04:50:50 --> Undefined property: stdClass::$consultancy_type
+in APPPATH\Views\students\client_form_fields.php on line 1173.
+ 1 APPPATH\Views\students\client_form_fields.php(1173): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$consultancy_type', 'D:\\projects\\visaalliance-crm\\app\\Views\\students\\client_form_fields.php', 1173)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\client_form_fields.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/client_form_fields', [], true)
+ 5 APPPATH\Views\students\modal_form.php(21): view('students/client_form_fields')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\modal_form.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/modal_form', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('students/modal_form', [...])
+10 APPPATH\Controllers\Students.php(106): App\Libraries\Template->view('students/modal_form', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->modal_form()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-12 09:05:28 --> Undefined array key "xero_oauth2"
+in FCPATH\xero_session_storage.php on line 18.
+ 1 FCPATH\xero_session_storage.php(18): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "xero_oauth2"', 'D:\\projects\\visaalliance-crm\\xero_session_storage.php', 18)
+ 2 FCPATH\xero_session_storage.php(72): XEROSessionStorage->getSession()
+ 3 APPPATH\Controllers\Xero_api.php(93): XEROSessionStorage->isAccessTokenExpired()
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-12 09:07:41 --> Undefined array key "root"
+in APPPATH\Controllers\Xero_api.php on line 140.
+ 1 APPPATH\Controllers\Xero_api.php(140): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "root"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php', 140)
+ 2 APPPATH\Controllers\Xero_api.php(109): App\Controllers\Xero_api->_xero_provider('86')
+ 3 APPPATH\Controllers\Xero_api.php(94): App\Controllers\Xero_api->_auth('86')
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-06-12 11:15:30 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '3,4,5,6,7,8 AND FIND_IN_SET(rise_tickets.status, 'open')' at line 3 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(ri...')
+#3 D:\projects\visaalliance-crm\app\Models\Tickets_model.php(271): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(ri...')
+#4 D:\projects\visaalliance-crm\app\Helpers\widget_helper.php(1037): App\Models\Tickets_model->count_tickets(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(1147): ticket_status_widget_small(Array)
+#6 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(1089): App\Controllers\Dashboard->_get_widgets_for_staffs('open_tickets', Array)
+#7 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(1065): App\Controllers\Dashboard->_make_dashboard_widgets('open_tickets')
+#8 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(411): App\Controllers\Dashboard->make_dashboard(Array)
+#9 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(36): App\Controllers\Dashboard->view('1')
+#10 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Dashboard->index()
+#11 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+#12 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 D:\projects\visaalliance-crm\index.php(84): CodeIgniter\CodeIgniter->run()
+#14 {main}
+CRITICAL - 2024-06-12 11:15:30 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '3,4,5,6,7,8 AND FIND_IN_SET(rise_tickets.status, 'open')' at line 3
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(rise_tickets.id) AS total
+        FROM rise_tickets
+        WHERE rise_tickets.deleted=0  AND rise_tickets.location_id=2,3,4,5,6,7,8 AND FIND_IN_SET(rise_tickets.status, \'open\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(rise_tickets.id) AS total
+        FROM rise_tickets
+        WHERE rise_tickets.deleted=0  AND rise_tickets.location_id=2,3,4,5,6,7,8 AND FIND_IN_SET(rise_tickets.status, \'open\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(rise_tickets.id) AS total
+        FROM rise_tickets
+        WHERE rise_tickets.deleted=0  AND rise_tickets.location_id=2,3,4,5,6,7,8 AND FIND_IN_SET(rise_tickets.status, \'open\')')
+ 4 APPPATH\Models\Tickets_model.php(271): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(rise_tickets.id) AS total
+        FROM rise_tickets
+        WHERE rise_tickets.deleted=0  AND rise_tickets.location_id=2,3,4,5,6,7,8 AND FIND_IN_SET(rise_tickets.status, \'open\')')
+ 5 APPPATH\Helpers\widget_helper.php(1037): App\Models\Tickets_model->count_tickets([...])
+ 6 APPPATH\Controllers\Dashboard.php(1147): ticket_status_widget_small([...])
+ 7 APPPATH\Controllers\Dashboard.php(1089): App\Controllers\Dashboard->_get_widgets_for_staffs('open_tickets', [...])
+ 8 APPPATH\Controllers\Dashboard.php(1065): App\Controllers\Dashboard->_make_dashboard_widgets('open_tickets')
+ 9 APPPATH\Controllers\Dashboard.php(411): App\Controllers\Dashboard->make_dashboard([...])
+10 APPPATH\Controllers\Dashboard.php(36): App\Controllers\Dashboard->view('1')
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Dashboard->index()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()

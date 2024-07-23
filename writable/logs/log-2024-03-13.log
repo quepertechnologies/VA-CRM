@@ -1,0 +1,899 @@
+CRITICAL - 2024-03-13 00:02:18 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('team_members/save_default_location/1', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-13 00:05:37 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('team_members/save_default_location/1', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-13 00:39:44 --> Array to string conversion
+in APPPATH\Views\check_in\modal_form.php on line 272.
+ 1 APPPATH\Views\check_in\modal_form.php(272): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php', 272)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('check_in/modal_form', [...])
+ 6 APPPATH\Controllers\Check_in.php(99): App\Libraries\Template->view('check_in/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-13 00:39:50 --> Array to string conversion
+in APPPATH\Views\check_in\modal_form.php on line 272.
+ 1 APPPATH\Views\check_in\modal_form.php(272): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php', 272)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('check_in/modal_form', [...])
+ 6 APPPATH\Controllers\Check_in.php(99): App\Libraries\Template->view('check_in/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:14:55 --> mysqli_sql_exception: Unknown column 'Waiting' in 'where clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:14:55 --> Unknown column 'Waiting' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=Waiting
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=Waiting
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=Waiting
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=Waiting
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:19:21 --> mysqli_sql_exception: Unknown column 'Attending' in 'where clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->list_data('Attending')
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:19:21 --> Unknown column 'Attending' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=Attending
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=Attending
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=Attending
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=Attending
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data('Attending')
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:31:12 --> mysqli_sql_exception: Unknown column 'Waiting' in 'where clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:31:12 --> Unknown column 'Waiting' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=Waiting
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=Waiting
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=Waiting
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=Waiting
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:31:21 --> mysqli_sql_exception: Unknown column 'rise_check_in.sort' in 'order clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(592): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:31:21 --> Unknown column 'rise_check_in.sort' in 'order clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(592): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:37:07 --> mysqli_sql_exception: Unknown column 'rise_check_in.sort' in 'order clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:37:07 --> Unknown column 'rise_check_in.sort' in 'order clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND \'rise_check_in.status\'=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND \'rise_check_in.status\'=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND \'rise_check_in.status\'=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND \'rise_check_in.status\'=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:37:09 --> mysqli_sql_exception: Unknown column 'rise_check_in.sort' in 'order clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(592): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:37:09 --> Unknown column 'rise_check_in.sort' in 'order clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(592): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:37:23 --> mysqli_sql_exception: Unknown column 'rise_check_in.sort' in 'order clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:37:23 --> Unknown column 'rise_check_in.sort' in 'order clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:37:26 --> mysqli_sql_exception: Unknown column 'rise_check_in.sort' in 'order clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(592): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:37:26 --> Unknown column 'rise_check_in.sort' in 'order clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(592): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:37:45 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''status'='Waiting'
+        ORDER BY rise_check_in.sort ASC' at line 3 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:37:45 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''status'='Waiting'
+        ORDER BY rise_check_in.sort ASC' at line 3
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.\'status\'=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.\'status\'=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.\'status\'=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.\'status\'=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:37:46 --> mysqli_sql_exception: Unknown column 'rise_check_in.sort' in 'order clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(592): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:37:46 --> Unknown column 'rise_check_in.sort' in 'order clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(592): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:38:18 --> mysqli_sql_exception: Unknown column 'rise_check_in.sort' in 'order clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:38:18 --> Unknown column 'rise_check_in.sort' in 'order clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:38:20 --> mysqli_sql_exception: Unknown column 'rise_check_in.sort' in 'order clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(592): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:38:20 --> Unknown column 'rise_check_in.sort' in 'order clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0 
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(592): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->all_list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:40:40 --> mysqli_sql_exception: Unknown column 'rise_check_in.sort' in 'order clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_che...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_che...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_che...')
+#3 D:\projects\visaalliance-crm\app\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_che...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-13 01:40:40 --> Unknown column 'rise_check_in.sort' in 'order clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 4 APPPATH\Models\Check_in_model.php(42): CodeIgniter\Database\BaseConnection->query('SELECT rise_check_in.*
+        FROM rise_check_in
+        WHERE rise_check_in.deleted=0  AND rise_check_in.status=\'Waiting\'
+        ORDER BY rise_check_in.sort ASC')
+ 5 APPPATH\Controllers\Check_in.php(310): App\Models\Check_in_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 01:46:53 --> Email: sendWithSmtp throwed ErrorException: fsockopen(): Unable to connect to sandbox.smtp.mailtrap.io:2525 (A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) in D:\projects\visaalliance-crm\system\Email\Email.php:1868
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fsockopen(): Un...', 'D:\\projects\\vis...', 1868)
+#1 D:\projects\visaalliance-crm\system\Email\Email.php(1868): fsockopen('sandbox.smtp.ma...', '2525', NULL, NULL, 5)
+#2 D:\projects\visaalliance-crm\system\Email\Email.php(1782): CodeIgniter\Email\Email->SMTPConnect()
+#3 D:\projects\visaalliance-crm\system\Email\Email.php(1667): CodeIgniter\Email\Email->sendWithSmtp()
+#4 D:\projects\visaalliance-crm\system\Email\Email.php(1565): CodeIgniter\Email\Email->spoolEmail()
+#5 D:\projects\visaalliance-crm\app\Helpers\general_helper.php(561): CodeIgniter\Email\Email->send()
+#6 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(221): send_app_mail('tech@terra-nova...', 'Login details', '<div style="bac...')
+#7 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(160): App\Controllers\Check_in->save_primary_contact(14)
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->save()
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#10 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#12 {main}
+ERROR - 2024-03-13 01:46:53 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-03-13 01:46:53 --> 
+CRITICAL - 2024-03-13 01:46:53 --> Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Wed, 13 Mar 2024 01:46:48 -0500
+From: &quot;Visa Alliance&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+To: tech@terra-nova.io
+Subject: =?UTF-8?Q?Login=20details?=
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;65f14bd8133c53.08454825@visaalliance.com.au&gt;
+Mime-Version: 1.0
+
+
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_65f14bd8133e79.26310426&quot;
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_65f14bd8133e79.26310426
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Login Details Hello Test User,An account has been created for you. Please
+use the following info to login your dashboard: Dashboard
+URL:&amp;nbsp;http://localhost/visaalliance-crm/ Email: tech@terra-nova.io
+Password:&amp;nbsp;56af879f Team Visa Alliance
+
+
+--B_ALT_65f14bd8133e79.26310426
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+&lt;div style=3D&quot;background-color: #eeeeef; padding: 50px 0; &quot;&gt;&lt;div style=3D&quot;m=
+ax-width:640px; margin:0 auto; &quot;&gt; &lt;div style=3D&quot;color: #fff; text-align: ce=
+nter; background-color:#33333e; padding: 30px; border-top-left-radius: 3px;=
+ border-top-right-radius: 3px; margin: 0;&quot;&gt;  &lt;h1&gt;Login Details&lt;/h1&gt;&lt;/div&gt;&lt;d=
+iv style=3D&quot;padding: 20px; background-color: rgb(255, 255, 255);&quot;&gt;         =
+   &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Hello Test User,&lt;=
+br&gt;&lt;br&gt;An account has been created for you.&lt;/p&gt;            &lt;p style=3D&quot;colo=
+r: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Please use the following info to log=
+in your dashboard:&lt;/p&gt;            &lt;hr&gt;            &lt;p style=3D&quot;color: rgb(85=
+, 85, 85); font-size: 14px;&quot;&gt;Dashboard URL:&amp;nbsp;&lt;a href=3D&quot;http://localhos=
+t/visaalliance-crm/&quot; target=3D&quot;_blank&quot;&gt;http://localhost/visaalliance-crm/&lt;/=
+a&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt;&lt;/p=
+&gt;            &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-size=
+: 14px; line-height: 20px;&quot;&gt;Email: tech@terra-nova.io&lt;/span&gt;&lt;br&gt;&lt;/p&gt;       =
+     &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-size: 14px; =
+line-height: 20px;&quot;&gt;Password:&amp;nbsp;56af879f&lt;/span&gt;&lt;/p&gt;            &lt;p style=
+=3D&quot;color: rgb(85, 85, 85);&quot;&gt;&lt;br&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rgb(85,=
+ 85, 85); font-size: 14px;&quot;&gt;Team Visa Alliance&lt;/p&gt;        &lt;/div&gt;    &lt;/div&gt;&lt;=
+/div&gt;
+
+--B_ALT_65f14bd8133e79.26310426--</pre>
+in APPPATH\Helpers\general_helper.php on line 566.
+ 1 APPPATH\Controllers\Check_in.php(221): send_app_mail('tech@terra-nova.io', 'Login details', '<div style="background-color: #eeeeef; padding: 50px 0; "><div style="max-width:640px; margin:0 auto; "> <div style="color: #fff; text-align: center; background-color:#33333e; padding: 30px; border-top-left-radius: 3px; border-top-right-radius: 3px; margin: 0;">  <h1>Login Details</h1></div><div style="padding: 20px; background-color: rgb(255, 255, 255);">            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Hello Test User,<br><br>An account has been created for you.</p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Please use the following info to login your dashboard:</p>            <hr>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Dashboard URL:&nbsp;<a href="http://localhost/visaalliance-crm/" target="_blank">http://localhost/visaalliance-crm/</a></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Email: tech@terra-nova.io</span><br></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Password:&nbsp;56af879f</span></p>            <p style="color: rgb(85, 85, 85);"><br></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Team Visa Alliance</p>        </div>    </div></div>')
+ 2 APPPATH\Controllers\Check_in.php(160): App\Controllers\Check_in->save_primary_contact(14)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-13 01:53:51 --> Undefined property: stdClass::$location_id
+in APPPATH\Controllers\Check_in.php on line 383.
+ 1 APPPATH\Controllers\Check_in.php(383): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location_id', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Check_in.php', 383)
+ 2 APPPATH\Controllers\Check_in.php(340): App\Controllers\Check_in->_make_row(Object(stdClass))
+ 3 APPPATH\Controllers\Check_in.php(242): App\Controllers\Check_in->_row_data('1')
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->save_note()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 02:00:29 --> Email: sendWithSmtp throwed ErrorException: fsockopen(): Unable to connect to sandbox.smtp.mailtrap.io:2525 (A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) in D:\projects\visaalliance-crm\system\Email\Email.php:1868
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fsockopen(): Un...', 'D:\\projects\\vis...', 1868)
+#1 D:\projects\visaalliance-crm\system\Email\Email.php(1868): fsockopen('sandbox.smtp.ma...', '2525', NULL, NULL, 5)
+#2 D:\projects\visaalliance-crm\system\Email\Email.php(1782): CodeIgniter\Email\Email->SMTPConnect()
+#3 D:\projects\visaalliance-crm\system\Email\Email.php(1667): CodeIgniter\Email\Email->sendWithSmtp()
+#4 D:\projects\visaalliance-crm\system\Email\Email.php(1565): CodeIgniter\Email\Email->spoolEmail()
+#5 D:\projects\visaalliance-crm\app\Helpers\general_helper.php(561): CodeIgniter\Email\Email->send()
+#6 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(223): send_app_mail('asdf@asdfasdf.c...', 'Login details', '<div style="bac...')
+#7 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(161): App\Controllers\Check_in->save_primary_contact(15)
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->save()
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#10 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#12 {main}
+ERROR - 2024-03-13 02:00:29 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-03-13 02:00:29 --> 
+CRITICAL - 2024-03-13 02:00:29 --> Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Wed, 13 Mar 2024 02:00:23 -0500
+From: &quot;Visa Alliance&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+To: asdf@asdfasdf.com
+Subject: =?UTF-8?Q?Login=20details?=
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;65f14f07d6bb77.13219374@visaalliance.com.au&gt;
+Mime-Version: 1.0
+
+
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_65f14f07d6bcc7.95308695&quot;
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_65f14f07d6bcc7.95308695
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Login Details Hello Test NGO,An account has been created for you. Please use
+the following info to login your dashboard: Dashboard
+URL:&amp;nbsp;http://localhost/visaalliance-crm/ Email: asdf@asdfasdf.com
+Password:&amp;nbsp;63198975 Team Visa Alliance
+
+
+--B_ALT_65f14f07d6bcc7.95308695
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+&lt;div style=3D&quot;background-color: #eeeeef; padding: 50px 0; &quot;&gt;&lt;div style=3D&quot;m=
+ax-width:640px; margin:0 auto; &quot;&gt; &lt;div style=3D&quot;color: #fff; text-align: ce=
+nter; background-color:#33333e; padding: 30px; border-top-left-radius: 3px;=
+ border-top-right-radius: 3px; margin: 0;&quot;&gt;  &lt;h1&gt;Login Details&lt;/h1&gt;&lt;/div&gt;&lt;d=
+iv style=3D&quot;padding: 20px; background-color: rgb(255, 255, 255);&quot;&gt;         =
+   &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Hello Test NGO,&lt;b=
+r&gt;&lt;br&gt;An account has been created for you.&lt;/p&gt;            &lt;p style=3D&quot;color=
+: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Please use the following info to logi=
+n your dashboard:&lt;/p&gt;            &lt;hr&gt;            &lt;p style=3D&quot;color: rgb(85,=
+ 85, 85); font-size: 14px;&quot;&gt;Dashboard URL:&amp;nbsp;&lt;a href=3D&quot;http://localhost=
+/visaalliance-crm/&quot; target=3D&quot;_blank&quot;&gt;http://localhost/visaalliance-crm/&lt;/a=
+&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt;&lt;/p&gt;=
+            &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-size:=
+ 14px; line-height: 20px;&quot;&gt;Email: asdf@asdfasdf.com&lt;/span&gt;&lt;br&gt;&lt;/p&gt;         =
+   &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-size: 14px; li=
+ne-height: 20px;&quot;&gt;Password:&amp;nbsp;63198975&lt;/span&gt;&lt;/p&gt;            &lt;p style=3D=
+&quot;color: rgb(85, 85, 85);&quot;&gt;&lt;br&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rgb(85, 85=
+, 85); font-size: 14px;&quot;&gt;Team Visa Alliance&lt;/p&gt;        &lt;/div&gt;    &lt;/div&gt;&lt;/di=
+v&gt;
+
+--B_ALT_65f14f07d6bcc7.95308695--</pre>
+in APPPATH\Helpers\general_helper.php on line 566.
+ 1 APPPATH\Controllers\Check_in.php(223): send_app_mail('asdf@asdfasdf.com', 'Login details', '<div style="background-color: #eeeeef; padding: 50px 0; "><div style="max-width:640px; margin:0 auto; "> <div style="color: #fff; text-align: center; background-color:#33333e; padding: 30px; border-top-left-radius: 3px; border-top-right-radius: 3px; margin: 0;">  <h1>Login Details</h1></div><div style="padding: 20px; background-color: rgb(255, 255, 255);">            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Hello Test NGO,<br><br>An account has been created for you.</p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Please use the following info to login your dashboard:</p>            <hr>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Dashboard URL:&nbsp;<a href="http://localhost/visaalliance-crm/" target="_blank">http://localhost/visaalliance-crm/</a></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Email: asdf@asdfasdf.com</span><br></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Password:&nbsp;63198975</span></p>            <p style="color: rgb(85, 85, 85);"><br></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Team Visa Alliance</p>        </div>    </div></div>')
+ 2 APPPATH\Controllers\Check_in.php(161): App\Controllers\Check_in->save_primary_contact(15)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-13 02:13:18 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('check_in/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-13 02:13:23 --> Undefined property: stdClass::$user_id
+in APPPATH\Controllers\Check_in.php on line 69.
+ 1 APPPATH\Controllers\Check_in.php(69): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_id', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Check_in.php', 69)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 02:17:58 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0 = :0:, 1 = :1:
+WHERE `id` = :id:' at line 1 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `rise_ch...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `rise_ch...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `rise_ch...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2476): CodeIgniter\Database\BaseConnection->query('UPDATE `rise_ch...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Crud_model.php(360): CodeIgniter\Database\BaseBuilder->update(Array, Array)
+#5 D:\projects\visaalliance-crm\app\Models\Crud_model.php(153): App\Models\Crud_model->update_where(Array, Array)
+#6 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(161): App\Models\Crud_model->ci_save(Array, '3')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->save()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2024-03-13 02:17:58 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0 = :0:, 1 = :1:
+WHERE `id` = :id:' at line 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `rise_check_in` SET 0 = :0:, 1 = :1:
+WHERE `id` = :id:', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `rise_check_in` SET 0 = :0:, 1 = :1:
+WHERE `id` = :id:')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `rise_check_in` SET 0 = :0:, 1 = :1:
+WHERE `id` = :id:')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2476): CodeIgniter\Database\BaseConnection->query('UPDATE `rise_check_in` SET 0 = :0:, 1 = :1:
+WHERE `id` = :id:', [...], false)
+ 5 APPPATH\Models\Crud_model.php(360): CodeIgniter\Database\BaseBuilder->update([...], [...])
+ 6 APPPATH\Models\Crud_model.php(153): App\Models\Crud_model->update_where([...], [...])
+ 7 APPPATH\Controllers\Check_in.php(161): App\Models\Crud_model->ci_save([...], '3')
+ 8 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->save()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 02:19:17 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0 = :0:, 1 = :1:
+WHERE `id` = :id:' at line 1 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `rise_ch...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `rise_ch...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `rise_ch...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2476): CodeIgniter\Database\BaseConnection->query('UPDATE `rise_ch...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Crud_model.php(360): CodeIgniter\Database\BaseBuilder->update(Array, Array)
+#5 D:\projects\visaalliance-crm\app\Models\Crud_model.php(153): App\Models\Crud_model->update_where(Array, Array)
+#6 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(161): App\Models\Crud_model->ci_save(Array, '4')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->save()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2024-03-13 02:19:17 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0 = :0:, 1 = :1:
+WHERE `id` = :id:' at line 1
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `rise_check_in` SET 0 = :0:, 1 = :1:
+WHERE `id` = :id:', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `rise_check_in` SET 0 = :0:, 1 = :1:
+WHERE `id` = :id:')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `rise_check_in` SET 0 = :0:, 1 = :1:
+WHERE `id` = :id:')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2476): CodeIgniter\Database\BaseConnection->query('UPDATE `rise_check_in` SET 0 = :0:, 1 = :1:
+WHERE `id` = :id:', [...], false)
+ 5 APPPATH\Models\Crud_model.php(360): CodeIgniter\Database\BaseBuilder->update([...], [...])
+ 6 APPPATH\Models\Crud_model.php(153): App\Models\Crud_model->update_where([...], [...])
+ 7 APPPATH\Controllers\Check_in.php(161): App\Models\Crud_model->ci_save([...], '4')
+ 8 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->save()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 02:21:08 --> Email: sendWithSmtp throwed ErrorException: fsockopen(): Unable to connect to sandbox.smtp.mailtrap.io:2525 (A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) in D:\projects\visaalliance-crm\system\Email\Email.php:1868
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fsockopen(): Un...', 'D:\\projects\\vis...', 1868)
+#1 D:\projects\visaalliance-crm\system\Email\Email.php(1868): fsockopen('sandbox.smtp.ma...', '2525', NULL, NULL, 5)
+#2 D:\projects\visaalliance-crm\system\Email\Email.php(1782): CodeIgniter\Email\Email->SMTPConnect()
+#3 D:\projects\visaalliance-crm\system\Email\Email.php(1667): CodeIgniter\Email\Email->sendWithSmtp()
+#4 D:\projects\visaalliance-crm\system\Email\Email.php(1565): CodeIgniter\Email\Email->spoolEmail()
+#5 D:\projects\visaalliance-crm\app\Helpers\general_helper.php(561): CodeIgniter\Email\Email->send()
+#6 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(224): send_app_mail('eqwsdaszxc@rews...', 'Login details', '<div style="bac...')
+#7 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(162): App\Controllers\Check_in->save_primary_contact(18)
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->save()
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#10 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#12 {main}
+ERROR - 2024-03-13 02:21:08 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-03-13 02:21:08 --> 
+CRITICAL - 2024-03-13 02:21:08 --> Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Wed, 13 Mar 2024 02:21:03 -0500
+From: &quot;Visa Alliance&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+To: eqwsdaszxc@rewsdaczx.com
+Subject: =?UTF-8?Q?Login=20details?=
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;65f153dfaffcc7.83446458@visaalliance.com.au&gt;
+Mime-Version: 1.0
+
+
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_65f153dfaffe15.54232713&quot;
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_65f153dfaffe15.54232713
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Login Details Hello Test User,An account has been created for you. Please
+use the following info to login your dashboard: Dashboard
+URL:&amp;nbsp;http://localhost/visaalliance-crm/ Email: eqwsdaszxc@rewsdaczx.com
+Password:&amp;nbsp;8d8d31e2 Team Visa Alliance
+
+
+--B_ALT_65f153dfaffe15.54232713
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+&lt;div style=3D&quot;background-color: #eeeeef; padding: 50px 0; &quot;&gt;&lt;div style=3D&quot;m=
+ax-width:640px; margin:0 auto; &quot;&gt; &lt;div style=3D&quot;color: #fff; text-align: ce=
+nter; background-color:#33333e; padding: 30px; border-top-left-radius: 3px;=
+ border-top-right-radius: 3px; margin: 0;&quot;&gt;  &lt;h1&gt;Login Details&lt;/h1&gt;&lt;/div&gt;&lt;d=
+iv style=3D&quot;padding: 20px; background-color: rgb(255, 255, 255);&quot;&gt;         =
+   &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Hello Test User,&lt;=
+br&gt;&lt;br&gt;An account has been created for you.&lt;/p&gt;            &lt;p style=3D&quot;colo=
+r: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Please use the following info to log=
+in your dashboard:&lt;/p&gt;            &lt;hr&gt;            &lt;p style=3D&quot;color: rgb(85=
+, 85, 85); font-size: 14px;&quot;&gt;Dashboard URL:&amp;nbsp;&lt;a href=3D&quot;http://localhos=
+t/visaalliance-crm/&quot; target=3D&quot;_blank&quot;&gt;http://localhost/visaalliance-crm/&lt;/=
+a&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt;&lt;/p=
+&gt;            &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-size=
+: 14px; line-height: 20px;&quot;&gt;Email: eqwsdaszxc@rewsdaczx.com&lt;/span&gt;&lt;br&gt;&lt;/p&gt; =
+           &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-size: =
+14px; line-height: 20px;&quot;&gt;Password:&amp;nbsp;8d8d31e2&lt;/span&gt;&lt;/p&gt;            &lt;p =
+style=3D&quot;color: rgb(85, 85, 85);&quot;&gt;&lt;br&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rg=
+b(85, 85, 85); font-size: 14px;&quot;&gt;Team Visa Alliance&lt;/p&gt;        &lt;/div&gt;    &lt;/=
+div&gt;&lt;/div&gt;
+
+--B_ALT_65f153dfaffe15.54232713--</pre>
+in APPPATH\Helpers\general_helper.php on line 566.
+ 1 APPPATH\Controllers\Check_in.php(224): send_app_mail('eqwsdaszxc@rewsdaczx.com', 'Login details', '<div style="background-color: #eeeeef; padding: 50px 0; "><div style="max-width:640px; margin:0 auto; "> <div style="color: #fff; text-align: center; background-color:#33333e; padding: 30px; border-top-left-radius: 3px; border-top-right-radius: 3px; margin: 0;">  <h1>Login Details</h1></div><div style="padding: 20px; background-color: rgb(255, 255, 255);">            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Hello Test User,<br><br>An account has been created for you.</p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Please use the following info to login your dashboard:</p>            <hr>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Dashboard URL:&nbsp;<a href="http://localhost/visaalliance-crm/" target="_blank">http://localhost/visaalliance-crm/</a></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Email: eqwsdaszxc@rewsdaczx.com</span><br></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Password:&nbsp;8d8d31e2</span></p>            <p style="color: rgb(85, 85, 85);"><br></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Team Visa Alliance</p>        </div>    </div></div>')
+ 2 APPPATH\Controllers\Check_in.php(162): App\Controllers\Check_in->save_primary_contact(18)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-13 03:21:07 --> Email: sendWithSmtp throwed ErrorException: fsockopen(): Unable to connect to sandbox.smtp.mailtrap.io:2525 (A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) in D:\projects\visaalliance-crm\system\Email\Email.php:1868
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fsockopen(): Un...', 'D:\\projects\\vis...', 1868)
+#1 D:\projects\visaalliance-crm\system\Email\Email.php(1868): fsockopen('sandbox.smtp.ma...', '2525', NULL, NULL, 5)
+#2 D:\projects\visaalliance-crm\system\Email\Email.php(1782): CodeIgniter\Email\Email->SMTPConnect()
+#3 D:\projects\visaalliance-crm\system\Email\Email.php(1667): CodeIgniter\Email\Email->sendWithSmtp()
+#4 D:\projects\visaalliance-crm\system\Email\Email.php(1565): CodeIgniter\Email\Email->spoolEmail()
+#5 D:\projects\visaalliance-crm\app\Helpers\general_helper.php(561): CodeIgniter\Email\Email->send()
+#6 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(225): send_app_mail('munaweranwar@gm...', 'Login details', '<div style="bac...')
+#7 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(163): App\Controllers\Check_in->save_primary_contact(19)
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->save()
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#10 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#12 {main}
+ERROR - 2024-03-13 03:21:07 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-03-13 03:21:07 --> 
+CRITICAL - 2024-03-13 03:21:07 --> Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Wed, 13 Mar 2024 03:21:02 -0500
+From: &quot;Visa Alliance&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+To: munaweranwar@gmail.com
+Subject: =?UTF-8?Q?Login=20details?=
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;65f161ee674ac9.88271843@visaalliance.com.au&gt;
+Mime-Version: 1.0
+
+
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_65f161ee674c64.54102339&quot;
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_65f161ee674c64.54102339
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Login Details Hello Munawer Anwar,An account has been created for you.
+Please use the following info to login your dashboard: Dashboard
+URL:&amp;nbsp;http://localhost/visaalliance-crm/ Email: munaweranwar@gmail.com
+Password:&amp;nbsp;99902cf5 Team Visa Alliance
+
+
+--B_ALT_65f161ee674c64.54102339
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+&lt;div style=3D&quot;background-color: #eeeeef; padding: 50px 0; &quot;&gt;&lt;div style=3D&quot;m=
+ax-width:640px; margin:0 auto; &quot;&gt; &lt;div style=3D&quot;color: #fff; text-align: ce=
+nter; background-color:#33333e; padding: 30px; border-top-left-radius: 3px;=
+ border-top-right-radius: 3px; margin: 0;&quot;&gt;  &lt;h1&gt;Login Details&lt;/h1&gt;&lt;/div&gt;&lt;d=
+iv style=3D&quot;padding: 20px; background-color: rgb(255, 255, 255);&quot;&gt;         =
+   &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Hello Munawer Anw=
+ar,&lt;br&gt;&lt;br&gt;An account has been created for you.&lt;/p&gt;            &lt;p style=3D&quot;=
+color: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Please use the following info to=
+ login your dashboard:&lt;/p&gt;            &lt;hr&gt;            &lt;p style=3D&quot;color: rg=
+b(85, 85, 85); font-size: 14px;&quot;&gt;Dashboard URL:&amp;nbsp;&lt;a href=3D&quot;http://loca=
+lhost/visaalliance-crm/&quot; target=3D&quot;_blank&quot;&gt;http://localhost/visaalliance-cr=
+m/&lt;/a&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;=
+&gt;&lt;/p&gt;            &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-=
+size: 14px; line-height: 20px;&quot;&gt;Email: munaweranwar@gmail.com&lt;/span&gt;&lt;br&gt;&lt;/p=
+&gt;            &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-size=
+: 14px; line-height: 20px;&quot;&gt;Password:&amp;nbsp;99902cf5&lt;/span&gt;&lt;/p&gt;            &lt;=
+p style=3D&quot;color: rgb(85, 85, 85);&quot;&gt;&lt;br&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: =
+rgb(85, 85, 85); font-size: 14px;&quot;&gt;Team Visa Alliance&lt;/p&gt;        &lt;/div&gt;    =
+&lt;/div&gt;&lt;/div&gt;
+
+--B_ALT_65f161ee674c64.54102339--</pre>
+in APPPATH\Helpers\general_helper.php on line 566.
+ 1 APPPATH\Controllers\Check_in.php(225): send_app_mail('munaweranwar@gmail.com', 'Login details', '<div style="background-color: #eeeeef; padding: 50px 0; "><div style="max-width:640px; margin:0 auto; "> <div style="color: #fff; text-align: center; background-color:#33333e; padding: 30px; border-top-left-radius: 3px; border-top-right-radius: 3px; margin: 0;">  <h1>Login Details</h1></div><div style="padding: 20px; background-color: rgb(255, 255, 255);">            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Hello Munawer Anwar,<br><br>An account has been created for you.</p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Please use the following info to login your dashboard:</p>            <hr>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Dashboard URL:&nbsp;<a href="http://localhost/visaalliance-crm/" target="_blank">http://localhost/visaalliance-crm/</a></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Email: munaweranwar@gmail.com</span><br></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Password:&nbsp;99902cf5</span></p>            <p style="color: rgb(85, 85, 85);"><br></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Team Visa Alliance</p>        </div>    </div></div>')
+ 2 APPPATH\Controllers\Check_in.php(163): App\Controllers\Check_in->save_primary_contact(19)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

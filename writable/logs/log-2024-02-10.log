@@ -1,0 +1,320 @@
+CRITICAL - 2024-02-10 04:12:40 --> Undefined variable $location_id
+in APPPATH\Views\settings\locations\modal_form.php on line 3.
+ 1 APPPATH\Views\settings\locations\modal_form.php(3): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $location_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\settings\\locations\\modal_form.php', 3)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\settings\\locations\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('settings/locations/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(38): view('settings/locations/modal_form', [...])
+ 6 APPPATH\Controllers\Settings.php(1457): App\Libraries\Template->view('settings/locations/modal_form', [])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->location_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 04:36:39 --> Undefined variable $modal_info
+in APPPATH\Views\settings\locations\modal_form.php on line 16.
+ 1 APPPATH\Views\settings\locations\modal_form.php(16): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $modal_info', 'D:\\projects\\visaalliance-crm\\app\\Views\\settings\\locations\\modal_form.php', 16)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\settings\\locations\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('settings/locations/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(38): view('settings/locations/modal_form', [...])
+ 6 APPPATH\Controllers\Settings.php(1459): App\Libraries\Template->view('settings/locations/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->location_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 04:38:27 --> Undefined variable $modal_info
+in APPPATH\Views\settings\locations\modal_form.php on line 16.
+ 1 APPPATH\Views\settings\locations\modal_form.php(16): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $modal_info', 'D:\\projects\\visaalliance-crm\\app\\Views\\settings\\locations\\modal_form.php', 16)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\settings\\locations\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('settings/locations/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(38): view('settings/locations/modal_form', [...])
+ 6 APPPATH\Controllers\Settings.php(1459): App\Libraries\Template->view('settings/locations/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->location_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 04:53:45 --> Attempt to read property "id" on null
+in APPPATH\Controllers\Settings.php on line 1432.
+ 1 APPPATH\Controllers\Settings.php(1432): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "id" on null', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Settings.php', 1432)
+ 2 APPPATH\Controllers\Settings.php(1488): App\Controllers\Settings->_make_location_row(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->save_location()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:57:24 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Todo.php(21): App\Libraries\Template->rander('todo/index')
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Todo->index()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Todo))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:57:35 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Settings.php(1415): App\Libraries\Template->rander('settings/locations/index', [])
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->locations()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:57:38 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Client_groups.php(14): App\Libraries\Template->rander('client_groups/index')
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Client_groups->index()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Client_groups))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:57:41 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Settings.php(1415): App\Libraries\Template->rander('settings/locations/index', [])
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->locations()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:57:43 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Client_groups.php(14): App\Libraries\Template->rander('client_groups/index')
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Client_groups->index()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Client_groups))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:57:44 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Lead_status.php(13): App\Libraries\Template->rander('lead_status/index')
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Lead_status->index()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Lead_status))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:57:45 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Settings.php(1415): App\Libraries\Template->rander('settings/locations/index', [])
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->locations()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:57:46 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Lead_status.php(13): App\Libraries\Template->rander('lead_status/index')
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Lead_status->index()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Lead_status))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:57:47 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Settings.php(1415): App\Libraries\Template->rander('settings/locations/index', [])
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->locations()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:57:48 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Settings.php(26): App\Libraries\Template->rander('settings/general')
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Settings->general()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:57:49 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Courses.php(48): App\Libraries\Template->rander('courses/index', [...])
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Courses->index()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Courses))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:57:58 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Dashboard.php(417): App\Libraries\Template->rander('dashboards/custom_dashboards/view', [...])
+12 APPPATH\Controllers\Dashboard.php(36): App\Controllers\Dashboard->view('1')
+13 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Dashboard->index()
+14 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+15 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+16 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-10 06:58:32 --> Undefined property: stdClass::$location
+in APPPATH\Views\includes\topbar.php on line 88.
+ 1 APPPATH\Views\includes\topbar.php(88): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$location', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php', 88)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\topbar.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/topbar', [], true)
+ 5 APPPATH\Views\layout\index.php(18): view('includes/topbar', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Dashboard.php(417): App\Libraries\Template->rander('dashboards/custom_dashboards/view', [...])
+12 APPPATH\Controllers\Dashboard.php(36): App\Controllers\Dashboard->view('1')
+13 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Dashboard->index('1')
+14 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Dashboard))
+15 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+16 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-10 07:40:24 --> mysqli_sql_exception: Unknown column 'rise_users.company_name' in 'field list' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_use...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_use...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_use...')
+#3 D:\projects\visaalliance-crm\app\Models\Users_model.php(319): CodeIgniter\Database\BaseConnection->query('SELECT rise_use...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Security_Controller.php(40): App\Models\Users_model->get_access_info('1')
+#5 D:\projects\visaalliance-crm\app\Controllers\Dashboard.php(13): App\Controllers\Security_Controller->__construct()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-02-10 07:40:24 --> Unknown column 'rise_users.company_name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_users.id, rise_users.user_type, rise_users.is_admin, rise_users.role_id, rise_users.email,
+            rise_users.first_name, rise_users.last_name, rise_users.company_name, rise_users.image, rise_users.message_checked_at, rise_users.notification_checked_at, rise_users.client_id, rise_users.enable_web_notification,
+            rise_users.is_primary_contact, rise_users.sticky_note, rise_users.language, rise_users.location_id,
+            rise_roles.title as role_title, rise_roles.permissions,
+            (SELECT GROUP_CONCAT(id) team_ids FROM rise_team WHERE FIND_IN_SET(\'1\', `members`)) as team_ids
+        FROM rise_users
+        LEFT JOIN rise_roles ON rise_roles.id = rise_users.role_id AND rise_roles.deleted = 0
+        WHERE rise_users.deleted=0 AND rise_users.id=1', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_users.id, rise_users.user_type, rise_users.is_admin, rise_users.role_id, rise_users.email,
+            rise_users.first_name, rise_users.last_name, rise_users.company_name, rise_users.image, rise_users.message_checked_at, rise_users.notification_checked_at, rise_users.client_id, rise_users.enable_web_notification,
+            rise_users.is_primary_contact, rise_users.sticky_note, rise_users.language, rise_users.location_id,
+            rise_roles.title as role_title, rise_roles.permissions,
+            (SELECT GROUP_CONCAT(id) team_ids FROM rise_team WHERE FIND_IN_SET(\'1\', `members`)) as team_ids
+        FROM rise_users
+        LEFT JOIN rise_roles ON rise_roles.id = rise_users.role_id AND rise_roles.deleted = 0
+        WHERE rise_users.deleted=0 AND rise_users.id=1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_users.id, rise_users.user_type, rise_users.is_admin, rise_users.role_id, rise_users.email,
+            rise_users.first_name, rise_users.last_name, rise_users.company_name, rise_users.image, rise_users.message_checked_at, rise_users.notification_checked_at, rise_users.client_id, rise_users.enable_web_notification,
+            rise_users.is_primary_contact, rise_users.sticky_note, rise_users.language, rise_users.location_id,
+            rise_roles.title as role_title, rise_roles.permissions,
+            (SELECT GROUP_CONCAT(id) team_ids FROM rise_team WHERE FIND_IN_SET(\'1\', `members`)) as team_ids
+        FROM rise_users
+        LEFT JOIN rise_roles ON rise_roles.id = rise_users.role_id AND rise_roles.deleted = 0
+        WHERE rise_users.deleted=0 AND rise_users.id=1')
+ 4 APPPATH\Models\Users_model.php(319): CodeIgniter\Database\BaseConnection->query('SELECT rise_users.id, rise_users.user_type, rise_users.is_admin, rise_users.role_id, rise_users.email,
+            rise_users.first_name, rise_users.last_name, rise_users.company_name, rise_users.image, rise_users.message_checked_at, rise_users.notification_checked_at, rise_users.client_id, rise_users.enable_web_notification,
+            rise_users.is_primary_contact, rise_users.sticky_note, rise_users.language, rise_users.location_id,
+            rise_roles.title as role_title, rise_roles.permissions,
+            (SELECT GROUP_CONCAT(id) team_ids FROM rise_team WHERE FIND_IN_SET(\'1\', `members`)) as team_ids
+        FROM rise_users
+        LEFT JOIN rise_roles ON rise_roles.id = rise_users.role_id AND rise_roles.deleted = 0
+        WHERE rise_users.deleted=0 AND rise_users.id=1')
+ 5 APPPATH\Controllers\Security_Controller.php(40): App\Models\Users_model->get_access_info('1')
+ 6 APPPATH\Controllers\Dashboard.php(13): App\Controllers\Security_Controller->__construct()
+ 7 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+ 8 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

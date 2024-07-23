@@ -1,0 +1,175 @@
+CRITICAL - 2024-04-02 00:09:56 --> Undefined variable $client_info
+in APPPATH\Views\students\files\index.php on line 12.
+ 1 APPPATH\Views\students\files\index.php(12): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_info', 'D:\\projects\\visaalliance-crm\\app\\Views\\students\\files\\index.php', 12)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\files\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/files/index', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('students/files/index', [...])
+ 6 APPPATH\Controllers\Students.php(647): App\Libraries\Template->view('students/files/index', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->files('59')
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 01:13:51 --> Undefined variable $tab
+in APPPATH\Views\students\files\index.php on line 45.
+ 1 APPPATH\Views\students\files\index.php(45): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $tab', 'D:\\projects\\visaalliance-crm\\app\\Views\\students\\files\\index.php', 45)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\files\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/files/index', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('students/files/index', [...])
+ 6 APPPATH\Controllers\Students.php(648): App\Libraries\Template->view('students/files/index', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->files('59')
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:23:22 --> Undefined variable $doc_check_list_item
+in APPPATH\Views\students\files\modal_form.php on line 11.
+ 1 APPPATH\Views\students\files\modal_form.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $doc_check_list_item', 'D:\\projects\\visaalliance-crm\\app\\Views\\students\\files\\modal_form.php', 11)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\files\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/files/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('students/files/modal_form', [...])
+ 6 APPPATH\Controllers\Students.php(738): App\Libraries\Template->view('students/files/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->file_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 02:23:39 --> Undefined variable $doc_check_list_item
+in APPPATH\Views\students\files\modal_form.php on line 11.
+ 1 APPPATH\Views\students\files\modal_form.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $doc_check_list_item', 'D:\\projects\\visaalliance-crm\\app\\Views\\students\\files\\modal_form.php', 11)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\files\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/files/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('students/files/modal_form', [...])
+ 6 APPPATH\Controllers\Students.php(738): App\Libraries\Template->view('students/files/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->file_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 03:13:48 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('students/check_list_data/37', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-02 03:32:40 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':0:
+AND 1 = :1:
+AND `client_id` = :client_id:
+ LIMIT 1000000' at line 3 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT *\nFROM `...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(1749): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Crud_model.php(122): CodeIgniter\Database\BaseBuilder->getWhere(Array, 1000000, 0)
+#5 D:\projects\visaalliance-crm\app\Controllers\Students.php(743): App\Models\Crud_model->get_all_where(Array)
+#6 D:\projects\visaalliance-crm\app\Controllers\Students.php(733): App\Controllers\Students->_make_checklist_row(Object(stdClass), '37')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Students->check_list_data('37')
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2024-04-02 03:32:40 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':0:
+AND 1 = :1:
+AND `client_id` = :client_id:
+ LIMIT 1000000' at line 3
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT *
+FROM `rise_general_files`
+WHERE 0 = :0:
+AND 1 = :1:
+AND `client_id` = :client_id:
+ LIMIT 1000000', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `rise_general_files`
+WHERE 0 = :0:
+AND 1 = :1:
+AND `client_id` = :client_id:
+ LIMIT 1000000')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `rise_general_files`
+WHERE 0 = :0:
+AND 1 = :1:
+AND `client_id` = :client_id:
+ LIMIT 1000000')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1749): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `rise_general_files`
+WHERE 0 = :0:
+AND 1 = :1:
+AND `client_id` = :client_id:
+ LIMIT 1000000', [...], false)
+ 5 APPPATH\Models\Crud_model.php(122): CodeIgniter\Database\BaseBuilder->getWhere([...], 1000000, 0)
+ 6 APPPATH\Controllers\Students.php(743): App\Models\Crud_model->get_all_where([...])
+ 7 APPPATH\Controllers\Students.php(733): App\Controllers\Students->_make_checklist_row(Object(stdClass), '37')
+ 8 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->check_list_data('37')
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 03:40:30 --> Too few arguments to function App\Controllers\Students::files(), 0 passed in D:\projects\visaalliance-crm\system\CodeIgniter.php on line 932 and at least 1 expected
+in APPPATH\Controllers\Students.php on line 630.
+ 1 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->files()
+ 2 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 03:45:45 --> Invalid file: "students/files/uploaded_files_list.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('students/files/uploaded_files_list.php')
+ 2 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/files/uploaded_files_list', [], true)
+ 3 APPPATH\Views\students\files\index.php(40): view('students/files/uploaded_files_list')
+ 4 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\files\\index.php')
+ 5 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/files/index', [], true)
+ 7 APPPATH\Libraries\Template.php(42): view('students/files/index', [...])
+ 8 APPPATH\Controllers\Students.php(648): App\Libraries\Template->view('students/files/index', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->files('37')
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+11 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 03:45:49 --> Invalid file: "students/files/uploaded_files_list.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('students/files/uploaded_files_list.php')
+ 2 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/files/uploaded_files_list', [], true)
+ 3 APPPATH\Views\students\files\index.php(40): view('students/files/uploaded_files_list')
+ 4 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\files\\index.php')
+ 5 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/files/index', [], true)
+ 7 APPPATH\Libraries\Template.php(42): view('students/files/index', [...])
+ 8 APPPATH\Controllers\Students.php(648): App\Libraries\Template->view('students/files/index', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->files('37')
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+11 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 09:08:49 --> Undefined variable $client_id
+in APPPATH\Views\projects\files\check_list.php on line 12.
+ 1 APPPATH\Views\projects\files\check_list.php(12): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\check_list.php', 12)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\check_list.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/files/check_list', [], true)
+ 5 APPPATH\Views\projects\files\index.php(31): view('projects/files/check_list')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/files/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('projects/files/index', [...])
+10 APPPATH\Controllers\Projects.php(3305): App\Libraries\Template->view('projects/files/index', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->files('18')
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 09:29:59 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/project_partner_list_data/18', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-02 09:29:59 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/project_member_list_data/18', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

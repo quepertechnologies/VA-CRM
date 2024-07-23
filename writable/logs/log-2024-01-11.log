@@ -1,0 +1,45 @@
+ERROR - 2024-01-11 04:48:45 --> mysqli_sql_exception: Unknown column 'rise_clients.company_name' in 'field list' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_use...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_use...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_use...')
+#3 D:\projects\visaalliance-crm\app\Models\Messages_model.php(290): CodeIgniter\Database\BaseConnection->query('SELECT rise_use...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Security_Controller.php(915): App\Models\Messages_model->get_users_for_messaging(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Messages.php(356): App\Controllers\Security_Controller->get_allowed_user_ids()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Messages->count_notifications()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Messages))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-01-11 04:48:45 --> Unknown column 'rise_clients.company_name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_users.id, rise_users.client_id, rise_users.user_type, rise_users.first_name, rise_users.last_name, rise_clients.company_name,
+            rise_users.image,  rise_users.job_title, rise_users.last_online
+        FROM rise_users
+        LEFT JOIN rise_clients ON rise_clients.id = rise_users.client_id AND rise_clients.deleted=0
+        WHERE rise_users.deleted=0 AND rise_users.status=\'active\' AND rise_users.id!=1  AND rise_users.user_type=\'staff\'
+        ORDER BY rise_users.user_type, rise_users.first_name ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_users.id, rise_users.client_id, rise_users.user_type, rise_users.first_name, rise_users.last_name, rise_clients.company_name,
+            rise_users.image,  rise_users.job_title, rise_users.last_online
+        FROM rise_users
+        LEFT JOIN rise_clients ON rise_clients.id = rise_users.client_id AND rise_clients.deleted=0
+        WHERE rise_users.deleted=0 AND rise_users.status=\'active\' AND rise_users.id!=1  AND rise_users.user_type=\'staff\'
+        ORDER BY rise_users.user_type, rise_users.first_name ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_users.id, rise_users.client_id, rise_users.user_type, rise_users.first_name, rise_users.last_name, rise_clients.company_name,
+            rise_users.image,  rise_users.job_title, rise_users.last_online
+        FROM rise_users
+        LEFT JOIN rise_clients ON rise_clients.id = rise_users.client_id AND rise_clients.deleted=0
+        WHERE rise_users.deleted=0 AND rise_users.status=\'active\' AND rise_users.id!=1  AND rise_users.user_type=\'staff\'
+        ORDER BY rise_users.user_type, rise_users.first_name ASC')
+ 4 APPPATH\Models\Messages_model.php(290): CodeIgniter\Database\BaseConnection->query('SELECT rise_users.id, rise_users.client_id, rise_users.user_type, rise_users.first_name, rise_users.last_name, rise_clients.company_name,
+            rise_users.image,  rise_users.job_title, rise_users.last_online
+        FROM rise_users
+        LEFT JOIN rise_clients ON rise_clients.id = rise_users.client_id AND rise_clients.deleted=0
+        WHERE rise_users.deleted=0 AND rise_users.status=\'active\' AND rise_users.id!=1  AND rise_users.user_type=\'staff\'
+        ORDER BY rise_users.user_type, rise_users.first_name ASC')
+ 5 APPPATH\Controllers\Security_Controller.php(915): App\Models\Messages_model->get_users_for_messaging([...])
+ 6 APPPATH\Controllers\Messages.php(356): App\Controllers\Security_Controller->get_allowed_user_ids()
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Messages->count_notifications()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Messages))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

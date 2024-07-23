@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Vacancy Check"
+  },
+  {
+    "id": 2,
+    "title": "Quotation",
+    "doc_check_list": true
+  },
+  {
+    "id": 3,
+    "title": "Approved"
+  },
+  {
+    "id": 4,
+    "title": "Payment"
+  },
+  {
+    "id": 5,
+    "title": "Confirmation"
+  }
+]

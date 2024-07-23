@@ -1,0 +1,58 @@
+[
+  {
+    "label": "Signed Cost Agreement",
+    "required": true
+  },
+  {
+    "label": "Signed 956 Form",
+    "required": true
+  },
+  {
+    "label": "Tax invoice",
+    "required": true
+  },
+  {
+    "label": "Payment Receipt",
+    "required": true
+  },
+  {
+    "label": "Passport",
+    "required": true
+  },
+  {
+    "label": "Australian Academic Certificates (Completion Letter)",
+    "required": true
+  },
+  {
+    "label": "Transcripts",
+    "required": true
+  },
+  {
+    "label": "English Language Test Scores (IELTS/ PTE/ TOEFL)",
+    "required": true
+  },
+  {
+    "label": "Professional Year Program Certificate",
+    "required": true
+  },
+  {
+    "label": "Work Reference Letter",
+    "required": true
+  },
+  {
+    "label": "Payslips ( at least 3-4 )",
+    "required": true
+  },
+  {
+    "label": "Skill Assessment Lodged SNIPSHOT as Proof",
+    "required": false
+  },
+  {
+    "label": "Skill Assessment Outcome",
+    "required": false
+  },
+  {
+    "label": "Check for invoice and ask for Due Money",
+    "required": false
+  }
+]

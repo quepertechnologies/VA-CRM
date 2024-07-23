@@ -1,0 +1,49 @@
+first_name,last_name,email,phone_number,job_title,role,primary_branch,secondary_branches,status
+Shay,Sahafin,admin.fiji@visaalliance.com,+6799462089,"Country Director-Fiji",,NEPAL,Fiji,Active
+Nga,PHAM,admin.viet@visaalliance.com,,Director,,"Vietnam HANOI",,Active
+Sherly,Bingcang,sherly.bingcang@visaalliance.com,+639357123440,Admin,,Philippines,,Active
+Precious,Pistula,precious.pistula@visaalliance.com,,Admin,,Philippines,,Active
+Edyliza,Razon,edyliza.razon@visaalliance.com,,Counsellor,,Philippines,,Inactive
+Marlon,Suronio,marlon.suronio@visaalliance.com,,Counsellor,,Philippines,,Inactive
+Joana,Obrien,Joana.obrien@visaalliance.com,,Manager,,Philippines,,Active
+Edyliza,Razon,Edyliza.Razon@visaalliance.com,,"Admin Team member",,Philippines,,Inactive
+Marlon,Suronio,Marlon.suronio@visaalliance.com,,"Admit Team member",,Philippines,,Inactive
+Edyliza,Razon,Edyliza.Razon@visaalliance.com,+639272831705,,,Philippines,,Inactive
+Shreeshray,Tandukar,Shreeshray.Tandukar@visaalliance.com,,"Migration Support",,"CORPORATE ADMISSION","Head Office,NEPAL,INDIA,Philippines",Active
+srijana,Rajbhandari,accountsnepal@visaalliance.com,+9779849622991,Accounts,,NEPAL,"Head Office",Active
+Sweta,Shrestha,sweta.shrestha@visaalliance.com,+9779811432693,Counsellor,,NEPAL,,Active
+Aarjabi,Upreti,aarjabi.upreti@visaalliance.com,+9779801015800,Reception,,NEPAL,,Active
+Sabina,Shrestha,sabina.shrestha@visaalliance.com,+9779813219387,Reception,,NEPAL,,Active
+Krital,Munikar,krital.munikar@visaalliance.com,+9779860104744,Counsellor,,NEPAL,,Active
+Aayushma,Shrestha,aayushma.shrestha@visaalliance.com,,0452510236,,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION,Philippines",Active
+Ruaa,Aoro,ruaa.aoro@visaalliance.com,+61493233667,"Migration Support",,"Head Office",,Inactive
+Aakrity,Chitrakar,aakrity.chitrakar@visaalliance.com,,"Admin Support",,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION",Active
+Urusha,Malakar,urusha.malakar@visaalliance.com,+9779843694991,"Admin Support",,"Head Office","Vietnam HANOI",Active
+Krishma,Shrestha,krishma.shrestha@visaalliance.com,+61424065038,"Study Coordinator",,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION,Philippines",Active
+Rajiv,Shakya,rajib.shakya@visaalliance.com,+9779861045834,"Admin Support",,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION",Active
+Samartha,Pandey,samartha.pandey@visaalliance.com,+9779843135589,"Satellite Team",,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION",Active
+Sanir,Maharjan,sanir.maharjan@visaalliance.com,+9779851238828,Director,,NEPAL,"Head Office,INDIA,CORPORATE ADMISSION",Active
+Subash,Adhikari,subash.adhikari@visaalliance.com,+9779800713525,"Nepal Office Team Member",,NEPAL,"Head Office,CORPORATE ADMISSION",Inactive
+Shova,Rai,shova.rai@visaalliance.com,+9779814329712,"Nepal office",,NEPAL,"Head Office",Active
+Divya,Pradhan,divya.pradhan@visaalliance.com,+9779818432754,"Statellite Team",,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION",Inactive
+Shrija,Mangrati,shrija.mangrati@visaalliance.com,+9779860061753,"Satellite Team Manager",,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION,Philippines",Active
+Sosuka,Maskey,sosuka.maskey@visaalliance.com,+9779813385882,"Partners Manager",,"CORPORATE ADMISSION","Head Office,NEPAL,INDIA,Philippines,Vietnam HANOI,Fiji",Active
+Situ,Joshi,contact@visaalliance.com,+61444528938,Admin,,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION",Inactive
+Smrity,Chitrakar,support@visaalliance.com,,"Assist Accountant",,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION",Inactive
+Sudikshya,Thapa,Study@visaalliance.com,,"Study Coordinator",,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION",Inactive
+Sudin,Shrestha,sudin.shrestha@visaalliance.com,,Director,,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION,Philippines,Vietnam HANOI",Active
+Naina,Shrestha,migration@visaalliance.com,,Operation,,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION,Philippines",Active
+Basanta,Kharel,admin@visaalliance.com,+61421038534,Director,,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION,Philippines,Vietnam HANOI,Fiji",Active
+Samartha,Pandey,samartha@visaalliance.com.au,+9779843135589,,,"Head Office",,Inactive
+Satish,Risal,satish@visaalliance.com.au,,,,"Head Office",,Inactive
+Satish,Risal,sathish@visaalliance.com.au,+9779841970545,,,"Head Office",,Inactive
+Divya,Pradhan,divya@visaalliance.com.au,,"Admin Support ",,"Head Office",NEPAL,Inactive
+Shova,Rai,shova@visaalliance.com.au,,"Admin ",,NEPAL,"Head Office",Inactive
+Subash,Adhikari,subash@visaalliance.com.au,,"Admin Support ",,NEPAL,"Head Office",Inactive
+Shrija,Mangrati,shrija@visaalliance.com.au,+9779818958120,"Admission ",,"Head Office",NEPAL,Inactive
+smrity,Chitrakar,smrity@visaalliance.com.au,,"Counsellor ",,"Head Office",NEPAL,Inactive
+Sanir,Maharjan,sanir@visaalliance.com.au,,"Director (Nepal)",,NEPAL,"Head Office",Inactive
+Sudin,Shrestha,sudin@visaalliance.com.au,+61449729156,"Director ",,"Head Office",NEPAL,Inactive
+Naina,Shrestha,naina@visaalliance.com.au,+61405407081,"Head Of Operations",,"Head Office",NEPAL,Inactive
+Sudikshya,Thapa,sudikshya@visaalliance.com.au,+61415471847,Admin,,"Head Office",NEPAL,Inactive
+Admin,-VA,admin@visaalliance.com.au,+61421038534,admin,,"Head Office","NEPAL,INDIA,CORPORATE ADMISSION",Inactive

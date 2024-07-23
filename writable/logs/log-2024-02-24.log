@@ -1,0 +1,657 @@
+WARNING - 2024-02-24 01:45:06 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(346): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-24 01:45:06 --> mysqli_sql_exception: Column 'log_for_id3' cannot be null in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Activity_logs_model.php(36): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 D:\projects\visaalliance-crm\app\Models\Crud_model.php(293): App\Models\Activity_logs_model->ci_save(Array, false)
+#6 D:\projects\visaalliance-crm\app\Controllers\Projects.php(454): App\Models\Crud_model->ci_save(Array, '')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->save()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2024-02-24 01:45:06 --> Column 'log_for_id3' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `rise_activity_logs` (`action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `created_at`, `created_by`) VALUES (\'created\', \'milestone\', \'Contract and 956 Form\', 26, \'project\', 10, \'\', 0, \'milestone\', NULL, \'2024-02-24 07:45:06\', \'1\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `rise_activity_logs` (`action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `created_at`, `created_by`) VALUES (\'created\', \'milestone\', \'Contract and 956 Form\', 26, \'project\', 10, \'\', 0, \'milestone\', NULL, \'2024-02-24 07:45:06\', \'1\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `rise_activity_logs` (`action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `created_at`, `created_by`) VALUES (\'created\', \'milestone\', \'Contract and 956 Form\', 26, \'project\', 10, \'\', 0, \'milestone\', NULL, \'2024-02-24 07:45:06\', \'1\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `rise_activity_logs` (`action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `created_at`, `created_by`) VALUES (:action:, :log_type:, :log_type_title:, :log_type_id:, :log_for:, :log_for_id:, :log_for2:, :log_for_id2:, :log_for3:, :log_for_id3:, :created_at:, :created_by:)', [...], false)
+ 5 APPPATH\Models\Activity_logs_model.php(36): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Models\Crud_model.php(293): App\Models\Activity_logs_model->ci_save([...], false)
+ 7 APPPATH\Controllers\Projects.php(454): App\Models\Crud_model->ci_save([...], '')
+ 8 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-02-24 01:45:35 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(346): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-24 01:45:35 --> mysqli_sql_exception: Column 'log_for_id3' cannot be null in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Activity_logs_model.php(36): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 D:\projects\visaalliance-crm\app\Models\Crud_model.php(293): App\Models\Activity_logs_model->ci_save(Array, false)
+#6 D:\projects\visaalliance-crm\app\Controllers\Projects.php(454): App\Models\Crud_model->ci_save(Array, '')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->save()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2024-02-24 01:45:35 --> Column 'log_for_id3' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `rise_activity_logs` (`action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `created_at`, `created_by`) VALUES (\'created\', \'milestone\', \'Contract and 956 Form\', 27, \'project\', 11, \'\', 0, \'milestone\', NULL, \'2024-02-24 07:45:35\', \'1\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `rise_activity_logs` (`action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `created_at`, `created_by`) VALUES (\'created\', \'milestone\', \'Contract and 956 Form\', 27, \'project\', 11, \'\', 0, \'milestone\', NULL, \'2024-02-24 07:45:35\', \'1\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `rise_activity_logs` (`action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `created_at`, `created_by`) VALUES (\'created\', \'milestone\', \'Contract and 956 Form\', 27, \'project\', 11, \'\', 0, \'milestone\', NULL, \'2024-02-24 07:45:35\', \'1\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `rise_activity_logs` (`action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `created_at`, `created_by`) VALUES (:action:, :log_type:, :log_type_title:, :log_type_id:, :log_for:, :log_for_id:, :log_for2:, :log_for_id2:, :log_for3:, :log_for_id3:, :created_at:, :created_by:)', [...], false)
+ 5 APPPATH\Models\Activity_logs_model.php(36): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Models\Crud_model.php(293): App\Models\Activity_logs_model->ci_save([...], false)
+ 7 APPPATH\Controllers\Projects.php(454): App\Models\Crud_model->ci_save([...], '')
+ 8 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-02-24 01:49:24 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(346): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 03:38:35 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Projects.php on line 3783
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Projects.php(3783): anchor('http://localhost/visaalliance-crm/index.php/clients/view/1', null)
+ 2 APPPATH\Controllers\Projects.php(3773): App\Controllers\Projects->_make_clients_summary_row(Object(stdClass))
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->clients_summary_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-24 04:11:18 --> Email: sendWithMail throwed ErrorException: mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in D:\projects\visaalliance-crm\system\Email\Email.php:1735
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'mail(): Failed ...', 'D:\\projects\\vis...', 1735)
+#1 D:\projects\visaalliance-crm\system\Email\Email.php(1735): mail('munawer@queper....', '=?UTF-8?Q?Login...', 'This is a multi...', 'Date: Sat, 24 F...', '-f admin@visaal...')
+#2 D:\projects\visaalliance-crm\system\Email\Email.php(1667): CodeIgniter\Email\Email->sendWithMail()
+#3 D:\projects\visaalliance-crm\system\Email\Email.php(1565): CodeIgniter\Email\Email->spoolEmail()
+#4 D:\projects\visaalliance-crm\app\Helpers\general_helper.php(561): CodeIgniter\Email\Email->send()
+#5 D:\projects\visaalliance-crm\app\Controllers\Students.php(1168): send_app_mail('munawer@queper....', 'Login details', '<div style="bac...')
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Students->save_contact()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2024-02-24 04:11:18 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-02-24 04:11:18 --> 
+CRITICAL - 2024-02-24 04:11:18 --> Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.<br><pre>Date: Sat, 24 Feb 2024 04:11:16 -0600
+From: &quot;Basanta&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;65d9c0c4221456.70113783@visaalliance.com.au&gt;
+Mime-Version: 1.0
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_65d9c0c4221599.49921817&quot;
+=?UTF-8?Q?Login=20details?=
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_65d9c0c4221599.49921817
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Login Details Hello Munawer Anwar,An account has been created for you.
+Please use the following info to login your dashboard: Dashboard
+URL:&amp;nbsp;http://localhost/visaalliance-crm/ Email: munawer@queper.co
+Password:&amp;nbsp;meslvJm) Powered By: fairsketch
+
+
+--B_ALT_65d9c0c4221599.49921817
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+&lt;div style=3D&quot;background-color: #eeeeef; padding: 50px 0; &quot;&gt;&lt;div style=3D&quot;m=
+ax-width:640px; margin:0 auto; &quot;&gt; &lt;div style=3D&quot;color: #fff; text-align: ce=
+nter; background-color:#33333e; padding: 30px; border-top-left-radius: 3px;=
+ border-top-right-radius: 3px; margin: 0;&quot;&gt;  &lt;h1&gt;Login Details&lt;/h1&gt;&lt;/div&gt;&lt;d=
+iv style=3D&quot;padding: 20px; background-color: rgb(255, 255, 255);&quot;&gt;         =
+   &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Hello Munawer Anw=
+ar,&lt;br&gt;&lt;br&gt;An account has been created for you.&lt;/p&gt;            &lt;p style=3D&quot;=
+color: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Please use the following info to=
+ login your dashboard:&lt;/p&gt;            &lt;hr&gt;            &lt;p style=3D&quot;color: rg=
+b(85, 85, 85); font-size: 14px;&quot;&gt;Dashboard URL:&amp;nbsp;&lt;a href=3D&quot;http://loca=
+lhost/visaalliance-crm/&quot; target=3D&quot;_blank&quot;&gt;http://localhost/visaalliance-cr=
+m/&lt;/a&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;=
+&gt;&lt;/p&gt;            &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-=
+size: 14px; line-height: 20px;&quot;&gt;Email: munawer@queper.co&lt;/span&gt;&lt;br&gt;&lt;/p&gt;    =
+        &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-size: 14p=
+x; line-height: 20px;&quot;&gt;Password:&amp;nbsp;meslvJm)&lt;/span&gt;&lt;/p&gt;            &lt;p sty=
+le=3D&quot;color: rgb(85, 85, 85);&quot;&gt;&lt;br&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rgb(8=
+5, 85, 85); font-size: 14px;&quot;&gt;Powered By: &lt;a href=3D&quot;http://fairsketch.com/=
+&quot; target=3D&quot;_blank&quot;&gt;fairsketch &lt;/a&gt;&lt;/p&gt;        &lt;/div&gt;    &lt;/div&gt;&lt;/div&gt;
+
+--B_ALT_65d9c0c4221599.49921817--</pre>
+in APPPATH\Helpers\general_helper.php on line 566.
+ 1 APPPATH\Controllers\Students.php(1168): send_app_mail('munawer@queper.co', 'Login details', '<div style="background-color: #eeeeef; padding: 50px 0; "><div style="max-width:640px; margin:0 auto; "> <div style="color: #fff; text-align: center; background-color:#33333e; padding: 30px; border-top-left-radius: 3px; border-top-right-radius: 3px; margin: 0;">  <h1>Login Details</h1></div><div style="padding: 20px; background-color: rgb(255, 255, 255);">            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Hello Munawer Anwar,<br><br>An account has been created for you.</p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Please use the following info to login your dashboard:</p>            <hr>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Dashboard URL:&nbsp;<a href="http://localhost/visaalliance-crm/" target="_blank">http://localhost/visaalliance-crm/</a></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Email: munawer@queper.co</span><br></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Password:&nbsp;meslvJm)</span></p>            <p style="color: rgb(85, 85, 85);"><br></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Powered By: <a href="http://fairsketch.com/" target="_blank">fairsketch </a></p>        </div>    </div></div>')
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->save_contact()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 04:11:37 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Students.php on line 1460
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Students.php(1460): anchor('http://localhost/visaalliance-crm/index.php/students/view/11', null)
+ 2 APPPATH\Controllers\Students.php(1411): App\Controllers\Students->_make_contact_row(Object(stdClass), [], false)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->contacts_list_data('11')
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-02-24 04:30:13 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(346): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 07:01:55 --> Dropbox\Sign\Model\SubSignatureRequestSigner::setEmailAddress(): Argument #1 ($email_address) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Helpers\general_helper.php on line 601
+in FCPATH\vendor\dropbox\sign\src\Model\SubSignatureRequestSigner.php on line 336.
+ 1 APPPATH\Helpers\general_helper.php(601): Dropbox\Sign\Model\SubSignatureRequestSigner->setEmailAddress(null)
+ 2 APPPATH\Controllers\Contracts.php(952): send_hellosign_sign_request([...], 'NDA with test org', 'Contract sent', '<p><br></p>', [], [...], [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Contracts->send_contract()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 07:05:06 --> Dropbox\Sign\Model\SubSignatureRequestSigner::setEmailAddress(): Argument #1 ($email_address) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Helpers\general_helper.php on line 601
+in FCPATH\vendor\dropbox\sign\src\Model\SubSignatureRequestSigner.php on line 336.
+ 1 APPPATH\Helpers\general_helper.php(601): Dropbox\Sign\Model\SubSignatureRequestSigner->setEmailAddress(null)
+ 2 APPPATH\Controllers\Contracts.php(952): send_hellosign_sign_request([...], 'NDA with test org', 'Contract sent', '<p><br></p>', [], [...], [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Contracts->send_contract()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 07:15:03 --> Dropbox\Sign\Model\SubSignatureRequestSigner::setEmailAddress(): Argument #1 ($email_address) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Helpers\general_helper.php on line 601
+in FCPATH\vendor\dropbox\sign\src\Model\SubSignatureRequestSigner.php on line 336.
+ 1 APPPATH\Helpers\general_helper.php(601): Dropbox\Sign\Model\SubSignatureRequestSigner->setEmailAddress(null)
+ 2 APPPATH\Controllers\Contracts.php(953): send_hellosign_sign_request([...], 'NDA with test org', 'Contract sent', '<p><br></p>', [...], [...], [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Contracts->send_contract()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 07:17:24 --> Dropbox\Sign\Model\SubSignatureRequestSigner::setEmailAddress(): Argument #1 ($email_address) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Helpers\general_helper.php on line 601
+in FCPATH\vendor\dropbox\sign\src\Model\SubSignatureRequestSigner.php on line 336.
+ 1 APPPATH\Helpers\general_helper.php(601): Dropbox\Sign\Model\SubSignatureRequestSigner->setEmailAddress(null)
+ 2 APPPATH\Controllers\Contracts.php(953): send_hellosign_sign_request([...], 'NDA with test org', 'Contract sent', '<p><br></p>', [], [...], [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Contracts->send_contract()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 07:18:37 --> Dropbox\Sign\Model\SubSignatureRequestSigner::setEmailAddress(): Argument #1 ($email_address) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Helpers\general_helper.php on line 602
+in FCPATH\vendor\dropbox\sign\src\Model\SubSignatureRequestSigner.php on line 336.
+ 1 APPPATH\Helpers\general_helper.php(602): Dropbox\Sign\Model\SubSignatureRequestSigner->setEmailAddress(null)
+ 2 APPPATH\Controllers\Contracts.php(953): send_hellosign_sign_request([...], 'NDA with test org', 'Contract sent', '<p><br></p>', [], [...], [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Contracts->send_contract()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 07:20:18 --> Array to string conversion
+in APPPATH\Helpers\general_helper.php on line 601.
+ 1 APPPATH\Helpers\general_helper.php(601): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\projects\\visaalliance-crm\\app\\Helpers\\general_helper.php', 601)
+ 2 APPPATH\Controllers\Contracts.php(953): send_hellosign_sign_request([...], 'NDA with test org', 'Contract sent', '<p><br></p>', [], [...], [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Contracts->send_contract()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 07:21:17 --> Dropbox\Sign\Model\SubSignatureRequestSigner::setEmailAddress(): Argument #1 ($email_address) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Helpers\general_helper.php on line 603
+in FCPATH\vendor\dropbox\sign\src\Model\SubSignatureRequestSigner.php on line 336.
+ 1 APPPATH\Helpers\general_helper.php(603): Dropbox\Sign\Model\SubSignatureRequestSigner->setEmailAddress(null)
+ 2 APPPATH\Controllers\Contracts.php(953): send_hellosign_sign_request([...], 'NDA with test org', 'Contract sent', '<p><br></p>', [], [...], [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Contracts->send_contract()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 07:27:38 --> Dropbox\Sign\Model\SubSignatureRequestSigner::setEmailAddress(): Argument #1 ($email_address) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Helpers\general_helper.php on line 603
+in FCPATH\vendor\dropbox\sign\src\Model\SubSignatureRequestSigner.php on line 336.
+ 1 APPPATH\Helpers\general_helper.php(603): Dropbox\Sign\Model\SubSignatureRequestSigner->setEmailAddress(null)
+ 2 APPPATH\Controllers\Contracts.php(953): send_hellosign_sign_request([...], 'NDA with test org', 'Contract sent', '<p><br></p>', [], [...], [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Contracts->send_contract()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-02-24 08:59:42 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-02-24 08:59:42 --> 220 smtp.mailtrap.io ESMTP ready
+
+hello: 250-smtp.mailtrap.io
+250-SIZE 5242880
+250-PIPELINING
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250-DSN
+250-AUTH PLAIN LOGIN CRAM-MD5
+250 STARTTLS
+
+starttls: 220 2.0.0 Start TLS
+
+hello: 250-smtp.mailtrap.io
+250-SIZE 5242880
+250-PIPELINING
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250-DSN
+250 AUTH PLAIN LOGIN CRAM-MD5
+
+Failed to send AUTH LOGIN command. Error: 
+ERROR - 2024-02-24 08:59:42 --> 220 smtp.mailtrap.io ESMTP ready
+<br><pre>hello: 250-smtp.mailtrap.io
+250-SIZE 5242880
+250-PIPELINING
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250-DSN
+250-AUTH PLAIN LOGIN CRAM-MD5
+250 STARTTLS
+</pre><pre>starttls: 220 2.0.0 Start TLS
+</pre><pre>hello: 250-smtp.mailtrap.io
+250-SIZE 5242880
+250-PIPELINING
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250-DSN
+250 AUTH PLAIN LOGIN CRAM-MD5
+</pre>Failed to send AUTH LOGIN command. Error: <br>Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Sat, 24 Feb 2024 08:59:23 -0600
+From: &quot;Visa Alliance&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+To: munawar@queper.co
+Subject: =?UTF-8?Q?Test=20message?=
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;65da044bb25459.75973975@visaalliance.com.au&gt;
+Mime-Version: 1.0
+
+
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_65da044bb255b7.66335185&quot;
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_65da044bb255b7.66335185
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This is a test message to check mail configuration.
+
+
+--B_ALT_65da044bb255b7.66335185
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+This is a test message to check mail configuration.
+
+--B_ALT_65da044bb255b7.66335185--</pre>
+ERROR - 2024-02-24 09:00:41 --> Email: sendWithSmtp throwed ErrorException: fsockopen(): Unable to connect to sandbox.smtp.mailtrap.io:587 (A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) in D:\projects\visaalliance-crm\system\Email\Email.php:1868
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fsockopen(): Un...', 'D:\\projects\\vis...', 1868)
+#1 D:\projects\visaalliance-crm\system\Email\Email.php(1868): fsockopen('sandbox.smtp.ma...', '587', NULL, NULL, 5)
+#2 D:\projects\visaalliance-crm\system\Email\Email.php(1782): CodeIgniter\Email\Email->SMTPConnect()
+#3 D:\projects\visaalliance-crm\system\Email\Email.php(1667): CodeIgniter\Email\Email->sendWithSmtp()
+#4 D:\projects\visaalliance-crm\system\Email\Email.php(1565): CodeIgniter\Email\Email->spoolEmail()
+#5 D:\projects\visaalliance-crm\app\Controllers\Settings.php(200): CodeIgniter\Email\Email->send()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Settings->save_email_settings()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2024-02-24 09:00:41 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-02-24 09:00:41 --> 
+ERROR - 2024-02-24 09:00:41 --> Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Sat, 24 Feb 2024 09:00:36 -0600
+From: &quot;Visa Alliance&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+To: munawar@queper.co
+Subject: =?UTF-8?Q?Test=20message?=
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;65da049454b4b9.95255409@visaalliance.com.au&gt;
+Mime-Version: 1.0
+
+
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_65da049454b5c8.16624265&quot;
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_65da049454b5c8.16624265
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This is a test message to check mail configuration.
+
+
+--B_ALT_65da049454b5c8.16624265
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+This is a test message to check mail configuration.
+
+--B_ALT_65da049454b5c8.16624265--</pre>
+ERROR - 2024-02-24 09:00:59 --> Email: sendWithSmtp throwed ErrorException: stream_socket_enable_crypto(): SSL: Handshake timed out in D:\projects\visaalliance-crm\system\Email\Email.php:1889
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'stream_socket_e...', 'D:\\projects\\vis...', 1889)
+#1 D:\projects\visaalliance-crm\system\Email\Email.php(1889): stream_socket_enable_crypto(Resource id #235, true, 121)
+#2 D:\projects\visaalliance-crm\system\Email\Email.php(1782): CodeIgniter\Email\Email->SMTPConnect()
+#3 D:\projects\visaalliance-crm\system\Email\Email.php(1667): CodeIgniter\Email\Email->sendWithSmtp()
+#4 D:\projects\visaalliance-crm\system\Email\Email.php(1565): CodeIgniter\Email\Email->spoolEmail()
+#5 D:\projects\visaalliance-crm\app\Controllers\Settings.php(200): CodeIgniter\Email\Email->send()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Settings->save_email_settings()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2024-02-24 09:00:59 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-02-24 09:00:59 --> 220 smtp.mailtrap.io ESMTP ready
+
+hello: 250-smtp.mailtrap.io
+250-SIZE 5242880
+250-PIPELINING
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250-DSN
+250-AUTH PLAIN LOGIN CRAM-MD5
+250 STARTTLS
+
+starttls: 220 2.0.0 Start TLS
+
+ERROR - 2024-02-24 09:00:59 --> 220 smtp.mailtrap.io ESMTP ready
+<br><pre>hello: 250-smtp.mailtrap.io
+250-SIZE 5242880
+250-PIPELINING
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250-DSN
+250-AUTH PLAIN LOGIN CRAM-MD5
+250 STARTTLS
+</pre><pre>starttls: 220 2.0.0 Start TLS
+</pre>Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Sat, 24 Feb 2024 09:00:50 -0600
+From: &quot;Visa Alliance&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+To: munawar@queper.co
+Subject: =?UTF-8?Q?Test=20message?=
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;65da04a2d14858.96540965@visaalliance.com.au&gt;
+Mime-Version: 1.0
+
+
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_65da04a2d14a06.69955706&quot;
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_65da04a2d14a06.69955706
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This is a test message to check mail configuration.
+
+
+--B_ALT_65da04a2d14a06.69955706
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+This is a test message to check mail configuration.
+
+--B_ALT_65da04a2d14a06.69955706--</pre>
+ERROR - 2024-02-24 09:01:22 --> Email: sendWithSmtp throwed ErrorException: stream_socket_enable_crypto(): SSL: Handshake timed out in D:\projects\visaalliance-crm\system\Email\Email.php:1889
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'stream_socket_e...', 'D:\\projects\\vis...', 1889)
+#1 D:\projects\visaalliance-crm\system\Email\Email.php(1889): stream_socket_enable_crypto(Resource id #235, true, 121)
+#2 D:\projects\visaalliance-crm\system\Email\Email.php(1782): CodeIgniter\Email\Email->SMTPConnect()
+#3 D:\projects\visaalliance-crm\system\Email\Email.php(1667): CodeIgniter\Email\Email->sendWithSmtp()
+#4 D:\projects\visaalliance-crm\system\Email\Email.php(1565): CodeIgniter\Email\Email->spoolEmail()
+#5 D:\projects\visaalliance-crm\app\Controllers\Settings.php(200): CodeIgniter\Email\Email->send()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Settings->save_email_settings()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2024-02-24 09:01:22 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-02-24 09:01:22 --> 220 smtp.mailtrap.io ESMTP ready
+
+hello: 250-smtp.mailtrap.io
+250-SIZE 5242880
+250-PIPELINING
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250-DSN
+250-AUTH PLAIN LOGIN CRAM-MD5
+250 STARTTLS
+
+starttls: 220 2.0.0 Start TLS
+
+ERROR - 2024-02-24 09:01:22 --> 220 smtp.mailtrap.io ESMTP ready
+<br><pre>hello: 250-smtp.mailtrap.io
+250-SIZE 5242880
+250-PIPELINING
+250-ENHANCEDSTATUSCODES
+250-8BITMIME
+250-DSN
+250-AUTH PLAIN LOGIN CRAM-MD5
+250 STARTTLS
+</pre><pre>starttls: 220 2.0.0 Start TLS
+</pre>Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Sat, 24 Feb 2024 09:01:14 -0600
+From: &quot;Visa Alliance&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+To: munawar@queper.co
+Subject: =?UTF-8?Q?Test=20message?=
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;65da04ba0aab83.60447239@visaalliance.com.au&gt;
+Mime-Version: 1.0
+
+
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_65da04ba0aaf70.86159185&quot;
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_65da04ba0aaf70.86159185
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This is a test message to check mail configuration.
+
+
+--B_ALT_65da04ba0aaf70.86159185
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+This is a test message to check mail configuration.
+
+--B_ALT_65da04ba0aaf70.86159185--</pre>
+ERROR - 2024-02-24 09:01:33 --> Email: sendWithSmtp throwed ErrorException: fsockopen(): SSL operation failed with code 1. OpenSSL Error messages:
+error:1408F10B:SSL routines:ssl3_get_record:wrong version number in D:\projects\visaalliance-crm\system\Email\Email.php:1868
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fsockopen(): SS...', 'D:\\projects\\vis...', 1868)
+#1 D:\projects\visaalliance-crm\system\Email\Email.php(1868): fsockopen('ssl://sandbox.s...', '2525', NULL, NULL, 5)
+#2 D:\projects\visaalliance-crm\system\Email\Email.php(1782): CodeIgniter\Email\Email->SMTPConnect()
+#3 D:\projects\visaalliance-crm\system\Email\Email.php(1667): CodeIgniter\Email\Email->sendWithSmtp()
+#4 D:\projects\visaalliance-crm\system\Email\Email.php(1565): CodeIgniter\Email\Email->spoolEmail()
+#5 D:\projects\visaalliance-crm\app\Controllers\Settings.php(200): CodeIgniter\Email\Email->send()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Settings->save_email_settings()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Settings))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+ERROR - 2024-02-24 09:01:33 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-02-24 09:01:33 --> 
+ERROR - 2024-02-24 09:01:33 --> Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Sat, 24 Feb 2024 09:01:29 -0600
+From: &quot;Visa Alliance&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+To: munawar@queper.co
+Subject: =?UTF-8?Q?Test=20message?=
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;65da04c96efa25.06179568@visaalliance.com.au&gt;
+Mime-Version: 1.0
+
+
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_65da04c96efba9.93738389&quot;
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_65da04c96efba9.93738389
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This is a test message to check mail configuration.
+
+
+--B_ALT_65da04c96efba9.93738389
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+This is a test message to check mail configuration.
+
+--B_ALT_65da04c96efba9.93738389--</pre>
+CRITICAL - 2024-02-24 09:21:56 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Clients.php on line 297
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Clients.php(297): anchor('http://localhost/visaalliance-crm/index.php/clients/view/1', null)
+ 2 APPPATH\Controllers\Clients.php(242): App\Controllers\Clients->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Clients->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Clients))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 09:26:53 --> Undefined property: stdClass::$client_id
+in APPPATH\Controllers\Clients.php on line 295.
+ 1 APPPATH\Controllers\Clients.php(295): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$client_id', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Clients.php', 295)
+ 2 APPPATH\Controllers\Clients.php(242): App\Controllers\Clients->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Clients->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Clients))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 11:30:00 --> Undefined variable $contract_info
+in APPPATH\Views\contracts\send_contract_modal_form.php on line 4.
+ 1 APPPATH\Views\contracts\send_contract_modal_form.php(4): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $contract_info', 'D:\\projects\\visaalliance-crm\\app\\Views\\contracts\\send_contract_modal_form.php', 4)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\contracts\\send_contract_modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('contracts/send_contract_modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('contracts/send_contract_modal_form', [...])
+ 6 APPPATH\Controllers\Projects.php(329): App\Libraries\Template->view('contracts/send_contract_modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->email_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 11:30:08 --> Undefined variable $contract_info
+in APPPATH\Views\contracts\send_contract_modal_form.php on line 4.
+ 1 APPPATH\Views\contracts\send_contract_modal_form.php(4): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $contract_info', 'D:\\projects\\visaalliance-crm\\app\\Views\\contracts\\send_contract_modal_form.php', 4)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\contracts\\send_contract_modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('contracts/send_contract_modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('contracts/send_contract_modal_form', [...])
+ 6 APPPATH\Controllers\Projects.php(329): App\Libraries\Template->view('contracts/send_contract_modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->email_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 11:31:39 --> Undefined variable $contract_info
+in APPPATH\Views\contracts\send_contract_modal_form.php on line 4.
+ 1 APPPATH\Views\contracts\send_contract_modal_form.php(4): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $contract_info', 'D:\\projects\\visaalliance-crm\\app\\Views\\contracts\\send_contract_modal_form.php', 4)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\contracts\\send_contract_modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('contracts/send_contract_modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('contracts/send_contract_modal_form', [...])
+ 6 APPPATH\Controllers\Projects.php(329): App\Libraries\Template->view('contracts/send_contract_modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->email_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 11:33:01 --> Invalid file: "projects/send_contract_modal_form.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('projects/send_contract_modal_form.php')
+ 2 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/send_contract_modal_form', [], true)
+ 3 APPPATH\Libraries\Template.php(42): view('projects/send_contract_modal_form', [...])
+ 4 APPPATH\Controllers\Projects.php(329): App\Libraries\Template->view('projects/send_contract_modal_form', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->email_modal_form()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 7 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 12:09:33 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Views\tasks\task_view_data.php on line 214
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Views\tasks\task_view_data.php(214): anchor('http://localhost/visaalliance-crm/index.php/clients/view/1', null)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\tasks\\task_view_data.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('tasks/task_view_data', [], true)
+ 5 APPPATH\Views\tasks\view.php(71): view('tasks/task_view_data')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\tasks\\view.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('tasks/view', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('tasks/view', [...])
+10 APPPATH\Controllers\Tasks.php(1739): App\Libraries\Template->view('tasks/view', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Tasks->view()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tasks))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 12:14:07 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Views\tasks\task_view_data.php on line 214
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Views\tasks\task_view_data.php(214): anchor('http://localhost/visaalliance-crm/index.php/clients/view/1', null)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\tasks\\task_view_data.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('tasks/task_view_data', [], true)
+ 5 APPPATH\Views\tasks\view.php(71): view('tasks/task_view_data')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\tasks\\view.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('tasks/view', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('tasks/view', [...])
+10 APPPATH\Controllers\Tasks.php(1739): App\Libraries\Template->view('tasks/view', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Tasks->view()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tasks))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-02-24 12:14:32 --> Undefined variable $milestone_id
+in APPPATH\Views\projects\comments\comment_form.php on line 30.
+ 1 APPPATH\Views\projects\comments\comment_form.php(30): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $milestone_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\comments\\comment_form.php', 30)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\comments\\comment_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/comments/comment_form', [], true)
+ 5 APPPATH\Views\tasks\task_view_data.php(432): view('projects/comments/comment_form')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\tasks\\task_view_data.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('tasks/task_view_data', [], true)
+ 9 APPPATH\Views\tasks\view.php(71): view('tasks/task_view_data')
+10 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\tasks\\view.php')
+11 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+12 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('tasks/view', [], true)
+13 APPPATH\Libraries\Template.php(42): view('tasks/view', [...])
+14 APPPATH\Controllers\Tasks.php(1739): App\Libraries\Template->view('tasks/view', [...])
+15 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Tasks->view()
+16 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tasks))
+17 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

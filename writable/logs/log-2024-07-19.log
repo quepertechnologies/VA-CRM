@@ -1,0 +1,179 @@
+CRITICAL - 2024-07-19 08:09:24 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-07-19 08:13:20 --> Maximum execution time of 120 seconds exceeded
+in APPPATH\Controllers\Import.php on line 624.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-07-19 08:55:51 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ASSESSMENT' at line 4 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_gen...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_gen...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_gen...')
+#3 D:\projects\visaalliance-crm\app\Models\General_files_model.php(55): CodeIgniter\Database\BaseConnection->query('SELECT rise_gen...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Import.php(634): App\Models\General_files_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Import.php(403): App\Controllers\Import->_find(Array, Array, 't', 'workflow_id', Array)
+#6 D:\projects\visaalliance-crm\app\Controllers\Import.php(221): App\Controllers\Import->_pair_rows(Resource id #294, Array, 0, 'project')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Import->run()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(84): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2024-07-19 08:55:51 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ASSESSMENT' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_general_files.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS uploaded_by_user_name, rise_users.image AS uploaded_by_user_image, rise_users.user_type AS uploaded_by_user_type
+        FROM rise_general_files
+        LEFT JOIN rise_users ON rise_users.id= rise_general_files.uploaded_by
+        WHERE rise_general_files.deleted=0  AND rise_general_files.description=SKILL ASSESSMENT', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_general_files.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS uploaded_by_user_name, rise_users.image AS uploaded_by_user_image, rise_users.user_type AS uploaded_by_user_type
+        FROM rise_general_files
+        LEFT JOIN rise_users ON rise_users.id= rise_general_files.uploaded_by
+        WHERE rise_general_files.deleted=0  AND rise_general_files.description=SKILL ASSESSMENT')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_general_files.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS uploaded_by_user_name, rise_users.image AS uploaded_by_user_image, rise_users.user_type AS uploaded_by_user_type
+        FROM rise_general_files
+        LEFT JOIN rise_users ON rise_users.id= rise_general_files.uploaded_by
+        WHERE rise_general_files.deleted=0  AND rise_general_files.description=SKILL ASSESSMENT')
+ 4 APPPATH\Models\General_files_model.php(55): CodeIgniter\Database\BaseConnection->query('SELECT rise_general_files.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS uploaded_by_user_name, rise_users.image AS uploaded_by_user_image, rise_users.user_type AS uploaded_by_user_type
+        FROM rise_general_files
+        LEFT JOIN rise_users ON rise_users.id= rise_general_files.uploaded_by
+        WHERE rise_general_files.deleted=0  AND rise_general_files.description=SKILL ASSESSMENT')
+ 5 APPPATH\Controllers\Import.php(634): App\Models\General_files_model->get_details([...])
+ 6 APPPATH\Controllers\Import.php(403): App\Controllers\Import->_find([...], [...], 't', 'workflow_id', [...])
+ 7 APPPATH\Controllers\Import.php(221): App\Controllers\Import->_pair_rows(resource (stream), [...], 0, 'project')
+ 8 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Import->run()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-19 08:55:51 --> Uncaught CodeIgniter\Format\Exceptions\FormatException: Failed to parse JSON string. Error: Type is not supported in D:\projects\visaalliance-crm\system\Format\JSONFormatter.php:41
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Format\JSONFormatter.php(41): CodeIgniter\Format\Exceptions\FormatException::forInvalidJSON('Type is not sup...')
+#1 D:\projects\visaalliance-crm\system\API\ResponseTrait.php(345): CodeIgniter\Format\JSONFormatter->format(Array)
+#2 D:\projects\visaalliance-crm\system\API\ResponseTrait.php(98): CodeIgniter\Debug\Exceptions->format(Array)
+#3 D:\projects\visaalliance-crm\system\Debug\Exceptions.php(150): CodeIgniter\Debug\Exceptions->respond(Array, 500)
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(mysqli_sql_exception))
+#5 {main}
+  thrown
+【Previous Exception】
+CodeIgniter\Database\Exceptions\DatabaseException
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ASSESSMENT' at line 4
+#0 D:\projects\visaalliance-crm\app\Models\General_files_model.php(55): CodeIgniter\Database\BaseConnection->query('SELECT rise_gen...')
+#1 D:\projects\visaalliance-crm\app\Controllers\Import.php(634): App\Models\General_files_model->get_details(Array)
+#2 D:\projects\visaalliance-crm\app\Controllers\Import.php(403): App\Controllers\Import->_find(Array, Array, 't', 'workflow_id', Array)
+#3 D:\projects\visaalliance-crm\app\Controllers\Import.php(221): App\Controllers\Import->_pair_rows(Resource id #294, Array, 0, 'project')
+#4 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Import->run()
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\projects\visaalliance-crm\index.php(84): CodeIgniter\CodeIgniter->run()
+#8 {main}
+in SYSTEMPATH\Format\JSONFormatter.php on line 41.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-07-19 08:57:15 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ASSESSMENT' at line 4 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_gen...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_gen...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_gen...')
+#3 D:\projects\visaalliance-crm\app\Models\General_files_model.php(55): CodeIgniter\Database\BaseConnection->query('SELECT rise_gen...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Import.php(634): App\Models\General_files_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Import.php(403): App\Controllers\Import->_find(Array, Array, 't', 'workflow_id', Array)
+#6 D:\projects\visaalliance-crm\app\Controllers\Import.php(221): App\Controllers\Import->_pair_rows(Resource id #294, Array, 0, 'project')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Import->run()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(84): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2024-07-19 08:57:15 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ASSESSMENT' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_general_files.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS uploaded_by_user_name, rise_users.image AS uploaded_by_user_image, rise_users.user_type AS uploaded_by_user_type
+        FROM rise_general_files
+        LEFT JOIN rise_users ON rise_users.id= rise_general_files.uploaded_by
+        WHERE rise_general_files.deleted=0  AND \'rise_general_files.description\'=SKILL ASSESSMENT', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_general_files.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS uploaded_by_user_name, rise_users.image AS uploaded_by_user_image, rise_users.user_type AS uploaded_by_user_type
+        FROM rise_general_files
+        LEFT JOIN rise_users ON rise_users.id= rise_general_files.uploaded_by
+        WHERE rise_general_files.deleted=0  AND \'rise_general_files.description\'=SKILL ASSESSMENT')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_general_files.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS uploaded_by_user_name, rise_users.image AS uploaded_by_user_image, rise_users.user_type AS uploaded_by_user_type
+        FROM rise_general_files
+        LEFT JOIN rise_users ON rise_users.id= rise_general_files.uploaded_by
+        WHERE rise_general_files.deleted=0  AND \'rise_general_files.description\'=SKILL ASSESSMENT')
+ 4 APPPATH\Models\General_files_model.php(55): CodeIgniter\Database\BaseConnection->query('SELECT rise_general_files.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS uploaded_by_user_name, rise_users.image AS uploaded_by_user_image, rise_users.user_type AS uploaded_by_user_type
+        FROM rise_general_files
+        LEFT JOIN rise_users ON rise_users.id= rise_general_files.uploaded_by
+        WHERE rise_general_files.deleted=0  AND \'rise_general_files.description\'=SKILL ASSESSMENT')
+ 5 APPPATH\Controllers\Import.php(634): App\Models\General_files_model->get_details([...])
+ 6 APPPATH\Controllers\Import.php(403): App\Controllers\Import->_find([...], [...], 't', 'workflow_id', [...])
+ 7 APPPATH\Controllers\Import.php(221): App\Controllers\Import->_pair_rows(resource (stream), [...], 0, 'project')
+ 8 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Import->run()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-19 08:57:15 --> Uncaught CodeIgniter\Format\Exceptions\FormatException: Failed to parse JSON string. Error: Type is not supported in D:\projects\visaalliance-crm\system\Format\JSONFormatter.php:41
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Format\JSONFormatter.php(41): CodeIgniter\Format\Exceptions\FormatException::forInvalidJSON('Type is not sup...')
+#1 D:\projects\visaalliance-crm\system\API\ResponseTrait.php(345): CodeIgniter\Format\JSONFormatter->format(Array)
+#2 D:\projects\visaalliance-crm\system\API\ResponseTrait.php(98): CodeIgniter\Debug\Exceptions->format(Array)
+#3 D:\projects\visaalliance-crm\system\Debug\Exceptions.php(150): CodeIgniter\Debug\Exceptions->respond(Array, 500)
+#4 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(mysqli_sql_exception))
+#5 {main}
+  thrown
+【Previous Exception】
+CodeIgniter\Database\Exceptions\DatabaseException
+You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ASSESSMENT' at line 4
+#0 D:\projects\visaalliance-crm\app\Models\General_files_model.php(55): CodeIgniter\Database\BaseConnection->query('SELECT rise_gen...')
+#1 D:\projects\visaalliance-crm\app\Controllers\Import.php(634): App\Models\General_files_model->get_details(Array)
+#2 D:\projects\visaalliance-crm\app\Controllers\Import.php(403): App\Controllers\Import->_find(Array, Array, 't', 'workflow_id', Array)
+#3 D:\projects\visaalliance-crm\app\Controllers\Import.php(221): App\Controllers\Import->_pair_rows(Resource id #294, Array, 0, 'project')
+#4 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Import->run()
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\projects\visaalliance-crm\index.php(84): CodeIgniter\CodeIgniter->run()
+#8 {main}
+in SYSTEMPATH\Format\JSONFormatter.php on line 41.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-07-19 08:58:45 --> mysqli_sql_exception: Unknown column 'internal_id' in 'field list' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Crud_model.php(267): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Import.php(254): App\Models\Crud_model->ci_save(Array)
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Import->run()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(84): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-07-19 08:58:45 --> Unknown column 'internal_id' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `rise_projects` (`client_id`, `workflow_id`, `partner_ids`, `title`, `temp_product_id`, `status_id`, `status`, `created_date`, `temp_applic_id`, `start_date`, `deadline`, `location_id`, `disc_reason`, `created_by`, `internal_id`, `row_data`) VALUES (0, \'41\', \'3606\', \'For applications lodged within Australia (Eligibility for Membership (Stage 1 Competency) Assessment)\', \'1\', 2, \'open\', \'2023-09-20\', \'3692\', \'2024-01-15\', \'2024-02-28\', (2), \'\', \'0\', \'\', \'a:39:{i:0;s:1:\\".\\";i:1;s:8:\\"Khadijah\\";i:2;s:27:\\"khadijahalirizwan@gmail.com\\";i:3;s:12:\\"+61481131915\\";i:4;s:0:\\"\\";i:5;s:10:\\"14/07/1997\\";i:6;s:10:\\"2025-03-15\\";i:7;s:0:\\"\\";i:8;s:0:\\"\\";i:9;s:0:\\"\\";i:10;s:16:\\"SKILL ASSESSMENT\\";i:11;s:38:\\"The Institution of Engineers Australia\\";i:12;s:40:\\"memberservices@engineersaustralia.org.au\\";i:13;s:101:\\"For applications lodged within Australia (Eligibility for Membership (Stage 1 Competency) Assessment)\\";i:14;s:16:\\"Skill Assessment\\";i:15;s:26:\\"Communication with Client \\";i:16;s:9:\\"Completed\\";i:17;s:19:\\"2023-09-20 01:58:44\\";i:18;s:4:\\"3692\\";i:19;s:0:\\"\\";i:20;s:19:\\"2024-01-15 00:00:00\\";i:21;s:19:\\"2024-02-28 00:00:00\\";i:22;s:11:\\"Head Office\\";i:23;s:0:\\"\\";i:24;s:17:\\"Aakrity Chitrakar\\";i:25;s:6:\\"Sydney\\";i:26;s:19:\\"2024-02-28 04:07:07\\";i:27;s:0:\\"\\";i:28;s:0:\\"\\";i:29;s:17:\\"Aakrity Chitrakar\\";i:30;s:6:\\"1 week\\";i:31;s:6:\\"748.00\\";i:32;s:0:\\"\\";i:33;s:6:\\"748.00\\";i:34;s:8:\\"Full Fee\\";i:35;s:3:\\"303\\";i:36;s:3:\\"142\\";i:37;s:17:\\"Aakrity Chitrakar\\";i:38;s:6:\\"VA2445\\";}\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `rise_projects` (`client_id`, `workflow_id`, `partner_ids`, `title`, `temp_product_id`, `status_id`, `status`, `created_date`, `temp_applic_id`, `start_date`, `deadline`, `location_id`, `disc_reason`, `created_by`, `internal_id`, `row_data`) VALUES (0, \'41\', \'3606\', \'For applications lodged within Australia (Eligibility for Membership (Stage 1 Competency) Assessment)\', \'1\', 2, \'open\', \'2023-09-20\', \'3692\', \'2024-01-15\', \'2024-02-28\', (2), \'\', \'0\', \'\', \'a:39:{i:0;s:1:\\".\\";i:1;s:8:\\"Khadijah\\";i:2;s:27:\\"khadijahalirizwan@gmail.com\\";i:3;s:12:\\"+61481131915\\";i:4;s:0:\\"\\";i:5;s:10:\\"14/07/1997\\";i:6;s:10:\\"2025-03-15\\";i:7;s:0:\\"\\";i:8;s:0:\\"\\";i:9;s:0:\\"\\";i:10;s:16:\\"SKILL ASSESSMENT\\";i:11;s:38:\\"The Institution of Engineers Australia\\";i:12;s:40:\\"memberservices@engineersaustralia.org.au\\";i:13;s:101:\\"For applications lodged within Australia (Eligibility for Membership (Stage 1 Competency) Assessment)\\";i:14;s:16:\\"Skill Assessment\\";i:15;s:26:\\"Communication with Client \\";i:16;s:9:\\"Completed\\";i:17;s:19:\\"2023-09-20 01:58:44\\";i:18;s:4:\\"3692\\";i:19;s:0:\\"\\";i:20;s:19:\\"2024-01-15 00:00:00\\";i:21;s:19:\\"2024-02-28 00:00:00\\";i:22;s:11:\\"Head Office\\";i:23;s:0:\\"\\";i:24;s:17:\\"Aakrity Chitrakar\\";i:25;s:6:\\"Sydney\\";i:26;s:19:\\"2024-02-28 04:07:07\\";i:27;s:0:\\"\\";i:28;s:0:\\"\\";i:29;s:17:\\"Aakrity Chitrakar\\";i:30;s:6:\\"1 week\\";i:31;s:6:\\"748.00\\";i:32;s:0:\\"\\";i:33;s:6:\\"748.00\\";i:34;s:8:\\"Full Fee\\";i:35;s:3:\\"303\\";i:36;s:3:\\"142\\";i:37;s:17:\\"Aakrity Chitrakar\\";i:38;s:6:\\"VA2445\\";}\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `rise_projects` (`client_id`, `workflow_id`, `partner_ids`, `title`, `temp_product_id`, `status_id`, `status`, `created_date`, `temp_applic_id`, `start_date`, `deadline`, `location_id`, `disc_reason`, `created_by`, `internal_id`, `row_data`) VALUES (0, \'41\', \'3606\', \'For applications lodged within Australia (Eligibility for Membership (Stage 1 Competency) Assessment)\', \'1\', 2, \'open\', \'2023-09-20\', \'3692\', \'2024-01-15\', \'2024-02-28\', (2), \'\', \'0\', \'\', \'a:39:{i:0;s:1:\\".\\";i:1;s:8:\\"Khadijah\\";i:2;s:27:\\"khadijahalirizwan@gmail.com\\";i:3;s:12:\\"+61481131915\\";i:4;s:0:\\"\\";i:5;s:10:\\"14/07/1997\\";i:6;s:10:\\"2025-03-15\\";i:7;s:0:\\"\\";i:8;s:0:\\"\\";i:9;s:0:\\"\\";i:10;s:16:\\"SKILL ASSESSMENT\\";i:11;s:38:\\"The Institution of Engineers Australia\\";i:12;s:40:\\"memberservices@engineersaustralia.org.au\\";i:13;s:101:\\"For applications lodged within Australia (Eligibility for Membership (Stage 1 Competency) Assessment)\\";i:14;s:16:\\"Skill Assessment\\";i:15;s:26:\\"Communication with Client \\";i:16;s:9:\\"Completed\\";i:17;s:19:\\"2023-09-20 01:58:44\\";i:18;s:4:\\"3692\\";i:19;s:0:\\"\\";i:20;s:19:\\"2024-01-15 00:00:00\\";i:21;s:19:\\"2024-02-28 00:00:00\\";i:22;s:11:\\"Head Office\\";i:23;s:0:\\"\\";i:24;s:17:\\"Aakrity Chitrakar\\";i:25;s:6:\\"Sydney\\";i:26;s:19:\\"2024-02-28 04:07:07\\";i:27;s:0:\\"\\";i:28;s:0:\\"\\";i:29;s:17:\\"Aakrity Chitrakar\\";i:30;s:6:\\"1 week\\";i:31;s:6:\\"748.00\\";i:32;s:0:\\"\\";i:33;s:6:\\"748.00\\";i:34;s:8:\\"Full Fee\\";i:35;s:3:\\"303\\";i:36;s:3:\\"142\\";i:37;s:17:\\"Aakrity Chitrakar\\";i:38;s:6:\\"VA2445\\";}\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `rise_projects` (`client_id`, `workflow_id`, `partner_ids`, `title`, `temp_product_id`, `status_id`, `status`, `created_date`, `temp_applic_id`, `start_date`, `deadline`, `location_id`, `disc_reason`, `created_by`, `internal_id`, `row_data`) VALUES (:client_id:, :workflow_id:, :partner_ids:, :title:, :temp_product_id:, :status_id:, :status:, :created_date:, :temp_applic_id:, :start_date:, :deadline:, :location_id:, :disc_reason:, :created_by:, :internal_id:, :row_data:)', [...], false)
+ 5 APPPATH\Models\Crud_model.php(267): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\Import.php(254): App\Models\Crud_model->ci_save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Import->run()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-19 10:28:52 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('import/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-19 15:41:00 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-07-19 21:54:24 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-07-19 22:22:51 --> Maximum execution time of 120 seconds exceeded
+in APPPATH\Controllers\Import.php on line 407.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-07-19 23:50:42 --> implode(): Argument #2 ($array) must be of type ?array, int given
+in APPPATH\Controllers\Import.php on line 151.
+ 1 APPPATH\Controllers\Import.php(151): implode(',', 3995)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Import->populate_visa()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()

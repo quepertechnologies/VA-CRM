@@ -1,0 +1,158 @@
+CRITICAL - 2024-04-25 00:50:51 --> Unsupported operand types: string * int
+in APPPATH\Controllers\Team_members.php on line 413.
+ 1 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->view('job_info')
+ 2 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-25 01:34:28 --> Email: sendWithSmtp throwed ErrorException: fsockopen(): Unable to connect to sandbox.smtp.mailtrap.io:2525 (A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) in D:\projects\visaalliance-crm\system\Email\Email.php:1868
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fsockopen(): Un...', 'D:\\projects\\vis...', 1868)
+#1 D:\projects\visaalliance-crm\system\Email\Email.php(1868): fsockopen('sandbox.smtp.ma...', '2525', NULL, NULL, 5)
+#2 D:\projects\visaalliance-crm\system\Email\Email.php(1782): CodeIgniter\Email\Email->SMTPConnect()
+#3 D:\projects\visaalliance-crm\system\Email\Email.php(1667): CodeIgniter\Email\Email->sendWithSmtp()
+#4 D:\projects\visaalliance-crm\system\Email\Email.php(1565): CodeIgniter\Email\Email->spoolEmail()
+#5 D:\projects\visaalliance-crm\app\Helpers\general_helper.php(561): CodeIgniter\Email\Email->send()
+#6 D:\projects\visaalliance-crm\app\Controllers\Team_members.php(230): send_app_mail('sosuka.maskey@v...', 'Login details', '<div style="bac...')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Team_members->add_team_member()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2024-04-25 01:34:28 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-04-25 01:34:28 --> 
+CRITICAL - 2024-04-25 01:34:28 --> Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Thu, 25 Apr 2024 01:34:23 -0500
+From: &quot;Visa Alliance&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+To: sosuka.maskey@visaalliance.com
+Subject: =?UTF-8?Q?Login=20details?=
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;6629f96f64b944.50182788@visaalliance.com.au&gt;
+Mime-Version: 1.0
+
+
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_6629f96f64bb49.61824331&quot;
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_6629f96f64bb49.61824331
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Login Details Hello Sosuka Maskey,An account has been created for you.
+Please use the following info to login your dashboard: Dashboard
+URL:&amp;nbsp;http://localhost/visaalliance-crm/ Email:
+sosuka.maskey@visaalliance.com Password:&amp;nbsp;Q33j87-T Team Visa Alliance
+
+
+--B_ALT_6629f96f64bb49.61824331
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+&lt;div style=3D&quot;background-color: #eeeeef; padding: 50px 0; &quot;&gt;&lt;div style=3D&quot;m=
+ax-width:640px; margin:0 auto; &quot;&gt; &lt;div style=3D&quot;color: #fff; text-align: ce=
+nter; background-color:#33333e; padding: 30px; border-top-left-radius: 3px;=
+ border-top-right-radius: 3px; margin: 0;&quot;&gt;  &lt;h1&gt;Login Details&lt;/h1&gt;&lt;/div&gt;&lt;d=
+iv style=3D&quot;padding: 20px; background-color: rgb(255, 255, 255);&quot;&gt;         =
+   &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Hello Sosuka Mask=
+ey,&lt;br&gt;&lt;br&gt;An account has been created for you.&lt;/p&gt;            &lt;p style=3D&quot;=
+color: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Please use the following info to=
+ login your dashboard:&lt;/p&gt;            &lt;hr&gt;            &lt;p style=3D&quot;color: rg=
+b(85, 85, 85); font-size: 14px;&quot;&gt;Dashboard URL:&amp;nbsp;&lt;a href=3D&quot;http://loca=
+lhost/visaalliance-crm/&quot; target=3D&quot;_blank&quot;&gt;http://localhost/visaalliance-cr=
+m/&lt;/a&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;=
+&gt;&lt;/p&gt;            &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-=
+size: 14px; line-height: 20px;&quot;&gt;Email: sosuka.maskey@visaalliance.com&lt;/span=
+&gt;&lt;br&gt;&lt;/p&gt;            &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); f=
+ont-size: 14px; line-height: 20px;&quot;&gt;Password:&amp;nbsp;Q33j87-T&lt;/span&gt;&lt;/p&gt;     =
+       &lt;p style=3D&quot;color: rgb(85, 85, 85);&quot;&gt;&lt;br&gt;&lt;/p&gt;            &lt;p style=3D=
+&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt;Team Visa Alliance&lt;/p&gt;        &lt;/=
+div&gt;    &lt;/div&gt;&lt;/div&gt;
+
+--B_ALT_6629f96f64bb49.61824331--</pre>
+in APPPATH\Helpers\general_helper.php on line 566.
+ 1 APPPATH\Controllers\Team_members.php(230): send_app_mail('sosuka.maskey@visaalliance.com', 'Login details', '<div style="background-color: #eeeeef; padding: 50px 0; "><div style="max-width:640px; margin:0 auto; "> <div style="color: #fff; text-align: center; background-color:#33333e; padding: 30px; border-top-left-radius: 3px; border-top-right-radius: 3px; margin: 0;">  <h1>Login Details</h1></div><div style="padding: 20px; background-color: rgb(255, 255, 255);">            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Hello Sosuka Maskey,<br><br>An account has been created for you.</p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Please use the following info to login your dashboard:</p>            <hr>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Dashboard URL:&nbsp;<a href="http://localhost/visaalliance-crm/" target="_blank">http://localhost/visaalliance-crm/</a></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Email: sosuka.maskey@visaalliance.com</span><br></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Password:&nbsp;Q33j87-T</span></p>            <p style="color: rgb(85, 85, 85);"><br></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Team Visa Alliance</p>        </div>    </div></div>')
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->add_team_member()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-25 01:36:48 --> Email: sendWithSmtp throwed ErrorException: fsockopen(): Unable to connect to sandbox.smtp.mailtrap.io:2525 (A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) in D:\projects\visaalliance-crm\system\Email\Email.php:1868
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fsockopen(): Un...', 'D:\\projects\\vis...', 1868)
+#1 D:\projects\visaalliance-crm\system\Email\Email.php(1868): fsockopen('sandbox.smtp.ma...', '2525', NULL, NULL, 5)
+#2 D:\projects\visaalliance-crm\system\Email\Email.php(1782): CodeIgniter\Email\Email->SMTPConnect()
+#3 D:\projects\visaalliance-crm\system\Email\Email.php(1667): CodeIgniter\Email\Email->sendWithSmtp()
+#4 D:\projects\visaalliance-crm\system\Email\Email.php(1565): CodeIgniter\Email\Email->spoolEmail()
+#5 D:\projects\visaalliance-crm\app\Helpers\general_helper.php(561): CodeIgniter\Email\Email->send()
+#6 D:\projects\visaalliance-crm\app\Controllers\Team_members.php(230): send_app_mail('shrija.mangrati...', 'Login details', '<div style="bac...')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Team_members->add_team_member()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2024-04-25 01:36:48 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-04-25 01:36:48 --> 
+CRITICAL - 2024-04-25 01:36:48 --> Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Thu, 25 Apr 2024 01:36:43 -0500
+From: &quot;Visa Alliance&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+To: shrija.mangrati@visaalliance.com
+Subject: =?UTF-8?Q?Login=20details?=
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;6629f9fbcc1442.98820109@visaalliance.com.au&gt;
+Mime-Version: 1.0
+
+
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_6629f9fbcc1581.40975786&quot;
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_6629f9fbcc1581.40975786
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Login Details Hello Shrija Mangrati,An account has been created for you.
+Please use the following info to login your dashboard: Dashboard
+URL:&amp;nbsp;http://localhost/visaalliance-crm/ Email:
+shrija.mangrati@visaalliance.com Password:&amp;nbsp;TekAIStp Team Visa Alliance
+
+
+--B_ALT_6629f9fbcc1581.40975786
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+&lt;div style=3D&quot;background-color: #eeeeef; padding: 50px 0; &quot;&gt;&lt;div style=3D&quot;m=
+ax-width:640px; margin:0 auto; &quot;&gt; &lt;div style=3D&quot;color: #fff; text-align: ce=
+nter; background-color:#33333e; padding: 30px; border-top-left-radius: 3px;=
+ border-top-right-radius: 3px; margin: 0;&quot;&gt;  &lt;h1&gt;Login Details&lt;/h1&gt;&lt;/div&gt;&lt;d=
+iv style=3D&quot;padding: 20px; background-color: rgb(255, 255, 255);&quot;&gt;         =
+   &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Hello Shrija Mang=
+rati,&lt;br&gt;&lt;br&gt;An account has been created for you.&lt;/p&gt;            &lt;p style=
+=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Please use the following inf=
+o to login your dashboard:&lt;/p&gt;            &lt;hr&gt;            &lt;p style=3D&quot;color=
+: rgb(85, 85, 85); font-size: 14px;&quot;&gt;Dashboard URL:&amp;nbsp;&lt;a href=3D&quot;http://=
+localhost/visaalliance-crm/&quot; target=3D&quot;_blank&quot;&gt;http://localhost/visaallianc=
+e-crm/&lt;/a&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14=
+px;&quot;&gt;&lt;/p&gt;            &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); f=
+ont-size: 14px; line-height: 20px;&quot;&gt;Email: shrija.mangrati@visaalliance.com=
+&lt;/span&gt;&lt;br&gt;&lt;/p&gt;            &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, =
+85); font-size: 14px; line-height: 20px;&quot;&gt;Password:&amp;nbsp;TekAIStp&lt;/span&gt;&lt;/p=
+&gt;            &lt;p style=3D&quot;color: rgb(85, 85, 85);&quot;&gt;&lt;br&gt;&lt;/p&gt;            &lt;p st=
+yle=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt;Team Visa Alliance&lt;/p&gt;    =
+    &lt;/div&gt;    &lt;/div&gt;&lt;/div&gt;
+
+--B_ALT_6629f9fbcc1581.40975786--</pre>
+in APPPATH\Helpers\general_helper.php on line 566.
+ 1 APPPATH\Controllers\Team_members.php(230): send_app_mail('shrija.mangrati@visaalliance.com', 'Login details', '<div style="background-color: #eeeeef; padding: 50px 0; "><div style="max-width:640px; margin:0 auto; "> <div style="color: #fff; text-align: center; background-color:#33333e; padding: 30px; border-top-left-radius: 3px; border-top-right-radius: 3px; margin: 0;">  <h1>Login Details</h1></div><div style="padding: 20px; background-color: rgb(255, 255, 255);">            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Hello Shrija Mangrati,<br><br>An account has been created for you.</p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Please use the following info to login your dashboard:</p>            <hr>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Dashboard URL:&nbsp;<a href="http://localhost/visaalliance-crm/" target="_blank">http://localhost/visaalliance-crm/</a></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Email: shrija.mangrati@visaalliance.com</span><br></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Password:&nbsp;TekAIStp</span></p>            <p style="color: rgb(85, 85, 85);"><br></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Team Visa Alliance</p>        </div>    </div></div>')
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->add_team_member()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

@@ -1,0 +1,68 @@
+ERROR - 2024-02-13 01:36:50 --> mysqli_sql_exception: Unknown column 'student' in 'where clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(ri...')
+#3 D:\projects\visaalliance-crm\app\Models\Clients_model.php(493): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(ri...')
+#4 D:\projects\visaalliance-crm\app\Helpers\widget_helper.php(1192): App\Models\Clients_model->count_total_clients(Array)
+#5 D:\projects\visaalliance-crm\app\Views\students\overview\index.php(4): total_students_widget(false, Array)
+#6 D:\projects\visaalliance-crm\system\View\View.php(224): include('D:\\projects\\vis...')
+#7 D:\projects\visaalliance-crm\system\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#8 D:\projects\visaalliance-crm\system\Common.php(1180): CodeIgniter\View\View->render('students/overvi...', Array, true)
+#9 D:\projects\visaalliance-crm\app\Views\students\index.php(21): view('students/overvi...')
+#10 D:\projects\visaalliance-crm\system\View\View.php(224): include('D:\\projects\\vis...')
+#11 D:\projects\visaalliance-crm\system\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#12 D:\projects\visaalliance-crm\system\Common.php(1180): CodeIgniter\View\View->render('students/index', Array, true)
+#13 D:\projects\visaalliance-crm\app\Views\layout\index.php(62): view('students/index')
+#14 D:\projects\visaalliance-crm\system\View\View.php(224): include('D:\\projects\\vis...')
+#15 D:\projects\visaalliance-crm\system\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#16 D:\projects\visaalliance-crm\system\Common.php(1180): CodeIgniter\View\View->render('layout/index', Array, true)
+#17 D:\projects\visaalliance-crm\app\Libraries\Template.php(42): view('layout/index', Array)
+#18 D:\projects\visaalliance-crm\app\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', Array)
+#19 D:\projects\visaalliance-crm\app\Controllers\Students.php(46): App\Libraries\Template->rander('students/index', Array)
+#20 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Students->index()
+#21 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+#22 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#23 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#24 {main}
+CRITICAL - 2024-02-13 01:36:50 --> Unknown column 'student' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(rise_clients.id) AS total
+        FROM rise_clients 
+        WHERE rise_clients.deleted=0 AND rise_clients.is_lead=0  AND rise_clients.account_type=student', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(rise_clients.id) AS total
+        FROM rise_clients 
+        WHERE rise_clients.deleted=0 AND rise_clients.is_lead=0  AND rise_clients.account_type=student')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(rise_clients.id) AS total
+        FROM rise_clients 
+        WHERE rise_clients.deleted=0 AND rise_clients.is_lead=0  AND rise_clients.account_type=student')
+ 4 APPPATH\Models\Clients_model.php(493): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(rise_clients.id) AS total
+        FROM rise_clients 
+        WHERE rise_clients.deleted=0 AND rise_clients.is_lead=0  AND rise_clients.account_type=student')
+ 5 APPPATH\Helpers\widget_helper.php(1192): App\Models\Clients_model->count_total_clients([...])
+ 6 APPPATH\Views\students\overview\index.php(4): total_students_widget(false, [])
+ 7 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\overview\\index.php')
+ 8 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/overview/index', [], true)
+10 APPPATH\Views\students\index.php(21): view('students/overview/index')
+11 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\index.php')
+12 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+13 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/index', [], true)
+14 APPPATH\Views\layout\index.php(62): view('students/index')
+15 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+16 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+17 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+18 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+19 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+20 APPPATH\Controllers\Students.php(46): App\Libraries\Template->rander('students/index', [...])
+21 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->index()
+22 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+23 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+24 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-02-13 03:38:31 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(339): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

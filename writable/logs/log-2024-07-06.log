@@ -1,0 +1,37 @@
+CRITICAL - 2024-07-06 00:20:57 --> array_key_exists(): Argument #2 ($array) must be of type array, stdClass given
+in APPPATH\Controllers\Projects.php on line 3912.
+ 1 APPPATH\Controllers\Projects.php(3912): array_key_exists('folder', Object(stdClass))
+ 2 APPPATH\Controllers\Projects.php(3898): App\Controllers\Projects->_make_checklist_row(Object(stdClass), '20', [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->check_list_data('20')
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-06 00:21:12 --> array_key_exists(): Argument #2 ($array) must be of type array, stdClass given
+in APPPATH\Controllers\Projects.php on line 3912.
+ 1 APPPATH\Controllers\Projects.php(3912): array_key_exists('folder', Object(stdClass))
+ 2 APPPATH\Controllers\Projects.php(3898): App\Controllers\Projects->_make_checklist_row(Object(stdClass), '20', [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->check_list_data('20')
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-06 00:21:38 --> Attempt to read property "label" on array
+in APPPATH\Controllers\Projects.php on line 3913.
+ 1 APPPATH\Controllers\Projects.php(3913): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "label" on array', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 3913)
+ 2 APPPATH\Controllers\Projects.php(3898): App\Controllers\Projects->_make_checklist_row(Object(stdClass), '20', [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->check_list_data('20')
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-06 00:53:02 --> syntax error, unexpected single-quoted string "is_required", expecting ")"
+in APPPATH\Controllers\Security_Controller.php on line 627.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(289): CodeIgniter\Autoloader\Autoloader->includeFile('D:\\projects\\visaalliance-crm\\app\\Controllers\\Security_Controller.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(267): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Security_Controller')
+ 3 APPPATH\Controllers\Messages.php(5): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Security_Controller')
+ 4 SYSTEMPATH\Autoloader\Autoloader.php(312): include_once('D:\\projects\\visaalliance-crm\\app\\Controllers\\Messages.php')
+ 5 SYSTEMPATH\Autoloader\Autoloader.php(289): CodeIgniter\Autoloader\Autoloader->includeFile('D:\\projects\\visaalliance-crm\\app\\Controllers\\Messages.php')
+ 6 SYSTEMPATH\Autoloader\Autoloader.php(267): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Messages')
+ 7 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Messages')
+ 8 SYSTEMPATH\CodeIgniter.php(890): class_exists('\\App\\Controllers\\Messages', true)
+ 9 SYSTEMPATH\CodeIgniter.php(484): CodeIgniter\CodeIgniter->startController()
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()

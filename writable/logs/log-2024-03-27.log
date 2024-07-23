@@ -1,0 +1,266 @@
+CRITICAL - 2024-03-27 01:10:49 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('events/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-03-27 01:15:25 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(514): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-27 01:15:25 --> mysqli_sql_exception: Unknown column 'partner_ids' in 'field list' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Crud_model.php(262): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Projects.php(545): App\Models\Crud_model->ci_save(Array, '')
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->save()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-27 01:15:25 --> Unknown column 'partner_ids' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `rise_projects` (`title`, `description`, `client_id`, `start_date`, `deadline`, `project_type`, `price`, `labels`, `status_id`, `estimate_id`, `order_id`, `workflow_id`, `partner_ids`, `company_name`, `created_date`, `created_by`) VALUES (\'Doc Check List Module\', \'asfd fdsa fdsa fdsa fdsa fdsaf dsafdsaf sdafdafd\', \'36\', NULL, NULL, \'client_project\', \'\', \'\', \'1\', \'\', \'\', \'28\', \'42\', \'Ali Haider Derawala\', \'2024-03-27 06:15:25\', \'1\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `rise_projects` (`title`, `description`, `client_id`, `start_date`, `deadline`, `project_type`, `price`, `labels`, `status_id`, `estimate_id`, `order_id`, `workflow_id`, `partner_ids`, `company_name`, `created_date`, `created_by`) VALUES (\'Doc Check List Module\', \'asfd fdsa fdsa fdsa fdsa fdsaf dsafdsaf sdafdafd\', \'36\', NULL, NULL, \'client_project\', \'\', \'\', \'1\', \'\', \'\', \'28\', \'42\', \'Ali Haider Derawala\', \'2024-03-27 06:15:25\', \'1\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `rise_projects` (`title`, `description`, `client_id`, `start_date`, `deadline`, `project_type`, `price`, `labels`, `status_id`, `estimate_id`, `order_id`, `workflow_id`, `partner_ids`, `company_name`, `created_date`, `created_by`) VALUES (\'Doc Check List Module\', \'asfd fdsa fdsa fdsa fdsa fdsaf dsafdsaf sdafdafd\', \'36\', NULL, NULL, \'client_project\', \'\', \'\', \'1\', \'\', \'\', \'28\', \'42\', \'Ali Haider Derawala\', \'2024-03-27 06:15:25\', \'1\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `rise_projects` (`title`, `description`, `client_id`, `start_date`, `deadline`, `project_type`, `price`, `labels`, `status_id`, `estimate_id`, `order_id`, `workflow_id`, `partner_ids`, `company_name`, `created_date`, `created_by`) VALUES (:title:, :description:, :client_id:, :start_date:, :deadline:, :project_type:, :price:, :labels:, :status_id:, :estimate_id:, :order_id:, :workflow_id:, :partner_ids:, :company_name:, :created_date:, :created_by:)', [...], false)
+ 5 APPPATH\Models\Crud_model.php(262): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\Projects.php(545): App\Models\Crud_model->ci_save([...], '')
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-03-27 01:16:11 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(514): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-27 01:16:11 --> mysqli_sql_exception: Unknown column 'partner_ids' in 'field list' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Crud_model.php(262): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Projects.php(545): App\Models\Crud_model->ci_save(Array, '')
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->save()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-27 01:16:11 --> Unknown column 'partner_ids' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `rise_projects` (`title`, `description`, `client_id`, `start_date`, `deadline`, `project_type`, `price`, `labels`, `status_id`, `estimate_id`, `order_id`, `workflow_id`, `partner_ids`, `company_name`, `created_date`, `created_by`) VALUES (\'Doc Check List Module\', \'\', \'36\', NULL, NULL, \'client_project\', \'\', \'\', \'1\', \'\', \'\', \'28\', \'42\', \'Ali Haider Derawala\', \'2024-03-27 06:16:11\', \'1\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `rise_projects` (`title`, `description`, `client_id`, `start_date`, `deadline`, `project_type`, `price`, `labels`, `status_id`, `estimate_id`, `order_id`, `workflow_id`, `partner_ids`, `company_name`, `created_date`, `created_by`) VALUES (\'Doc Check List Module\', \'\', \'36\', NULL, NULL, \'client_project\', \'\', \'\', \'1\', \'\', \'\', \'28\', \'42\', \'Ali Haider Derawala\', \'2024-03-27 06:16:11\', \'1\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `rise_projects` (`title`, `description`, `client_id`, `start_date`, `deadline`, `project_type`, `price`, `labels`, `status_id`, `estimate_id`, `order_id`, `workflow_id`, `partner_ids`, `company_name`, `created_date`, `created_by`) VALUES (\'Doc Check List Module\', \'\', \'36\', NULL, NULL, \'client_project\', \'\', \'\', \'1\', \'\', \'\', \'28\', \'42\', \'Ali Haider Derawala\', \'2024-03-27 06:16:11\', \'1\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `rise_projects` (`title`, `description`, `client_id`, `start_date`, `deadline`, `project_type`, `price`, `labels`, `status_id`, `estimate_id`, `order_id`, `workflow_id`, `partner_ids`, `company_name`, `created_date`, `created_by`) VALUES (:title:, :description:, :client_id:, :start_date:, :deadline:, :project_type:, :price:, :labels:, :status_id:, :estimate_id:, :order_id:, :workflow_id:, :partner_ids:, :company_name:, :created_date:, :created_by:)', [...], false)
+ 5 APPPATH\Models\Crud_model.php(262): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\Projects.php(545): App\Models\Crud_model->ci_save([...], '')
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-27 03:22:32 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/save', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-03-27 03:23:37 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(516): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-27 03:23:37 --> mysqli_sql_exception: Unknown column 'rise_project_doc_check_list.sort' in 'order clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_pro...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_pro...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_pro...')
+#3 D:\projects\visaalliance-crm\app\Models\Project_doc_check_list_model.php(80): CodeIgniter\Database\BaseConnection->query('SELECT rise_pro...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Projects.php(662): App\Models\Project_doc_check_list_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->save()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-27 03:23:37 --> Unknown column 'rise_project_doc_check_list.sort' in 'order clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_project_doc_check_list.*
+        FROM rise_project_doc_check_list WHERE rise_project_doc_check_list.deleted=0  AND rise_project_doc_check_list.project_id=17
+        ORDER BY rise_project_doc_check_list.sort DESC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_project_doc_check_list.*
+        FROM rise_project_doc_check_list WHERE rise_project_doc_check_list.deleted=0  AND rise_project_doc_check_list.project_id=17
+        ORDER BY rise_project_doc_check_list.sort DESC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_project_doc_check_list.*
+        FROM rise_project_doc_check_list WHERE rise_project_doc_check_list.deleted=0  AND rise_project_doc_check_list.project_id=17
+        ORDER BY rise_project_doc_check_list.sort DESC')
+ 4 APPPATH\Models\Project_doc_check_list_model.php(80): CodeIgniter\Database\BaseConnection->query('SELECT rise_project_doc_check_list.*
+        FROM rise_project_doc_check_list WHERE rise_project_doc_check_list.deleted=0  AND rise_project_doc_check_list.project_id=17
+        ORDER BY rise_project_doc_check_list.sort DESC')
+ 5 APPPATH\Controllers\Projects.php(662): App\Models\Project_doc_check_list_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-03-27 06:49:17 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 95.
+ 1 APPPATH\Helpers\currency_helper.php(95): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(516): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-27 09:04:27 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/file_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-27 09:11:34 --> Array to string conversion
+in APPPATH\Views\includes\multi_file_uploader.php on line 215.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\multi_file_uploader.php', 215)
+ 2 APPPATH\Views\includes\multi_file_uploader.php(215): array_unique([...])
+ 3 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\multi_file_uploader.php')
+ 4 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/multi_file_uploader', [], true)
+ 6 APPPATH\Views\projects\files\modal_form.php(45): view('includes/multi_file_uploader', [...])
+ 7 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\modal_form.php')
+ 8 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/files/modal_form', [], true)
+10 APPPATH\Libraries\Template.php(42): view('projects/files/modal_form', [...])
+11 APPPATH\Controllers\Projects.php(3065): App\Libraries\Template->view('projects/files/modal_form', [...])
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->file_modal_form()
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-27 10:48:58 --> Undefined variable $model_info
+in APPPATH\Views\projects\deadline_modal_form.php on line 4.
+ 1 APPPATH\Views\projects\deadline_modal_form.php(4): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $model_info', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\deadline_modal_form.php', 4)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\deadline_modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/deadline_modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('projects/deadline_modal_form', [...])
+ 6 APPPATH\Controllers\Projects.php(304): App\Libraries\Template->view('projects/deadline_modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->deadline_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-27 10:52:59 --> mysqli_sql_exception: Unknown column 'deadline' in 'field list' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `rise_mi...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `rise_mi...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `rise_mi...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2476): CodeIgniter\Database\BaseConnection->query('UPDATE `rise_mi...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Crud_model.php(364): CodeIgniter\Database\BaseBuilder->update(Array, Array)
+#5 D:\projects\visaalliance-crm\app\Models\Crud_model.php(157): App\Models\Crud_model->update_where(Array, Array)
+#6 D:\projects\visaalliance-crm\app\Controllers\Projects.php(1709): App\Models\Crud_model->ci_save(Array, '76')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->save_milestone_deadline()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2024-03-27 10:52:59 --> Unknown column 'deadline' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `rise_milestones` SET `deadline` = \'2024-03-28\'
+WHERE `id` = \'76\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `rise_milestones` SET `deadline` = \'2024-03-28\'
+WHERE `id` = \'76\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `rise_milestones` SET `deadline` = \'2024-03-28\'
+WHERE `id` = \'76\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2476): CodeIgniter\Database\BaseConnection->query('UPDATE `rise_milestones` SET `deadline` = :deadline:
+WHERE `id` = :id:', [...], false)
+ 5 APPPATH\Models\Crud_model.php(364): CodeIgniter\Database\BaseBuilder->update([...], [...])
+ 6 APPPATH\Models\Crud_model.php(157): App\Models\Crud_model->update_where([...], [...])
+ 7 APPPATH\Controllers\Projects.php(1709): App\Models\Crud_model->ci_save([...], '76')
+ 8 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save_milestone_deadline()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-27 11:24:24 --> date_format(): Argument #1 ($object) must be of type DateTimeInterface, string given
+in APPPATH\Views\activity_logs\milestone_activity_logs_widget.php on line 42.
+ 1 APPPATH\Views\activity_logs\milestone_activity_logs_widget.php(42): date_format('2024-06-27', 'dd mm Y')
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\activity_logs\\milestone_activity_logs_widget.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('activity_logs/milestone_activity_logs_widget', [], true)
+ 5 APPPATH\Helpers\widget_helper.php(97): view('activity_logs/milestone_activity_logs_widget', [...])
+ 6 APPPATH\Views\projects\history\index.php(9): milestone_activity_logs_widget([...], [...])
+ 7 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\history\\index.php')
+ 8 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/history/index', [], true)
+10 APPPATH\Views\projects\overview.php(22): view('projects/history/index')
+11 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\overview.php')
+12 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+13 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/overview', [], true)
+14 APPPATH\Libraries\Template.php(42): view('projects/overview', [...])
+15 APPPATH\Controllers\Projects.php(1582): App\Libraries\Template->view('projects/overview', [...])
+16 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->overview('18')
+17 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+18 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+19 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-27 13:22:04 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/deadline_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-27 23:37:51 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/project_partners_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-27 23:38:00 --> Undefined property: stdClass::$user_id
+in APPPATH\Controllers\Projects.php on line 1970.
+ 1 APPPATH\Controllers\Projects.php(1970): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_id', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 1970)
+ 2 APPPATH\Controllers\Projects.php(1914): App\Controllers\Projects->_make_project_partner_row(Object(stdClass), false)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->project_partner_list_data('18')
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-27 23:41:15 --> Undefined property: stdClass::$user_type
+in APPPATH\Controllers\Projects.php on line 1984.
+ 1 APPPATH\Controllers\Projects.php(1984): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 1984)
+ 2 APPPATH\Controllers\Projects.php(1914): App\Controllers\Projects->_make_project_partner_row(Object(stdClass), false)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->project_partner_list_data('18')
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-27 23:41:32 --> Undefined property: stdClass::$user_type
+in APPPATH\Controllers\Projects.php on line 1984.
+ 1 APPPATH\Controllers\Projects.php(1984): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 1984)
+ 2 APPPATH\Controllers\Projects.php(1914): App\Controllers\Projects->_make_project_partner_row(Object(stdClass), false)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->project_partner_list_data('18')
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-27 23:44:08 --> Undefined property: stdClass::$user_id
+in APPPATH\Views\projects\partners\modal_form.php on line 13.
+ 1 APPPATH\Views\projects\partners\modal_form.php(13): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\partners\\modal_form.php', 13)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\partners\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/partners/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('projects/partners/modal_form', [...])
+ 6 APPPATH\Controllers\Projects.php(1678): App\Libraries\Template->view('projects/partners/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->project_partner_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

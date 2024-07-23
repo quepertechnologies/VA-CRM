@@ -1,0 +1,233 @@
+CRITICAL - 2024-06-10 02:05:05 --> CodeIgniter\Database\BaseResult::getResult(): Argument #1 ($type) must be of type string, array given, called in D:\projects\visaalliance-crm\app\Models\Office_model.php on line 44
+in SYSTEMPATH\Database\BaseResult.php on line 104.
+ 1 APPPATH\Models\Office_model.php(44): CodeIgniter\Database\BaseResult->getResult([...])
+ 2 APPPATH\Controllers\Projects.php(1315): App\Models\Office_model->sync_team_members_office()
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 02:05:15 --> CodeIgniter\Database\BaseResult::getResult(): Argument #1 ($type) must be of type string, array given, called in D:\projects\visaalliance-crm\app\Models\Office_model.php on line 44
+in SYSTEMPATH\Database\BaseResult.php on line 104.
+ 1 APPPATH\Models\Office_model.php(44): CodeIgniter\Database\BaseResult->getResult([...])
+ 2 APPPATH\Controllers\Projects.php(1315): App\Models\Office_model->sync_team_members_office()
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 04:57:15 --> Call to undefined method CodeIgniter\Database\MySQLi\Result::getResults()
+in APPPATH\Helpers\general_helper.php on line 3101.
+ 1 APPPATH\Controllers\Security_Controller.php(1015): get_ltm_opl_id(false)
+ 2 APPPATH\Controllers\Partners.php(94): App\Controllers\Security_Controller->get_team_members_dropdown()
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Partners->modal_form()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Partners))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 05:36:52 --> CodeIgniter\Database\MySQLi\Connection::_escapeString(): Argument #1 ($str) must be of type string, stdClass given, called in D:\projects\visaalliance-crm\system\Database\BaseConnection.php on line 1296
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(1296): CodeIgniter\Database\MySQLi\Connection->_escapeString(Object(stdClass))
+ 2 APPPATH\Models\Crud_model.php(100): CodeIgniter\Database\BaseConnection->escapeString(Object(stdClass))
+ 3 APPPATH\Models\Crud_model.php(71): App\Models\Crud_model->escape_array([...])
+ 4 APPPATH\Models\Crud_model.php(66): App\Models\Crud_model->get_one_where([...])
+ 5 APPPATH\Controllers\Security_Controller.php(127): App\Models\Crud_model->get_one(Object(stdClass))
+ 6 APPPATH\Controllers\Search.php(80): App\Controllers\Security_Controller->get_client_full_name(Object(stdClass))
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Search->get_search_suggestion()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Search))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 05:37:16 --> Undefined property: stdClass::$type
+in APPPATH\Controllers\Security_Controller.php on line 130.
+ 1 APPPATH\Controllers\Security_Controller.php(130): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$type', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Security_Controller.php', 130)
+ 2 APPPATH\Controllers\Search.php(80): App\Controllers\Security_Controller->get_client_full_name(0, Object(stdClass))
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Search->get_search_suggestion()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Search))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 07:07:34 --> Undefined variable $show_offices
+in APPPATH\Views\team_members\view.php on line 80.
+ 1 APPPATH\Views\team_members\view.php(80): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $show_offices', 'D:\\projects\\visaalliance-crm\\app\\Views\\team_members\\view.php', 80)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\team_members\\view.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('team_members/view', [], true)
+ 5 APPPATH\Views\layout\index.php(62): view('team_members/view')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Team_members.php(566): App\Libraries\Template->rander('team_members/view', [...])
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->view('60')
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 08:07:36 --> Constant expression contains invalid operations
+in APPPATH\Controllers\Security_Controller.php on line 665.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-10 08:07:44 --> Constant expression contains invalid operations
+in APPPATH\Controllers\Security_Controller.php on line 665.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-06-10 08:13:01 --> Invalid file: "team_members/office/modal_form.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('team_members/office/modal_form.php')
+ 2 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('team_members/office/modal_form', [], true)
+ 3 APPPATH\Libraries\Template.php(42): view('team_members/office/modal_form', [...])
+ 4 APPPATH\Controllers\Team_members.php(1288): App\Libraries\Template->view('team_members/office/modal_form', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->office_modal_form()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+ 7 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 08:15:02 --> Invalid file: "team_members/office/modal_form.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('team_members/office/modal_form.php')
+ 2 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('team_members/office/modal_form', [], true)
+ 3 APPPATH\Libraries\Template.php(42): view('team_members/office/modal_form', [...])
+ 4 APPPATH\Controllers\Team_members.php(1288): App\Libraries\Template->view('team_members/office/modal_form', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->office_modal_form()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+ 7 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 08:16:15 --> Undefined variable $user_id
+in APPPATH\Views\team_members\offices\modal_form.php on line 5.
+ 1 APPPATH\Views\team_members\offices\modal_form.php(5): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $user_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\team_members\\offices\\modal_form.php', 5)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\team_members\\offices\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('team_members/offices/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('team_members/offices/modal_form', [...])
+ 6 APPPATH\Controllers\Team_members.php(1288): App\Libraries\Template->view('team_members/offices/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->office_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 08:16:53 --> Undefined variable $locations_filter_dropdown
+in APPPATH\Views\team_members\offices\modal_form.php on line 47.
+ 1 APPPATH\Views\team_members\offices\modal_form.php(47): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $locations_filter_dropdown', 'D:\\projects\\visaalliance-crm\\app\\Views\\team_members\\offices\\modal_form.php', 47)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\team_members\\offices\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('team_members/offices/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('team_members/offices/modal_form', [...])
+ 6 APPPATH\Controllers\Team_members.php(1289): App\Libraries\Template->view('team_members/offices/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->office_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 08:18:15 --> Undefined property: stdClass::$user_id
+in APPPATH\Controllers\Team_members.php on line 1338.
+ 1 APPPATH\Controllers\Team_members.php(1338): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_id', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Team_members.php', 1338)
+ 2 APPPATH\Controllers\Team_members.php(1327): App\Controllers\Team_members->_row_office_data(56)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->save_office()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 08:19:48 --> Undefined property: stdClass::$user_id
+in APPPATH\Controllers\Team_members.php on line 1337.
+ 1 APPPATH\Controllers\Team_members.php(1337): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_id', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Team_members.php', 1337)
+ 2 APPPATH\Controllers\Team_members.php(1327): App\Controllers\Team_members->_row_office_data(57)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->save_office()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 10:44:39 --> Undefined variable $label_title
+in APPPATH\Controllers\Team_members.php on line 1348.
+ 1 APPPATH\Controllers\Team_members.php(1348): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $label_title', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Team_members.php', 1348)
+ 2 APPPATH\Controllers\Team_members.php(1300): App\Controllers\Team_members->_make_office_row(Object(stdClass), 3)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->office_list_data('60')
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 10:44:49 --> Undefined variable $label_title
+in APPPATH\Controllers\Team_members.php on line 1348.
+ 1 APPPATH\Controllers\Team_members.php(1348): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $label_title', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Team_members.php', 1348)
+ 2 APPPATH\Controllers\Team_members.php(1300): App\Controllers\Team_members->_make_office_row(Object(stdClass), 3)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->office_list_data('60')
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 11:26:14 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 96.
+ 1 APPPATH\Helpers\currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(657): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 11:39:40 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 96.
+ 1 APPPATH\Helpers\currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(657): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 11:42:59 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 96.
+ 1 APPPATH\Helpers\currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(657): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-10 11:55:14 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 96.
+ 1 APPPATH\Helpers\currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(657): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 12:23:09 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('proposals/save', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 12:23:16 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/timelog_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 12:34:29 --> Attempt to read property "id" on array
+in APPPATH\Controllers\Notes.php on line 164.
+ 1 APPPATH\Controllers\Notes.php(164): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "id" on array', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Notes.php', 164)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Notes->save()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notes))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 13:12:35 --> Unsupported operand types: string * int
+in APPPATH\Controllers\Events.php on line 600.
+ 1 APPPATH\Controllers\Events.php(583): App\Controllers\Events->_make_view_data('7daf997c833e00fc7c9992f8de55444ece35dfc69c77e121a50f6a694b2697ecea46fcdddcbee91aaa33695a3728656c2d8f6c02facfb25271752d9cbaae21bdee9c77547bf936ec6c8b99cda4d12ef31601facccda63384b3f8', '')
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Events->view()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Events))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 23:45:46 --> array_intersect(): Argument #1 ($array) must be of type array, string given
+in APPPATH\Controllers\Security_Controller.php on line 1018.
+ 1 APPPATH\Controllers\Security_Controller.php(1018): array_intersect('0', [...])
+ 2 APPPATH\Controllers\Students.php(2398): App\Controllers\Security_Controller->get_team_members_dropdown(true)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->clients_list()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 23:45:50 --> array_intersect(): Argument #1 ($array) must be of type array, string given
+in APPPATH\Controllers\Security_Controller.php on line 1018.
+ 1 APPPATH\Controllers\Security_Controller.php(1018): array_intersect('0', [...])
+ 2 APPPATH\Controllers\Students.php(2398): App\Controllers\Security_Controller->get_team_members_dropdown(true)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->clients_list()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 23:47:12 --> array_intersect(): Argument #1 ($array) must be of type array, string given
+in APPPATH\Controllers\Security_Controller.php on line 1018.
+ 1 APPPATH\Controllers\Security_Controller.php(1018): array_intersect('0', [...])
+ 2 APPPATH\Controllers\Students.php(2398): App\Controllers\Security_Controller->get_team_members_dropdown(true)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->clients_list()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-10 23:51:07 --> Array to string conversion
+in APPPATH\Models\Clients_model.php on line 91.
+ 1 APPPATH\Models\Clients_model.php(91): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\projects\\visaalliance-crm\\app\\Models\\Clients_model.php', 91)
+ 2 APPPATH\Controllers\Students.php(360): App\Models\Clients_model->get_details([...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

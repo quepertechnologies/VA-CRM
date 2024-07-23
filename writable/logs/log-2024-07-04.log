@@ -1,0 +1,44 @@
+CRITICAL - 2024-07-04 05:03:48 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 08:20:11 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('students/list_data', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 08:20:19 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('students/list_data', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 08:20:36 --> Undefined array key "access_token"
+in APPPATH\Helpers\app_files_helper.php on line 538.
+ 1 APPPATH\Helpers\app_files_helper.php(538): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "access_token"', 'D:\\projects\\visaalliance-crm\\app\\Helpers\\app_files_helper.php', 538)
+ 2 APPPATH\Helpers\app_files_helper.php(561): get_onedrive_access_token()
+ 3 APPPATH\Helpers\app_files_helper.php(603): list_ms_onedrive_directory_items('Clients/Clients/')
+ 4 APPPATH\Controllers\Projects.php(3904): get_client_drive_items('Clients/')
+ 5 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->files_list_data('20')
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 7 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-04 08:20:48 --> Undefined array key "access_token"
+in APPPATH\Helpers\app_files_helper.php on line 538.
+ 1 APPPATH\Helpers\app_files_helper.php(538): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "access_token"', 'D:\\projects\\visaalliance-crm\\app\\Helpers\\app_files_helper.php', 538)
+ 2 APPPATH\Helpers\app_files_helper.php(561): get_onedrive_access_token()
+ 3 APPPATH\Helpers\app_files_helper.php(603): list_ms_onedrive_directory_items('Clients/Clients/')
+ 4 APPPATH\Controllers\Projects.php(3904): get_client_drive_items('Clients/')
+ 5 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->files_list_data('20')
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 7 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()

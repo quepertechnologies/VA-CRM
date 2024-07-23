@@ -1,0 +1,43 @@
+[
+  {
+    "id": 1,
+    "title": "Application",
+    "doc_check_list": true
+  },
+  {
+    "id": 2,
+    "title": "Offer Letter"
+  },
+  {
+    "id": 3,
+    "title": "Offer Notification to Client"
+  },
+  {
+    "id": 4,
+    "title": "Fee Payment"
+  },
+  {
+    "id": 5,
+    "title": "COE"
+  },
+  {
+    "id": 6,
+    "title": "COE Notification to Client"
+  },
+  {
+    "id": 7,
+    "title": "Commenced Studies"
+  },
+  {
+    "id": 8,
+    "title": "Ongoing Course"
+  },
+  {
+    "id": 9,
+    "title": "Visa Application"
+  },
+  {
+    "id": 10,
+    "title": "Course Completion"
+  }
+]

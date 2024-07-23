@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Contract and 956 Form",
+    "description": "A contract is a legally binding agreement, and the 956 Form (IRS Form 8850) is a document used for pre-screening job applicants eligible for the Work Opportunity Tax Credit."
+  },
+  {
+    "id": 2,
+    "title": "Payment Collection/confirmation in Account/Invoice",
+    "description": "Payment Collection is the process of obtaining funds from a customer, Confirmation in Account involves verifying financial transactions, and an Invoice is a document requesting payment for goods or services provided."
+  },
+  {
+    "id": 3,
+    "title": "Collect Documents & Prepare lodgement",
+    "description": "Collecting documents involves gathering necessary paperwork, while preparing lodgement entails organizing and submitting these documents for processing or filing.",
+    "doc_check_list": true
+  },
+  {
+    "id": 4,
+    "title": "Lodge skill assessment",
+    "description": "Lodging a skill assessment involves submitting necessary documentation and information for evaluation to assess one's professional qualifications and skills."
+  },
+  {
+    "id": 5,
+    "title": "Sent confirmation to Client about lodgement of Skill assessment",
+    "description": "Sending confirmation to the client about the lodgement of the skill assessment involves notifying them that the submission has been successfully submitted for evaluation."
+  },
+  {
+    "id": 6,
+    "title": "Received Skill assessment",
+    "description": "Receiving a skill assessment means obtaining the evaluation results that assess one's professional qualifications and skills."
+  },
+  {
+    "id": 7,
+    "title": "Communication with Client",
+    "description": "Communication with a client involves the exchange of information, updates, and discussions to address their needs or provide relevant updates on a particular matter."
+  }
+]

@@ -1,0 +1,23 @@
+CRITICAL - 2024-05-06 01:28:09 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-05-06 01:33:59 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-05-06 01:36:33 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('import/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-05-06 02:26:25 --> Maximum execution time of 120 seconds exceeded
+in APPPATH\Controllers\Import.php on line 515.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-05-06 03:22:24 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-05-06 04:33:52 --> Maximum execution time of 120 seconds exceeded
+in APPPATH\Controllers\Import.php on line 515.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()

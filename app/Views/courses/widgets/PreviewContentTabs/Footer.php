@@ -1,0 +1,1 @@
+<div class="m-4" data-v-0a954aaa-s=""><button class="btn btn-primary mx-2" onclick="window.close();" data-v-0a954aaa-s="">Close</button><a class="" href="mailto:admin@visaalliance.com.au" target="_blank" id="course-error-report-btn" data-v-0a954aaa-s="">Something doesn’t look right?</a></div>

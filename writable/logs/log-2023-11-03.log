@@ -1,0 +1,273 @@
+CRITICAL - 2023-11-03 08:12:11 --> ini_set(): Session ini settings cannot be changed after headers have already been sent
+in SYSTEMPATH/Session/Session.php on line 294.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Session ini settings cannot be changed after headers have already been sent', '/home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php', 294)
+ 2 SYSTEMPATH/Session/Session.php(294): ini_set('session.name', 'ci_session')
+ 3 SYSTEMPATH/Session/Session.php(240): CodeIgniter\Session\Session->configure()
+ 4 SYSTEMPATH/Config/Services.php(674): CodeIgniter\Session\Session->start()
+ 5 SYSTEMPATH/Config/BaseService.php(252): CodeIgniter\Config\Services::session(Object(Config\App), false)
+ 6 SYSTEMPATH/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 7 SYSTEMPATH/Config/Services.php(641): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 8 SYSTEMPATH/Config/BaseService.php(252): CodeIgniter\Config\Services::session()
+ 9 APPPATH/Models/Users_model.php(82): CodeIgniter\Config\BaseService::__callStatic('session', [])
+10 APPPATH/Controllers/App_Controller.php(100): App\Models\Users_model->login_user_id()
+11 APPPATH/Controllers/Security_Controller.php(17): App\Controllers\App_Controller->__construct()
+12 APPPATH/Controllers/Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+13 SYSTEMPATH/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+14 SYSTEMPATH/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+15 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+16 FCPATH/index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-11-03 08:12:11 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/visaalliance/public_html/crm.visaalliance.com/index.php:1) in /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php:772
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/home/visaallia...', 772)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(772): setcookie('rise_csrf_cooki...', 'ff2b8cd24decbf6...', Array)
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(748): CodeIgniter\HTTP\Response->doSetCookie('rise_csrf_cooki...', 'ff2b8cd24decbf6...', Array)
+#3 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(728): CodeIgniter\HTTP\Response->dispatchCookies()
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(447): CodeIgniter\HTTP\Response->sendCookies()
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Debug/Exceptions.php(150): CodeIgniter\HTTP\Response->send()
+#6 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#7 {main}
+  thrown
+【Previous Exception】
+ErrorException
+ini_set(): Session ini settings cannot be changed after headers have already been sent
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Sess...', '/home/visaallia...', 294)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php(294): ini_set('session.name', 'ci_session')
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php(240): CodeIgniter\Session\Session->configure()
+#3 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Services.php(674): CodeIgniter\Session\Session->start()
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(252): CodeIgniter\Config\Services::session(Object(Config\App), false)
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Services.php(641): CodeIgniter\Config\BaseService::getSharedInstance('session', NULL)
+#7 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(252): CodeIgniter\Config\Services::session()
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Users_model.php(82): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#9 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(100): App\Models\Users_model->login_user_id()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(17): App\Controllers\App_Controller->__construct()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+#12 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+#13 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#14 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#15 /home/visaalliance/public_html/crm.visaalliance.com/index.php(80): CodeIgniter\CodeIgniter->run()
+#16 {main}
+in SYSTEMPATH/HTTP/ResponseTrait.php on line 772.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2023-11-03 09:05:01 --> ini_set(): Session ini settings cannot be changed after headers have already been sent
+in SYSTEMPATH/Session/Session.php on line 294.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Session ini settings cannot be changed after headers have already been sent', '/home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php', 294)
+ 2 SYSTEMPATH/Session/Session.php(294): ini_set('session.name', 'ci_session')
+ 3 SYSTEMPATH/Session/Session.php(240): CodeIgniter\Session\Session->configure()
+ 4 SYSTEMPATH/Config/Services.php(674): CodeIgniter\Session\Session->start()
+ 5 SYSTEMPATH/Config/BaseService.php(252): CodeIgniter\Config\Services::session(Object(Config\App), false)
+ 6 SYSTEMPATH/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 7 SYSTEMPATH/Config/Services.php(641): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 8 SYSTEMPATH/Config/BaseService.php(252): CodeIgniter\Config\Services::session()
+ 9 APPPATH/Models/Users_model.php(82): CodeIgniter\Config\BaseService::__callStatic('session', [])
+10 APPPATH/Controllers/App_Controller.php(100): App\Models\Users_model->login_user_id()
+11 APPPATH/Controllers/Security_Controller.php(17): App\Controllers\App_Controller->__construct()
+12 APPPATH/Controllers/Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+13 SYSTEMPATH/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+14 SYSTEMPATH/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+15 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+16 FCPATH/index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-11-03 09:05:02 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/visaalliance/public_html/crm.visaalliance.com/index.php:1) in /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php:772
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/home/visaallia...', 772)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(772): setcookie('rise_csrf_cooki...', '2921a2787bdd09b...', Array)
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(748): CodeIgniter\HTTP\Response->doSetCookie('rise_csrf_cooki...', '2921a2787bdd09b...', Array)
+#3 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(728): CodeIgniter\HTTP\Response->dispatchCookies()
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(447): CodeIgniter\HTTP\Response->sendCookies()
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Debug/Exceptions.php(150): CodeIgniter\HTTP\Response->send()
+#6 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#7 {main}
+  thrown
+【Previous Exception】
+ErrorException
+ini_set(): Session ini settings cannot be changed after headers have already been sent
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Sess...', '/home/visaallia...', 294)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php(294): ini_set('session.name', 'ci_session')
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php(240): CodeIgniter\Session\Session->configure()
+#3 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Services.php(674): CodeIgniter\Session\Session->start()
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(252): CodeIgniter\Config\Services::session(Object(Config\App), false)
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Services.php(641): CodeIgniter\Config\BaseService::getSharedInstance('session', NULL)
+#7 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(252): CodeIgniter\Config\Services::session()
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Users_model.php(82): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#9 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(100): App\Models\Users_model->login_user_id()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(17): App\Controllers\App_Controller->__construct()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+#12 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+#13 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#14 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#15 /home/visaalliance/public_html/crm.visaalliance.com/index.php(80): CodeIgniter\CodeIgniter->run()
+#16 {main}
+in SYSTEMPATH/HTTP/ResponseTrait.php on line 772.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2023-11-03 09:05:02 --> ini_set(): Session ini settings cannot be changed after headers have already been sent
+in SYSTEMPATH/Session/Session.php on line 294.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Session ini settings cannot be changed after headers have already been sent', '/home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php', 294)
+ 2 SYSTEMPATH/Session/Session.php(294): ini_set('session.name', 'ci_session')
+ 3 SYSTEMPATH/Session/Session.php(240): CodeIgniter\Session\Session->configure()
+ 4 SYSTEMPATH/Config/Services.php(674): CodeIgniter\Session\Session->start()
+ 5 SYSTEMPATH/Config/BaseService.php(252): CodeIgniter\Config\Services::session(Object(Config\App), false)
+ 6 SYSTEMPATH/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 7 SYSTEMPATH/Config/Services.php(641): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 8 SYSTEMPATH/Config/BaseService.php(252): CodeIgniter\Config\Services::session()
+ 9 APPPATH/Models/Users_model.php(82): CodeIgniter\Config\BaseService::__callStatic('session', [])
+10 APPPATH/Controllers/App_Controller.php(100): App\Models\Users_model->login_user_id()
+11 APPPATH/Controllers/Security_Controller.php(17): App\Controllers\App_Controller->__construct()
+12 APPPATH/Controllers/Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+13 SYSTEMPATH/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+14 SYSTEMPATH/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+15 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+16 FCPATH/index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-11-03 09:05:02 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/visaalliance/public_html/crm.visaalliance.com/index.php:1) in /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php:772
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/home/visaallia...', 772)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(772): setcookie('rise_csrf_cooki...', 'd264b2bd3b9ce0c...', Array)
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(748): CodeIgniter\HTTP\Response->doSetCookie('rise_csrf_cooki...', 'd264b2bd3b9ce0c...', Array)
+#3 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(728): CodeIgniter\HTTP\Response->dispatchCookies()
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(447): CodeIgniter\HTTP\Response->sendCookies()
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Debug/Exceptions.php(150): CodeIgniter\HTTP\Response->send()
+#6 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#7 {main}
+  thrown
+【Previous Exception】
+ErrorException
+ini_set(): Session ini settings cannot be changed after headers have already been sent
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Sess...', '/home/visaallia...', 294)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php(294): ini_set('session.name', 'ci_session')
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php(240): CodeIgniter\Session\Session->configure()
+#3 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Services.php(674): CodeIgniter\Session\Session->start()
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(252): CodeIgniter\Config\Services::session(Object(Config\App), false)
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Services.php(641): CodeIgniter\Config\BaseService::getSharedInstance('session', NULL)
+#7 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(252): CodeIgniter\Config\Services::session()
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Users_model.php(82): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#9 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(100): App\Models\Users_model->login_user_id()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(17): App\Controllers\App_Controller->__construct()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+#12 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+#13 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#14 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#15 /home/visaalliance/public_html/crm.visaalliance.com/index.php(80): CodeIgniter\CodeIgniter->run()
+#16 {main}
+in SYSTEMPATH/HTTP/ResponseTrait.php on line 772.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2023-11-03 09:05:04 --> ini_set(): Session ini settings cannot be changed after headers have already been sent
+in SYSTEMPATH/Session/Session.php on line 294.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Session ini settings cannot be changed after headers have already been sent', '/home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php', 294)
+ 2 SYSTEMPATH/Session/Session.php(294): ini_set('session.name', 'ci_session')
+ 3 SYSTEMPATH/Session/Session.php(240): CodeIgniter\Session\Session->configure()
+ 4 SYSTEMPATH/Config/Services.php(674): CodeIgniter\Session\Session->start()
+ 5 SYSTEMPATH/Config/BaseService.php(252): CodeIgniter\Config\Services::session(Object(Config\App), false)
+ 6 SYSTEMPATH/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 7 SYSTEMPATH/Config/Services.php(641): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 8 SYSTEMPATH/Config/BaseService.php(252): CodeIgniter\Config\Services::session()
+ 9 APPPATH/Models/Users_model.php(82): CodeIgniter\Config\BaseService::__callStatic('session', [])
+10 APPPATH/Controllers/App_Controller.php(100): App\Models\Users_model->login_user_id()
+11 APPPATH/Controllers/Security_Controller.php(17): App\Controllers\App_Controller->__construct()
+12 APPPATH/Controllers/Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+13 SYSTEMPATH/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+14 SYSTEMPATH/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+15 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+16 FCPATH/index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-11-03 09:05:09 --> ini_set(): Session ini settings cannot be changed after headers have already been sent
+in SYSTEMPATH/Session/Session.php on line 294.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Session ini settings cannot be changed after headers have already been sent', '/home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php', 294)
+ 2 SYSTEMPATH/Session/Session.php(294): ini_set('session.name', 'ci_session')
+ 3 SYSTEMPATH/Session/Session.php(240): CodeIgniter\Session\Session->configure()
+ 4 SYSTEMPATH/Config/Services.php(674): CodeIgniter\Session\Session->start()
+ 5 SYSTEMPATH/Config/BaseService.php(252): CodeIgniter\Config\Services::session(Object(Config\App), false)
+ 6 SYSTEMPATH/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 7 SYSTEMPATH/Config/Services.php(641): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 8 SYSTEMPATH/Config/BaseService.php(252): CodeIgniter\Config\Services::session()
+ 9 APPPATH/Models/Users_model.php(82): CodeIgniter\Config\BaseService::__callStatic('session', [])
+10 APPPATH/Controllers/App_Controller.php(100): App\Models\Users_model->login_user_id()
+11 APPPATH/Controllers/Security_Controller.php(17): App\Controllers\App_Controller->__construct()
+12 APPPATH/Controllers/Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+13 SYSTEMPATH/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+14 SYSTEMPATH/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+15 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+16 FCPATH/index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-11-03 09:05:09 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/visaalliance/public_html/crm.visaalliance.com/index.php:1) in /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php:772
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/home/visaallia...', 772)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(772): setcookie('rise_csrf_cooki...', '20ddaaa38064a32...', Array)
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(748): CodeIgniter\HTTP\Response->doSetCookie('rise_csrf_cooki...', '20ddaaa38064a32...', Array)
+#3 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(728): CodeIgniter\HTTP\Response->dispatchCookies()
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(447): CodeIgniter\HTTP\Response->sendCookies()
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Debug/Exceptions.php(150): CodeIgniter\HTTP\Response->send()
+#6 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#7 {main}
+  thrown
+【Previous Exception】
+ErrorException
+ini_set(): Session ini settings cannot be changed after headers have already been sent
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Sess...', '/home/visaallia...', 294)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php(294): ini_set('session.name', 'ci_session')
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php(240): CodeIgniter\Session\Session->configure()
+#3 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Services.php(674): CodeIgniter\Session\Session->start()
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(252): CodeIgniter\Config\Services::session(Object(Config\App), false)
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Services.php(641): CodeIgniter\Config\BaseService::getSharedInstance('session', NULL)
+#7 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(252): CodeIgniter\Config\Services::session()
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Users_model.php(82): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#9 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(100): App\Models\Users_model->login_user_id()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(17): App\Controllers\App_Controller->__construct()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+#12 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+#13 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#14 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#15 /home/visaalliance/public_html/crm.visaalliance.com/index.php(80): CodeIgniter\CodeIgniter->run()
+#16 {main}
+in SYSTEMPATH/HTTP/ResponseTrait.php on line 772.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2023-11-03 21:21:25 --> ini_set(): Session ini settings cannot be changed after headers have already been sent
+in SYSTEMPATH/Session/Session.php on line 294.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Session ini settings cannot be changed after headers have already been sent', '/home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php', 294)
+ 2 SYSTEMPATH/Session/Session.php(294): ini_set('session.name', 'ci_session')
+ 3 SYSTEMPATH/Session/Session.php(240): CodeIgniter\Session\Session->configure()
+ 4 SYSTEMPATH/Config/Services.php(674): CodeIgniter\Session\Session->start()
+ 5 SYSTEMPATH/Config/BaseService.php(252): CodeIgniter\Config\Services::session(Object(Config\App), false)
+ 6 SYSTEMPATH/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 7 SYSTEMPATH/Config/Services.php(641): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 8 SYSTEMPATH/Config/BaseService.php(252): CodeIgniter\Config\Services::session()
+ 9 APPPATH/Models/Users_model.php(82): CodeIgniter\Config\BaseService::__callStatic('session', [])
+10 APPPATH/Controllers/App_Controller.php(100): App\Models\Users_model->login_user_id()
+11 APPPATH/Controllers/Security_Controller.php(17): App\Controllers\App_Controller->__construct()
+12 APPPATH/Controllers/Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+13 SYSTEMPATH/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+14 SYSTEMPATH/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+15 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+16 FCPATH/index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2023-11-03 21:21:25 --> Uncaught ErrorException: Cannot modify header information - headers already sent by (output started at /home/visaalliance/public_html/crm.visaalliance.com/index.php:1) in /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php:772
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'Cannot modify h...', '/home/visaallia...', 772)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(772): setcookie('rise_csrf_cooki...', '4e4e8036013a532...', Array)
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(748): CodeIgniter\HTTP\Response->doSetCookie('rise_csrf_cooki...', '4e4e8036013a532...', Array)
+#3 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(728): CodeIgniter\HTTP\Response->dispatchCookies()
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/HTTP/ResponseTrait.php(447): CodeIgniter\HTTP\Response->sendCookies()
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Debug/Exceptions.php(150): CodeIgniter\HTTP\Response->send()
+#6 [internal function]: CodeIgniter\Debug\Exceptions->exceptionHandler(Object(ErrorException))
+#7 {main}
+  thrown
+【Previous Exception】
+ErrorException
+ini_set(): Session ini settings cannot be changed after headers have already been sent
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'ini_set(): Sess...', '/home/visaallia...', 294)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php(294): ini_set('session.name', 'ci_session')
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/Session/Session.php(240): CodeIgniter\Session\Session->configure()
+#3 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Services.php(674): CodeIgniter\Session\Session->start()
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(252): CodeIgniter\Config\Services::session(Object(Config\App), false)
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(193): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Services.php(641): CodeIgniter\Config\BaseService::getSharedInstance('session', NULL)
+#7 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/BaseService.php(252): CodeIgniter\Config\Services::session()
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Users_model.php(82): CodeIgniter\Config\BaseService::__callStatic('session', Array)
+#9 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(100): App\Models\Users_model->login_user_id()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(17): App\Controllers\App_Controller->__construct()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Dashboard.php(11): App\Controllers\Security_Controller->__construct()
+#12 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+#13 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#14 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#15 /home/visaalliance/public_html/crm.visaalliance.com/index.php(80): CodeIgniter\CodeIgniter->run()
+#16 {main}
+in SYSTEMPATH/HTTP/ResponseTrait.php on line 772.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()

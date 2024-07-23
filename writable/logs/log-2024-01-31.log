@@ -1,0 +1,24 @@
+CRITICAL - 2024-01-31 02:51:45 --> Undefined variable $page_view
+in APPPATH\Views\students\emails\index.php on line 1.
+ 1 APPPATH\Views\students\emails\index.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $page_view', 'D:\\projects\\visaalliance-crm\\app\\Views\\students\\emails\\index.php', 1)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\emails\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/emails/index', [], true)
+ 5 APPPATH\Libraries\Template.php(38): view('students/emails/index', [...])
+ 6 APPPATH\Controllers\Students.php(955): App\Libraries\Template->view('students/emails/index', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->emails('11')
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-31 02:51:59 --> Undefined variable $page_view
+in APPPATH\Views\students\emails\index.php on line 1.
+ 1 APPPATH\Views\students\emails\index.php(1): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $page_view', 'D:\\projects\\visaalliance-crm\\app\\Views\\students\\emails\\index.php', 1)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\emails\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/emails/index', [], true)
+ 5 APPPATH\Libraries\Template.php(38): view('students/emails/index', [...])
+ 6 APPPATH\Controllers\Students.php(955): App\Libraries\Template->view('students/emails/index', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->emails('11')
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

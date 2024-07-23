@@ -1,0 +1,24 @@
+CRITICAL - 2024-04-08 23:32:00 --> Undefined variable $project_id
+in APPPATH\Views\projects\schedule_modal_form.php on line 4.
+ 1 APPPATH\Views\projects\schedule_modal_form.php(4): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $project_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\schedule_modal_form.php', 4)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\schedule_modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/schedule_modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('projects/schedule_modal_form', [...])
+ 6 APPPATH\Controllers\Projects.php(4603): App\Libraries\Template->view('projects/schedule_modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->schedule_modal_form(null)
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-08 23:32:15 --> Undefined variable $project_id
+in APPPATH\Views\projects\schedule_modal_form.php on line 4.
+ 1 APPPATH\Views\projects\schedule_modal_form.php(4): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $project_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\schedule_modal_form.php', 4)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\schedule_modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/schedule_modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('projects/schedule_modal_form', [...])
+ 6 APPPATH\Controllers\Projects.php(4603): App\Libraries\Template->view('projects/schedule_modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->schedule_modal_form(null)
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

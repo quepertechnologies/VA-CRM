@@ -1,0 +1,164 @@
+CRITICAL - 2024-06-13 02:25:44 --> Undefined variable $xero_auth_required
+in APPPATH\Views\invoices\view.php on line 35.
+ 1 APPPATH\Views\invoices\view.php(35): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $xero_auth_required', 'D:\\projects\\visaalliance-crm\\app\\Views\\invoices\\view.php', 35)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\invoices\\view.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('invoices/view', [], true)
+ 5 APPPATH\Views\layout\index.php(62): view('invoices/view')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+10 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+11 APPPATH\Controllers\Invoices.php(887): App\Libraries\Template->rander('invoices/view', [...])
+12 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Invoices->view('86')
+13 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Invoices))
+14 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+15 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 02:42:30 --> Undefined array key "va_redirect_url"
+in APPPATH\Controllers\Xero_api.php on line 62.
+ 1 APPPATH\Controllers\Xero_api.php(62): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "va_redirect_url"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php', 62)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->auth_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 03:00:53 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('xero_api/create_invoice_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 03:01:00 --> Call to undefined method XeroAPI\XeroPHP\Api\FinanceApi::getAccounts()
+in APPPATH\Controllers\Xero_api.php on line 120.
+ 1 APPPATH\Controllers\Xero_api.php(99): App\Controllers\Xero_api->_xero_get_accounts(Object(XEROSessionStorage))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 03:50:24 --> syntax error, unexpected variable "$name"
+in APPPATH\Controllers\Xero_api.php on line 104.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(289): CodeIgniter\Autoloader\Autoloader->includeFile('D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(267): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Xero_api')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Xero_api')
+ 4 SYSTEMPATH\CodeIgniter.php(890): class_exists('\\App\\Controllers\\Xero_api', true)
+ 5 SYSTEMPATH\CodeIgniter.php(484): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 03:50:42 --> Undefined array key "Name"
+in APPPATH\Controllers\Xero_api.php on line 104.
+ 1 APPPATH\Controllers\Xero_api.php(104): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Name"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php', 104)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 03:51:05 --> Undefined array key "Name"
+in APPPATH\Controllers\Xero_api.php on line 105.
+ 1 APPPATH\Controllers\Xero_api.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Name"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php', 105)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 03:51:15 --> Undefined array key "Name"
+in APPPATH\Controllers\Xero_api.php on line 105.
+ 1 APPPATH\Controllers\Xero_api.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Name"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php', 105)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 03:51:34 --> Undefined array key "Name"
+in APPPATH\Controllers\Xero_api.php on line 105.
+ 1 APPPATH\Controllers\Xero_api.php(105): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Name"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php', 105)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 04:17:06 --> Undefined array key "Name"
+in APPPATH\Controllers\Xero_api.php on line 106.
+ 1 APPPATH\Controllers\Xero_api.php(106): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Name"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php', 106)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 04:18:35 --> Undefined array key "Description"
+in APPPATH\Controllers\Xero_api.php on line 107.
+ 1 APPPATH\Controllers\Xero_api.php(107): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Description"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php', 107)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 04:19:22 --> Undefined array key "Description"
+in APPPATH\Controllers\Xero_api.php on line 110.
+ 1 APPPATH\Controllers\Xero_api.php(110): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Description"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php', 110)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 04:19:53 --> Undefined array key "Description"
+in APPPATH\Controllers\Xero_api.php on line 109.
+ 1 APPPATH\Controllers\Xero_api.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Description"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php', 109)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 04:28:58 --> Undefined array key "Description"
+in APPPATH\Controllers\Xero_api.php on line 109.
+ 1 APPPATH\Controllers\Xero_api.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Description"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php', 109)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 04:43:44 --> Undefined array key "Description"
+in APPPATH\Controllers\Xero_api.php on line 109.
+ 1 APPPATH\Controllers\Xero_api.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Description"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php', 109)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 05:09:21 --> syntax error, unexpected token ":", expecting "," or ";"
+in APPPATH\Controllers\Xero_api.php on line 120.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(289): CodeIgniter\Autoloader\Autoloader->includeFile('D:\\projects\\visaalliance-crm\\app\\Controllers\\Xero_api.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(267): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\Xero_api')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\Xero_api')
+ 4 SYSTEMPATH\CodeIgniter.php(890): class_exists('\\App\\Controllers\\Xero_api', true)
+ 5 SYSTEMPATH\CodeIgniter.php(484): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 05:56:30 --> Invalid file: "invoice/xero/session_expired.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('invoice/xero/session_expired.php')
+ 2 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('invoice/xero/session_expired', [], true)
+ 3 APPPATH\Views\invoices\xero\modal_form.php(2): view('invoice/xero/session_expired')
+ 4 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\invoices\\xero\\modal_form.php')
+ 5 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('invoices/xero/modal_form', [], true)
+ 7 APPPATH\Libraries\Template.php(42): view('invoices/xero/modal_form', [...])
+ 8 APPPATH\Controllers\Xero_api.php(134): App\Libraries\Template->view('invoices/xero/modal_form', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+11 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 07:04:37 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('xero_api/create_invoice_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 07:04:45 --> Call to undefined method XeroAPI\XeroPHP\Models\Accounting\Account::getAccountCode()
+in APPPATH\Controllers\Xero_api.php on line 154.
+ 1 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->create_invoice_modal_form()
+ 2 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-13 07:58:10 --> invalid_grant
+in FCPATH\vendor\league\oauth2-client\src\Provider\GenericProvider.php on line 236.
+ 1 FCPATH\vendor\league\oauth2-client\src\Provider\AbstractProvider.php(726): League\OAuth2\Client\Provider\GenericProvider->checkResponse(Object(GuzzleHttp\Psr7\Response), [...])
+ 2 FCPATH\vendor\league\oauth2-client\src\Provider\AbstractProvider.php(635): League\OAuth2\Client\Provider\AbstractProvider->getParsedResponse(Object(GuzzleHttp\Psr7\Request))
+ 3 APPPATH\Controllers\Xero_api.php(40): League\OAuth2\Client\Provider\AbstractProvider->getAccessToken(Object(League\OAuth2\Client\Grant\AuthorizationCode), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Xero_api->auth_callback()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Xero_api))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()

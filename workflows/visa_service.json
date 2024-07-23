@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "title": "Client Documents",
+    "doc_check_list": true
+  },
+  {
+    "id": 2,
+    "title": "Application Commenced"
+  },
+  {
+    "id": 3,
+    "title": "Application Lodged to Department of Home Affairs"
+  },
+  {
+    "id": 4,
+    "title": "Information Request"
+  },
+  {
+    "id": 5,
+    "title": "Documents submitted to DHA s56"
+  },
+  {
+    "id": 6,
+    "title": "Communication with Client Post s56"
+  },
+  {
+    "id": 7,
+    "title": "Visa Approved/ Visa Refused/ Visa Withdrawn"
+  },
+  {
+    "id": 8,
+    "title": "Complete OR Application AAT"
+  }
+]

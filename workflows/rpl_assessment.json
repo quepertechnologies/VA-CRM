@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "Documents Collection",
+    "doc_check_list": true
+  },
+  {
+    "id": 2,
+    "title": "Payment Confirmation"
+  },
+  {
+    "id": 3,
+    "title": "Invoice Created and confirmed with Account"
+  },
+  {
+    "id": 4,
+    "title": "Forwarded to RPL provider & Money Transferred"
+  },
+  {
+    "id": 5,
+    "title": "Follow up with RPL Provider"
+  },
+  {
+    "id": 6,
+    "title": "Received and Email Sent to Client"
+  }
+]

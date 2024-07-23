@@ -1,0 +1,231 @@
+CRITICAL - 2024-06-05 03:51:45 --> Undefined property: stdClass::$product_name
+in APPPATH\Controllers\Projects.php on line 5078.
+ 1 APPPATH\Controllers\Projects.php(5078): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$product_name', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 5078)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-05 03:51:47 --> Undefined property: stdClass::$product_name
+in APPPATH\Controllers\Projects.php on line 5078.
+ 1 APPPATH\Controllers\Projects.php(5078): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$product_name', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 5078)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-05 03:52:07 --> Undefined property: stdClass::$product_name
+in APPPATH\Controllers\Projects.php on line 5078.
+ 1 APPPATH\Controllers\Projects.php(5078): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$product_name', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 5078)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-06-05 04:41:48 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-06-05 05:37:40 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH\Helpers\currency_helper.php on line 96.
+ 1 APPPATH\Helpers\currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH\Controllers\Projects.php(652): unformat_currency(null)
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-06-05 05:38:04 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY rise_temp_products.product_name ASC' at line 4 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_tem...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_tem...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_tem...')
+#3 D:\projects\visaalliance-crm\app\Models\Temp_Product_model.php(66): CodeIgniter\Database\BaseConnection->query('SELECT rise_tem...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Projects.php(5097): App\Models\Temp_Product_model->get_title_suggestion('')
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-06-05 05:38:04 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY rise_temp_products.product_name ASC' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 4 APPPATH\Models\Temp_Product_model.php(66): CodeIgniter\Database\BaseConnection->query('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 5 APPPATH\Controllers\Projects.php(5097): App\Models\Temp_Product_model->get_title_suggestion('')
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-06-05 05:38:07 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY rise_temp_products.product_name ASC' at line 4 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_tem...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_tem...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_tem...')
+#3 D:\projects\visaalliance-crm\app\Models\Temp_Product_model.php(66): CodeIgniter\Database\BaseConnection->query('SELECT rise_tem...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Projects.php(5097): App\Models\Temp_Product_model->get_title_suggestion('')
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-06-05 05:38:07 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY rise_temp_products.product_name ASC' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 4 APPPATH\Models\Temp_Product_model.php(66): CodeIgniter\Database\BaseConnection->query('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 5 APPPATH\Controllers\Projects.php(5097): App\Models\Temp_Product_model->get_title_suggestion('')
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-06-05 05:39:15 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY rise_temp_products.product_name ASC' at line 4 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_tem...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_tem...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_tem...')
+#3 D:\projects\visaalliance-crm\app\Models\Temp_Product_model.php(66): CodeIgniter\Database\BaseConnection->query('SELECT rise_tem...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Projects.php(5097): App\Models\Temp_Product_model->get_title_suggestion('')
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-06-05 05:39:15 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY rise_temp_products.product_name ASC' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 4 APPPATH\Models\Temp_Product_model.php(66): CodeIgniter\Database\BaseConnection->query('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 5 APPPATH\Controllers\Projects.php(5097): App\Models\Temp_Product_model->get_title_suggestion('')
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-06-05 05:39:54 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY rise_temp_products.product_name ASC' at line 4 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_tem...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_tem...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_tem...')
+#3 D:\projects\visaalliance-crm\app\Models\Temp_Product_model.php(66): CodeIgniter\Database\BaseConnection->query('SELECT rise_tem...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Projects.php(5097): App\Models\Temp_Product_model->get_title_suggestion('')
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-06-05 05:39:54 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY rise_temp_products.product_name ASC' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 4 APPPATH\Models\Temp_Product_model.php(66): CodeIgniter\Database\BaseConnection->query('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 5 APPPATH\Controllers\Projects.php(5097): App\Models\Temp_Product_model->get_title_suggestion('')
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-06-05 05:40:07 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY rise_temp_products.product_name ASC' at line 4 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_tem...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_tem...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_tem...')
+#3 D:\projects\visaalliance-crm\app\Models\Temp_Product_model.php(66): CodeIgniter\Database\BaseConnection->query('SELECT rise_tem...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Projects.php(5097): App\Models\Temp_Product_model->get_title_suggestion('')
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-06-05 05:40:07 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'ORDER BY rise_temp_products.product_name ASC' at line 4
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 4 APPPATH\Models\Temp_Product_model.php(66): CodeIgniter\Database\BaseConnection->query('SELECT rise_temp_products.id, rise_temp_products.product_name
+        FROM rise_temp_products
+        WHERE rise_temp_products.deleted=0  AND rise_temp_products.product_name LIKE \'%%\' ESCAPE \'!\' 
+        LIMIT 10 ORDER BY rise_temp_products.product_name ASC
+        ')
+ 5 APPPATH\Controllers\Projects.php(5097): App\Models\Temp_Product_model->get_title_suggestion('')
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->get_project_title_suggestion()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

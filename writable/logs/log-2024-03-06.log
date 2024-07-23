@@ -1,0 +1,107 @@
+CRITICAL - 2024-03-06 06:46:55 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/file_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-06 07:13:21 --> Array to string conversion
+in APPPATH\Views\includes\multi_file_uploader.php on line 237.
+ 1 APPPATH\Views\includes\multi_file_uploader.php(237): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\multi_file_uploader.php', 237)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\multi_file_uploader.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/multi_file_uploader', [], true)
+ 5 APPPATH\Views\projects\files\modal_form.php(44): view('includes/multi_file_uploader', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\modal_form.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/files/modal_form', [], true)
+ 9 APPPATH\Libraries\Template.php(42): view('projects/files/modal_form', [...])
+10 APPPATH\Controllers\Projects.php(2963): App\Libraries\Template->view('projects/files/modal_form', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->file_modal_form()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-06 07:53:19 --> Email: sendWithSmtp throwed ErrorException: fsockopen(): Unable to connect to sandbox.smtp.mailtrap.io:2525 (A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond) in D:\projects\visaalliance-crm\system\Email\Email.php:1868
+Stack trace:
+#0 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fsockopen(): Un...', 'D:\\projects\\vis...', 1868)
+#1 D:\projects\visaalliance-crm\system\Email\Email.php(1868): fsockopen('sandbox.smtp.ma...', '2525', NULL, NULL, 5)
+#2 D:\projects\visaalliance-crm\system\Email\Email.php(1782): CodeIgniter\Email\Email->SMTPConnect()
+#3 D:\projects\visaalliance-crm\system\Email\Email.php(1667): CodeIgniter\Email\Email->sendWithSmtp()
+#4 D:\projects\visaalliance-crm\system\Email\Email.php(1565): CodeIgniter\Email\Email->spoolEmail()
+#5 D:\projects\visaalliance-crm\app\Helpers\general_helper.php(561): CodeIgniter\Email\Email->send()
+#6 D:\projects\visaalliance-crm\app\Controllers\Team_members.php(227): send_app_mail('munawer@queper....', 'Login details', '<div style="bac...')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Team_members->add_team_member()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#11 {main}
+ERROR - 2024-03-06 07:53:19 --> Email: Unable to send email using SMTP. Your server might not be configured to send mail using this method.
+ERROR - 2024-03-06 07:53:19 --> 
+CRITICAL - 2024-03-06 07:53:19 --> Unable to send email using SMTP. Your server might not be configured to send mail using this method.<br><pre>Date: Wed, 6 Mar 2024 07:53:13 -0600
+From: &quot;Visa Alliance&quot; &lt;admin@visaalliance.com.au&gt;
+Return-Path: &lt;admin@visaalliance.com.au&gt;
+To: munawer@queper.co
+Subject: =?UTF-8?Q?Login=20details?=
+Reply-To: &lt;admin@visaalliance.com.au&gt;
+User-Agent: CodeIgniter
+X-Sender: admin@visaalliance.com.au
+X-Mailer: CodeIgniter
+X-Priority: 3 (Normal)
+Message-ID: &lt;65e87549d0fa81.03745485@visaalliance.com.au&gt;
+Mime-Version: 1.0
+
+
+Content-Type: multipart/alternative; boundary=&quot;B_ALT_65e87549d0fc38.61487756&quot;
+
+This is a multi-part message in MIME format.
+Your email application may not support this format.
+
+--B_ALT_65e87549d0fc38.61487756
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Login Details Hello Staff Member,An account has been created for you. Please
+use the following info to login your dashboard: Dashboard
+URL:&amp;nbsp;http://localhost/visaalliance-crm/ Email: munawer@queper.co
+Password:&amp;nbsp;12345678 Team Visa Alliance
+
+
+--B_ALT_65e87549d0fc38.61487756
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+&lt;div style=3D&quot;background-color: #eeeeef; padding: 50px 0; &quot;&gt;&lt;div style=3D&quot;m=
+ax-width:640px; margin:0 auto; &quot;&gt; &lt;div style=3D&quot;color: #fff; text-align: ce=
+nter; background-color:#33333e; padding: 30px; border-top-left-radius: 3px;=
+ border-top-right-radius: 3px; margin: 0;&quot;&gt;  &lt;h1&gt;Login Details&lt;/h1&gt;&lt;/div&gt;&lt;d=
+iv style=3D&quot;padding: 20px; background-color: rgb(255, 255, 255);&quot;&gt;         =
+   &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Hello Staff Membe=
+r,&lt;br&gt;&lt;br&gt;An account has been created for you.&lt;/p&gt;            &lt;p style=3D&quot;c=
+olor: rgb(85, 85, 85); font-size: 14px;&quot;&gt; Please use the following info to =
+login your dashboard:&lt;/p&gt;            &lt;hr&gt;            &lt;p style=3D&quot;color: rgb=
+(85, 85, 85); font-size: 14px;&quot;&gt;Dashboard URL:&amp;nbsp;&lt;a href=3D&quot;http://local=
+host/visaalliance-crm/&quot; target=3D&quot;_blank&quot;&gt;http://localhost/visaalliance-crm=
+/&lt;/a&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rgb(85, 85, 85); font-size: 14px;&quot;&gt;=
+&lt;/p&gt;            &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-s=
+ize: 14px; line-height: 20px;&quot;&gt;Email: munawer@queper.co&lt;/span&gt;&lt;br&gt;&lt;/p&gt;     =
+       &lt;p style=3D&quot;&quot;&gt;&lt;span style=3D&quot;color: rgb(85, 85, 85); font-size: 14px=
+; line-height: 20px;&quot;&gt;Password:&amp;nbsp;12345678&lt;/span&gt;&lt;/p&gt;            &lt;p styl=
+e=3D&quot;color: rgb(85, 85, 85);&quot;&gt;&lt;br&gt;&lt;/p&gt;            &lt;p style=3D&quot;color: rgb(85=
+, 85, 85); font-size: 14px;&quot;&gt;Team Visa Alliance&lt;/p&gt;        &lt;/div&gt;    &lt;/div&gt;=
+&lt;/div&gt;
+
+--B_ALT_65e87549d0fc38.61487756--</pre>
+in APPPATH\Helpers\general_helper.php on line 566.
+ 1 APPPATH\Controllers\Team_members.php(227): send_app_mail('munawer@queper.co', 'Login details', '<div style="background-color: #eeeeef; padding: 50px 0; "><div style="max-width:640px; margin:0 auto; "> <div style="color: #fff; text-align: center; background-color:#33333e; padding: 30px; border-top-left-radius: 3px; border-top-right-radius: 3px; margin: 0;">  <h1>Login Details</h1></div><div style="padding: 20px; background-color: rgb(255, 255, 255);">            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Hello Staff Member,<br><br>An account has been created for you.</p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"> Please use the following info to login your dashboard:</p>            <hr>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Dashboard URL:&nbsp;<a href="http://localhost/visaalliance-crm/" target="_blank">http://localhost/visaalliance-crm/</a></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;"></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Email: munawer@queper.co</span><br></p>            <p style=""><span style="color: rgb(85, 85, 85); font-size: 14px; line-height: 20px;">Password:&nbsp;12345678</span></p>            <p style="color: rgb(85, 85, 85);"><br></p>            <p style="color: rgb(85, 85, 85); font-size: 14px;">Team Visa Alliance</p>        </div>    </div></div>')
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Team_members->add_team_member()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Team_members))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-06 07:55:54 --> Undefined variable $view_data
+in APPPATH\Controllers\Notes.php on line 68.
+ 1 APPPATH\Controllers\Notes.php(68): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $view_data', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Notes.php', 68)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Notes->modal_form()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notes))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

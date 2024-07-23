@@ -1,0 +1,42 @@
+[
+  {
+    "label": "Passport",
+    "required": true
+  },
+  {
+    "label": "RPL 100 points ID ( Utility Bill/ Australian Driver Licence/ Photo Id/ Bank Card )",
+    "required": true
+  },
+  {
+    "label": "Work Reference Letter",
+    "required": true
+  },
+  {
+    "label": "Resume / CV",
+    "required": true
+  },
+  {
+    "label": "USI Number",
+    "required": true
+  },
+  {
+    "label": "Australian Academic Certificates (Completion Letter)",
+    "required": true
+  },
+  {
+    "label": "15 Work Photos and 5/10 Videos 2 mins long",
+    "required": true
+  },
+  {
+    "label": "Tax invoice",
+    "required": false
+  },
+  {
+    "label": "Payment Receipt",
+    "required": false
+  },
+  {
+    "label": "Check for invoice and ask for Due Money",
+    "required": false
+  }
+]

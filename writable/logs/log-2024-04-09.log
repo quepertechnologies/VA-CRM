@@ -1,0 +1,47 @@
+CRITICAL - 2024-04-09 00:45:35 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/schedule_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-04-09 00:52:05 --> mysqli_sql_exception: Unknown column 'net_total' in 'field list' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `rise_pr...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `rise_pr...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `rise_pr...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2476): CodeIgniter\Database\BaseConnection->query('UPDATE `rise_pr...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Crud_model.php(364): CodeIgniter\Database\BaseBuilder->update(Array, Array)
+#5 D:\projects\visaalliance-crm\app\Models\Crud_model.php(157): App\Models\Crud_model->update_where(Array, Array)
+#6 D:\projects\visaalliance-crm\app\Controllers\Projects.php(4671): App\Models\Crud_model->ci_save(Array, '20')
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Projects->save_schedule()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2024-04-09 00:52:05 --> Unknown column 'net_total' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('UPDATE `rise_project_payment_schedule_setup` SET `project_id` = \'18\', `client_id` = \'Queper Pty Ltd\', `rows_count` = \'4\', `installment_name` = \'Trimester 1\', `invoice_date` = \'2024-04-15-undefined-2024-04-15\', `due_date` = \'2024-04-22-undefined-2024-04-22\', `discount` = \'50\', `fees` = \'a:4:{i:0;a:2:{s:8:\\"fee_type\\";s:15:\\"Application Fee\\";s:6:\\"amount\\";s:4:\\"1200\\";}i:1;a:2:{s:8:\\"fee_type\\";s:4:\\"Bond\\";s:6:\\"amount\\";s:3:\\"250\\";}i:2;a:2:{s:8:\\"fee_type\\";s:18:\\"Administration Fee\\";s:6:\\"amount\\";s:3:\\"100\\";}i:3;a:2:{s:8:\\"fee_type\\";s:21:\\"Business Service Bond\\";s:6:\\"amount\\";s:3:\\"100\\";}}\', `total_fee` = 0, `net_total` = -50
+WHERE `id` = \'20\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `rise_project_payment_schedule_setup` SET `project_id` = \'18\', `client_id` = \'Queper Pty Ltd\', `rows_count` = \'4\', `installment_name` = \'Trimester 1\', `invoice_date` = \'2024-04-15-undefined-2024-04-15\', `due_date` = \'2024-04-22-undefined-2024-04-22\', `discount` = \'50\', `fees` = \'a:4:{i:0;a:2:{s:8:\\"fee_type\\";s:15:\\"Application Fee\\";s:6:\\"amount\\";s:4:\\"1200\\";}i:1;a:2:{s:8:\\"fee_type\\";s:4:\\"Bond\\";s:6:\\"amount\\";s:3:\\"250\\";}i:2;a:2:{s:8:\\"fee_type\\";s:18:\\"Administration Fee\\";s:6:\\"amount\\";s:3:\\"100\\";}i:3;a:2:{s:8:\\"fee_type\\";s:21:\\"Business Service Bond\\";s:6:\\"amount\\";s:3:\\"100\\";}}\', `total_fee` = 0, `net_total` = -50
+WHERE `id` = \'20\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `rise_project_payment_schedule_setup` SET `project_id` = \'18\', `client_id` = \'Queper Pty Ltd\', `rows_count` = \'4\', `installment_name` = \'Trimester 1\', `invoice_date` = \'2024-04-15-undefined-2024-04-15\', `due_date` = \'2024-04-22-undefined-2024-04-22\', `discount` = \'50\', `fees` = \'a:4:{i:0;a:2:{s:8:\\"fee_type\\";s:15:\\"Application Fee\\";s:6:\\"amount\\";s:4:\\"1200\\";}i:1;a:2:{s:8:\\"fee_type\\";s:4:\\"Bond\\";s:6:\\"amount\\";s:3:\\"250\\";}i:2;a:2:{s:8:\\"fee_type\\";s:18:\\"Administration Fee\\";s:6:\\"amount\\";s:3:\\"100\\";}i:3;a:2:{s:8:\\"fee_type\\";s:21:\\"Business Service Bond\\";s:6:\\"amount\\";s:3:\\"100\\";}}\', `total_fee` = 0, `net_total` = -50
+WHERE `id` = \'20\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2476): CodeIgniter\Database\BaseConnection->query('UPDATE `rise_project_payment_schedule_setup` SET `project_id` = :project_id:, `client_id` = :client_id:, `rows_count` = :rows_count:, `installment_name` = :installment_name:, `invoice_date` = :invoice_date:, `due_date` = :due_date:, `discount` = :discount:, `fees` = :fees:, `total_fee` = :total_fee:, `net_total` = :net_total:
+WHERE `id` = :id:', [...], false)
+ 5 APPPATH\Models\Crud_model.php(364): CodeIgniter\Database\BaseBuilder->update([...], [...])
+ 6 APPPATH\Models\Crud_model.php(157): App\Models\Crud_model->update_where([...], [...])
+ 7 APPPATH\Controllers\Projects.php(4671): App\Models\Crud_model->ci_save([...], '20')
+ 8 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save_schedule()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-09 13:33:34 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/project_fees_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

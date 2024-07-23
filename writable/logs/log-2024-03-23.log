@@ -1,0 +1,156 @@
+CRITICAL - 2024-03-23 00:06:00 --> Attempt to read property "created_date" on null
+in APPPATH\Controllers\Organizations.php on line 596.
+ 1 APPPATH\Controllers\Organizations.php(596): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "created_date" on null', 'C:\\xampp\\htdocs\\VA-latest\\app\\Controllers\\Organizations.php', 596)
+ 2 APPPATH\Controllers\Organizations.php(578): App\Controllers\Organizations->_make_sub_user_row(null, [])
+ 3 APPPATH\Controllers\Organizations.php(453): App\Controllers\Organizations->_row_sub_user_data(53)
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Organizations->save_sub_user()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Organizations))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-23 00:08:48 --> Attempt to read property "created_date" on null
+in APPPATH\Controllers\Organizations.php on line 596.
+ 1 APPPATH\Controllers\Organizations.php(596): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "created_date" on null', 'C:\\xampp\\htdocs\\VA-latest\\app\\Controllers\\Organizations.php', 596)
+ 2 APPPATH\Controllers\Organizations.php(578): App\Controllers\Organizations->_make_sub_user_row(null, [])
+ 3 APPPATH\Controllers\Organizations.php(453): App\Controllers\Organizations->_row_sub_user_data(54)
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Organizations->save_sub_user()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Organizations))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-23 00:09:17 --> Attempt to read property "location_id" on null
+in APPPATH\Controllers\Organizations.php on line 597.
+ 1 APPPATH\Controllers\Organizations.php(597): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "location_id" on null', 'C:\\xampp\\htdocs\\VA-latest\\app\\Controllers\\Organizations.php', 597)
+ 2 APPPATH\Controllers\Organizations.php(578): App\Controllers\Organizations->_make_sub_user_row(null, [])
+ 3 APPPATH\Controllers\Organizations.php(453): App\Controllers\Organizations->_row_sub_user_data(55)
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Organizations->save_sub_user()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Organizations))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-23 00:31:19 --> Attempt to read property "created_date" on null
+in APPPATH\Controllers\Students.php on line 392.
+ 1 APPPATH\Controllers\Students.php(392): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "created_date" on null', 'C:\\xampp\\htdocs\\VA-latest\\app\\Controllers\\Students.php', 392)
+ 2 APPPATH\Controllers\Students.php(384): App\Controllers\Students->_make_row(null, [])
+ 3 APPPATH\Controllers\Students.php(237): App\Controllers\Students->_row_data('57')
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->save()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-23 00:33:08 --> Attempt to read property "created_date" on null
+in APPPATH\Controllers\Students.php on line 392.
+ 1 APPPATH\Controllers\Students.php(392): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "created_date" on null', 'C:\\xampp\\htdocs\\VA-latest\\app\\Controllers\\Students.php', 392)
+ 2 APPPATH\Controllers\Students.php(384): App\Controllers\Students->_make_row(null, [])
+ 3 APPPATH\Controllers\Students.php(237): App\Controllers\Students->_row_data('56')
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->save()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-23 00:48:14 --> Attempt to read property "labels_list" on null
+in APPPATH\Controllers\Migration_clients.php on line 370.
+ 1 APPPATH\Controllers\Migration_clients.php(370): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "labels_list" on null', 'C:\\xampp\\htdocs\\VA-latest\\app\\Controllers\\Migration_clients.php', 370)
+ 2 APPPATH\Controllers\Migration_clients.php(364): App\Controllers\Migration_clients->_make_row(null, [])
+ 3 APPPATH\Controllers\Migration_clients.php(217): App\Controllers\Migration_clients->_row_data('62')
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Migration_clients->save()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Migration_clients))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-23 00:49:59 --> Attempt to read property "created_date" on null
+in APPPATH\Controllers\Migration_clients.php on line 372.
+ 1 APPPATH\Controllers\Migration_clients.php(372): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "created_date" on null', 'C:\\xampp\\htdocs\\VA-latest\\app\\Controllers\\Migration_clients.php', 372)
+ 2 APPPATH\Controllers\Migration_clients.php(364): App\Controllers\Migration_clients->_make_row(null, [])
+ 3 APPPATH\Controllers\Migration_clients.php(217): App\Controllers\Migration_clients->_row_data('63')
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Migration_clients->save()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Migration_clients))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-23 01:35:29 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '>0 AND rise_clients.location_id='2'' at line 3 in C:\xampp\htdocs\VA-latest\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\VA-latest\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(ri...', 0)
+#1 C:\xampp\htdocs\VA-latest\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(ri...')
+#2 C:\xampp\htdocs\VA-latest\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(ri...')
+#3 C:\xampp\htdocs\VA-latest\app\Models\Clients_model.php(544): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(ri...')
+#4 C:\xampp\htdocs\VA-latest\app\Helpers\widget_helper.php(1340): App\Models\Clients_model->count_total_clients(Array)
+#5 C:\xampp\htdocs\VA-latest\app\Views\students\overview\index.php(4): total_leads(false, Array, Array)
+#6 C:\xampp\htdocs\VA-latest\system\View\View.php(224): include('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\VA-latest\system\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#8 C:\xampp\htdocs\VA-latest\system\Common.php(1180): CodeIgniter\View\View->render('students/overvi...', Array, true)
+#9 C:\xampp\htdocs\VA-latest\app\Views\students\index.php(21): view('students/overvi...')
+#10 C:\xampp\htdocs\VA-latest\system\View\View.php(224): include('C:\\xampp\\htdocs...')
+#11 C:\xampp\htdocs\VA-latest\system\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#12 C:\xampp\htdocs\VA-latest\system\Common.php(1180): CodeIgniter\View\View->render('students/index', Array, true)
+#13 C:\xampp\htdocs\VA-latest\app\Views\layout\index.php(62): view('students/index')
+#14 C:\xampp\htdocs\VA-latest\system\View\View.php(224): include('C:\\xampp\\htdocs...')
+#15 C:\xampp\htdocs\VA-latest\system\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#16 C:\xampp\htdocs\VA-latest\system\Common.php(1180): CodeIgniter\View\View->render('layout/index', Array, true)
+#17 C:\xampp\htdocs\VA-latest\app\Libraries\Template.php(42): view('layout/index', Array)
+#18 C:\xampp\htdocs\VA-latest\app\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', Array)
+#19 C:\xampp\htdocs\VA-latest\app\Controllers\Students.php(46): App\Libraries\Template->rander('students/index', Array)
+#20 C:\xampp\htdocs\VA-latest\system\CodeIgniter.php(932): App\Controllers\Students->index()
+#21 C:\xampp\htdocs\VA-latest\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+#22 C:\xampp\htdocs\VA-latest\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#23 C:\xampp\htdocs\VA-latest\index.php(80): CodeIgniter\CodeIgniter->run()
+#24 {main}
+CRITICAL - 2024-03-23 01:35:29 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '>0 AND rise_clients.location_id='2'' at line 3
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(rise_clients.id) AS total
+        FROM rise_clients 
+        WHERE rise_clients.deleted=0  AND rise_clients.account_type=\'1\' AND rise_clients.is_lead=1 AND rise_clients.lead_status_id=\'1\' AND rise_clients.is_sub_user=>0 AND rise_clients.location_id=\'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(rise_clients.id) AS total
+        FROM rise_clients 
+        WHERE rise_clients.deleted=0  AND rise_clients.account_type=\'1\' AND rise_clients.is_lead=1 AND rise_clients.lead_status_id=\'1\' AND rise_clients.is_sub_user=>0 AND rise_clients.location_id=\'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(rise_clients.id) AS total
+        FROM rise_clients 
+        WHERE rise_clients.deleted=0  AND rise_clients.account_type=\'1\' AND rise_clients.is_lead=1 AND rise_clients.lead_status_id=\'1\' AND rise_clients.is_sub_user=>0 AND rise_clients.location_id=\'2\'')
+ 4 APPPATH\Models\Clients_model.php(544): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(rise_clients.id) AS total
+        FROM rise_clients 
+        WHERE rise_clients.deleted=0  AND rise_clients.account_type=\'1\' AND rise_clients.is_lead=1 AND rise_clients.lead_status_id=\'1\' AND rise_clients.is_sub_user=>0 AND rise_clients.location_id=\'2\'')
+ 5 APPPATH\Helpers\widget_helper.php(1340): App\Models\Clients_model->count_total_clients([...])
+ 6 APPPATH\Views\students\overview\index.php(4): total_leads(false, [], [...])
+ 7 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\VA-latest\\app\\Views\\students\\overview\\index.php')
+ 8 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/overview/index', [], true)
+10 APPPATH\Views\students\index.php(21): view('students/overview/index')
+11 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\VA-latest\\app\\Views\\students\\index.php')
+12 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+13 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/index', [], true)
+14 APPPATH\Views\layout\index.php(62): view('students/index')
+15 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\VA-latest\\app\\Views\\layout\\index.php')
+16 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+17 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('layout/index', [], true)
+18 APPPATH\Libraries\Template.php(42): view('layout/index', [...])
+19 APPPATH\Libraries\Template.php(24): App\Libraries\Template->view('layout/index', [...])
+20 APPPATH\Controllers\Students.php(46): App\Libraries\Template->rander('students/index', [...])
+21 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->index()
+22 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+23 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+24 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-23 02:09:43 --> Undefined variable $check
+in APPPATH\Helpers\general_helper.php on line 840.
+ 1 APPPATH\Helpers\general_helper.php(840): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $check', 'C:\\xampp\\htdocs\\VA-latest\\app\\Helpers\\general_helper.php', 840)
+ 2 APPPATH\Controllers\Organizations.php(634): get_client_contact_profile_link('36', 'Queper Pty Ltd', [], [...])
+ 3 APPPATH\Controllers\Organizations.php(560): App\Controllers\Organizations->_make_row(Object(stdClass), [])
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Organizations->list_data()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Organizations))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-23 02:09:59 --> Undefined variable $check
+in APPPATH\Helpers\general_helper.php on line 840.
+ 1 APPPATH\Helpers\general_helper.php(840): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $check', 'C:\\xampp\\htdocs\\VA-latest\\app\\Helpers\\general_helper.php', 840)
+ 2 APPPATH\Controllers\Organizations.php(634): get_client_contact_profile_link('36', 'Queper Pty Ltd', [], [...])
+ 3 APPPATH\Controllers\Organizations.php(560): App\Controllers\Organizations->_make_row(Object(stdClass), [])
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Organizations->list_data()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Organizations))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-23 02:16:13 --> Undefined variable $options
+in APPPATH\Controllers\Organizations.php on line 660.
+ 1 APPPATH\Controllers\Organizations.php(660): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $options', 'C:\\xampp\\htdocs\\VA-latest\\app\\Controllers\\Organizations.php', 660)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Organizations->view('36')
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Organizations))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-23 02:17:24 --> Undefined variable $options
+in APPPATH\Controllers\Organizations.php on line 660.
+ 1 APPPATH\Controllers\Organizations.php(660): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $options', 'C:\\xampp\\htdocs\\VA-latest\\app\\Controllers\\Organizations.php', 660)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Organizations->view('36')
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Organizations))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

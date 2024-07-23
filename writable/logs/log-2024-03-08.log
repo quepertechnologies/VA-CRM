@@ -1,0 +1,123 @@
+CRITICAL - 2024-03-08 04:22:47 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('leads/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-08 07:14:51 --> Undefined property: stdClass::$first_name
+in APPPATH\Views\check_in\modal_form.php on line 109.
+ 1 APPPATH\Views\check_in\modal_form.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$first_name', 'D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php', 109)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('check_in/modal_form', [...])
+ 6 APPPATH\Controllers\Check_in.php(98): App\Libraries\Template->view('check_in/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-08 07:14:58 --> Undefined property: stdClass::$first_name
+in APPPATH\Views\check_in\modal_form.php on line 109.
+ 1 APPPATH\Views\check_in\modal_form.php(109): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$first_name', 'D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php', 109)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('check_in/modal_form', [...])
+ 6 APPPATH\Controllers\Check_in.php(98): App\Libraries\Template->view('check_in/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-08 07:16:12 --> Undefined property: stdClass::$first_name
+in APPPATH\Views\check_in\modal_form.php on line 110.
+ 1 APPPATH\Views\check_in\modal_form.php(110): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$first_name', 'D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php', 110)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\check_in\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('check_in/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('check_in/modal_form', [...])
+ 6 APPPATH\Controllers\Check_in.php(98): App\Libraries\Template->view('check_in/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-08 07:31:14 --> mysqli_sql_exception: Unknown column 'rise_clients.sort' in 'field list' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_cli...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_cli...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_cli...')
+#3 D:\projects\visaalliance-crm\app\Models\Clients_model.php(429): CodeIgniter\Database\BaseConnection->query('SELECT rise_cli...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Leads.php(1030): App\Models\Clients_model->get_leads_kanban_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Leads->all_leads_kanban_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Leads))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-03-08 07:31:14 --> Unknown column 'rise_clients.sort' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT rise_clients.id, rise_clients.company_name, rise_clients.sort, IF(rise_clients.sort!=0, rise_clients.sort, rise_clients.id) AS new_sort, rise_clients.lead_status_id, rise_clients.owner_id,
+                (SELECT rise_users.image FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\' AND rise_users.is_primary_contact=1) AS primary_contact_avatar,
+                (SELECT COUNT(rise_users.id) FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\') AS total_contacts_count,
+                (SELECT COUNT(rise_events.id) FROM rise_events WHERE rise_events.deleted=0 AND rise_events.client_id=rise_clients.id) AS total_events_count,
+                (SELECT COUNT(rise_notes.id) FROM rise_notes WHERE rise_notes.deleted=0 AND rise_notes.client_id=rise_clients.id) AS total_notes_count,
+                (SELECT COUNT(rise_estimates.id) FROM rise_estimates WHERE rise_estimates.deleted=0 AND rise_estimates.client_id=rise_clients.id) AS total_estimates_count,
+                (SELECT COUNT(rise_general_files.id) FROM rise_general_files WHERE rise_general_files.deleted=0 AND rise_general_files.client_id=rise_clients.id) AS total_files_count,
+                (SELECT COUNT(rise_estimate_requests.id) FROM rise_estimate_requests WHERE rise_estimate_requests.deleted=0 AND rise_estimate_requests.client_id=rise_clients.id) AS total_estimate_requests_count,
+                rise_lead_source.title AS lead_source_title,
+                CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name
+        FROM rise_clients 
+        LEFT JOIN rise_lead_source ON rise_clients.lead_source_id = rise_lead_source.id 
+        LEFT JOIN rise_users ON rise_users.id = rise_clients.owner_id AND rise_users.deleted=0 AND rise_users.user_type=\'staff\' 
+        WHERE rise_clients.deleted=0 AND rise_clients.is_lead=1  
+        ORDER BY new_sort ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT rise_clients.id, rise_clients.company_name, rise_clients.sort, IF(rise_clients.sort!=0, rise_clients.sort, rise_clients.id) AS new_sort, rise_clients.lead_status_id, rise_clients.owner_id,
+                (SELECT rise_users.image FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\' AND rise_users.is_primary_contact=1) AS primary_contact_avatar,
+                (SELECT COUNT(rise_users.id) FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\') AS total_contacts_count,
+                (SELECT COUNT(rise_events.id) FROM rise_events WHERE rise_events.deleted=0 AND rise_events.client_id=rise_clients.id) AS total_events_count,
+                (SELECT COUNT(rise_notes.id) FROM rise_notes WHERE rise_notes.deleted=0 AND rise_notes.client_id=rise_clients.id) AS total_notes_count,
+                (SELECT COUNT(rise_estimates.id) FROM rise_estimates WHERE rise_estimates.deleted=0 AND rise_estimates.client_id=rise_clients.id) AS total_estimates_count,
+                (SELECT COUNT(rise_general_files.id) FROM rise_general_files WHERE rise_general_files.deleted=0 AND rise_general_files.client_id=rise_clients.id) AS total_files_count,
+                (SELECT COUNT(rise_estimate_requests.id) FROM rise_estimate_requests WHERE rise_estimate_requests.deleted=0 AND rise_estimate_requests.client_id=rise_clients.id) AS total_estimate_requests_count,
+                rise_lead_source.title AS lead_source_title,
+                CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name
+        FROM rise_clients 
+        LEFT JOIN rise_lead_source ON rise_clients.lead_source_id = rise_lead_source.id 
+        LEFT JOIN rise_users ON rise_users.id = rise_clients.owner_id AND rise_users.deleted=0 AND rise_users.user_type=\'staff\' 
+        WHERE rise_clients.deleted=0 AND rise_clients.is_lead=1  
+        ORDER BY new_sort ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT rise_clients.id, rise_clients.company_name, rise_clients.sort, IF(rise_clients.sort!=0, rise_clients.sort, rise_clients.id) AS new_sort, rise_clients.lead_status_id, rise_clients.owner_id,
+                (SELECT rise_users.image FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\' AND rise_users.is_primary_contact=1) AS primary_contact_avatar,
+                (SELECT COUNT(rise_users.id) FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\') AS total_contacts_count,
+                (SELECT COUNT(rise_events.id) FROM rise_events WHERE rise_events.deleted=0 AND rise_events.client_id=rise_clients.id) AS total_events_count,
+                (SELECT COUNT(rise_notes.id) FROM rise_notes WHERE rise_notes.deleted=0 AND rise_notes.client_id=rise_clients.id) AS total_notes_count,
+                (SELECT COUNT(rise_estimates.id) FROM rise_estimates WHERE rise_estimates.deleted=0 AND rise_estimates.client_id=rise_clients.id) AS total_estimates_count,
+                (SELECT COUNT(rise_general_files.id) FROM rise_general_files WHERE rise_general_files.deleted=0 AND rise_general_files.client_id=rise_clients.id) AS total_files_count,
+                (SELECT COUNT(rise_estimate_requests.id) FROM rise_estimate_requests WHERE rise_estimate_requests.deleted=0 AND rise_estimate_requests.client_id=rise_clients.id) AS total_estimate_requests_count,
+                rise_lead_source.title AS lead_source_title,
+                CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name
+        FROM rise_clients 
+        LEFT JOIN rise_lead_source ON rise_clients.lead_source_id = rise_lead_source.id 
+        LEFT JOIN rise_users ON rise_users.id = rise_clients.owner_id AND rise_users.deleted=0 AND rise_users.user_type=\'staff\' 
+        WHERE rise_clients.deleted=0 AND rise_clients.is_lead=1  
+        ORDER BY new_sort ASC')
+ 4 APPPATH\Models\Clients_model.php(429): CodeIgniter\Database\BaseConnection->query('SELECT rise_clients.id, rise_clients.company_name, rise_clients.sort, IF(rise_clients.sort!=0, rise_clients.sort, rise_clients.id) AS new_sort, rise_clients.lead_status_id, rise_clients.owner_id,
+                (SELECT rise_users.image FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\' AND rise_users.is_primary_contact=1) AS primary_contact_avatar,
+                (SELECT COUNT(rise_users.id) FROM rise_users WHERE rise_users.client_id=rise_clients.id AND rise_users.deleted=0 AND rise_users.user_type=\'lead\') AS total_contacts_count,
+                (SELECT COUNT(rise_events.id) FROM rise_events WHERE rise_events.deleted=0 AND rise_events.client_id=rise_clients.id) AS total_events_count,
+                (SELECT COUNT(rise_notes.id) FROM rise_notes WHERE rise_notes.deleted=0 AND rise_notes.client_id=rise_clients.id) AS total_notes_count,
+                (SELECT COUNT(rise_estimates.id) FROM rise_estimates WHERE rise_estimates.deleted=0 AND rise_estimates.client_id=rise_clients.id) AS total_estimates_count,
+                (SELECT COUNT(rise_general_files.id) FROM rise_general_files WHERE rise_general_files.deleted=0 AND rise_general_files.client_id=rise_clients.id) AS total_files_count,
+                (SELECT COUNT(rise_estimate_requests.id) FROM rise_estimate_requests WHERE rise_estimate_requests.deleted=0 AND rise_estimate_requests.client_id=rise_clients.id) AS total_estimate_requests_count,
+                rise_lead_source.title AS lead_source_title,
+                CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name
+        FROM rise_clients 
+        LEFT JOIN rise_lead_source ON rise_clients.lead_source_id = rise_lead_source.id 
+        LEFT JOIN rise_users ON rise_users.id = rise_clients.owner_id AND rise_users.deleted=0 AND rise_users.user_type=\'staff\' 
+        WHERE rise_clients.deleted=0 AND rise_clients.is_lead=1  
+        ORDER BY new_sort ASC')
+ 5 APPPATH\Controllers\Leads.php(1030): App\Models\Clients_model->get_leads_kanban_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Leads->all_leads_kanban_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Leads))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

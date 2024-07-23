@@ -1,0 +1,19 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled",
+                "ssl": {}
+            },
+            "previewLimit": 50,
+            "server": "eu-cdbr-west-03.cleardb.net",
+            "driver": "MySQL",
+            "name": "TerraNova Production DB",
+            "username": "b0ccc08248945d",
+            "database": "heroku_516c07f915f26e6",
+            "password": "e0aefeeb",
+            "connectString": "mysql://b0ccc08248945d:e0aefeeb@eu-cdbr-west-03.cleardb.net/heroku_516c07f915f26e6?reconnect=true"
+        }
+    ]
+}

@@ -1,0 +1,188 @@
+WARNING - 2024-07-20 00:14:11 --> [DEPRECATED] preg_match(): Passing null to parameter #2 ($subject) of type string is deprecated in SYSTEMPATH\Helpers\url_helper.php on line 263.
+ 1 SYSTEMPATH\Helpers\url_helper.php(263): preg_match('#^(\\w+:)?//#i', null)
+ 2 APPPATH\Controllers\Organizations.php(637): anchor(null, null, [...])
+ 3 APPPATH\Controllers\Organizations.php(560): App\Controllers\Organizations->_make_row(Object(stdClass), [])
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Organizations->list_data()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Organizations))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-07-20 00:14:11 --> [DEPRECATED] strpos(): Passing null to parameter #1 ($haystack) of type string is deprecated in SYSTEMPATH\Helpers\url_helper.php on line 60.
+ 1 SYSTEMPATH\Helpers\url_helper.php(60): strpos(null, '://')
+ 2 SYSTEMPATH\Helpers\url_helper.php(118): _get_uri(null, Object(Config\App))
+ 3 SYSTEMPATH\Helpers\url_helper.php(263): site_url(null, null, Object(Config\App))
+ 4 APPPATH\Controllers\Organizations.php(637): anchor(null, null, [...])
+ 5 APPPATH\Controllers\Organizations.php(560): App\Controllers\Organizations->_make_row(Object(stdClass), [])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Organizations->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Organizations))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-20 00:14:11 --> CodeIgniter\HTTP\URI::removeDotSegments(): Argument #1 ($path) must be of type string, null given, called in D:\projects\visaalliance-crm\system\Helpers\url_helper.php on line 71
+in SYSTEMPATH\HTTP\URI.php on line 197.
+ 1 SYSTEMPATH\Helpers\url_helper.php(71): CodeIgniter\HTTP\URI::removeDotSegments(null)
+ 2 SYSTEMPATH\Helpers\url_helper.php(118): _get_uri(null, Object(Config\App))
+ 3 SYSTEMPATH\Helpers\url_helper.php(263): site_url(null, null, Object(Config\App))
+ 4 APPPATH\Controllers\Organizations.php(637): anchor(null, null, [...])
+ 5 APPPATH\Controllers\Organizations.php(560): App\Controllers\Organizations->_make_row(Object(stdClass), [])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Organizations->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Organizations))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-07-20 02:44:02 --> mysqli_sql_exception: Column 'log_for_id' cannot be null in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Activity_logs_model.php(41): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 D:\projects\visaalliance-crm\app\Models\Crud_model.php(358): App\Models\Activity_logs_model->ci_save(Array, false)
+#6 D:\projects\visaalliance-crm\app\Controllers\Import.php(400): App\Models\Crud_model->ci_save(Array)
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Import->run()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(84): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2024-07-20 02:44:02 --> Column 'log_for_id' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `rise_activity_logs` (`created_at`, `created_by`, `action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `changes`) VALUES (\'2024-01-12\', 0, \'created\', \'task\', \'Apply 191\', 1, \'general_task\', NULL, \'\', 0, \'milestone\', 0, NULL)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `rise_activity_logs` (`created_at`, `created_by`, `action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `changes`) VALUES (\'2024-01-12\', 0, \'created\', \'task\', \'Apply 191\', 1, \'general_task\', NULL, \'\', 0, \'milestone\', 0, NULL)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `rise_activity_logs` (`created_at`, `created_by`, `action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `changes`) VALUES (\'2024-01-12\', 0, \'created\', \'task\', \'Apply 191\', 1, \'general_task\', NULL, \'\', 0, \'milestone\', 0, NULL)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `rise_activity_logs` (`created_at`, `created_by`, `action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `changes`) VALUES (:created_at:, :created_by:, :action:, :log_type:, :log_type_title:, :log_type_id:, :log_for:, :log_for_id:, :log_for2:, :log_for_id2:, :log_for3:, :log_for_id3:, :changes:)', [...], false)
+ 5 APPPATH\Models\Activity_logs_model.php(41): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Models\Crud_model.php(358): App\Models\Activity_logs_model->ci_save([...], false)
+ 7 APPPATH\Controllers\Import.php(400): App\Models\Crud_model->ci_save([...])
+ 8 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Import->run()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-07-20 02:49:20 --> mysqli_sql_exception: Column 'log_for_id' cannot be null in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Activity_logs_model.php(41): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 D:\projects\visaalliance-crm\app\Models\Crud_model.php(358): App\Models\Activity_logs_model->ci_save(Array, false)
+#6 D:\projects\visaalliance-crm\app\Controllers\Import.php(400): App\Models\Crud_model->ci_save(Array)
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Import->run()
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+#9 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 D:\projects\visaalliance-crm\index.php(84): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2024-07-20 02:49:20 --> Column 'log_for_id' cannot be null
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `rise_activity_logs` (`created_at`, `created_by`, `action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `changes`) VALUES (\'2024-01-12\', 0, \'created\', \'task\', \'Apply 191\', 1, \'general_task\', NULL, \'\', 0, \'milestone\', 0, NULL)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `rise_activity_logs` (`created_at`, `created_by`, `action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `changes`) VALUES (\'2024-01-12\', 0, \'created\', \'task\', \'Apply 191\', 1, \'general_task\', NULL, \'\', 0, \'milestone\', 0, NULL)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `rise_activity_logs` (`created_at`, `created_by`, `action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `changes`) VALUES (\'2024-01-12\', 0, \'created\', \'task\', \'Apply 191\', 1, \'general_task\', NULL, \'\', 0, \'milestone\', 0, NULL)')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `rise_activity_logs` (`created_at`, `created_by`, `action`, `log_type`, `log_type_title`, `log_type_id`, `log_for`, `log_for_id`, `log_for2`, `log_for_id2`, `log_for3`, `log_for_id3`, `changes`) VALUES (:created_at:, :created_by:, :action:, :log_type:, :log_type_title:, :log_type_id:, :log_for:, :log_for_id:, :log_for2:, :log_for_id2:, :log_for3:, :log_for_id3:, :changes:)', [...], false)
+ 5 APPPATH\Models\Activity_logs_model.php(41): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Models\Crud_model.php(358): App\Models\Activity_logs_model->ci_save([...], false)
+ 7 APPPATH\Controllers\Import.php(400): App\Models\Crud_model->ci_save([...])
+ 8 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Import->run()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-20 03:34:23 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-07-20 03:37:37 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-07-20 06:07:51 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('import/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-20 08:26:17 --> json_decode(): Argument #1 ($json) must be of type string, array given
+in APPPATH\Controllers\Import.php on line 180.
+ 1 APPPATH\Controllers\Import.php(180): json_decode([...], true)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Import->populate_activities()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-20 08:33:34 --> Object of class DateTime could not be converted to string
+in SYSTEMPATH\Database\Query.php on line 335.
+ 1 SYSTEMPATH\Database\Query.php(335): strtr('INSERT INTO `rise_timeline` (`client_id`, `title`, `created_by`, `caption`, `created_at`) VALUES (:client_id:, :title:, :created_by:, :caption:, :created_at:)', [...])
+ 2 SYSTEMPATH\Database\Query.php(310): CodeIgniter\Database\Query->matchNamedBinds('INSERT INTO `rise_timeline` (`client_id`, `title`, `created_by`, `caption`, `created_at`) VALUES (:client_id:, :title:, :created_by:, :caption:, :created_at:)', [...])
+ 3 SYSTEMPATH\Database\Query.php(159): CodeIgniter\Database\Query->compileBinds()
+ 4 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\Query->getQuery()
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `rise_timeline` (`client_id`, `title`, `created_by`, `caption`, `created_at`) VALUES (:client_id:, :title:, :created_by:, :caption:, :created_at:)', [...], false)
+ 6 APPPATH\Models\Crud_model.php(267): CodeIgniter\Database\BaseBuilder->insert([...])
+ 7 APPPATH\Controllers\Import.php(235): App\Models\Crud_model->ci_save([...])
+ 8 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Import->populate_activities()
+ 9 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+10 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-20 08:48:19 --> Array to string conversion
+in APPPATH\Controllers\Import.php on line 1155.
+ 1 APPPATH\Controllers\Import.php(1155): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Import.php', 1155)
+ 2 APPPATH\Controllers\Import.php(272): App\Controllers\Import->_log('D:/projects/visaalliance-crm/files/logs/import/clients.log', [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Import->populate_activities()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-20 09:27:02 --> Undefined variable $succeeded
+in APPPATH\Controllers\Import.php on line 274.
+ 1 APPPATH\Controllers\Import.php(274): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $succeeded', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Import.php', 274)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Import->populate_activities()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-20 22:42:54 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-07-20 22:46:01 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-07-20 22:48:44 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-07-20 22:48:44 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-07-20 22:57:48 --> Call to a member function getResult() on array
+in APPPATH\Controllers\Projects.php on line 1346.
+ 1 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->list_data()
+ 2 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-20 22:59:13 --> Undefined property: stdClass::$client_id
+in APPPATH\Controllers\Projects.php on line 1440.
+ 1 APPPATH\Controllers\Projects.php(1440): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$client_id', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 1440)
+ 2 APPPATH\Controllers\Projects.php(1357): App\Controllers\Projects->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-20 23:00:24 --> Undefined property: stdClass::$client_id
+in APPPATH\Controllers\Projects.php on line 1441.
+ 1 APPPATH\Controllers\Projects.php(1441): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$client_id', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 1441)
+ 2 APPPATH\Controllers\Projects.php(1357): App\Controllers\Projects->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-07-20 23:21:33 --> [DEPRECATED] date_create_from_format(): Passing null to parameter #2 ($datetime) of type string is deprecated in APPPATH\Controllers\Import.php on line 149.
+ 1 APPPATH\Controllers\Import.php(149): date_create_from_format('d D, M Y h:i A', null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Import->populate_application_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-20 23:21:33 --> date_format(): Argument #1 ($object) must be of type DateTimeInterface, bool given
+in APPPATH\Controllers\Import.php on line 149.
+ 1 APPPATH\Controllers\Import.php(149): date_format(false, 'Y-m-d h:m:s')
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Import->populate_application_data()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Import))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-07-20 23:25:00 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-07-20 23:29:08 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-07-20 23:31:34 --> Maximum execution time of 120 seconds exceeded
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()

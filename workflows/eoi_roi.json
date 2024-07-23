@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "title": "Ask for documents / Send Doc Checklist",
+    "doc_check_list": true
+  },
+  {
+    "id": 2,
+    "title": "Document received"
+  },
+  {
+    "id": 3,
+    "title": "Prepare EOI"
+  },
+  {
+    "id": 4,
+    "title": "Confirmation Sent to Client"
+  },
+  {
+    "id": 5,
+    "title": "Lodge EOI"
+  },
+  {
+    "id": 6,
+    "title": "ROI draft sent to Client"
+  },
+  {
+    "id": 7,
+    "title": "Lodge ROI"
+  },
+  {
+    "id": 8,
+    "title": "Notify Client"
+  }
+]

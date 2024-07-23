@@ -1,0 +1,562 @@
+CRITICAL - 2024-01-13 01:38:17 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Students.php on line 332
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Students.php(332): anchor('http://localhost/visaalliance-crm/index.php/students/view/2', null)
+ 2 APPPATH\Controllers\Students.php(295): App\Controllers\Students->_make_row(Object(stdClass), [])
+ 3 APPPATH\Controllers\Students.php(221): App\Controllers\Students->_row_data(2)
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->save()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-01-13 02:20:16 --> mysqli_sql_exception: Unknown column 'person' in 'where clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SQL_CALC...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SQL_CALC...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SQL_CALC...')
+#3 D:\projects\visaalliance-crm\app\Models\Clients_model.php(197): CodeIgniter\Database\BaseConnection->query('SELECT SQL_CALC...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Students.php(267): App\Models\Clients_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Students->list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-01-13 02:20:16 --> Unknown column 'person' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND rise_clients.type=person AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND rise_clients.type=person AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND rise_clients.type=person AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ')
+ 4 APPPATH\Models\Clients_model.php(197): CodeIgniter\Database\BaseConnection->query('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND rise_clients.type=person AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ')
+ 5 APPPATH\Controllers\Students.php(267): App\Models\Clients_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-01-13 02:21:20 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''type'=person AND rise_clients.account_type=student AND rise_clients.is_lead=...' at line 18 in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SQL_CALC...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SQL_CALC...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SQL_CALC...')
+#3 D:\projects\visaalliance-crm\app\Models\Clients_model.php(197): CodeIgniter\Database\BaseConnection->query('SELECT SQL_CALC...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Students.php(267): App\Models\Clients_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Students->list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-01-13 02:21:20 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''type'=person AND rise_clients.account_type=student AND rise_clients.is_lead=...' at line 18
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND rise_clients.\'type\'=person AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND rise_clients.\'type\'=person AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND rise_clients.\'type\'=person AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ')
+ 4 APPPATH\Models\Clients_model.php(197): CodeIgniter\Database\BaseConnection->query('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND rise_clients.\'type\'=person AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ')
+ 5 APPPATH\Controllers\Students.php(267): App\Models\Clients_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-01-13 02:21:56 --> mysqli_sql_exception: Unknown column 'person' in 'where clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SQL_CALC...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SQL_CALC...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SQL_CALC...')
+#3 D:\projects\visaalliance-crm\app\Models\Clients_model.php(197): CodeIgniter\Database\BaseConnection->query('SELECT SQL_CALC...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Students.php(267): App\Models\Clients_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Students->list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-01-13 02:21:56 --> Unknown column 'person' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND \'rise_clients.type\'=person AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND \'rise_clients.type\'=person AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND \'rise_clients.type\'=person AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ')
+ 4 APPPATH\Models\Clients_model.php(197): CodeIgniter\Database\BaseConnection->query('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND \'rise_clients.type\'=person AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ')
+ 5 APPPATH\Controllers\Students.php(267): App\Models\Clients_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-01-13 02:22:13 --> mysqli_sql_exception: Unknown column 'student' in 'where clause' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SQL_CALC...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SQL_CALC...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SQL_CALC...')
+#3 D:\projects\visaalliance-crm\app\Models\Clients_model.php(197): CodeIgniter\Database\BaseConnection->query('SELECT SQL_CALC...')
+#4 D:\projects\visaalliance-crm\app\Controllers\Students.php(267): App\Models\Clients_model->get_details(Array)
+#5 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Students->list_data()
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-01-13 02:22:13 --> Unknown column 'student' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND \'rise_clients.type\'=\'person\' AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND \'rise_clients.type\'=\'person\' AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND \'rise_clients.type\'=\'person\' AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ')
+ 4 APPPATH\Models\Clients_model.php(197): CodeIgniter\Database\BaseConnection->query('SELECT SQL_CALC_FOUND_ROWS rise_clients.*, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS primary_contact, rise_users.id AS primary_contact_id, rise_users.image AS contact_avatar,  project_table.total_projects, IFNULL(invoice_details.payment_received,0) AS payment_received ,
+                IFNULL(invoice_details.invoice_value,0) AS invoice_value,
+                (SELECT GROUP_CONCAT(rise_client_groups.title) FROM rise_client_groups WHERE FIND_IN_SET(rise_client_groups.id, rise_clients.group_ids)) AS client_groups, rise_lead_status.title AS lead_status_title,  rise_lead_status.color AS lead_status_color,
+                owner_details.owner_name, owner_details.owner_avatar, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_clients.labels)) AS labels_list
+        FROM rise_clients
+        LEFT JOIN rise_users ON rise_users.client_id = rise_clients.id AND rise_users.deleted=0 AND rise_users.is_primary_contact=1 
+        LEFT JOIN (SELECT client_id, COUNT(id) AS total_projects FROM rise_projects WHERE deleted=0 AND project_type=\'client_project\' GROUP BY client_id) AS project_table ON project_table.client_id= rise_clients.id
+        
+        LEFT JOIN (SELECT client_id, SUM(payments_table.payment_received) as payment_received, SUM(rise_invoices.invoice_total) AS invoice_value FROM rise_invoices
+                   LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM rise_invoice_payments WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id=rise_invoices.id AND rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   WHERE rise_invoices.deleted=0 AND rise_invoices.status=\'not_paid\'
+                   GROUP BY rise_invoices.client_id    
+                   ) AS invoice_details ON invoice_details.client_id= rise_clients.id 
+                       
+        LEFT JOIN rise_lead_status ON rise_clients.lead_status_id = rise_lead_status.id 
+        LEFT JOIN (SELECT rise_users.id, CONCAT(rise_users.first_name, \' \', rise_users.last_name) AS owner_name, rise_users.image AS owner_avatar FROM rise_users WHERE rise_users.deleted=0 AND rise_users.user_type=\'staff\') AS owner_details ON owner_details.id=rise_clients.owner_id
+                       
+        WHERE rise_clients.deleted=0  AND \'rise_clients.type\'=\'person\' AND rise_clients.account_type=student AND rise_clients.is_lead=0   
+         ORDER BY rise_clients.id ASC   LIMIT 10 OFFSET 0 ')
+ 5 APPPATH\Controllers\Students.php(267): App\Models\Clients_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->list_data()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 02:24:57 --> foreach() argument must be of type array|object, null given
+in APPPATH\Views\students\client_form_fields.php on line 110.
+ 1 APPPATH\Views\students\client_form_fields.php(110): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, null given', 'D:\\projects\\visaalliance-crm\\app\\Views\\students\\client_form_fields.php', 110)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\client_form_fields.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/client_form_fields', [], true)
+ 5 APPPATH\Views\students\contacts\company_info_tab.php(12): view('students/client_form_fields')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\contacts\\company_info_tab.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/contacts/company_info_tab', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('students/contacts/company_info_tab', [...])
+10 APPPATH\Controllers\Students.php(1027): App\Libraries\Template->view('students/contacts/company_info_tab', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->company_info_tab('2')
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 02:29:03 --> foreach() argument must be of type array|object, null given
+in APPPATH\Views\students\client_form_fields.php on line 182.
+ 1 APPPATH\Views\students\client_form_fields.php(182): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, null given', 'D:\\projects\\visaalliance-crm\\app\\Views\\students\\client_form_fields.php', 182)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\client_form_fields.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/client_form_fields', [], true)
+ 5 APPPATH\Views\students\contacts\company_info_tab.php(12): view('students/client_form_fields')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\contacts\\company_info_tab.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/contacts/company_info_tab', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('students/contacts/company_info_tab', [...])
+10 APPPATH\Controllers\Students.php(1027): App\Libraries\Template->view('students/contacts/company_info_tab', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->company_info_tab('2')
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 02:33:42 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Migration_clients.php on line 299
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Migration_clients.php(299): anchor('http://localhost/visaalliance-crm/index.php/migration_clients/view/1', null)
+ 2 APPPATH\Controllers\Migration_clients.php(244): App\Controllers\Migration_clients->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Migration_clients->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Migration_clients))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 02:46:07 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('students/contacts_list_data/2', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-01-13 04:19:41 --> mysqli_sql_exception: Unknown column 'vat_number' in 'field list' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Crud_model.php(208): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Migration_clients.php(179): App\Models\Crud_model->ci_save(Array, '')
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Migration_clients->save()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Migration_clients))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-01-13 04:19:41 --> Unknown column 'vat_number' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `rise_clients` (`first_name`, `last_name`, `unique_id`, `type`, `account_type`, `address`, `city`, `state`, `zip`, `country`, `phone`, `website`, `vat_number`, `gst_number`, `group_ids`, `labels`, `created_date`, `currency_symbol`, `currency`, `disable_online_payment`, `created_by`) VALUES (\'Munawer\', \'An\', \'\', \'person\', \'agent\', \'\', \'\', \'\', \'\', \'Pakistan\', \'\', \'\', \'\', \'\', \'\', \'\', \'2024-01-13 10:19:41\', \'\', \'\', \'0\', \'1\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `rise_clients` (`first_name`, `last_name`, `unique_id`, `type`, `account_type`, `address`, `city`, `state`, `zip`, `country`, `phone`, `website`, `vat_number`, `gst_number`, `group_ids`, `labels`, `created_date`, `currency_symbol`, `currency`, `disable_online_payment`, `created_by`) VALUES (\'Munawer\', \'An\', \'\', \'person\', \'agent\', \'\', \'\', \'\', \'\', \'Pakistan\', \'\', \'\', \'\', \'\', \'\', \'\', \'2024-01-13 10:19:41\', \'\', \'\', \'0\', \'1\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `rise_clients` (`first_name`, `last_name`, `unique_id`, `type`, `account_type`, `address`, `city`, `state`, `zip`, `country`, `phone`, `website`, `vat_number`, `gst_number`, `group_ids`, `labels`, `created_date`, `currency_symbol`, `currency`, `disable_online_payment`, `created_by`) VALUES (\'Munawer\', \'An\', \'\', \'person\', \'agent\', \'\', \'\', \'\', \'\', \'Pakistan\', \'\', \'\', \'\', \'\', \'\', \'\', \'2024-01-13 10:19:41\', \'\', \'\', \'0\', \'1\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `rise_clients` (`first_name`, `last_name`, `unique_id`, `type`, `account_type`, `address`, `city`, `state`, `zip`, `country`, `phone`, `website`, `vat_number`, `gst_number`, `group_ids`, `labels`, `created_date`, `currency_symbol`, `currency`, `disable_online_payment`, `created_by`) VALUES (:first_name:, :last_name:, :unique_id:, :type:, :account_type:, :address:, :city:, :state:, :zip:, :country:, :phone:, :website:, :vat_number:, :gst_number:, :group_ids:, :labels:, :created_date:, :currency_symbol:, :currency:, :disable_online_payment:, :created_by:)', [...], false)
+ 5 APPPATH\Models\Crud_model.php(208): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\Migration_clients.php(179): App\Models\Crud_model->ci_save([...], '')
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Migration_clients->save()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Migration_clients))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 05:03:58 --> Cannot use isset() on the result of an expression (you can use "null !== expression" instead)
+in APPPATH\Views\includes\multi_file_uploader.php on line 86.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-01-13 05:04:01 --> Cannot use isset() on the result of an expression (you can use "null !== expression" instead)
+in APPPATH\Views\includes\multi_file_uploader.php on line 86.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-01-13 05:10:52 --> Undefined variable $account_type
+in APPPATH\Views\includes\multi_file_uploader.php on line 28.
+ 1 APPPATH\Views\includes\multi_file_uploader.php(28): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $account_type', 'D:\\projects\\visaalliance-crm\\app\\Views\\includes\\multi_file_uploader.php', 28)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\includes\\multi_file_uploader.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('includes/multi_file_uploader', [], true)
+ 5 APPPATH\Views\students\files\modal_form.php(8): view('includes/multi_file_uploader', [...])
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\students\\files\\modal_form.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('students/files/modal_form', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('students/files/modal_form', [...])
+10 APPPATH\Controllers\Students.php(595): App\Libraries\Template->view('students/files/modal_form', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Students->file_modal_form()
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 06:00:56 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Migration_clients.php on line 299
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Migration_clients.php(299): anchor('http://localhost/visaalliance-crm/index.php/migration_clients/view/1', null)
+ 2 APPPATH\Controllers\Migration_clients.php(244): App\Controllers\Migration_clients->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Migration_clients->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Migration_clients))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 06:12:28 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Migration_clients.php on line 313
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Migration_clients.php(313): anchor('http://localhost/visaalliance-crm/index.php/migration_clients/view/1', null)
+ 2 APPPATH\Controllers\Migration_clients.php(258): App\Controllers\Migration_clients->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Migration_clients->list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Migration_clients))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 06:30:25 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Migration_clients.php on line 313
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Migration_clients.php(313): anchor('http://localhost/visaalliance-crm/index.php/migration_clients/view/3', null)
+ 2 APPPATH\Controllers\Migration_clients.php(276): App\Controllers\Migration_clients->_make_row(Object(stdClass), [])
+ 3 APPPATH\Controllers\Migration_clients.php(202): App\Controllers\Migration_clients->_row_data(3)
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Migration_clients->save()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Migration_clients))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 06:32:23 --> foreach() argument must be of type array|object, null given
+in APPPATH\Views\migration_clients\client_form_fields.php on line 294.
+ 1 APPPATH\Views\migration_clients\client_form_fields.php(294): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argument must be of type array|object, null given', 'D:\\projects\\visaalliance-crm\\app\\Views\\migration_clients\\client_form_fields.php', 294)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\migration_clients\\client_form_fields.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('migration_clients/client_form_fields', [], true)
+ 5 APPPATH\Views\migration_clients\contacts\company_info_tab.php(12): view('migration_clients/client_form_fields')
+ 6 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\migration_clients\\contacts\\company_info_tab.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('migration_clients/contacts/company_info_tab', [], true)
+ 9 APPPATH\Libraries\Template.php(38): view('migration_clients/contacts/company_info_tab', [...])
+10 APPPATH\Controllers\Migration_clients.php(1010): App\Libraries\Template->view('migration_clients/contacts/company_info_tab', [...])
+11 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Migration_clients->company_info_tab('3')
+12 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Migration_clients))
+13 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 06:56:37 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('organizations/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 07:54:14 --> Undefined variable $client_info
+in APPPATH\Views\organizations\files\modal_form.php on line 6.
+ 1 APPPATH\Views\organizations\files\modal_form.php(6): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $client_info', 'D:\\projects\\visaalliance-crm\\app\\Views\\organizations\\files\\modal_form.php', 6)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\organizations\\files\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('organizations/files/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(38): view('organizations/files/modal_form', [...])
+ 6 APPPATH\Controllers\Organizations.php(586): App\Libraries\Template->view('organizations/files/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Organizations->file_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Organizations))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 08:51:46 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Partners.php on line 321
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Partners.php(321): anchor('http://localhost/visaalliance-crm/index.php/partners/view/6', null)
+ 2 APPPATH\Controllers\Partners.php(284): App\Controllers\Partners->_make_row(Object(stdClass), [])
+ 3 APPPATH\Controllers\Partners.php(210): App\Controllers\Partners->_row_data(6)
+ 4 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Partners->save()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Partners))
+ 6 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-01-13 08:54:14 --> anchor(): Argument #2 ($title) must be of type string, null given, called in D:\projects\visaalliance-crm\app\Controllers\Check_in.php on line 348
+in SYSTEMPATH\Helpers\url_helper.php on line 258.
+ 1 APPPATH\Controllers\Check_in.php(348): anchor('http://localhost/visaalliance-crm/index.php/check_in/view/1', null)
+ 2 APPPATH\Controllers\Check_in.php(293): App\Controllers\Check_in->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->waiting_list_data()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

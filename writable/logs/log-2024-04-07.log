@@ -1,0 +1,100 @@
+CRITICAL - 2024-04-07 06:31:35 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/project_payment_schedule_setup_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-07 06:34:20 --> date_format(): Argument #1 ($object) must be of type DateTimeInterface, string given
+in APPPATH\Views\projects\project_partners_revenue_overview.php on line 38.
+ 1 APPPATH\Views\projects\project_partners_revenue_overview.php(38): date_format('2024-04-16', 'd M Y')
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\project_partners_revenue_overview.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/project_partners_revenue_overview', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('projects/project_partners_revenue_overview', [...])
+ 6 APPPATH\Controllers\Projects.php(4490): App\Libraries\Template->view('projects/project_partners_revenue_overview', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->project_partners_revenue_overview()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-07 06:34:29 --> date_format(): Argument #1 ($object) must be of type DateTimeInterface, string given
+in APPPATH\Views\projects\project_partners_revenue_overview.php on line 38.
+ 1 APPPATH\Views\projects\project_partners_revenue_overview.php(38): date_format('2024-04-16', 'd M Y')
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\project_partners_revenue_overview.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/project_partners_revenue_overview', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('projects/project_partners_revenue_overview', [...])
+ 6 APPPATH\Controllers\Projects.php(4490): App\Libraries\Template->view('projects/project_partners_revenue_overview', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->project_partners_revenue_overview()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-07 09:23:41 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/project_fees_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-07 11:24:03 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/project_fees_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-07 11:55:54 --> Attempt to read property "status" on string
+in APPPATH\Controllers\Projects.php on line 4788.
+ 1 APPPATH\Controllers\Projects.php(4788): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "status" on string', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 4788)
+ 2 APPPATH\Controllers\Projects.php(1597): App\Controllers\Projects->_get_payment_schedule_overview_info('18', [...])
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->overview('18')
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-07 12:46:38 --> Invalid file: "project/history/overview_tabs.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('project/history/overview_tabs.php')
+ 2 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('project/history/overview_tabs', [], true)
+ 3 APPPATH\Views\projects\overview.php(23): view('project/history/overview_tabs')
+ 4 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\overview.php')
+ 5 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/overview', [], true)
+ 7 APPPATH\Libraries\Template.php(42): view('projects/overview', [...])
+ 8 APPPATH\Controllers\Projects.php(1612): App\Libraries\Template->view('projects/overview', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->overview('18')
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+11 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-07 12:46:49 --> Invalid file: "project/history/overview_tabs.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 33.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('project/history/overview_tabs.php')
+ 2 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('project/history/overview_tabs', [], true)
+ 3 APPPATH\Views\projects\overview.php(23): view('project/history/overview_tabs')
+ 4 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\overview.php')
+ 5 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/overview', [], true)
+ 7 APPPATH\Libraries\Template.php(42): view('projects/overview', [...])
+ 8 APPPATH\Controllers\Projects.php(1612): App\Libraries\Template->view('projects/overview', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->overview('18')
+10 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+11 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-07 14:38:24 --> Array to string conversion
+in APPPATH\Controllers\Projects.php on line 2102.
+ 1 APPPATH\Controllers\Projects.php(2102): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 2102)
+ 2 APPPATH\Controllers\Projects.php(4520): App\Controllers\Projects->_make_project_payment_schedule_row(Object(stdClass))
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->project_payment_schedule_list_data('18')
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-07 14:38:36 --> Array to string conversion
+in APPPATH\Controllers\Projects.php on line 2102.
+ 1 APPPATH\Controllers\Projects.php(2102): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 2102)
+ 2 APPPATH\Controllers\Projects.php(4520): App\Controllers\Projects->_make_project_payment_schedule_row(Object(stdClass))
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->project_payment_schedule_list_data('18')
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

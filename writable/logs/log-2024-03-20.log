@@ -1,0 +1,28 @@
+CRITICAL - 2024-03-20 00:16:20 --> Undefined property: stdClass::$first_name
+in APPPATH\Controllers\Security_Controller.php on line 585.
+ 1 APPPATH\Controllers\Security_Controller.php(585): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$first_name', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Security_Controller.php', 585)
+ 2 APPPATH\Controllers\Projects.php(278): App\Controllers\Security_Controller->make_partners_dropdown()
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->modal_form()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-20 00:16:44 --> Undefined property: stdClass::$partner_ids
+in APPPATH\Views\projects\modal_form.php on line 26.
+ 1 APPPATH\Views\projects\modal_form.php(26): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$partner_ids', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\modal_form.php', 26)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('projects/modal_form', [...])
+ 6 APPPATH\Controllers\Projects.php(284): App\Libraries\Template->view('projects/modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-20 01:41:30 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

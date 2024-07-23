@@ -1,0 +1,273 @@
+CRITICAL - 2024-03-05 05:08:36 --> Call to undefined function App\Controllers\get_setting()
+in APPPATH\Controllers\Hellosign_api.php on line 25.
+ 1 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 2 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:09:26 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(25): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:13:07 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(25): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:14:42 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(25): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:18:42 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(26): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:20:40 --> Undefined array key "event"
+in APPPATH\Controllers\Hellosign_api.php on line 22.
+ 1 APPPATH\Controllers\Hellosign_api.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "event"', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Hellosign_api.php', 22)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:21:13 --> Attempt to read property "event" on array
+in APPPATH\Controllers\Hellosign_api.php on line 22.
+ 1 APPPATH\Controllers\Hellosign_api.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "event" on array', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Hellosign_api.php', 22)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:22:12 --> Undefined property: App\Controllers\Hellosign_api::$input
+in APPPATH\Controllers\Hellosign_api.php on line 22.
+ 1 APPPATH\Controllers\Hellosign_api.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\Hellosign_api::$input', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Hellosign_api.php', 22)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:24:59 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(32): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:25:21 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(32): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:26:12 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(32): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:27:14 --> Call to undefined function App\Controllers\get_setting()
+in APPPATH\Controllers\Hellosign_api.php on line 27.
+ 1 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 2 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:27:44 --> Call to undefined function App\Controllers\get_setting()
+in APPPATH\Controllers\Hellosign_api.php on line 28.
+ 1 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 2 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:33:48 --> Too few arguments to function App\Controllers\Hellosign_api::__construct(), 0 passed in D:\projects\visaalliance-crm\system\CodeIgniter.php on line 904 and exactly 1 expected
+in APPPATH\Controllers\Hellosign_api.php on line 14.
+ 1 SYSTEMPATH\CodeIgniter.php(904): App\Controllers\Hellosign_api->__construct()
+ 2 SYSTEMPATH\CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:34:19 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(29): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:43:33 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(29): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:43:46 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(29): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:44:45 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(29): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:45:46 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(29): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:46:10 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(30): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:59:30 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(30): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 05:59:48 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(30): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 06:01:53 --> Dropbox\Sign\Model\EventCallbackRequest::init(): Argument #1 ($data) must be of type array, null given, called in D:\projects\visaalliance-crm\app\Controllers\Hellosign_api.php on line 26
+in FCPATH\vendor\dropbox\sign\src\Model\EventCallbackRequest.php on line 209.
+ 1 APPPATH\Controllers\Hellosign_api.php(26): Dropbox\Sign\Model\EventCallbackRequest::init(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 06:03:06 --> Dropbox\Sign\Model\EventCallbackRequest::init(): Argument #1 ($data) must be of type array, null given, called in D:\projects\visaalliance-crm\app\Controllers\Hellosign_api.php on line 26
+in FCPATH\vendor\dropbox\sign\src\Model\EventCallbackRequest.php on line 209.
+ 1 APPPATH\Controllers\Hellosign_api.php(26): Dropbox\Sign\Model\EventCallbackRequest::init(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 06:03:18 --> Dropbox\Sign\Model\EventCallbackRequest::init(): Argument #1 ($data) must be of type array, string given, called in D:\projects\visaalliance-crm\app\Controllers\Hellosign_api.php on line 26
+in FCPATH\vendor\dropbox\sign\src\Model\EventCallbackRequest.php on line 209.
+ 1 APPPATH\Controllers\Hellosign_api.php(26): Dropbox\Sign\Model\EventCallbackRequest::init('')
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 06:03:32 --> Dropbox\Sign\Model\EventCallbackRequest::init(): Argument #1 ($data) must be of type array, string given, called in D:\projects\visaalliance-crm\app\Controllers\Hellosign_api.php on line 26
+in FCPATH\vendor\dropbox\sign\src\Model\EventCallbackRequest.php on line 209.
+ 1 APPPATH\Controllers\Hellosign_api.php(26): Dropbox\Sign\Model\EventCallbackRequest::init('{
+    "event": {
+        "event_type": "callback_test",
+        "event_time": "1709637186",
+        "event_hash": "68f486d88dc932b45289ee78e225adac87a57eedd2ce50c3d0adc23cc17d224d",
+        "event_metadata": {
+            "related_signature_id": null,
+            "reported_for_account_id": "e41c66df29d619c5fbff04cec9cbcfb45dd5f553",
+            "reported_for_app_id": null,
+            "event_message": null
+        }
+    }
+}')
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 06:04:14 --> Dropbox\Sign\Model\EventCallbackRequest::init(): Argument #1 ($data) must be of type array, null given, called in D:\projects\visaalliance-crm\app\Controllers\Hellosign_api.php on line 26
+in FCPATH\vendor\dropbox\sign\src\Model\EventCallbackRequest.php on line 209.
+ 1 APPPATH\Controllers\Hellosign_api.php(26): Dropbox\Sign\Model\EventCallbackRequest::init(null)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 06:04:47 --> Call to a member function getEventTime() on null
+in FCPATH\vendor\dropbox\sign\src\EventCallbackHelper.php on line 55.
+ 1 APPPATH\Controllers\Hellosign_api.php(29): Dropbox\Sign\EventCallbackHelper::isValid('be4aa9a0106a812efc4f4cfb56d950de5fc09575e1d7bb69b222e08da7d2f321', Object(Dropbox\Sign\Model\EventCallbackRequest))
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 06:16:00 --> Cannot access offset of type string on string
+in APPPATH\Controllers\Hellosign_api.php on line 25.
+ 1 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 2 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 3 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 06:16:17 --> Attempt to read property "event" on string
+in APPPATH\Controllers\Hellosign_api.php on line 25.
+ 1 APPPATH\Controllers\Hellosign_api.php(25): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "event" on string', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Hellosign_api.php', 25)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Hellosign_api->handleHellosign_callback()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Hellosign_api))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 06:22:13 --> Undefined variable $project_id
+in APPPATH\Views\contracts\send_project_contract_modal_form.php on line 4.
+ 1 APPPATH\Views\contracts\send_project_contract_modal_form.php(4): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $project_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\contracts\\send_project_contract_modal_form.php', 4)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\contracts\\send_project_contract_modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('contracts/send_project_contract_modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('contracts/send_project_contract_modal_form', [...])
+ 6 APPPATH\Controllers\Contracts.php(864): App\Libraries\Template->view('contracts/send_project_contract_modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Contracts->send_project_contract_modal_form('11')
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 06:22:22 --> Undefined variable $project_id
+in APPPATH\Views\contracts\send_project_contract_modal_form.php on line 4.
+ 1 APPPATH\Views\contracts\send_project_contract_modal_form.php(4): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $project_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\contracts\\send_project_contract_modal_form.php', 4)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\contracts\\send_project_contract_modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('contracts/send_project_contract_modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('contracts/send_project_contract_modal_form', [...])
+ 6 APPPATH\Controllers\Contracts.php(864): App\Libraries\Template->view('contracts/send_project_contract_modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Contracts->send_project_contract_modal_form('11')
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-03-05 06:23:46 --> Undefined variable $project_id
+in APPPATH\Controllers\Contracts.php on line 972.
+ 1 APPPATH\Controllers\Contracts.php(972): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $project_id', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Contracts.php', 972)
+ 2 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Contracts->send_contract()
+ 3 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+ 4 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-03-05 06:26:18 --> mysqli_sql_exception: Unknown column 'status' in 'field list' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Crud_model.php(258): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Contracts.php(1022): App\Models\Crud_model->ci_save(Array)
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Contracts->send_contract()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-05 06:26:19 --> Unknown column 'status' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `rise_contract_activity_logs` (`status`, `send_to_name`, `send_to`, `contract_id`, `project_id`, `milestone_id`, `created_by`) VALUES (\'sent\', \'Munawer Anwar\', \'munawar@queper.co\', \'2\', \'13\', \'36\', \'1\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `rise_contract_activity_logs` (`status`, `send_to_name`, `send_to`, `contract_id`, `project_id`, `milestone_id`, `created_by`) VALUES (\'sent\', \'Munawer Anwar\', \'munawar@queper.co\', \'2\', \'13\', \'36\', \'1\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `rise_contract_activity_logs` (`status`, `send_to_name`, `send_to`, `contract_id`, `project_id`, `milestone_id`, `created_by`) VALUES (\'sent\', \'Munawer Anwar\', \'munawar@queper.co\', \'2\', \'13\', \'36\', \'1\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `rise_contract_activity_logs` (`status`, `send_to_name`, `send_to`, `contract_id`, `project_id`, `milestone_id`, `created_by`) VALUES (:status:, :send_to_name:, :send_to:, :contract_id:, :project_id:, :milestone_id:, :created_by:)', [...], false)
+ 5 APPPATH\Models\Crud_model.php(258): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\Contracts.php(1022): App\Models\Crud_model->ci_save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Contracts->send_contract()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contracts))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

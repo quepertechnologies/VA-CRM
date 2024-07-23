@@ -1,0 +1,19 @@
+[
+  {
+    "id": 1,
+    "title": "Student Admission",
+    "doc_check_list": true
+  },
+  {
+    "id": 2,
+    "title": "PTE/IELTS Course Application"
+  },
+  {
+    "id": 3,
+    "title": "Course Completion"
+  },
+  {
+    "id": 4,
+    "title": "Apply for Offer letter"
+  }
+]

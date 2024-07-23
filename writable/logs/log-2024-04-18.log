@@ -1,0 +1,52 @@
+CRITICAL - 2024-04-18 01:42:08 --> Undefined variable $1
+in APPPATH\Controllers\Projects.php on line 4987.
+ 1 APPPATH\Controllers\Projects.php(4987): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $1', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 4987)
+ 2 APPPATH\Controllers\Projects.php(4824): App\Controllers\Projects->_handle_auto_payment_schedule('18')
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save_project_fees()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-18 01:42:19 --> Undefined variable $1
+in APPPATH\Controllers\Projects.php on line 4987.
+ 1 APPPATH\Controllers\Projects.php(4987): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $1', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 4987)
+ 2 APPPATH\Controllers\Projects.php(4824): App\Controllers\Projects->_handle_auto_payment_schedule('18')
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save_project_fees()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-18 01:55:03 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/schedule_modal_form', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-18 03:27:52 --> Undefined property: stdClass::$doc_check_list_id
+in APPPATH\Views\projects\files\checklist_modal_form.php on line 12.
+ 1 APPPATH\Views\projects\files\checklist_modal_form.php(12): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$doc_check_list_id', 'D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\checklist_modal_form.php', 12)
+ 2 SYSTEMPATH\View\View.php(224): include('D:\\projects\\visaalliance-crm\\app\\Views\\projects\\files\\checklist_modal_form.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('projects/files/checklist_modal_form', [], true)
+ 5 APPPATH\Libraries\Template.php(42): view('projects/files/checklist_modal_form', [...])
+ 6 APPPATH\Controllers\Projects.php(3468): App\Libraries\Template->view('projects/files/checklist_modal_form', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->checklist_modal_form()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-18 03:56:14 --> The action you requested is not allowed.
+in SYSTEMPATH\Security\Security.php on line 306.
+ 1 SYSTEMPATH\Security\Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH\Filters\CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH\Filters\Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH\CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/save_doc_checklist', 'before')
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-04-18 03:56:54 --> Undefined variable $doc_check_list
+in APPPATH\Controllers\Projects.php on line 5257.
+ 1 APPPATH\Controllers\Projects.php(5257): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $doc_check_list', 'D:\\projects\\visaalliance-crm\\app\\Controllers\\Projects.php', 5257)
+ 2 APPPATH\Controllers\Projects.php(3431): App\Controllers\Projects->_handle_doc_check_list('16', '16')
+ 3 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->save_doc_checklist()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()

@@ -1,0 +1,25 @@
+ERROR - 2024-03-12 21:53:28 --> mysqli_sql_exception: Unknown column 'first_name' in 'field list' in D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 D:\projects\visaalliance-crm\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `ri...', 0)
+#1 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ri...')
+#2 D:\projects\visaalliance-crm\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ri...')
+#3 D:\projects\visaalliance-crm\system\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ri...', Array, false)
+#4 D:\projects\visaalliance-crm\app\Models\Crud_model.php(258): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 D:\projects\visaalliance-crm\app\Controllers\Check_in.php(139): App\Models\Crud_model->ci_save(Array, '')
+#6 D:\projects\visaalliance-crm\system\CodeIgniter.php(932): App\Controllers\Check_in->save()
+#7 D:\projects\visaalliance-crm\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+#8 D:\projects\visaalliance-crm\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 D:\projects\visaalliance-crm\index.php(80): CodeIgniter\CodeIgniter->run()
+#10 {main}
+CRITICAL - 2024-03-12 21:53:28 --> Unknown column 'first_name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `rise_lead_source` (`first_name`, `last_name`, `company_name`, `unique_id`, `email`, `created_date`, `created_by`) VALUES (\'Test\', \'User\', \'\', \'VA-24-65f1152826878\', \'Munaweranwar2@gmail.com\', \'2024-03-13 02:53:28\', \'1\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `rise_lead_source` (`first_name`, `last_name`, `company_name`, `unique_id`, `email`, `created_date`, `created_by`) VALUES (\'Test\', \'User\', \'\', \'VA-24-65f1152826878\', \'Munaweranwar2@gmail.com\', \'2024-03-13 02:53:28\', \'1\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `rise_lead_source` (`first_name`, `last_name`, `company_name`, `unique_id`, `email`, `created_date`, `created_by`) VALUES (\'Test\', \'User\', \'\', \'VA-24-65f1152826878\', \'Munaweranwar2@gmail.com\', \'2024-03-13 02:53:28\', \'1\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2309): CodeIgniter\Database\BaseConnection->query('INSERT INTO `rise_lead_source` (`first_name`, `last_name`, `company_name`, `unique_id`, `email`, `created_date`, `created_by`) VALUES (:first_name:, :last_name:, :company_name:, :unique_id:, :email:, :created_date:, :created_by:)', [...], false)
+ 5 APPPATH\Models\Crud_model.php(258): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\Check_in.php(139): App\Models\Crud_model->ci_save([...], '')
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Check_in->save()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Check_in))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(80): CodeIgniter\CodeIgniter->run()
