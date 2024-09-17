@@ -1,7 +1,7 @@
 <div class="card">
     <div class="table-responsive">
-      <table id="lead-table" class="display" cellspacing="0" width="100%">
-      </table>
+        <table id="lead-table" class="display" cellspacing="0" width="100%">
+        </table>
     </div>
 </div>
 
@@ -19,8 +19,7 @@
             serverSide: true,
             smartFilterIdentity: "all_leads_list", //a to z and _ only. should be unique to avoid conflicts
             ignoreSavedFilter: ignoreSavedFilter,
-            columns: [
-                {
+            columns: [{
                     title: "<?php echo app_lang("lead_contact") ?>",
                     "class": "all",
                     order_by: "first_name"
@@ -56,7 +55,7 @@
                 <?php echo $custom_field_headers; ?>,
                 {
                     title: '<i data-feather="menu" class="icon-16"></i>',
-                    "class": "text-center option w100"
+                    "class": "text-center w100"
                 }
             ],
             filterDropdown: [

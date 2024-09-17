@@ -163,22 +163,74 @@ foreach ($task_statuses as $status) {
                         class: "w200"
                     }
                 ],
-                columns: [
-                    {visible: false, searchable: false},
-                    {title: '<?php echo app_lang("id") ?>', "class": idColumnClass, order_by: "id"},
-                    {title: '<?php echo app_lang("title") ?>', "class": titleColumnClass, order_by: "title"},
-                    {visible: false, searchable: false, order_by: "start_date"},
-                    {title: '<?php echo app_lang("start_date") ?>', "iDataSort": 3, visible: showResponsiveOption, order_by: "start_date"},
-                    {visible: false, searchable: false, order_by: "deadline"},
-                    {title: '<?php echo app_lang("deadline") ?>', "iDataSort": 5, visible: showResponsiveOption, order_by: "deadline"},
-                    {title: '<?php echo app_lang("milestone") ?>', visible: showResponsiveOption, order_by: "milestone"},
-                    {visible: false, searchable: false},
-                    {title: '<?php echo app_lang("assigned_to") ?>', "class": "min-w150", visible: showResponsiveOption, order_by: "assigned_to"},
-                    {title: '<?php echo app_lang("collaborators") ?>', visible: showResponsiveOption},
-                    {title: '<?php echo app_lang("status") ?>', visible: showResponsiveOption, order_by: "status"}
-                    <?php echo $custom_field_headers; ?>,
-                    {title: '<i data-feather="menu" class="icon-16"></i>', visible: optionVisibility, "class": "text-center option " + optionColumnClass}
-                ],
+                columns: [{
+                    visible: false,
+                    searchable: false
+                },
+                {
+                    title: '<?php echo app_lang("id") ?>',
+                    "class": idColumnClass,
+                    order_by: "id"
+                },
+                {
+                    title: '<?php echo app_lang("title") ?>',
+                    class: "w300",
+                    order_by: "title"
+                },
+                {
+                    visible: false,
+                    searchable: false,
+                    order_by: "deadline"
+                },
+                {
+                    title: '<?php echo app_lang("deadline") ?>',
+                    "iDataSort": 3,
+                    //visible: showOption,
+                    order_by: "deadline"
+                },
+                // {
+                //     visible: false,
+                //     searchable: false,
+                //     order_by: "deadline"
+                // },
+                // {
+                //     title: '<?php echo app_lang("deadline") ?>',
+                //     "iDataSort": 5,
+                //     visible: showOption,
+                //     order_by: "deadline"
+                // },
+                // {
+                //     title: '<?php echo app_lang("milestone") ?>',
+                //     visible: showOption,
+                //     order_by: "milestone"
+                // },
+                // {
+                //     title: '<?php echo app_lang("related_to") ?>',
+                //     visible: showOption
+                // },
+                {
+                    title: '<?php echo app_lang("created_by") ?>',
+                },
+                {
+                    title: '<?php echo app_lang("assigned_to") ?>',
+                    "class": "min-w150",
+                    // visible: showOption,
+                    order_by: "assigned_to"
+                },
+                {
+                    title: '<?php echo app_lang("collaborators") ?>',
+                    //visible: showOption
+                },
+                {
+                    title: '<?php echo app_lang("status") ?>',
+                    order_by: "status"
+                }
+                <?php echo $custom_field_headers; ?>,
+                {
+                    title: '<i data-feather="menu" class="icon-16"></i>',
+                    "class": "text-center option "
+                }
+            ],
                 printColumns: combineCustomFieldsColumns([1, 2, 4, 6, 7, 9, 10, 12], '<?php echo $custom_field_headers; ?>'),
                 xlsColumns: combineCustomFieldsColumns([1, 2, 4, 6, 8, 9, 10], '<?php echo $custom_field_headers; ?>'),
                 rowCallback: tasksTableRowCallback, //load this function from the task_table_common_script.php 

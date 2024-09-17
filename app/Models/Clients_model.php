@@ -13,10 +13,11 @@ class Clients_model extends Crud_model
         parent::__construct($this->table);
     }
 
-    function get_details($options = array())
+    function get_details($options = array(), $return_only_ids = false)
     {
         $clients_table = $this->db->prefixTable('clients');
         $projects_table = $this->db->prefixTable('projects');
+        $visas_table = $this->db->prefixTable('visa_types');
         $users_table = $this->db->prefixTable('users');
         $invoices_table = $this->db->prefixTable('invoices');
         $invoice_payments_table = $this->db->prefixTable('invoice_payments');
@@ -29,6 +30,12 @@ class Clients_model extends Crud_model
         $proposals_table = $this->db->prefixTable('proposals');
 
         $where = "";
+        $deleted_where = " WHERE $clients_table.deleted=0";
+        $deleted = $this->_get_clean_value($options, "deleted");
+        if ($deleted) {
+            $deleted_where = " WHERE $clients_table.deleted=$deleted";
+        }
+
         $id = $this->_get_clean_value($options, "id");
         if ($id) {
             $where .= " AND $clients_table.id=$id";
@@ -43,7 +50,13 @@ class Clients_model extends Crud_model
 
         $email = $this->_get_clean_value($options, "email");
         if ($email) {
+            $email = $this->db->escapeString($email);
             $where .= " AND $clients_table.email='$email'";
+        }
+
+        $visa_type = $this->_get_clean_value($options, "visa_type");
+        if ($visa_type) {
+            $where .= " AND $clients_table.visa_type='$visa_type'";
         }
 
         $status = $this->_get_clean_value($options, "status");
@@ -71,6 +84,16 @@ class Clients_model extends Crud_model
             $where .= " AND $clients_table.partner_type='$partner_type'";
         }
 
+        $only_partner_types = $this->_get_clean_value($options, "only_partner_types");
+        if ($only_partner_types) {
+            $where .= " AND FIND_IN_SET($clients_table.partner_type, '$only_partner_types')";
+        }
+
+        $partner_id = $this->_get_clean_value($options, "partner_id");
+        if ($partner_id) {
+            $where .= " AND $clients_table.partner_id='$partner_id'";
+        }
+
         $type = $this->_get_clean_value($options, "type");
         if ($type) {
             $where .= " AND $clients_table.type='$type'";
@@ -79,6 +102,11 @@ class Clients_model extends Crud_model
         $account_type = $this->_get_clean_value($options, "account_type");
         if ($account_type) {
             $where .= " AND $clients_table.account_type='$account_type'";
+        }
+
+        $only_account_types = $this->_get_clean_value($options, "only_account_types");
+        if ($only_account_types) {
+            $where .= " AND FIND_IN_SET($clients_table.account_type, '$only_account_types')";
         }
 
         $visa_phase = $this->_get_clean_value($options, "visa_phase");
@@ -118,6 +146,11 @@ class Clients_model extends Crud_model
             $where .= " AND $clients_table.parent_id='$parent_id'";
         }
 
+        $assignee = $this->_get_clean_value($options, "assignee");
+        if ($assignee) {
+            $where .= " AND $clients_table.assignee='$assignee'";
+        }
+
         $doc_check_list_id = $this->_get_clean_value($options, "doc_check_list_id");
         if ($doc_check_list_id) {
             $where .= " AND $clients_table.doc_check_list_id='$doc_check_list_id'";
@@ -128,9 +161,12 @@ class Clients_model extends Crud_model
             $where .= " AND ($clients_table.created_by=$show_own_clients_only_user_id OR $clients_table.owner_id=$show_own_clients_only_user_id)";
         }
 
-        if (!$id && !$leads_only) {
-            //only clients
-            $where .= " AND $clients_table.is_lead=0";
+        $with_leads = $this->_get_clean_value($options, "with_leads");
+        if (!$with_leads) {
+            if (!$id && !$leads_only) {
+                //only clients
+                $where .= " AND $clients_table.is_lead=0";
+            }
         }
 
         $group_id = $this->_get_clean_value($options, "group_id");
@@ -155,6 +191,41 @@ class Clients_model extends Crud_model
         $label_id = $this->_get_clean_value($options, "label_id");
         if ($label_id) {
             $where .= " AND (FIND_IN_SET('$label_id', $clients_table.labels)) ";
+        }
+
+        $expiry = $this->_get_clean_value($options, "expiry");
+        $visa_expiry_start_date = '';
+        $visa_expiry_end_date = '';
+        if ($expiry) {
+            $now = get_my_local_time("Y-m-d");
+            $where .= " AND $clients_table.visa_expiry IS NOT NULL AND $clients_table.visa_expiry != ''";
+            $visa_expiry_start_date = $now;
+            if ($expiry === "expired") {
+                $where .= " AND DATE($clients_table.visa_expiry) < STR_TO_DATE('$now', '%Y-%m-%d')";
+            } elseif ($expiry == 'today') {
+                $visa_expiry_end_date = $now;
+            } elseif ($expiry == 'tomorrow') {
+                $visa_expiry_start_date = date_create($now)->modify("+1 days")->format('Y-m-d');
+                $visa_expiry_end_date = date_create($now)->modify("+1 days")->format('Y-m-d');
+            } elseif ($expiry == 'in_thirty_days') {
+                $visa_expiry_end_date = date_create($now)->modify("+30 days")->format('Y-m-d');
+            } elseif ($expiry == 'in_sixty_days') {
+                $visa_expiry_end_date = date_create($now)->modify("+60 days")->format('Y-m-d');
+            } else {
+                $visa_expiry_end_date = $expiry;
+                // $where .= " AND DATE($clients_table.visa_expiry) <= STR_TO_DATE('$expiry', '%Y-%m-%d')";
+            }
+        }
+
+        // var_dump($expiry,$visa_expiry_start_date,$visa_expiry_end_date);exit();
+
+        if ($this->_get_clean_value($options, "visa_expiry_start_date") && $this->_get_clean_value($options, "visa_expiry_end_date")) {
+            $visa_expiry_start_date = $this->_get_clean_value($options, "visa_expiry_start_date");
+            $visa_expiry_end_date = $this->_get_clean_value($options, "visa_expiry_end_date");
+        }
+
+        if ($visa_expiry_start_date && $visa_expiry_end_date) {
+            $where .= " AND DATE($clients_table.visa_expiry)>= STR_TO_DATE('$visa_expiry_start_date', '%Y-%m-%d') AND DATE($clients_table.visa_expiry)<= STR_TO_DATE('$visa_expiry_end_date', '%Y-%m-%d')";
         }
 
         $select_labels_data_query = $this->get_labels_data_query();
@@ -183,12 +254,15 @@ class Clients_model extends Crud_model
         $available_order_by_list = array(
             "id" => $clients_table . ".id",
             "company_name" => $clients_table . ".company_name",
+            "full_name" => "CONCAT(" . $clients_table . ".first_name, ' ', " . $clients_table . ".last_name)",
             "created_date" => $clients_table . ".created_date",
             "primary_contact" => $users_table . ".first_name",
+            "unique_id" => $clients_table . ".unique_id",
             "status" => "lead_status_title",
             "owner_name" => "owner_details.owner_name",
             "primary_contact" => "primary_contact",
-            "client_groups" => "client_groups"
+            "client_groups" => "client_groups",
+            "visa_expiry" => "STR_TO_DATE(" . $clients_table . ".visa_expiry, '%Y-%m-%d')"
         );
 
         $order_by = get_array_value($available_order_by_list, $this->_get_clean_value($options, "order_by"));
@@ -200,7 +274,6 @@ class Clients_model extends Crud_model
             $order = " ORDER BY $order_by $order_dir ";
         }
 
-
         $search_by = get_array_value($options, "search_by");
         if ($search_by) {
             $search_by = $this->db->escapeLikeString($search_by);
@@ -209,6 +282,11 @@ class Clients_model extends Crud_model
             $where .= " AND (";
             $where .= " $clients_table.id LIKE '%$search_by%' ESCAPE '!' ";
             $where .= " OR $clients_table.company_name LIKE '%$search_by%' ESCAPE '!' ";
+            $where .= " OR $clients_table.first_name LIKE '%$search_by%' ESCAPE '!' ";
+            $where .= " OR $clients_table.last_name LIKE '%$search_by%' ESCAPE '!' ";
+            $where .= " OR $clients_table.email LIKE '%$search_by%' ESCAPE '!' ";
+            $where .= " OR $clients_table.unique_id LIKE '%$search_by%' ESCAPE '!' ";
+            $where .= " OR CONCAT($clients_table.first_name, ' ', $clients_table.last_name) LIKE '%$search_by%' ESCAPE '!' ";
             $where .= " OR CONCAT($users_table.first_name, ' ', $users_table.last_name) LIKE '%$search_by%' ESCAPE '!' ";
             $where .= " OR (SELECT GROUP_CONCAT($labels_table.title, ', ') FROM $labels_table WHERE FIND_IN_SET($labels_table.id, $clients_table.labels)) LIKE '%$search_by%' ESCAPE '!' ";
 
@@ -241,7 +319,7 @@ class Clients_model extends Crud_model
         LEFT JOIN $lead_status_table ON $clients_table.lead_status_id = $lead_status_table.id 
         LEFT JOIN (SELECT $users_table.id, CONCAT($users_table.first_name, ' ', $users_table.last_name) AS owner_name, $users_table.image AS owner_avatar FROM $users_table WHERE $users_table.deleted=0 AND $users_table.user_type='staff') AS owner_details ON owner_details.id=$clients_table.owner_id
         $join_custom_fieds               
-        WHERE $clients_table.deleted=0 $where $custom_fields_where  
+        $deleted_where $where $custom_fields_where  
         $order $limit_offset";
 
         $raw_query = $this->db->query($sql);
@@ -265,7 +343,31 @@ class Clients_model extends Crud_model
                 );
             }
         } else {
+            if ($return_only_ids) {
+                $data_info = $raw_query->getResult();
+                $ids = array();
+                foreach ($data_info as $info) {
+                    $ids[] = $info->id;
+                }
+                return $ids;
+            }
             return $raw_query;
+        }
+    }
+
+    function is_email_exists($email = '')
+    {
+        $clients_table = $this->db->prefixTable('clients');
+
+        $sql = "SELECT $clients_table.* FROM $clients_table   
+        WHERE $clients_table.deleted=0 AND $clients_table.email='$email' ";
+
+        $result = $this->db->query($sql);
+
+        if ($result->resultID->num_rows && $result->getRow()->id > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -348,6 +450,31 @@ class Clients_model extends Crud_model
         }
     }
 
+    function get_by_full_name($full_name = "", $account_type = 0, $info = false)
+    {
+        $clients_table = $this->db->prefixTable('clients');
+
+        $where = "";
+
+        if ($account_type) {
+            $where .= " AND $clients_table.account_type = '$account_type'";
+        }
+
+        $full_name = $this->db->escapeString($full_name);
+
+        $sql = "SELECT $clients_table.*
+        FROM $clients_table
+        WHERE $clients_table.deleted=0 AND CONCAT($clients_table.first_name, ' ', $clients_table.last_name) = '$full_name' $where";
+        $result = $this->db->query($sql);
+        if ($result->resultID->num_rows) {
+            if ($info) {
+                return $result->getRow();
+            } else {
+                return $result->getRow()->id;
+            }
+        }
+    }
+
     function add_remove_star($client_id, $user_id, $type = "add")
     {
         $clients_table = $this->db->prefixTable('clients');
@@ -403,11 +530,11 @@ class Clients_model extends Crud_model
         $delete_projects_sql = "UPDATE $projects_table SET $projects_table.deleted=1 WHERE $projects_table.client_id=$client_id; ";
         $this->db->query($delete_projects_sql);
 
-        //delete the project files from directory
-        $file_path = get_general_file_path("client", $client_id);
-        foreach ($client_files as $file) {
-            delete_app_files($file_path, array(make_array_of_file($file)));
-        }
+        // //delete the project files from directory
+        // $file_path = get_general_file_path("client", $client_id);
+        // foreach ($client_files as $file) {
+        //     delete_app_files($file_path, array(make_array_of_file($file)));
+        // }
 
         return true;
     }
@@ -492,6 +619,7 @@ class Clients_model extends Crud_model
     function get_search_suggestion($search = "", $options = array())
     {
         $clients_table = $this->db->prefixTable('clients');
+        $locations_table = $this->db->prefixTable('location');
 
         $where = "";
         $show_own_clients_only_user_id = $this->_get_clean_value($options, "show_own_clients_only_user_id");
@@ -506,10 +634,11 @@ class Clients_model extends Crud_model
         $client_groups = $this->_get_clean_value($options, "client_groups");
         $where .= $this->prepare_allowed_client_groups_query($clients_table, $client_groups);
 
-        $sql = "SELECT $clients_table.id, $clients_table.company_name AS title
-        FROM $clients_table  
-        WHERE $clients_table.deleted=0 AND $clients_table.is_lead=0 AND ($clients_table.company_name LIKE '%$search%' ESCAPE '!' OR $clients_table.first_name LIKE '%$search%' ESCAPE '!' OR $clients_table.last_name LIKE '%$search%' ESCAPE '!') $where
-        ORDER BY $clients_table.company_name ASC
+        $sql = "SELECT $clients_table.id, $clients_table.company_name AS company_name, $clients_table.first_name, $clients_table.last_name, $clients_table.account_type, $clients_table.email, $clients_table.partner_type, $clients_table.phone, $clients_table.phone_code, $clients_table.unique_id, $clients_table.location_id, $clients_table.deleted, $locations_table.title AS location_label, $clients_table.is_lead, $clients_table.lead_status_id
+        FROM $clients_table
+        LEFT JOIN $locations_table ON $locations_table.id=$clients_table.location_id
+        WHERE ($clients_table.unique_id LIKE '%$search%' ESCAPE '!' OR CONCAT('#', $clients_table.id) LIKE '%$search%' ESCAPE '!' OR $clients_table.company_name LIKE '%$search%' ESCAPE '!' OR $clients_table.first_name LIKE '%$search%' ESCAPE '!' OR $clients_table.last_name LIKE '%$search%' ESCAPE '!' OR $clients_table.email LIKE '%$search%' ESCAPE '!' OR CONCAT($clients_table.first_name, ' ',$clients_table.last_name) LIKE '%$search%' ESCAPE '!' OR $clients_table.phone LIKE '%$search%' ESCAPE '!' OR $clients_table.phone_code LIKE '%$search%' ESCAPE '!' OR CONCAT($clients_table.phone_code, $clients_table.phone) LIKE '%$search%' ESCAPE '!') $where
+        ORDER BY $clients_table.id DESC
         LIMIT 0, 10";
 
         return $this->db->query($sql);
@@ -624,6 +753,11 @@ class Clients_model extends Crud_model
         $show_own_leads_only_user_id = $this->_get_clean_value($options, "show_own_leads_only_user_id");
         if ($show_own_leads_only_user_id) {
             $where .= " AND ($clients_table.owner_id=$show_own_leads_only_user_id)";
+        }
+
+        $location_ids = $this->_get_clean_value($options, "location_ids");
+        if ($location_ids) {
+            $where .= " AND $clients_table.location_id IN ($location_ids)";
         }
 
         $converted_to_client = "SELECT COUNT($clients_table.id) AS total

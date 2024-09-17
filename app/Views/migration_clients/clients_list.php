@@ -53,8 +53,38 @@
                     class: "w200",
                     options: <?php echo $labels_dropdown; ?>
                 },
+                {
+                    name: "visa_type",
+                    class: "w200",
+                    options: <?php echo $visa_types; ?>
+                },
                 <?php echo $custom_field_filters; ?>
             ],
+            singleDatepicker: [{
+                name: "expiry",
+                defaultText: "<?php echo app_lang('visa_expiry') ?>",
+                options: [{
+                        value: "expired",
+                        text: "<?php echo app_lang('expired') ?>"
+                    },
+                    {
+                        value: 'today',
+                        text: "<?php echo app_lang('expiring') . ' ' . app_lang('today') ?>"
+                    },
+                    {
+                        value: 'tomorrow',
+                        text: "<?php echo app_lang('expiring') . ' ' . app_lang('tomorrow') ?>"
+                    },
+                    {
+                        value: 'in_thirty_days',
+                        text: "<?php echo sprintf(app_lang('in_number_of_days'), 30); ?>"
+                    },
+                    {
+                        value: 'in_sixty_days',
+                        text: "<?php echo sprintf(app_lang('in_number_of_days'), 60); ?>"
+                    }
+                ]
+            }],
             columns: [{
                     title: "<?php echo app_lang("id") ?>",
                     "class": "text-center w50 all",
@@ -63,7 +93,10 @@
                 {
                     title: "<?php echo app_lang("name") ?>",
                     "class": "all",
-                    order_by: "first_name"
+                    order_by: "full_name"
+                },
+                {
+                    title: "<?php echo app_lang("visa") ?>",
                 },
                 {
                     title: "<?php echo app_lang("created_at") ?>",

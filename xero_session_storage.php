@@ -18,11 +18,11 @@ class XEROSessionStorage
         return array_key_exists('xero_oauth2', $_SESSION) ? $_SESSION['xero_oauth2'] : null;
     }
 
-    public function setToken($token, $expires = null, $tenantId, $refreshToken, $idToken)
+    public function setToken($token, $expires, $tenantId, $refreshToken, $idToken)
     {
         $_SESSION['xero_oauth2'] = [
             'token' => $token,
-            'expires' => $expires,
+            'expires' => $expires ? $expires : null,
             'tenant_id' => $tenantId,
             'refresh_token' => $refreshToken,
             'id_token' => $idToken

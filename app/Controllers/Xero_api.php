@@ -74,6 +74,8 @@ class Xero_api extends Security_Controller
             ->setBody(array('status' => 'success'));
     }
 
+    function invoice_callback() {}
+
     function create_invoice()
     {
         $invoice_id = $this->request->getPost('invoice_id');
@@ -82,25 +84,65 @@ class Xero_api extends Security_Controller
         validate_numeric_value($invoice_id);
 
         $invoice = $this->Invoices_model->get_one($invoice_id);
+        $default_tax = $this->Taxes_model->get_details(array('is_default' => 1))->getRow();
 
         if ($invoice) {
             if ($invoice->xero_invoice_id) {
                 echo json_encode(array('success' => true, 'message' => "This Invoice is already created on XERO"));
+                exit();
             }
             $invoice_options = array('invoice_id' => $invoice_id);
             $invoice_items = $this->Invoice_items_model->get_details($invoice_options)->getResult();
 
-            $xero_contact_id = $this->_xero_contact_id($invoice->client_id);
+            if ($invoice->invoice_type == 'gross_claim' || $invoice->invoice_type == 'net_claim') {
+                $institute_options = array(
+                    'project_id' => $invoice->project_id,
+                    'partner_type' => 'institute'
+                );
+                $institute = $this->Project_partners_model->get_details($institute_options)->getRow();
+                if ($institute) {
+                    $xero_contact_id = $this->_xero_contact_id($institute->partner_id);
+                } else {
+                    echo json_encode(array('success' => false, 'message' => "No institute partner is attached with this application invoice. Please check the application info & make sure to attach the institute partner to send the Gross Claim invoice"));
+                }
+            } else {
+                $xero_contact_id = $this->_xero_contact_id($invoice->client_id);
+            }
 
             $contact = new \XeroAPI\XeroPHP\Models\Accounting\Contact;
             $contact->setContactID($xero_contact_id);
 
             $lineItems = [];
+            $total_tax = 0;
+            $total_discount = 0;
+            $total_amount = 0;
             foreach ($invoice_items as $invoice_item) {
                 $lineItem = new \XeroAPI\XeroPHP\Models\Accounting\LineItem;
-                $lineItem->setDescription($invoice_item->title);
+
+                $lineItemItem = new \XeroAPI\XeroPHP\Models\Accounting\LineItemItem;
+                $lineItemItem->setName((strlen($invoice_item->title) > 50) ? substr($invoice_item->title, 0, 47) . '...' : $invoice_item->title);
+                $lineItemItem->setCode($invoice_item->item_id ? $invoice_item->item_id : uniqid('VA-ITM-'));
+
+                $lineItem->setItem($lineItemItem);
+                $lineItem->setDescription($invoice_item->description ? $invoice_item->description : "-");
                 $lineItem->setQuantity((float)$invoice_item->quantity);
-                $lineItem->setUnitAmount((float)$invoice_item->rate);
+                $unit_amount = 0;
+                if ($invoice->invoice_type == 'gross_claim') {
+                    $commission = (float)calc_per((float)$invoice_item->rate, (float)$invoice_item->commission);
+
+                    $unit_amount = $commission;
+                    $lineItem->setUnitAmount($commission);
+                } else {
+                    $unit_amount = (float)$invoice_item->rate;
+                    $lineItem->setUnitAmount($unit_amount);
+                }
+
+                if ($invoice_item->taxable && $default_tax) {
+                    $unit_tax = calc_per($unit_amount, $default_tax->percentage);
+                    $total_tax += $unit_tax;
+                    $lineItem->setTaxAmount($unit_tax);
+                }
+                $total_amount += $unit_amount;
                 $lineItem->setAccountCode($xero_account_id);
                 array_push($lineItems, $lineItem);
             }
@@ -109,15 +151,27 @@ class Xero_api extends Security_Controller
                 $lineItems = null;
             }
 
+            if ($invoice->discount_amount) {
+                if ($invoice->discount_amount_type == 'fixed_amount') {
+                    $total_discount = $invoice->discount_amount;
+                } else {
+                    $total_discount = calc_per($total_amount, $invoice->discount_amount);
+                }
+            }
+
             $dateValue = $invoice->bill_date;
             $dueDateValue = $invoice->due_date;
+
             $_invoice = new \XeroAPI\XeroPHP\Models\Accounting\Invoice;
             $_invoice->setType(\XeroAPI\XeroPHP\Models\Accounting\Invoice::TYPE_ACCREC);
             $_invoice->setContact($contact);
             $_invoice->setDate($dateValue);
             $_invoice->setDueDate($dueDateValue);
             $_invoice->setLineItems($lineItems);
-            $_invoice->setReference($invoice->note);
+            $_invoice->setTotalTax($total_tax);
+            $_invoice->setIsDiscounted($total_discount > 0 ? true : false);
+            $_invoice->setTotalDiscount($total_discount);
+            $_invoice->setReference(html_decode($invoice->note));
             $_invoice->setStatus(\XeroAPI\XeroPHP\Models\Accounting\Invoice::STATUS_DRAFT);
 
             $invoices = new \XeroAPI\XeroPHP\Models\Accounting\Invoices;
@@ -127,8 +181,12 @@ class Xero_api extends Security_Controller
 
             $xero_invoice_id = $this->_xero_create_invoice($invoices);
 
-            $invoice_data = array('xero_invoice_id' => $xero_invoice_id);
-            $this->Invoices_model->ci_save($invoice_data, $invoice_id);
+            if ($xero_invoice_id) {
+                $invoice_data = array('xero_invoice_id' => $xero_invoice_id);
+                $this->Invoices_model->ci_save($invoice_data, $invoice_id);
+
+                $this->_handle_income_sharing($invoice_id, $invoice->project_id);
+            }
         }
 
         echo json_encode(array('success' => true, 'message' => "XERO Invoice created Successfully"));
@@ -204,7 +262,8 @@ class Xero_api extends Security_Controller
                 return null;
             }
         } catch (\Exception $e) {
-            echo $e->getMessage(), PHP_EOL;
+            // echo $e->getMessage(), PHP_EOL;
+            return null;
         }
     }
 
@@ -218,7 +277,7 @@ class Xero_api extends Security_Controller
             $storage = new XEROSessionStorage();
             $xero_api = $this->_xero_finance_api($storage->getAccessToken());
             $xeroTenantId = $storage->getXeroTenantId();
-            $where = 'Name=="' . "VA" . $client->id . " " . $this->get_client_full_name(0, $client) . '"';
+            $where = 'Name=="' . $this->get_client_full_name(0, $client) . " " . "VA" . $client->id . '"';
 
             try {
                 $result = $xero_api->getContacts($xeroTenantId, null, $where, null);
@@ -231,7 +290,7 @@ class Xero_api extends Security_Controller
             }
 
             $contact = new \XeroAPI\XeroPHP\Models\Accounting\Contact;
-            $contact->setName("VA" . $client->id . " " . $this->get_client_full_name(0, $client))
+            $contact->setName($this->get_client_full_name(0, $client) . " " . "VA" . $client->id)
                 ->setFirstName($client->first_name)
                 ->setLastName($client->last_name)
                 ->setEmailAddress($client->email);
@@ -305,6 +364,45 @@ class Xero_api extends Security_Controller
         );
 
         return $apiInstance;
+    }
+
+    private function _handle_income_sharing($invoice_id = 0, $project_id = 0)
+    {
+        $income_sharing = $this->Invoice_incomes_model->get_details(array('invoice_id' => $invoice_id))->getResult();
+        if ($income_sharing && count($income_sharing)) {
+            foreach ($income_sharing as $_income_sharing) {
+                $this->Invoice_incomes_model->delete($_income_sharing->id);
+            }
+        }
+
+        $income_sharing_partners = $this->Project_partners_model->get_details(array('project_id' => $project_id, 'only_partner_types' => 'subagent,referral'))->getResult();
+        if (count($income_sharing_partners)) {
+            $invoice_meta_info = $this->Invoices_model->get_invoice_total_meta($invoice_id);
+            $net_total_income = $invoice_meta_info->net_total_income; // net income after discount deduction
+            foreach ($income_sharing_partners as $partner) {
+
+                $shared_income = calc_per($net_total_income, $partner->commission);
+
+                
+                $tax = 0;
+                // if ($partner->partner_type == 'subagent') { // GST tax will only be given to subagents
+                //     $default_tax_info = $this->Taxes_model->get_details(array('is_default' => true))->getRow();
+                //     $tax = calc_per($shared_income, $default_tax_info->percentage);
+                // }
+
+                $income_sharing_data = array(
+                    'invoice_id' => $invoice_id,
+                    'partner_id' => $partner->partner_id,
+                    'commission' => $partner->commission,
+                    'amount' => $shared_income,
+                    'tax' => $tax,
+                    'status' => 'not_initiated',
+                    'created_date' => get_current_utc_time()
+                );
+
+                $this->Invoice_incomes_model->ci_save($income_sharing_data);
+            }
+        }
     }
 }
 

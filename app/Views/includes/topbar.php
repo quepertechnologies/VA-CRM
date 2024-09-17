@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand fixed-top navbar-light navbar-custom shadow-sm" role="navigation" id="default-navbar">
     <div class="container-fluid">
         <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto mb-lg-0">
+            <ul class="navbar-nav mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link sidebar-toggle-btn" aria-current="page" href="#">
                         <i data-feather="menu" class="icon"></i>
@@ -41,18 +41,22 @@
                 ?>
             </ul>
 
+            <ul class="navbar-nav me-auto ms-auto mb-lg-0" style="width: 40%;">
+                <?php
+                if ($login_user->user_type == "staff") {
+                    load_js(array("assets/js/awesomplete/awesomplete.min.js"));
+                ?>
+                    <li class="nav-item d-sm-none" title="<?php echo app_lang('search') . ' (/)'; ?>">
+                        <?php echo modal_anchor(get_uri("search/search_modal_form"), "<i data-feather='search' class='icon'></i>", array("class" => "nav-link", "data-modal-title" => app_lang('search') . ' (/)', "data-post-hide-header" => true, "data-modal-close" => "1", "id" => "global-search-btn")); ?>
+                    </li>
+                    <li class="nav-item hidden-sm" style="width: 100%;" title="<?php echo app_lang('search') . ' (/)'; ?>">
+                        <?php echo view("search/inline_search_bar"); ?>
+                    </li>
+                <?php } ?>
+            </ul>
+
             <div class="d-flex w-auto">
                 <ul class="navbar-nav">
-
-                    <?php
-                    if ($login_user->user_type == "staff") {
-                        load_js(array("assets/js/awesomplete/awesomplete.min.js"));
-                    ?>
-                        <li class="nav-item hidden-sm" title="<?php echo app_lang('search') . ' (/)'; ?>">
-                            <?php echo modal_anchor(get_uri("search/search_modal_form"), "<i data-feather='search' class='icon'></i>", array("class" => "nav-link", "data-modal-title" => app_lang('search') . ' (/)', "data-post-hide-header" => true, "data-modal-close" => "1", "id" => "global-search-btn")); ?>
-                        </li>
-                    <?php } ?>
-
                     <?php
                     if (!in_array("quick_add", $hidden_topbar_menus)) {
                         echo view("settings/topbar_parts/quick_add");

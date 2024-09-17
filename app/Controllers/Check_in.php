@@ -69,11 +69,19 @@ class Check_in extends Security_Controller
         $view_data['client_info'] = $this->Clients_model->get_one($view_data['model_info']->client_id);
         $view_data["countries_dropdown"] = $this->get_countries_dropdown([]);
         $view_data['account_types_filter_dropdown'] = $this->make_type_dropdown();
+
         // if ($view_data['model_info']->id) {
         //     $user_id = $view_data['model_info']->created_by;
 
         //     $this->access_only_allowed_members($user_id, true);
         // }
+
+        if ($view_data['client_info']->id) {
+            $view_data['selected_client_id'] = $view_data['client_info']->id;
+            $view_data['selected_client_name'] = $this->get_client_full_name(0, $view_data['client_info']);
+            // $view_data['selected_client'] = array($view_data['client_info']->id => ($view_data['client_info']->is_lead ? "Lead: " : "Client: ") . $this->get_client_full_name(0, $view_data['client_info']));
+            $view_data['selected_client'] = array('id' => $view_data['client_info']->id, 'text' => ($view_data['client_info']->is_lead ? "Lead: " : "Client: ") . $this->get_client_full_name(0, $view_data['client_info']));
+        }
 
         if ($user_id) {
             //edit mode. show user's info
@@ -97,11 +105,68 @@ class Check_in extends Security_Controller
         $view_data['field_column'] = "col-md-9";
         $view_data["team_members_dropdown"] = $this->get_team_members_dropdown();
         $view_data['account_types_filter_dropdown'] = $this->make_type_dropdown();
-        // $view_data["clients_dropdown"] = $this->get_clients_dropdown();
+        $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
         $view_data["locations_dropdown"] = $this->make_locations_dropdown('-');
-        $view_data["login_user"] = $this->login_user;
 
         return $this->template->view('check_in/modal_form', $view_data);
+    }
+
+    function get_client_suggestion()
+    {
+        $key = $this->request->getPost("q");
+        $suggestion = array();
+
+        $clients = $this->Clients_model->get_search_suggestion($key)->getResult();
+
+        foreach ($clients as $client) {
+            $suggestion[] = array("id" => $client->id, "text" => ($client->is_lead ? "Lead: " : "Client: ") . $this->get_client_full_name(0, $client));
+        }
+
+        // $suggestion[] = array("id" => "+", "text" => "+ " . app_lang("create_new_item"));
+
+        echo json_encode($suggestion);
+    }
+
+    function public_qr_code_modal_form()
+    {
+        $view_data['locations_dropdown'] = $this->make_locations_dropdown('-', true, '');
+        $view_data['label_column'] = "col-md-3";
+        $view_data['field_column'] = "col-md-9";
+
+        return $this->template->view('check_in/public_qr_code_modal_form', $view_data);
+    }
+
+    function generate_public_qr_code()
+    {
+        $this->validate_submitted_data(array(
+            "location_id" => "numeric|required",
+            'qr_label' => 'required'
+        ));
+
+        $location_id = $this->request->getPost("location_id");
+        $qr_label = $this->request->getPost("qr_label");
+
+        $result = \Endroid\QrCode\Builder\Builder::create()
+            ->writer(new \Endroid\QrCode\Writer\PngWriter())
+            ->writerOptions([])
+            ->data(get_uri('public_forms/check_in/' . $location_id))
+            ->encoding(new \Endroid\QrCode\Encoding\Encoding('UTF-8'))
+            ->errorCorrectionLevel(\Endroid\QrCode\ErrorCorrectionLevel::High)
+            ->size(500)
+            ->margin(10)
+            ->roundBlockSizeMode(\Endroid\QrCode\RoundBlockSizeMode::Margin)
+            ->logoPath(getcwd() . '/files/system/VA_Fav.png')
+            ->logoResizeToWidth(60)
+            ->logoPunchoutBackground(true)
+            ->labelText($qr_label)
+            ->labelFont(new \Endroid\QrCode\Label\Font\NotoSans(20))
+            ->labelAlignment(\Endroid\QrCode\Label\LabelAlignment::Center)
+            ->validateResult(false)
+            ->build();
+
+        $qr_uri = $result->getDataUri();
+
+        echo json_encode(array('success' => true, 'message' => 'Success', 'qr_uri' => $qr_uri));
     }
 
     //show attendance note modal
@@ -124,110 +189,93 @@ class Check_in extends Security_Controller
         $id = $this->request->getPost('id');
 
         $this->validate_submitted_data(array(
-            "first_name" => "required",
-            "last_name" => "required",
-            "email" => "required",
+            "student_onshore" => "required",
+            "checkin_for" => "required",
+            "note" => "required",
         ));
 
         $data = array(
-            'location_id' => $this->request->getPost('location_id') ? $this->request->getPost('location_id') : get_ltm_opl_id(),
-            "first_name" => $this->request->getPost('first_name'),
-            "last_name" => $this->request->getPost('last_name'),
-            "email" => $this->request->getPost('email'),
+            'location_id' => $this->request->getPost('location_id') ? $this->request->getPost('location_id') : get_ltm_opl_id(true),
+            "student_onshore" => $this->request->getPost('student_onshore'),
+            "checkin_for" => $this->request->getPost('checkin_for'),
+            "client_id" => $this->request->getPost('client_id'),
+            "visa_type" => $this->request->getPost('visa_type'),
+            "visa_2" => $this->request->getPost('visa_2'),
+            "visa_expiry" => $this->request->getPost('visa_expiry'),
             "note" => $this->request->getPost('note'),
             "status" => $this->request->getPost('status'),
-            "assignee" => $this->request->getPost('assignee') ? $this->request->getPost('assignee') : 0,
-            'created_date' => get_current_utc_time(),
-            'created_by' => $this->login_user->id,
+            "assignee" => $this->request->getPost('assignee') ? $this->request->getPost('assignee') : $this->login_user->id,
         );
 
+        if ($this->request->getPost('client_id')) {
+            $client_info = $this->Clients_model->get_one($this->request->getPost('client_id'));
+
+            $data['first_name'] = $client_info->first_name;
+            $data['last_name'] = $client_info->last_name;
+            $data['email'] = $client_info->email;
+        } else {
+            $data['first_name'] = $this->request->getPost('first_name');
+            $data['last_name'] = $this->request->getPost('last_name');
+            $data['email'] = $this->request->getPost('email');
+        }
+
+        if (!$id) {
+            $data['created_date'] = get_current_utc_time();
+            $data['created_by'] = $this->login_user->id;
+        }
+
         $save_id = $this->Check_in_model->ci_save($data, $id);
-        if ($save_id == $id) {
-            if ($save_id) {
-                $clientID = $this->Check_in_model->get_one($save_id);
+        if ($save_id) {
+            if ($this->request->getPost('checkin_for') == 'new') {
+                $checkin_info = $this->Check_in_model->get_one($save_id);
                 $client_data = array(
-                    "first_name" => $this->request->getPost('first_name'),
-                    "last_name" => $this->request->getPost('last_name'),
-                    'location_id' => $this->request->getPost('location_id') ? $this->request->getPost('location_id') : 0,
-                    'created_by_location_id' => get_ltm_opl_id(),
-                    "unique_id" => uniqid('VA' . date('-y-')),
+                    "first_name" => $checkin_info->first_name,
+                    "last_name" => $checkin_info->last_name,
+                    "visa_type" => $checkin_info->visa_type,
+                    "visa_2" => $checkin_info->visa_2,
+                    "visa_expiry" => $checkin_info->visa_expiry,
+                    'location_id' => $checkin_info->location_id,
+                    "email" => $checkin_info->email,
                     "type" => 'person',
+                    "account_type" => $this->request->getPost('account_type'),
                     "phone_code" => $this->request->getPost('phone_code'),
                     "phone" => $this->request->getPost('phone'),
-                    "account_type" => $this->request->getPost('account_type'),
-                    "created_date" => get_current_utc_time(),
+                    "date_of_birth" => $this->request->getPost('date_of_birth'),
                     "currency_symbol" => '',
                     "currency" => '',
                     "disable_online_payment" => 0,
-                    "created_by" => $this->login_user->id,
-                    'is_lead' => 1,
-                    'current_lead_status' => 'check_in',
                 );
+
                 $client_data = clean_data($client_data);
-                if ($clientID) {
-                    $client_id = $this->Clients_model->ci_save($client_data, $clientID->client_id);
+                $save_client_id = 0;
+                if ($checkin_info && $checkin_info->client_id) {
+                    $this->Clients_model->ci_save($client_data, $checkin_info->client_id);
                 } else {
-                    $client_id = $this->Clients_model->ci_save($client_data);
+                    $client_data['created_by'] = $this->login_user->id;
+                    $client_data['created_date'] = get_current_utc_time();
+                    $client_data['created_by_location_id'] = get_ltm_opl_id();
+                    $client_data['unique_id'] = _gen_va_uid($this->request->getPost('first_name') . ' ' . $this->request->getPost('last_name'));
+                    $client_data['is_lead'] = 1;
+                    $client_data['current_lead_status'] = 'check_in';
+                    $save_client_id = $this->Clients_model->ci_save($client_data);
                 }
 
-                $location_id = $this->request->getPost('location_id') ? $this->request->getPost('location_id') : 0;
-                if ($client_id) {
-                    $check_in_data = array('client_id' => $client_id);
+                $location_id = $checkin_info->location_id;
+                if ($save_client_id) {
+                    $check_in_data = array('client_id' => $save_client_id);
                     $this->Check_in_model->ci_save($check_in_data, $save_id);
-                    $this->save_primary_contact($client_id, $location_id);
-                }
-
-                echo json_encode(array("success" => true, "data" => $this->_row_data($save_id), 'id' => $save_id, 'isUpdate' => $id ? true : false, 'message' => app_lang('record_saved')));
-            } else {
-                echo json_encode(array("success" => false, 'message' => app_lang('error_occurred')));
-            }
-        } else {
-            if ($save_id) {
-                $clientID = $this->Check_in_model->get_one($save_id);
-                if (!$this->Users_model->is_email_exists($this->request->getPost('email'))) {
-                    $client_data = array(
-                        "first_name" => $this->request->getPost('first_name'),
-                        "last_name" => $this->request->getPost('last_name'),
-                        'location_id' => $this->request->getPost('location_id') ? $this->request->getPost('location_id') : 0,
-                        'created_by_location_id' => get_ltm_opl_id(),
-                        "unique_id" => uniqid('VA' . date('-y-')),
-                        "type" => 'person',
-                        "account_type" => $this->request->getPost('account_type'),
-                        "email" => $this->request->getPost('email'),
-                        "phone_code" => $this->request->getPost('phone_code'),
-                        "phone" => $this->request->getPost('phone'),
-                        "created_date" => get_current_utc_time(),
-                        "currency_symbol" => '',
-                        "currency" => '',
-                        "disable_online_payment" => 0,
-                        "created_by" => $this->login_user->id,
-                        'is_lead' => 1,
-                        'current_lead_status' => 'check_in',
+                    $this->save_primary_contact($save_client_id, $location_id);
+                    $timeline_data = array(
+                        'client_id' => $save_client_id,
+                        'title' => 'Account Created upon check in'
                     );
-                    $client_data = clean_data($client_data);
-                    if ($clientID) {
-                        $client_id = $this->Clients_model->ci_save($client_data, $clientID->client_id);
-                    } else {
-                        $client_id = $this->Clients_model->ci_save($client_data);
-                    }
-
-                    $location_id = $this->request->getPost('location_id') ? $this->request->getPost('location_id') : 0;
-                    if ($client_id) {
-                        $check_in_data = array('client_id' => $client_id);
-                        $this->Check_in_model->ci_save($check_in_data, $save_id);
-                        $this->save_primary_contact($client_id, $location_id);
-                        $timeline_data = array(
-                            'client_id' => $client_id,
-                            'title' => 'Account Created upon check in'
-                        );
-                        $this->Timeline_model->ci_save($timeline_data);
-                    }
+                    $this->Timeline_model->ci_save($timeline_data);
                 }
-
-                echo json_encode(array("success" => true, "data" => $this->_row_data($save_id), 'id' => $save_id, 'isUpdate' => $id ? true : false, 'message' => app_lang('record_saved')));
-            } else {
-                echo json_encode(array("success" => false, 'message' => app_lang('error_occurred')));
             }
+
+            echo json_encode(array("success" => true, "data" => $this->_row_data($save_id), 'id' => $save_id, 'isUpdate' => $id ? true : false, 'message' => app_lang('record_saved')));
+        } else {
+            echo json_encode(array("success" => false, 'message' => app_lang('error_occurred')));
         }
     }
 
@@ -252,7 +300,7 @@ class Check_in extends Security_Controller
         }
     }
 
-    function save_primary_contact($client_id = 0, $location_id = 0)
+    private function save_primary_contact($client_id = 0, $location_id = 0)
     {
         if ($client_id) {
             $user_phone = "";
@@ -456,8 +504,8 @@ class Check_in extends Security_Controller
     //prepare a row of attendance list
     private function _make_row($data, $highlight_status = false)
     {
-        // $client_info = $this->Clients_model->get_one($data->client_id);
-        $client_full_name = $this->get_client_full_name($data->client_id);
+        $client_info = $this->Clients_model->get_one($data->client_id);
+        $client_full_name = $this->get_client_full_name(0, $client_info);
         $option_links = modal_anchor(get_uri("check_in/modal_form"), "<i data-feather='edit' class='icon-16'></i>", array("class" => "edit", "title" => app_lang('edit_check_in'), "data-post-id" => $data->id, "data-reload-on-success" => true))
             . js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete_check_in'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("check_in/delete"), "data-action" => "delete"));
 
@@ -515,7 +563,7 @@ class Check_in extends Security_Controller
 
         return array(
             "<div>" . date('l', strtotime($data->created_date)) . "<br/><small>" . format_to_date($data->created_date) . "<br>" . format_to_time($data->created_date) . "</small></div>",
-            anchor(get_uri("leads/view/" . $data->client_id), $client_full_name),
+            anchor(get_uri("leads/view/" . $data->client_id), $client_full_name) . '<br><small>' . $client_info->unique_id . '</small>',
             $phone,
             $assignee,
             $account_type,

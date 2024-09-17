@@ -11,9 +11,7 @@ class Milestones_model extends Crud_model
     {
         $this->table = 'milestones';
         parent::__construct($this->table);
-        if (!is_dev_mode()) {
-            parent::init_activity_log("milestone", "title", "project", "project_id", "", 0, 'milestone', 'id');
-        }
+        parent::init_activity_log("milestone", "title", "project", "project_id", "", 0, 'milestone', 'id');
     }
 
     function schema()

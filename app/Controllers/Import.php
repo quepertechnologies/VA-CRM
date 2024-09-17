@@ -16,6 +16,63 @@ class Import extends Security_Controller
         parent::__construct();
     }
 
+    function generate_missing_notes_client_links_file()
+    {
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
+
+        $links = array();
+        $count = array();
+        $missing = 0;
+
+        $clients = $this->Clients_model->get_details(array())->getResult();
+
+        if ($clients) {
+            foreach ($clients as $client) {
+                $notes_count = $this->Notes_model->count_client_notes($client->id);
+                if ((int)$notes_count == 0) {
+                    $missing++;
+                    $count[] = $notes_count;
+                    $links[] = array('https://visaalliance.agentcisapp.com/app/#/contacts/u/' . ltrim($client->va_internal_id, 'VA') . '/notes-terms');
+                }
+            }
+        }
+
+        \Shuchkin\SimpleXLSXGen::fromArray($links)->saveAs($_SERVER['DOCUMENT_ROOT'] . '/' . get_logs_file_path("import") . 'missing_notes_client_links.xlsx');
+
+        echo json_encode(array('success' => true, 'message' => 'Success', 'missing' => $missing, 'count' => implode(',', $count), 'links' => $links));
+    }
+
+    function generate_archived_client_links_file()
+    {
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
+        $source = get_source_url_of_file(array(
+            "file_name" => 'run_results_archived_clients.json',
+            "file_id" => 0,
+            "service_type" => '',
+        ), get_general_file_path("import", $this->login_user->id));
+
+        // $list_source = $_SERVER['DOCUMENT_ROOT'] . '/' . get_logs_file_path("import") . 'clients.xlsx';
+
+        $json_file = $this->_read_json($source);
+        if ($json_file) {
+            $links = array();
+            $count = 0;
+
+            $clients = get_array_value($json_file, 'clients');
+
+            if ($clients) {
+                foreach ($clients as $client) {
+                    $links[] = array(get_array_value($client, 'url'));
+                    $count++;
+                }
+            }
+
+            \Shuchkin\SimpleXLSXGen::fromArray($links)->saveAs($_SERVER['DOCUMENT_ROOT'] . '/' . get_logs_file_path("import") . 'archived_client_links.xlsx');
+
+            echo json_encode(array('success' => true, 'message' => 'Success', 'count' => $count, 'links' => $links));
+        }
+    }
+
     function generate_incomplete_client_links_file()
     {
         ini_set('max_execution_time', 500); //execute maximum 500 seconds 
@@ -41,8 +98,7 @@ class Import extends Security_Controller
                     $va_internal_id = $line[0];
 
                     $client_options = array(
-                        'va_internal_id' => trim($va_internal_id),
-                        'leads_only' => TRUE
+                        'va_internal_id' => trim($va_internal_id)
                     );
 
                     $client = $this->Clients_model->get_details($client_options)->getRow();
@@ -174,6 +230,1060 @@ class Import extends Security_Controller
         }
     }
 
+    function populate_task_comments()
+    {
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds
+        ini_set('memory_limit', '-1');
+        $offset = $this->offset;
+        $stop_at_offset = $offset + $this->batch_size;
+        $current_key = 0;
+        $succeeded = array();
+        $processed_ids = 0;
+        $found_ids = 0;
+        $not_found_ids = 0;
+        $total_items = 0;
+        $source = get_source_url_of_file(array(
+            "file_name" => 'run_results_task_comments_1.json',
+            "file_id" => 0,
+            "service_type" => '',
+        ), get_general_file_path("import", $this->login_user->id));
+
+        $log_source = $_SERVER['DOCUMENT_ROOT'] . '/' . get_logs_file_path("import") . 'applications.log';
+
+        $file = $this->_read_json($source);
+
+        if ($file) {
+            $tasks = get_array_value($file, 'tasks');
+
+            $total_items = count($tasks);
+
+            if ($tasks) {
+                foreach ($tasks as $_task) {
+                    if ($current_key >= $offset && $current_key < $stop_at_offset) {
+                        $task            = get_array_value($_task, 'task')[0];
+
+                        if ($task) {
+                            $title       = get_array_value($task, 'title');
+                            $client_url  = get_array_value($task, 'client_url');
+                            $logs        = get_array_value($task, 'logs');
+                            $internal_id = ltrim($client_url, "https://visaalliance.agentcisapp.com/app#/contacts/u/");
+                            $client_id   = $this->_get_client_id('VA' . $internal_id);
+                            $task_info   = $this->Tasks_model->get_details(array('client_id' => $client_id, 'title' => $title))->getRow();
+
+                            if (count($logs) && $client_id && $task_info) {
+                                foreach ($logs as $log) {
+                                    $name           = get_array_value($log, 'name');
+                                    $caption        = get_array_value($log, 'caption');
+                                    $content        = get_array_value($log, 'content');
+                                    $date           = get_array_value($log, 'date');
+
+                                    $action         = 'created';
+                                    $log_type       = 'task';
+                                    $log_type_id    = $task_info->id;
+                                    $log_for        = 'general_task';
+                                    $log_for_id     = 0;
+                                    $log_for2       = '';
+                                    $log_for_id2    = 0;
+                                    $log_for3       = 'milestone';
+                                    $log_for_id3    = 0;
+
+                                    $user_id = $this->Users_model->get_by_full_name($name);
+                                    if (!$user_id) {
+                                        $user_id = 0;
+                                    }
+
+                                    $caption = trim(str_replace($name, '', $caption));
+
+                                    if ($content) {
+                                        $_label = 'content';
+
+                                        if (str_contains($caption, 'commented')) {
+                                            $_label = 'comment';
+                                            $log_type = 'task_comment';
+                                            $log_for = 'project';
+                                            $log_for2 = 'task';
+                                            $log_for_id2 = $task_info->id;
+                                            $log_type_id = $this->_project_comment(array(
+                                                'created_by'           => $user_id,
+                                                'created_at'           => $this->_f2d($date, "d/m/Y, h:i A"),
+                                                'description'          => $content,
+                                                'project_id'           => 0,
+                                                'comment_id'           => 0,
+                                                'task_id'              => $task_info->id,
+                                                'file_id'              => 0,
+                                                'milestone_id'         => 0,
+                                                'customer_feedback_id' => 0,
+                                                'files'                => serialize(array()),
+                                                'deleted'              => 0
+                                            ));
+                                            $content = null;
+                                        } elseif (str_contains($caption, 'description')) {
+                                            $_label = 'description';
+                                            $action = 'updated';
+                                        } elseif (str_contains($caption, 'title')) {
+                                            $_label = 'title';
+                                            $action = 'updated';
+                                        }
+
+                                        if ($action == 'updated') {
+                                            $content = serialize(array($_label => array('from' => "", 'to' => $content)));
+                                        } else {
+                                            $content = null;
+                                        }
+                                    }
+
+                                    $activity_data = array(
+                                        'created_at' => $this->_f2d($date, "d/m/Y, h:i A"),
+                                        'created_by' => $user_id,
+                                        'action' => $action,
+                                        'log_type' => $log_type,
+                                        'log_type_title' => $caption ? $caption : $task_info->title,
+                                        'log_type_id' => $log_type_id,
+                                        'changes' => $content,
+                                        'log_for' => $log_for,
+                                        'log_for_id' => $log_for_id,
+                                        'log_for2' => $log_for2,
+                                        'log_for_id2' => $log_for_id2,
+                                        'log_for3' => $log_for3,
+                                        'log_for_id3' => $log_for_id3
+                                    );
+
+                                    $processed_ids++;
+                                    $success = $this->Activity_logs_model->ci_save($activity_data);
+
+                                    if ($success) {
+                                        $succeeded[] = $success;
+                                    }
+                                }
+                            } else {
+                                $not_found_ids++;
+                            }
+                        }
+                        $found_ids++;
+                    }
+                    $current_key++;
+                }
+            }
+        }
+
+        $log_data = array(
+            'source' => $source,
+            'log_source' => $log_source,
+            'offset' => $offset,
+            'next_offset' => $stop_at_offset,
+            'processed_ids' => $processed_ids,
+            'found_ids' => $found_ids,
+            'not_found_ids' => $not_found_ids,
+            'total_items' => $total_items,
+            'remaining_items' => $total_items - $stop_at_offset,
+            'no_of_succeeded_queries' => count($succeeded),
+            'succeeded_queries' => implode(',', $succeeded),
+        );
+
+        $this->_log($log_source, $log_data);
+
+        echo json_encode($log_data);
+    }
+
+    function populate_invoice_income_sharing()
+    {
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
+
+        $succeeded = array();
+        $invoices = $this->Invoices_model->get_details()->getResult();
+
+        foreach ($invoices as $invoice) {
+            if ($invoice->project_id) {
+                $income_sharing_partners = $this->Project_partners_model->get_details(array('project_id' => $invoice->project_id, 'only_partner_types' => 'subagent,referral'))->getResult();
+
+                if (count($income_sharing_partners)) {
+                    $invoice_meta_info = $this->Invoices_model->get_invoice_total_meta($invoice->id);
+                    $net_total_income = $invoice_meta_info->net_total_income; // net income after discount deduction
+                    foreach ($income_sharing_partners as $partner) {
+
+                        $shared_income = calc_per($net_total_income, $partner->commission);
+
+                        if ($shared_income > 0) {
+                            $default_tax_info = $this->Taxes_model->get_details(array('is_default' => true))->getRow();
+
+                            $tax = 0;
+                            if ($partner->partner_type == 'subagent') { // GST tax will only be given to subagents
+                                $tax = calc_per($shared_income, $default_tax_info->percentage);
+                            }
+
+                            $income_sharing_data = array(
+                                'invoice_id' => $invoice->id,
+                                'partner_id' => $partner->partner_id,
+                                'commission' => $partner->commission,
+                                'amount' => $shared_income,
+                                'tax' => $tax,
+                                'status' => 'unpaid',
+                                'created_date' => get_current_utc_time()
+                            );
+
+                            $success = $this->Invoice_incomes_model->ci_save($income_sharing_data);
+
+                            if ($success) {
+                                $succeeded[] = $success;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        echo json_encode(array('success' => true, 'message' => 'Success', 'no_of_succeeded_queries' => count($succeeded), 'succeeded' => $succeeded));
+    }
+
+    function populate_invoice_schedule_id()
+    {
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
+
+        $succeeded = array();
+
+        $payment_schedules = $this->Project_payment_schedule_setup_model->get_details()->getResult();
+
+        foreach ($payment_schedules as $schedule) {
+            if ($schedule->invoice_id) {
+                $invoice_data = array(
+                    'schedule_id' => $schedule->id
+                );
+
+                $success = $this->Invoices_model->ci_save($invoice_data, $schedule->id);
+
+                if ($success) {
+                    $succeeded[] = $success;
+                }
+            }
+        }
+
+        echo json_encode(
+            array(
+                'success' => true,
+                'message' => 'success',
+                'succeeded' => implode(',', $succeeded),
+                'no_of_succeeded' => count($succeeded)
+            )
+        );
+    }
+
+    function populate_applic_partner_type()
+    {
+        ini_set('max_execution_time', 300); //execute maximum 300 seconds 
+        // $offset = $this->offset;
+        $succeeded = array();
+
+        $subagents = $this->Clients_model->get_details(array('partner_type' => 'subagent'))->getResult();
+
+        if ($subagents) {
+            foreach ($subagents as $subagent) {
+                $applic_partners = $this->Project_partners_model->get_details(array('partner_id' => $subagent->id))->getResult();
+
+                if ($applic_partners) {
+                    foreach ($applic_partners as $partner) {
+                        $partner_data = array(
+                            'partner_type' => $subagent->partner_type
+                        );
+
+                        $success = $this->Project_partners_model->ci_save($partner_data, $partner->id);
+
+                        if ($success) {
+                            $succeeded[] = $success;
+                        }
+                    }
+                }
+            }
+        }
+
+        echo json_encode(array('status' => true, 'message' => 'success', 'succeeded_queries' => count($succeeded)));
+    }
+
+    function populate_default_clients_source()
+    {
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
+
+        $succeeded = array();
+
+        $list = array(
+            'Search Engine (e.g., Google, Bing)',
+            'Facebook',
+            'Instagram',
+            'X (Twitter)',
+            'LinkedIn',
+            'Pinterest',
+            'Snapchat',
+            'TikTok',
+            'Reddit',
+            'WhatsApp',
+            'Quora',
+            'WeChat',
+            'Telegram',
+            'Referral from a Friend or Family Member',
+            'Online Advertisement',
+            'Printed Advertisement (Magazine, Newspaper, Brochure)',
+            'Event or Conference',
+            'Educational Institution',
+            'Employment Agency',
+            'News Article or Blog',
+        );
+        foreach ($list as $source) {
+            $success = $this->_source($source);
+            if ($success) {
+                $succeeded[] = $success;
+            }
+        }
+
+        echo json_encode(
+            array(
+                'status' => true,
+                'message' => 'success',
+                'succeeded' => count($succeeded)
+            )
+        );
+    }
+    function populate_clients_source()
+    {
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
+
+        $clients = $this->Clients_model->get_details(array('only_account_types' => '1,2,4'))->getResult();
+
+        $succeeded = array();
+        foreach ($clients as $client) {
+            if ($client->source) {
+                $client_data = array(
+                    'source' => $this->_source($client->source)
+                );
+
+                $success = $this->Clients_model->ci_save($client_data, $client->id);
+
+                if ($success) {
+                    $succeeded[] = $success;
+                }
+            }
+        }
+
+        echo json_encode(
+            array(
+                'status' => true,
+                'message' => 'success',
+                'succeeded' => count($succeeded)
+            )
+        );
+    }
+
+    function populate_client_uid_for_od_directories()
+    {
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
+
+        $clients = $this->Clients_model->get_details(array('only_account_types' => '1,2,4', 'leads_only' => false))->getResult();
+
+        $succeeded = array();
+        foreach ($clients as $client) {
+            $created_date = new \DateTime($client->created_date);
+            $name = $client->first_name . ' ' . $client->last_name;
+            if ((int)$client->account_type == 4) {
+                $name = $client->company_name;
+            }
+
+            $client_data = array(
+                'unique_id' => _gen_va_uid($name, date_format($created_date, 'dmY'))
+            );
+
+            $success = $this->Clients_model->ci_save($client_data, $client->id);
+
+            if ($success) {
+                $succeeded[] = $success;
+            }
+        }
+
+
+        echo json_encode(
+            array(
+                'status' => true,
+                'message' => 'success',
+                'succeeded' => count($succeeded)
+            )
+        );
+    }
+
+    function populate_invoice_types()
+    {
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
+
+        // $invoice_types = array(
+        //     37 => 'general',
+        //     38 => 'general',
+        //     39 => 'gross_claim',
+        //     40 => 'net_claim'
+        // );
+
+        $invoices = $this->Invoices_model->get_details(array('labels' => 40))->getResult();
+
+        $succeeded = array();
+        foreach ($invoices as $invoice) {
+            $invoice_data = array(
+                'invoice_type' => 'net_claim'
+            );
+
+            $success = $this->Invoices_model->ci_save($invoice_data, $invoice->id);
+
+            if ($success) {
+                $succeeded[] = $success;
+            }
+        }
+
+
+        echo json_encode(
+            array(
+                'status' => true,
+                'message' => 'success',
+                'succeeded' => count($succeeded)
+            )
+        );
+    }
+
+    function populate_invoice_items()
+    {
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
+        $offset = $this->offset;
+        $stop_at_offset = $offset + $this->batch_size;
+        $current_key = 0;
+        $item_succeeded = array();
+        $note_succeeded = array();
+        $payment_succeeded = array();
+        $processed_ids = 0;
+        $total_items = 0;
+        $not_found = 0;
+        $source = get_source_url_of_file(array(
+            "file_name" => 'run_results_invoices.json',
+            "file_id" => 0,
+            "service_type" => '',
+        ), get_general_file_path("import", $this->login_user->id));
+
+        $log_source = $_SERVER['DOCUMENT_ROOT'] . '/' . get_logs_file_path("import") . 'invoices.log';
+
+        $file = $this->_read_json($source);
+
+        if ($file) {
+            $invoices_data = get_array_value($file, 'invoices');
+
+            if ($invoices_data) {
+                $total_items = count($invoices_data);
+
+                foreach ($invoices_data as $key => $invoice_data) {
+
+                    if ($current_key >= $offset && $current_key < $stop_at_offset) {
+                        $va_invoice_id = ltrim(get_array_value($invoice_data, 'invoice_id'), '#');
+                        $invoice_lines = get_array_value($invoice_data, 'lines')[0];
+                        $invoice_note = get_array_value($invoice_data, 'note');
+                        $invoice_payments = get_array_value($invoice_data, 'payments');
+
+                        $invoice = $this->_trigger('Invoices_model')->get_details(array('va_invoice_id' => $va_invoice_id))->getRow();
+
+                        if ($invoice_lines && count($invoice_lines) && $invoice) {
+                            $first_line = get_array_value($invoice_lines, 'line_item')[0];
+                            $first_line_entries_count = count(get_array_value($first_line, 'entries'));
+                            if ($first_line_entries_count) {
+                                $lines = get_array_value($invoice_lines, 'line_item');
+                                for ($x = 0; $x < $first_line_entries_count; $x++) {
+                                    $title = $this->_invoice_item_val($lines, $x, array('description'));
+                                    $income_type = $this->_invoice_item_val($lines, $x, array('income type'));
+                                    $tax = $this->_invoice_item_val($lines, $x, array('tax (%)'));
+                                    $amount = $this->_invoice_item_val($lines, $x, array('amount', 'total fee'));
+                                    $commission = $this->_invoice_item_val($lines, $x, array('commission percent'));
+
+                                    if ($invoice->invoice_type == 'general') {
+                                        if ($income_type && strtolower($income_type) == 'payables') {
+                                            $income_type = 'payable';
+                                        } elseif ($income_type && strtolower($income_type) == 'income') {
+                                            $income_type = 'income';
+                                        } else {
+                                            $income_type = '';
+                                        }
+                                    } elseif ($invoice->invoice_type == 'gross_claim') {
+                                        $income_type = 'income';
+                                    } elseif ($invoice->invoice_type == 'net_claim') {
+                                        $income_type = 'payable';
+                                    } else {
+                                        continue; // skip this iteration. Do not save this invoice item as the invoice type is unknown
+                                    }
+
+                                    $taxable = 0;
+                                    if ($tax) {
+                                        $tax = (int)explode("%", $tax)[0];
+                                        if ($tax > 0) {
+                                            $taxable = 1;
+                                        }
+                                    }
+
+                                    $amount = $amount ? $this->_price($amount) : 0;
+                                    $commission = $commission ? $this->_price($commission) : 0;
+
+                                    $invoice_item_data = array(
+                                        'title' => $title,
+                                        'description' => '',
+                                        'quantity' => 1,
+                                        'unit_type' => '',
+                                        'income_type' => $income_type,
+                                        'commission' => $commission,
+                                        'rate' => $amount,
+                                        'total' => $amount,
+                                        'sort' => $x,
+                                        'invoice_id' => $invoice->id,
+                                        'item_id' => 0,
+                                        'schedule_id' => 0,
+                                        'schedule_fee_id' => 0,
+                                        'taxable' => $taxable
+                                    );
+
+                                    $success = $this->Invoice_items_model->ci_save($invoice_item_data);
+
+                                    if ($success) {
+                                        $item_succeeded[] = $success;
+                                    }
+                                }
+                            }
+
+                            if ($invoice_note) {
+                                $invoice_data = array('note' => trim($invoice_note));
+                                $success = $this->Invoices_model->ci_save($invoice_data, $invoice->id);
+
+                                if ($success) {
+                                    $note_succeeded[] = $success;
+                                }
+                            }
+
+                            if ($invoice_payments && count($invoice_payments)) {
+                                foreach ($invoice_payments as $payment) {
+                                    $date = get_array_value($payment, 'date');
+                                    $amount = get_array_value($payment, 'amount');
+                                    $type = get_array_value($payment, 'payment_type');
+
+                                    if (strtolower($date) != 'there is no payment done for this invoice') {
+                                        $payment_date = get_current_utc_time();
+                                        if ($date) {
+                                            $payment_date = $this->_f2d($date, "d/m/Y");
+                                        }
+
+                                        $payment_amount = 0;
+                                        if ($amount) {
+                                            $payment_amount = $this->_price($amount);
+                                        }
+
+                                        $payment_method_id = 0;
+                                        if ($type) {
+                                            $payment_method_id = $this->_payment_method($type);
+                                        }
+
+                                        $payment_data = array(
+                                            'amount' => $payment_amount,
+                                            'payment_date' => $payment_date,
+                                            'payment_method_id' => $payment_method_id,
+                                            'note' => '(Extracted as is from AgentCIS)',
+                                            'invoice_id' => $invoice->id,
+                                            'created_by' => 0,
+                                            'created_at' => $payment_date
+                                        );
+
+                                        $success = $this->_trigger('Invoice_payments_model')->ci_save($payment_data);
+
+                                        if ($success) {
+                                            $payment_succeeded[] = $success;
+                                        }
+                                    }
+                                }
+                            }
+                            $processed_ids++;
+                        } else {
+                            $not_found++;
+                        }
+                    }
+                    $current_key++;
+                }
+            }
+        }
+
+        $log_data = array(
+            'source' => $source,
+            'log_source' => $log_source,
+            'offset' => $offset,
+            'next_offset' => $stop_at_offset,
+            'processed_ids' => $processed_ids,
+            'total_items' => $total_items,
+            'remaining_items' => $total_items - $stop_at_offset,
+            'no_of_item_queries' => count($item_succeeded),
+            'no_of_payment_queries' => count($payment_succeeded),
+            'no_of_note_queries' => count($note_succeeded),
+            'not_found' => $not_found,
+            'item_succeeded_queries' => implode(',', $item_succeeded),
+            'payment_succeeded_queries' => implode(',', $payment_succeeded),
+            'note_succeeded_queries' => implode(',', $note_succeeded)
+        );
+
+        $this->_log($log_source, $log_data);
+
+        echo json_encode($log_data);
+    }
+
+    function populate_partners()
+    {
+        ini_set('max_execution_time', 300); //execute maximum 300 seconds 
+        $offset = $this->offset;
+        $stop_at_offset = $offset + $this->batch_size;
+        $current_key = 0;
+        $succeeded = array();
+        $processed_ids = 0;
+        $total_items = 0;
+        $not_found = 0;
+        $source = get_source_url_of_file(array(
+            "file_name" => 'run_results_partners.json',
+            "file_id" => 0,
+            "service_type" => '',
+        ), get_general_file_path("import", $this->login_user->id));
+
+        $log_source = $_SERVER['DOCUMENT_ROOT'] . '/' . get_logs_file_path("import") . 'clients.log';
+
+        $file = $this->_read_json($source);
+
+        if ($file) {
+            $partners_data = get_array_value($file, 'partners');
+
+            if ($partners_data) {
+                $total_items = count($partners_data);
+
+                foreach ($partners_data as $key => $partner) {
+
+                    if ($current_key >= $offset && $current_key < $stop_at_offset) {
+                        $email = get_array_value($partner, 'email');
+                        $notes = get_array_value($partner, 'note');
+
+                        $partner = $this->_trigger('Clients_model')->get_details(array('email' => $email, 'account_type' => '3'))->getRow();
+
+                        if ($notes && count($notes) && $partner) {
+                            foreach ($notes as $note) {
+                                $title = get_array_value($note, 'title');
+                                $content = get_array_value($note, 'content');
+                                $date = get_array_value($note, 'date');
+
+                                $note_data = array(
+                                    'created_by' => 0,
+                                    'created_at' => $this->_f2d($date, "d/m/Y"),
+                                    'title' => $title,
+                                    'description' => $content ? $content : "",
+                                    'client_id' => $partner->id,
+                                    'is_public' => 1
+                                );
+
+                                $success = $this->Notes_model->ci_save($note_data);
+
+                                if ($success) {
+                                    $succeeded[] = $success;
+                                }
+                            }
+                            $processed_ids++;
+                        } else {
+                            $not_found++;
+                        }
+                    }
+                    $current_key++;
+                }
+            }
+        }
+
+        $log_data = array(
+            'source' => $source,
+            'log_source' => $log_source,
+            'offset' => $offset,
+            'next_offset' => $stop_at_offset,
+            'succeeded_queries' => implode(',', $succeeded),
+            'processed_ids' => $processed_ids,
+            'total_items' => $total_items,
+            'remaining_items' => $total_items - $stop_at_offset,
+            'no_of_succeeded_queries' => count($succeeded),
+            'not_found' => $not_found
+        );
+
+        $this->_log($log_source, $log_data);
+
+        echo json_encode($log_data);
+    }
+
+    function populate_client_location_subagents()
+    {
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
+        $offset = $this->offset;
+        $stop_at_offset = $offset + $this->batch_size;
+        $succeeded = array();
+        $succeeded_locations = array();
+        $total_items = 0;
+        $source = get_source_url_of_file(array(
+            "file_name" => 'run_results_agents.json',
+            "file_id" => 0,
+            "service_type" => '',
+        ), get_general_file_path("import", $this->login_user->id));
+
+        $log_source = $_SERVER['DOCUMENT_ROOT'] . '/' . get_logs_file_path("import") . 'clients.log';
+
+        $options = array();
+        $locations = $this->Location_model->get_details($options)->getResult();
+
+        foreach ($locations as $location) {
+            $clients_options = array(
+                'only_account_types' => '1,2,4',
+                'location_id' => $location->id
+            );
+            $subagent_options = array(
+                'location_id' => $location->id,
+                'partner_type' => 'subagent'
+            );
+
+            $clients = $this->Clients_model->get_details($clients_options)->getResult();
+            $subagent = $this->Clients_model->get_details($subagent_options)->getRow();
+            $succeeded_locations[$location->title] = 0;
+
+            if ($subagent) {
+                foreach ($clients as $client) {
+                    $client_data = array(
+                        'partner_id' => $location->id == 2 ? $subagent->id : 4443
+                    );
+
+                    $success = $this->Clients_model->ci_save($client_data, $client->id);
+
+                    if ($success) {
+                        $succeeded_locations[$location->title]++;
+                    }
+                }
+            }
+        }
+
+        $log_data = array(
+            'source' => $source,
+            'log_source' => $log_source,
+            'offset' => $offset,
+            'next_offset' => $stop_at_offset,
+            'succeeded_queries' => implode(',', $succeeded),
+            'total_items' => $total_items,
+            'remaining_items' => $total_items - $stop_at_offset,
+            'no_of_succeeded_queries' => count($succeeded),
+            'succeeded_locations' => json_encode($succeeded_locations)
+        );
+
+        $this->_log($log_source, $log_data);
+
+        echo json_encode($log_data);
+    }
+
+    function populate_archived_clients()
+    {
+        ini_set('max_execution_time', 600); //execute maximum 600 seconds 
+        $offset = $this->offset;
+        $stop_at_offset = $offset + $this->batch_size;
+        $succeeded = array();
+        $processed_ids = 0;
+        $total_items = 0;
+        $source = get_source_url_of_file(array(
+            "file_name" => 'run_results_archived_clients.json',
+            "file_id" => 0,
+            "service_type" => '',
+        ), get_general_file_path("import", $this->login_user->id));
+
+        $log_source = $_SERVER['DOCUMENT_ROOT'] . '/' . get_logs_file_path("import") . 'clients.log';
+
+        $file = $this->_read_json($source);
+
+        if ($file) {
+            $clients = get_array_value($file, 'clients');
+            if ($clients) {
+                $total_items = count($clients);
+                foreach ($clients as $client) {
+                    $full_name = get_array_value($client, 'name');
+                    $url = get_array_value($client, 'url');
+                    $email = get_array_value($client, 'email');
+                    $label = get_array_value($client, 'label');
+                    $city = get_array_value($client, 'city');
+                    $assignee = get_array_value($client, 'assignee');
+                    $created_date = get_array_value($client, 'created_date');
+
+                    $_assignee = null;
+                    if (!$this->_isEmpty($assignee)) {
+                        $_assignee = $this->Users_model->get_by_full_name($assignee, true);
+                    }
+
+                    $_city = '';
+                    $_country = '';
+                    if (!$this->_isEmpty($city)) {
+                        $address = explode('\n', $city);
+                        if (count($address) > 1) {
+                            $_city = get_array_value($address, 0);
+                            $_country = get_array_value($address, 1);
+                        } elseif (count($address) == 1) {
+                            $_city = get_array_value($address, 0);
+                        }
+                    }
+
+                    $va_internal_id = ltrim($url, 'https://visaalliance.agentcisapp.com/app/#/contacts/u/');
+                    $va_internal_id = rtrim($va_internal_id, '/activities');
+
+                    $client_data = array_merge(
+                        $this->_name($full_name),
+                        array(
+                            'unique_id' => $this->_uniqueId($full_name),
+                            'va_internal_id' => $this->_isEmpty($va_internal_id) ? '' : 'VA' . $va_internal_id,
+                            'location_id' => $_assignee && $_assignee->location_id ? $_assignee->location_id : 2,
+                            'created_by_location_id' => $_assignee && $_assignee->location_id ? $_assignee->location_id : 2,
+                            'type' => 'person',
+                            'account_type' => 1,
+                            'email' => $email,
+                            'city' => $_city,
+                            'country' => $_country,
+                            'created_by' => $this->login_user->id,
+                            'created_date' => $this->_f2d($created_date, 'd/m/Y'),
+                            'assignee' => $_assignee && $_assignee->id ? $_assignee->id : 0,
+                            'deleted' => 0,
+                            'labels' => $this->_isEmpty($label) ? '' : $this->_label($label, 'client')
+                        )
+                    );
+
+                    $success = $this->Clients_model->ci_save($client_data);
+
+                    $processed_ids++;
+                    if ($success) {
+                        $succeeded[] = $success;
+                    }
+                }
+            }
+        }
+
+
+        $log_data = array(
+            'source' => $source,
+            'log_source' => $log_source,
+            'offset' => $offset,
+            'next_offset' => $stop_at_offset,
+            'succeeded_queries' => implode(',', $succeeded),
+            'processed_ids' => $processed_ids,
+            'total_items' => $total_items,
+            'remaining_items' => $total_items - $stop_at_offset,
+            'no_of_succeeded_queries' => count($succeeded)
+        );
+
+        $this->_log($log_source, $log_data);
+
+        echo json_encode($log_data);
+    }
+
+    function populate_location_subagents()
+    {
+        ini_set('max_execution_time', 300); //execute maximum 300 seconds 
+        $offset = $this->offset;
+        $stop_at_offset = $offset + $this->batch_size;
+        $succeeded = array();
+        $processed_ids = 0;
+        $total_items = 0;
+        $source = get_source_url_of_file(array(
+            "file_name" => 'run_results_agents.json',
+            "file_id" => 0,
+            "service_type" => '',
+        ), get_general_file_path("import", $this->login_user->id));
+
+        $log_source = $_SERVER['DOCUMENT_ROOT'] . '/' . get_logs_file_path("import") . 'clients.log';
+
+        $options = array();
+        $locations = $this->Location_model->get_details($options)->getResult();
+
+        foreach ($locations as $location) {
+            $partner_data = array(
+                'unique_id' => $this->_uniqueId($location->title . ' ' . 'Branch Office'),
+                'location_id' => $location->id,
+                'created_by_location_id' => 0,
+                'partner_type' => 'subagent',
+                'type' => 'person',
+                'account_type' => 3,
+                'first_name' => $location->title,
+                'last_name' => 'Branch Office',
+                'email' => 'admin.' . $this->_mutate(str_replace(' ', '.', str_replace(array("(", ")"), '', $location->title)), 'strtolower') . '@visaalliance.com',
+                'created_by' => $this->login_user->id,
+                'created_date' => $this->_gen('d'),
+                'deleted' => 0,
+                'labels' => $this->_label('Sub Agent', 'client')
+            );
+
+            $success = $this->Clients_model->ci_save($partner_data);
+
+            if ($success) {
+                $succeeded[] = $success;
+            }
+        }
+
+        $log_data = array(
+            'source' => $source,
+            'log_source' => $log_source,
+            'offset' => $offset,
+            'next_offset' => $stop_at_offset,
+            'succeeded_queries' => implode(',', $succeeded),
+            'processed_ids' => $processed_ids,
+            'total_items' => $total_items,
+            'remaining_items' => $total_items - $stop_at_offset,
+            'no_of_succeeded_queries' => count($succeeded)
+        );
+
+        $this->_log($log_source, $log_data);
+
+        echo json_encode($log_data);
+    }
+
+    function populate_agents()
+    {
+        ini_set('max_execution_time', 300); //execute maximum 300 seconds 
+        $offset = $this->offset;
+        $stop_at_offset = $offset + $this->batch_size;
+        $current_key = 0;
+        $succeeded = array();
+        $processed_ids = 0;
+        $total_items = 0;
+        $source = get_source_url_of_file(array(
+            "file_name" => 'run_results_agents.json',
+            "file_id" => 0,
+            "service_type" => '',
+        ), get_general_file_path("import", $this->login_user->id));
+
+        $log_source = $_SERVER['DOCUMENT_ROOT'] . '/' . get_logs_file_path("import") . 'clients.log';
+
+        $file = $this->_read_json($source);
+
+        if ($file) {
+            $partners_data = get_array_value($file, 'partners');
+
+            if ($partners_data) {
+                $total_items = count($partners_data);
+
+                foreach ($partners_data as $key => $partner) {
+
+                    if ($current_key >= $offset && $current_key < $stop_at_offset) {
+
+                        $agent_name = get_array_value($partner, 'title');
+                        $phone = get_array_value($partner, 'phone');
+                        $email = get_array_value($partner, 'email');
+                        $address = get_array_value($partner, 'address');
+                        // $type = get_array_value($partner, 'type');
+                        $commission = get_array_value($partner, 'commission');
+                        $location = get_array_value($partner, 'location');
+                        $notes = get_array_value($partner, 'notes');
+                        $applications = get_array_value($partner, 'applications');
+
+                        // $application_options = array(
+                        //     'temp_applic_id' => $applic_id
+                        // );
+                        // $application = $this->Projects_model->get_details($application_options)->getRow();
+                        if ($agent_name && $email) {
+                            $agent_data = array_merge($this->_name($agent_name), $this->_phone($phone));
+                            $agent_data['labels'] = $this->_label("Sub Agent", 'client');
+                            $agent_data['account_type'] = 3;
+                            $agent_data['type'] = 'person';
+                            $agent_data['partner_type'] = 'subagent';
+                            $agent_data['unique_id'] = $this->_uniqueId("VA" . date('-y-'));
+                            $agent_data['created_by'] = $this->login_user->id;
+                            $agent_data['created_date'] = get_current_utc_time();
+                            // $agent_data['phone'] = $this->_isEmpty($phone) ? "" : $phone;
+                            $agent_data['address'] = $this->_isEmpty($address) ? "" : $address;
+                            $agent_data['com_percentage'] = (float)trim($this->_mutate($commission, 'str_replace', array('p' => '%',  'r' => '')));
+                            $agent_data['location_id'] = get_ltm_opl_id(true);
+
+                            $locations = $this->make_locations_dropdown('', false);
+
+                            $_locations = explode(',', $location);
+                            if (count($_locations) == 2) {
+                                $location = trim($_locations[1]);
+                            } else {
+                                $location = trim($_locations[0]);
+                            }
+                            foreach ($locations as $location_id => $location_title) {
+                                if (strtolower($location) == strtolower($location_title) || str_contains(strtolower($location_title), strtolower($location))) {
+                                    $agent_data['location_id'] = $location_id;
+                                    break;
+                                }
+                            }
+                            $processed_ids++;
+
+                            $success = $this->Clients_model->ci_save($agent_data);
+
+                            if ($success) {
+                                $succeeded[] = $success;
+
+                                if ($notes) {
+                                    $notes = get_array_value($notes[0], 'note');
+
+                                    if ($notes) {
+                                        foreach ($notes as $note) {
+                                            $note = get_array_value($note, 'note');
+
+                                            if ($note && count($note)) {
+                                                $title = get_array_value($note[0], 'title');
+                                                $content = get_array_value($note[0], 'content');
+                                                $date = get_array_value($note[0], 'date');
+
+                                                $note_data = array(
+                                                    'created_by' => $this->login_user->id,
+                                                    'created_at' => $this->_f2d($date, "d/m/Y"),
+                                                    'title' => $title,
+                                                    'description' => $content ? $content : "",
+                                                    'client_id' => $success,
+                                                    'is_public' => 1
+                                                );
+
+                                                $this->Notes_model->ci_save($note_data);
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if ($applications) {
+                                    foreach ($applications as $link) {
+                                        $temp_applic_id = get_array_value(explode('/', ltrim(get_array_value($link, 'url'), 'https://visaalliance.agentcisapp.com/app#/contacts/u/')), 2);
+
+                                        $application_options = array(
+                                            'temp_applic_id' => $temp_applic_id
+                                        );
+                                        $application = $this->_trigger('Projects_model')->get_details($application_options)->getRow();
+
+                                        if ($application) {
+                                            $project_member_data = array(
+                                                'project_id' => $application->id,
+                                                'partner_id' => $success,
+                                                'full_name' => $agent_name,
+                                                'commission' => $agent_data['com_percentage'],
+                                                'created_date' => get_current_utc_time()
+                                            );
+
+                                            $this->_trigger('Project_partners_model')->ci_save($project_member_data);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    $current_key++;
+                }
+            }
+        }
+
+        $log_data = array(
+            'source' => $source,
+            'log_source' => $log_source,
+            'offset' => $offset,
+            'next_offset' => $stop_at_offset,
+            'succeeded_queries' => implode(',', $succeeded),
+            'processed_ids' => $processed_ids,
+            'total_items' => $total_items,
+            'remaining_items' => $total_items - $stop_at_offset,
+            'no_of_succeeded_queries' => count($succeeded)
+        );
+
+        $this->_log($log_source, $log_data);
+
+        echo json_encode($log_data);
+    }
+
     function populate_application_data()
     {
         ini_set('max_execution_time', 300); //execute maximum 300 seconds 
@@ -238,7 +1348,7 @@ class Import extends Security_Controller
 
                                                 if ($title && $date) {
                                                     $activity_data = array(
-                                                        'created_at' => date_format(date_create_from_format("d D, M Y h:i A", $date), "Y-m-d h:m:s"),
+                                                        'created_at' => $this->_f2d($date, "d D, M Y h:i A"),
                                                         'created_by' => 0,
                                                         'action' => 'created',
                                                         'log_type' => 'activity',
@@ -346,7 +1456,7 @@ class Import extends Security_Controller
 
                                             $note_data = array(
                                                 'created_by' => 0,
-                                                'created_at' => date_format(date_create_from_format("d/m/Y", $date), "Y-m-d h:m:s"),
+                                                'created_at' => $this->_f2d($date, "d/m/Y"),
                                                 'title' => $title,
                                                 'description' => $content,
                                                 'is_public' => 1,
@@ -391,7 +1501,7 @@ class Import extends Security_Controller
 
     function populate_application_payment_schedule()
     {
-        ini_set('max_execution_time', 300); //execute maximum 300 seconds 
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
         $offset = $this->offset;
         $stop_at_offset = $offset + $this->batch_size;
         $current_key = 0;
@@ -401,7 +1511,7 @@ class Import extends Security_Controller
         $processed_ids = 0;
         $total_items = 0;
         $source = get_source_url_of_file(array(
-            "file_name" => 'run_results_applic_5.json',
+            "file_name" => 'run_results_missing_payment_schedule.json',
             "file_id" => 0,
             "service_type" => '',
         ), get_general_file_path("import", $this->login_user->id));
@@ -422,8 +1532,6 @@ class Import extends Security_Controller
                         $applic_id = get_array_value($link, 'application');
                         if ($applic_id) {
 
-                            // $stages = get_array_value($link, 'stages');
-                            // $notes = get_array_value($link, 'notes');
                             $payment_schedules = get_array_value($link, 'payment_schedules');
 
                             $application_options = array(
@@ -433,6 +1541,13 @@ class Import extends Security_Controller
 
                             if ($payment_schedules && $application) {
                                 $project_id = $application->id;
+                                if (str_contains($source, 'missing')) {
+                                    $old_payment_schedules = $this->Project_payment_schedule_setup_model->get_details(array('project_id' => $project_id))->getResult();
+
+                                    foreach ($old_payment_schedules as $old_schedule) {
+                                        $this->Project_payment_schedule_setup_model->delete($old_schedule->id);
+                                    }
+                                }
                                 $_payment_schedule = get_array_value($payment_schedules, 0);
                                 if ($_payment_schedule) {
                                     $schedules = get_array_value($_payment_schedule, 'schedule');
@@ -445,14 +1560,16 @@ class Import extends Security_Controller
                                                 $date = get_array_value($schedule, 'date');
                                                 $is_claimable = get_array_value($schedule, 'is_claimable');
                                                 $fees = get_array_value($schedule, 'fees');
-                                                // $total_fee = get_array_value($schedule, 'total_fee');
+                                                // $total_fee = get_array_value($schedule, 'total_fee'); // we'll count the total_fee manually
                                                 $discount = get_array_value($schedule, 'discount');
-                                                $invoicing_date = get_array_value($schedule, 'invoicing_date');
+                                                // $invoicing_date = get_array_value($schedule, 'invoicing_date');
                                                 $status = get_array_value($schedule, 'status');
+                                                $action = get_array_value($schedule, 'action');
+                                                $action_url = get_array_value($schedule, 'action_url');
 
-                                                if ($title && $fees && $invoicing_date && $status) {
+                                                if ($title && $fees && $status) {
 
-                                                    $installment_date = date_format(date_create_from_format("d/m/Y", $date), "Y-m-d h:m:s");
+                                                    $installment_date = $this->_f2d($date, "d/m/Y");
 
                                                     $installment_fees = array();
                                                     $installment_total_amount = 0;
@@ -462,7 +1579,7 @@ class Import extends Security_Controller
 
                                                         $installment_fee['key'] = $key;
                                                         $installment_fee['fee_type'] = get_array_value($fee, 'fee_type');
-                                                        $amount = $this->_parse_price(get_array_value($fee, 'fee'));
+                                                        $amount = $this->_price(get_array_value($fee, 'fee'));
                                                         $installment_total_amount += $amount;
                                                         $installment_fee['amount'] = $amount;
 
@@ -484,11 +1601,33 @@ class Import extends Security_Controller
                                                         $selected_status = 0;
                                                     }
 
-                                                    $discount = $this->_parse_price($discount);
+                                                    $discount = $this->_price($discount);
+                                                    $invoice_id = 0;
+
+                                                    if ($action && $action_url && strtolower($action) == 'view invoice') {
+                                                        $va_invoice_id = ltrim($action_url, 'https://visaalliance.agentcisapp.com/invoice/');
+                                                        $va_invoice_id = rtrim($va_invoice_id, '/show');
+                                                        $va_invoice_id = trim($va_invoice_id);
+
+                                                        if ($va_invoice_id) {
+                                                            $invoice_options = array(
+                                                                'va_invoice_id' => $va_invoice_id
+                                                            );
+
+                                                            $invoice = $this->Invoices_model->get_details($invoice_options)->getRow();
+
+                                                            if ($invoice) {
+                                                                // var_dump($action_url, $invoice);
+                                                                // exit();
+                                                                $invoice_id = $invoice->id;
+                                                            }
+                                                        }
+                                                    }
 
                                                     $schedule_data = array(
                                                         'project_id' => $project_id,
                                                         'client_id' => $application->client_id,
+                                                        'invoice_id' => $invoice_id,
                                                         'installment_name' => $title,
                                                         'invoice_date' => $installment_date,
                                                         'due_date' => date_create($installment_date)->modify("+7 days")->format('Y-m-d'),
@@ -500,7 +1639,7 @@ class Import extends Security_Controller
                                                         'net_fee' => $installment_total_amount - $discount,
                                                         'is_claimable' => $is_claimable == "Claimable" ? 1 : 0,
                                                         'is_auto_created' => 1,
-                                                        'sort' => $key,
+                                                        'sort' => $schedule_key,
                                                         'status' => $selected_status,
                                                     );
 
@@ -634,6 +1773,64 @@ class Import extends Security_Controller
         echo json_encode($log_data);
     }
 
+    function populate_client_subagents()
+    {
+        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
+        $offset = 0;
+        $source = get_source_url_of_file(array(
+            "file_name" => 'client_report7bea6a0b-f737-44d5-bf8c-15f5cab6184a669a05c27dd566.52659325.csv',
+            "file_id" => 0,
+            "service_type" => '',
+        ), get_general_file_path("import", $this->login_user->id));
+        $log_source = $_SERVER['DOCUMENT_ROOT'] . '/' . get_logs_file_path("import") . 'clients.log';
+
+        $file = $this->_read_csv($source);
+        $stop_at_offset = $offset + 500;
+        $total_rows = $this->_file_total_rows($source);
+        $current_key = 0;
+        $succeeded = array();
+        while (($line = fgetcsv($file)) !== FALSE) {
+            if ($this->skip_first_row && $current_key == 0) {
+                $current_key++;
+                continue;
+            }
+            if ($current_key >= $offset && $current_key < $stop_at_offset) {
+                if (!$this->_isEmpty($line[13])) {
+                    $partner_full_name = strtolower(trim($line[27]));
+                    $internal_id = strtolower(trim($line[13]));
+
+                    $client_options = array('va_internal_id' => $internal_id);
+                    $client = $this->_trigger("Clients_model")->get_details($client_options)->getRow();
+                    if ($client && $client->account_type != 3) {
+                        $client_partner = $this->_trigger("Clients_model")->get_by_full_name($partner_full_name, '3', false);
+                        if ($client_partner) {
+                            $data = array("partner_id" => $client_partner);
+                            $success = $this->_trigger("Clients_model")->ci_save($data, $client->id);
+                            if ($success) {
+                                $succeeded[] = $success;
+                            }
+                        }
+                    }
+                }
+            }
+            $current_key++;
+        }
+
+        $log_data = array(
+            'source' => $source,
+            'log_source' => $log_source,
+            'offset' => $offset,
+            'next_offset' => $offset + $this->batch_size,
+            'total_rows' => $total_rows,
+            'no_of_succeeded_queries' => count($succeeded),
+            'succeeded_queries' => implode(',', $succeeded)
+        );
+
+        $this->_log($log_source, $log_data);
+
+        echo json_encode($log_data);
+    }
+
     function populate_visa()
     {
         $offset = 4000;
@@ -709,7 +1906,7 @@ class Import extends Security_Controller
 
     function populate_client_notes()
     {
-        ini_set('max_execution_time', 500); //execute maximum 500 seconds 
+        ini_set('max_execution_time', 600); //execute maximum 600 seconds 
         $offset = $this->offset;
         $stop_at_offset = $offset + $this->batch_size;
         $current_key = 0;
@@ -719,7 +1916,7 @@ class Import extends Security_Controller
         $processed_ids = 0;
         $total_items = 0;
         $source = get_source_url_of_file(array(
-            "file_name" => 'run_results_client_notes.json',
+            "file_name" => 'run_results_clients_missing_notes_2.json',
             "file_id" => 0,
             "service_type" => '',
         ), get_general_file_path("import", $this->login_user->id));
@@ -756,7 +1953,7 @@ class Import extends Security_Controller
                                         if ($client_id) {
                                             $note_data = array(
                                                 'created_by' => 0,
-                                                'created_at' => date_format(date_create_from_format("d/m/Y", $date), "Y-m-d h:m:s"),
+                                                'created_at' => $this->_f2d($date, "d/m/Y"),
                                                 'title' => $title,
                                                 'description' => $content ?? "",
                                                 'is_public' => 1,
@@ -811,13 +2008,13 @@ class Import extends Security_Controller
         $processed_ids = 0;
         $total_items = 0;
         $source = get_source_url_of_file(array(
-            "file_name" => 'client_activity_links.json',
+            "file_name" => 'archived_clients_links.json',
             "file_id" => 0,
             "service_type" => '',
         ), get_general_file_path("import", $this->login_user->id));
 
         $data_source = get_source_url_of_file(array(
-            "file_name" => 'client_activity_data.json',
+            "file_name" => 'run_results_archived_clients_activities.json',
             "file_id" => 0,
             "service_type" => '',
         ), get_general_file_path("import", $this->login_user->id));
@@ -856,36 +2053,38 @@ class Import extends Security_Controller
 
                                                         $can_save = FALSE;
 
-                                                        if ($title && $content) {
+                                                        if ($title) {
                                                             $timeline_data = array(
                                                                 'client_id' => $client_id,
                                                                 'title' => $title,
                                                                 'created_by' => 0
                                                             );
 
-                                                            if (str_contains(strtolower($title), 'changed assignee') && count($content) == 8) {
-                                                                $from_name = get_array_value(get_array_value($content, 1), 'name');
-                                                                $from_email = get_array_value(get_array_value($content, 2), 'name');
-                                                                $to_name = get_array_value(get_array_value($content, 6), 'name');
-                                                                $to_email = get_array_value(get_array_value($content, 7), 'name');
-                                                                $date = get_array_value(get_array_value($content, 0), 'date');
+                                                            if ($content) {
+                                                                if (str_contains(strtolower($title), 'changed assignee') && count($content) == 8) {
+                                                                    $from_name = get_array_value(get_array_value($content, 1), 'name');
+                                                                    $from_email = get_array_value(get_array_value($content, 2), 'name');
+                                                                    $to_name = get_array_value(get_array_value($content, 6), 'name');
+                                                                    $to_email = get_array_value(get_array_value($content, 7), 'name');
+                                                                    $date = get_array_value(get_array_value($content, 0), 'date');
 
-                                                                $caption = timeline_label('from') . $from_name . ' (' . $from_email . ') ' . timeline_label('to') . $to_name . ' (' . $to_email . ')';
+                                                                    $caption = timeline_label('from') . $from_name . ' (' . $from_email . ') ' . timeline_label('to') . $to_name . ' (' . $to_email . ')';
 
-                                                                $timeline_data['caption'] = $caption;
-                                                                $timeline_data['created_at'] = date_format(date_create_from_format("d M Y, h:i A", $date), "Y-m-d h:m:s");
+                                                                    $timeline_data['caption'] = $caption;
+                                                                    $timeline_data['created_at'] = $this->_f2d($date, "d M Y, h:i A");
 
-                                                                $can_save = TRUE;
-                                                            } elseif (count($content) == 1) {
-                                                                $caption = get_array_value(get_array_value($content, 0), 'name');
-                                                                $date = get_array_value(get_array_value($content, 0), 'date');
+                                                                    $can_save = TRUE;
+                                                                } elseif (count($content) == 1) {
+                                                                    $caption = get_array_value(get_array_value($content, 0), 'name');
+                                                                    $date = get_array_value(get_array_value($content, 0), 'date');
 
-                                                                $caption = trim(preg_replace('/\s\s+/', ' ', $caption));
+                                                                    $caption = trim(preg_replace('/\s\s+/', ' ', $caption));
 
-                                                                $timeline_data['caption'] = $caption;
-                                                                $timeline_data['created_at'] = date_format(date_create_from_format("d M Y, h:i A", $date), "Y-m-d h:m:s");
+                                                                    $timeline_data['caption'] = $caption;
+                                                                    $timeline_data['created_at'] = $this->_f2d($date, "d M Y, h:i A");
 
-                                                                $can_save = TRUE;
+                                                                    $can_save = TRUE;
+                                                                }
                                                             }
 
                                                             $processed_ids++;
@@ -1243,9 +2442,9 @@ class Import extends Security_Controller
         }
     }
 
-    private function _parse_price($str = "")
+    private function _project_comment($data = array())
     {
-        return (float)str_replace(',', '', trim($str));
+        return $this->Project_comments_model->ci_save($data);
     }
 
     private function _project_partners($project_id = 0, $partner_id = 0)
@@ -1523,6 +2722,9 @@ class Import extends Security_Controller
 
     private function _read_json($source = '')
     {
+        if (!ini_get('allow_url_fopen')) {
+            ini_set('allow_url_fopen', 1);
+        }
         $file = file_get_contents($source);
         if ($file) {
             $data = json_decode($file, true);
@@ -1617,12 +2819,7 @@ class Import extends Security_Controller
                 break;
             case 'p':
 
-                $v = str_replace(array(' ', '+', '-', '(', ')'), '', $v);
-
-                $str1 = substr((string)(int)$v, 0, 2);
-                $str2 = substr((string)(int)$v, 2);
-
-                $v = array($output[0] => $str1, $output[1] => $str2);
+                $v = $this->_phone($v, $output);
 
                 break;
             case 'l':
@@ -1854,6 +3051,21 @@ class Import extends Security_Controller
         return $this->$t;
     }
 
+    private function _invoice_item_val($data = array(), $index = 0, $prop_type = array())
+    {
+        $val = '';
+        foreach ($data as $item) {
+            $title = strtolower(trim(get_array_value($item, 'title')));
+            if (in_array($title, $prop_type)) {
+                $entries = get_array_value($item, 'entries');
+                $val = get_array_value(get_array_value($entries, $index), 'title');
+                break;
+            }
+        }
+
+        return $val;
+    }
+
     private function _name($str = "", $output = array('first_name', 'last_name'))
     {
         $lastSpace = strrpos($str, ' ');
@@ -1862,26 +3074,56 @@ class Import extends Security_Controller
         return array($output[0] => $str1, $output[1] => $str2);
     }
 
-    private function _label($v, $context)
+    private function _phone($str = "", $output = array('phone_code', 'phone'))
     {
-        $options = array('title' => $v, 'context' => $context);
-        $label = $this->Labels_model->get_details($options)->getRow();
-        if ($label) {
-            return $label->id;
+        $str = str_replace(array(' ', '+', '-', '(', ')'), '', $str);
+
+        $str1 = substr((string)(int)$str, 0, 2);
+        $str2 = substr((string)(int)$str, 2);
+
+        return array($output[0] => $str1, $output[1] => $str2);
+    }
+
+    private function _price($str = "")
+    {
+        return unformat_currency($str);
+    }
+
+    private function _payment_method($v = "", $available_on_invoice = 1)
+    {
+        $options = array('title' => $this->_mutate(trim($v), 'ucwords'));
+        $payment_method = $this->_trigger('Payment_methods_model')->get_details($options)->getRow();
+        if ($payment_method) {
+            return $payment_method->id;
         } else {
             $data = array(
                 'title' => $this->_mutate(trim($v), 'ucwords'),
-                'color' => $this->_color(),
-                'context' => $context
+                'type' => 'custom',
+                'Description' => "Payment Method",
+                'online_payable' => 0,
+                'available_on_invoice' => $available_on_invoice,
+                'minimum_payment_amount' => 0,
+                'settings' => '',
+                'sort' => 0
             );
-            $success = $this->Labels_model->ci_save($data);
+            $success = $this->_trigger('Payment_methods_model')->ci_save($data);
             return $success;
         }
     }
 
+    private function _label($v, $context)
+    {
+        return context_label($v, $context);
+    }
+
+    private function _source($v)
+    {
+        return client_source($v);
+    }
+
     private function _get_client_id($internal_id = "")
     {
-        $options = array('va_internal_id' => $internal_id, 'leads_only' => true);
+        $options = array('va_internal_id' => $internal_id);
         $client = $this->_trigger('Clients_model')->get_details($options)->getRow();
 
         if ($client) {
@@ -1896,16 +3138,19 @@ class Import extends Security_Controller
         return substr(trim($str), 2);
     }
 
+    private function _f2d($str = "", $f = "")
+    {
+        $date = date_create_from_format($f, $str);
+        if ($date) {
+            return date_format($date, "Y-m-d h:m:s");
+        } else {
+            return get_current_utc_time();
+        }
+    }
+
     private function _uniqueId($prefix = '')
     {
-        $alphabet = 'abcdefghijklmnopqrstuvwxyz1234567890';
-        $unique = array();
-        $alphaLength = strlen($alphabet) - 1;
-        for ($i = 0; $i < 14; $i++) {
-            $n = rand(0, $alphaLength);
-            $unique[] = $alphabet[$n];
-        }
-        return $prefix . implode($unique); // LENGTH = strlen(prefix) + 13
+        return _gen_va_uid($prefix); // LENGTH = strlen(prefix) + 13
     }
 
     private function _gen($k)
@@ -2052,7 +3297,7 @@ class Import extends Security_Controller
     private function _application_parseables()
     {
         $parseables = array(
-            array('key' => 38, 'operation' => 'find:t', 'output' => 'client_id', 'config' => array('mb' => 'strtolower', 'c' => 'id', 't' => 'Clients_model', 'cbm' => array('va_internal_id'), 'cbm_s' => array('leads_only' => TRUE))),
+            array('key' => 38, 'operation' => 'find:t', 'output' => 'client_id', 'config' => array('mb' => 'strtolower', 'c' => 'id', 't' => 'Clients_model', 'cbm' => array('va_internal_id'), 'cbm_s' => array())),
             array('key' => 10, 'operation' => 'find:t', 'output' => 'workflow_id', 'config' => array('c' => 'id', 't' => 'General_files_model', 'cbm' => array('description'), 'cbm_s' => array("file_type" => "workflow"))),
             array('key' => 10, 'operation' => 'find:t', 'output' => 'doc_check_list_id', 'config' => array('c' => 'id', 't' => 'General_files_model', 'cbm' => array('description'), 'cbm_s' => array("file_type" => "document_check_list"))),
             array('key' => 12, 'operation' => 'find:t', 'output' => 'partner_ids', 'config' => array('c' => 'client_id', 't' => 'Users_model', 'cbm' => array('email'), 'cbm_s' => array())),

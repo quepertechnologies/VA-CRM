@@ -14,6 +14,7 @@
 
             <div class="tab-title clearfix no-border time-card-page-title">
                 <div class="title-button-group">
+                    <?php echo modal_anchor(get_uri("check_in/public_qr_code_modal_form"), "<i data-feather='crop' class='icon-16'></i> " . app_lang('qr_code'), array("class" => "btn btn-default", "title" => app_lang('qr_code'))); ?>
                     <?php echo modal_anchor(get_uri("check_in/modal_form"), "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('add_checkin'), array("class" => "btn btn-default", "title" => app_lang('add_checkin'))); ?>
                 </div>
             </div>

@@ -2,13 +2,16 @@
 
 namespace App\Controllers;
 
-class Request_estimate extends App_Controller {
+class Request_estimate extends App_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
-    function index() {
+    function index()
+    {
         if (!get_setting("module_estimate_request")) {
             show_404();
         }
@@ -20,7 +23,8 @@ class Request_estimate extends App_Controller {
         return $this->template->rander("request_estimate/index", $view_data);
     }
 
-    function form($id = 0, $embedded = 0) {
+    function form($id = 0, $embedded = 0)
+    {
         if (!get_setting("module_estimate_request")) {
             show_404();
         }
@@ -51,7 +55,8 @@ class Request_estimate extends App_Controller {
         }
     }
 
-    private function is_valid_recaptcha($recaptcha_post_data) {
+    private function is_valid_recaptcha($recaptcha_post_data)
+    {
         //load recaptcha lib
         require_once(APPPATH . "ThirdParty/recaptcha/autoload.php");
         $recaptcha = new \ReCaptcha\ReCaptcha(get_setting("re_captcha_secret_key"));
@@ -71,14 +76,15 @@ class Request_estimate extends App_Controller {
     }
 
     //save estimate request from client
-    function save_estimate_request() {
-
-
+    function save_estimate_request()
+    {
         $form_id = $this->request->getPost('form_id');
         $assigned_to = $this->request->getPost('assigned_to');
 
         $this->validate_submitted_data(array(
-            "company_name" => "required",
+            "first_name" => "required",
+            "last_name" => "required",
+            "email" => "required",
             "form_id" => "required|numeric"
         ));
 
@@ -99,9 +105,6 @@ class Request_estimate extends App_Controller {
                 return false;
             }
         }
-
-
-
 
         $options = array("related_to" => "estimate_form-" . $form_id);
         $form_fields = $this->Custom_fields_model->get_details($options)->getResult();
@@ -126,18 +129,30 @@ class Request_estimate extends App_Controller {
             );
         } else {
             //unknown client
+            $location_id = get_tm_ol_id($assigned_to, true);
             $leads_data = array(
                 "company_name" => $this->request->getPost('company_name'),
+                "first_name" => $this->request->getPost('first_name'),
+                "last_name" => $this->request->getPost('last_name'),
+                "email" => $this->request->getPost('email'),
+                'unique_id' => _gen_va_uid($this->request->getPost('first_name') . ' ' . $this->request->getPost('last_name')),
                 "address" => $this->request->getPost('address'),
                 "city" => $this->request->getPost('city'),
                 "state" => $this->request->getPost('state'),
                 "zip" => $this->request->getPost('zip'),
                 "country" => $this->request->getPost('country'),
                 "phone" => $this->request->getPost('phone'),
+                "date_of_birth" => $this->request->getPost('date_of_birth'),
                 "is_lead" => 1,
+                'account_type' => 1,
+                'type' => 'person',
                 "lead_status_id" => $this->Lead_status_model->get_first_status(),
                 "created_date" => get_current_utc_time(),
-                "owner_id" => $assigned_to ? $assigned_to : 0
+                "owner_id" => $assigned_to ? $assigned_to : 0,
+                "created_by" => $assigned_to ? $assigned_to : 0,
+                "assignee" => $assigned_to ? $assigned_to : 0,
+                'location_id' => $location_id,
+                'created_by_location_id' => $location_id
             );
 
             $leads_data = clean_data($leads_data);
@@ -157,6 +172,13 @@ class Request_estimate extends App_Controller {
 
                 $lead_contact_data = clean_data($lead_contact_data);
                 $lead_contact_id = $this->Users_model->ci_save($lead_contact_data);
+
+                if ($lead_contact_id) {
+                    $new_lead_data = array(
+                        'primary_contact_id' => $lead_contact_id
+                    );
+                    $this->Clients_model->ci_save($new_lead_data, $lead_id);
+                }
             }
 
             $request_data = array(
@@ -206,26 +228,46 @@ class Request_estimate extends App_Controller {
     }
 
     //prepare data for datatable for estimate form's field list
-    function estimate_form_filed_list_data($id = 0) {
+    function estimate_form_filed_list_data($id = 0)
+    {
         validate_numeric_value($id);
 
         $options = array("related_to" => "estimate_form-" . $id);
         $list_data = $this->Custom_fields_model->get_details($options)->getResult();
         $result = array();
+        $single_row = '';
         foreach ($list_data as $data) {
             $result[] = $this->_make_form_field_row($data);
         }
+        $result[] = $single_row;
+        echo json_encode(array("data" => $result));
+    }
+
+    //prepare data for datatable for estimate form's field list
+    function estimate_form_filed_list_data_as_single_row($id = 0)
+    {
+        validate_numeric_value($id);
+
+        $options = array("related_to" => "estimate_form-" . $id);
+        $list_data = $this->Custom_fields_model->get_details($options)->getResult();
+        $result = array();
+        $single_row = '';
+        foreach ($list_data as $data) {
+            $single_row .= $this->_make_form_field_row($data)[0];
+        }
+        $result[] = $single_row;
         echo json_encode(array("data" => $result));
     }
 
     //prepare a row of estimates form's field list
-    private function _make_form_field_row($data) {
+    private function _make_form_field_row($data)
+    {
 
         $required = "";
         if ($data->required) {
             $required = "*";
         }
-        
+
         $title = "";
         if ($data->title_language_key) {
             $title = app_lang($data->title_language_key);
@@ -240,9 +282,9 @@ class Request_estimate extends App_Controller {
             $placeholder = $data->placeholder;
         }
 
-        $field = "<label for='custom_field_$data->id' data-id='$data->id' class='field-row'>$title $required</label>";
+        $field_label = "<label for='custom_field_$data->id' data-id='$data->id' class='field-row'>$title $required</label>";
 
-        $field .= "<div class='form-group'>" . $this->template->view("custom_fields/input_" . $data->field_type, array("field_info" => $data, "placeholder" => $placeholder)) . "</div>";
+        $field = "<div class='form-group col-md-6 col-lg-6 col-sm-6 col-xs-12'>" . $field_label . $this->template->view("custom_fields/input_" . $data->field_type, array("field_info" => $data, "placeholder" => $placeholder)) . "</div>";
 
         //extract estimate id from related_to field. 2nd index should be the id
         $estimate_form_id = get_array_value(explode("-", $data->related_to), 1);
@@ -251,22 +293,23 @@ class Request_estimate extends App_Controller {
             $field,
             $data->sort,
             modal_anchor(get_uri("estimate_requests/estimate_form_field_modal_form/" . $estimate_form_id), "<i data-feather='edit' class='icon-16'></i>", array("class" => "edit", "title" => app_lang('edit_form'), "data-post-id" => $data->id))
-            . js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("estimate_requests/estimate_form_field_delete"), "data-action" => "delete"))
+                . js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("estimate_requests/estimate_form_field_delete"), "data-action" => "delete"))
         );
     }
 
     /* upload a file */
 
-    function upload_file() {
+    function upload_file()
+    {
         upload_file_to_temp();
     }
 
     /* check valid file for ticket */
 
-    function validate_file() {
-        return validate_post_file($this->request->getPost("file_name"));
+    function validate_file()
+    {
+        return validate_pdf_file($this->request->getPost("file_name"));
     }
-
 }
 
 /* End of file quotations.php */

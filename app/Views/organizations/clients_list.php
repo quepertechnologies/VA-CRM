@@ -63,7 +63,7 @@
                 {
                     title: "Organization Name",
                     "class": "all",
-                    order_by: "first_name"
+                    order_by: "company_name"
                 },
                 {
                     title: "<?php echo app_lang("created_at") ?>",

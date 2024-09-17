@@ -555,6 +555,102 @@ if (!function_exists("get_onedrive_access_token")) {
     }
 }
 
+if (!function_exists("search_ms_onedrive_directory_items")) {
+
+    /**
+     * Upload the buffer stream to the OneDrive
+     * @return string|bool access token
+     */
+    function search_ms_onedrive_directory_items($dir_path = "", $search_term = "")
+    {
+        $onedrive_access_token = get_onedrive_access_token();
+        // echo 'https://graph.microsoft.com/v1.0/drives/' . get_setting('ms_onedrive_clients_directory_id') . '/root:/' . $source_path . ':/children';
+        if ($onedrive_access_token) {
+            $authorization = "Authorization: Bearer " . $onedrive_access_token; // Prepare the authorization token
+            $curl = curl_init();
+            $query = urlencode($dir_path);
+            curl_setopt_array($curl, array(
+                // CURLOPT_URL => "https://graph.microsoft.com/v1.0/sites/root",
+                CURLOPT_URL => "https://graph.microsoft.com/v1.0/sites/visaallianceau.sharepoint.com,6ba58890-94c9-4971-90a5-6344596e6ac4,1d96d60f-84b2-4344-8b2a-78af8dc5721c/drives/b!kIila8mUcUmQpWNEWW5qxA_Wlh2yhERDiyp4r43Fchzsj3tNzDAtQbaFsSSYEGev/root:/Clients/$query:/children?\$expand=listItem(\$expand=fields)",
+                // CURLOPT_URL => "https://graph.microsoft.com/v1.0/sites/visaallianceau.sharepoint.com,6ba58890-94c9-4971-90a5-6344596e6ac4,1d96d60f-84b2-4344-8b2a-78af8dc5721c/drive/root",
+                // CURLOPT_URL => "https://graph.microsoft.com/v1.0/sites/visaallianceau.sharepoint.com:/sites/VASydneyHQ",
+                // CURLOPT_URL => 'https://graph.microsoft.com/v1.0/drives/' . get_setting('ms_onedrive_clients_directory_id') . "/root:/" . $dir_path . "/search(q='" . $search_term . "')",
+                // CURLOPT_URL => 'https://graph.microsoft.com/v1.0/drives/' . get_setting('ms_onedrive_clients_directory_id') . "/root:/" . $dir_path . "/search(q='" . $search_term . "')",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => array(
+                    $authorization
+                ),
+            ));
+            $response = curl_exec($curl);
+            $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            var_dump($response);
+            exit();
+            curl_close($curl);
+            if ($httpcode == "200" || $httpcode == "201") {
+                return $response;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+}
+
+if (!function_exists("search_od_directory")) {
+
+    /**
+     * Upload the buffer stream to the OneDrive
+     * @return string|bool access token
+     */
+    function search_od_directory($dir_path = "", $search_term = "")
+    {
+        $onedrive_access_token = get_onedrive_access_token();
+        // echo 'https://graph.microsoft.com/v1.0/drives/' . get_setting('ms_onedrive_clients_directory_id') . '/root:/' . $source_path . ':/children';
+        if ($onedrive_access_token) {
+            $authorization = "Authorization: Bearer " . $onedrive_access_token; // Prepare the authorization token
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                // CURLOPT_URL => "https://graph.microsoft.com/v1.0/sites/root",
+                // CURLOPT_URL => "https://graph.microsoft.com/v1.0/sites/visaallianceau.sharepoint.com,6ba58890-94c9-4971-90a5-6344596e6ac4,1d96d60f-84b2-4344-8b2a-78af8dc5721c/drives/b!kIila8mUcUmQpWNEWW5qxA_Wlh2yhERDiyp4r43Fchzsj3tNzDAtQbaFsSSYEGev/root:/Clients/$query:/children?\$expand=listItem(\$expand=fields)",
+                CURLOPT_URL => "https://graph.microsoft.com/v1.0/sites/visaallianceau.sharepoint.com,6ba58890-94c9-4971-90a5-6344596e6ac4,1d96d60f-84b2-4344-8b2a-78af8dc5721c/drives/b!kIila8mUcUmQpWNEWW5qxA_Wlh2yhERDiyp4r43Fchzsj3tNzDAtQbaFsSSYEGev/root:/Clients/$dir_path" . ":/search(q='" . $search_term . "')",
+                // CURLOPT_URL => "https://graph.microsoft.com/v1.0/sites/visaallianceau.sharepoint.com,6ba58890-94c9-4971-90a5-6344596e6ac4,1d96d60f-84b2-4344-8b2a-78af8dc5721c/drive/root",
+                // CURLOPT_URL => "https://graph.microsoft.com/v1.0/sites/visaallianceau.sharepoint.com:/sites/VASydneyHQ",
+                // CURLOPT_URL => 'https://graph.microsoft.com/v1.0/drives/' . get_setting('ms_onedrive_clients_directory_id') . "/root:/" . $dir_path . "/search(q='" . $search_term . "')",
+                // CURLOPT_URL => 'https://graph.microsoft.com/v1.0/drives/' . get_setting('ms_onedrive_clients_directory_id') . "/root:/" . $dir_path . "/search(q='" . $search_term . "')",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => array(
+                    $authorization
+                ),
+            ));
+            $response = curl_exec($curl);
+            $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+            // var_dump($response);
+            // exit();
+            curl_close($curl);
+            if ($httpcode == "200" || $httpcode == "201") {
+                return json_decode($response, true);
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+}
+
 if (!function_exists("list_ms_onedrive_directory_items")) {
 
     /**
@@ -587,6 +683,28 @@ if (!function_exists("list_ms_onedrive_directory_items")) {
             curl_close($curl);
             if ($httpcode == "200" || $httpcode == "201") {
                 return $response;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+}
+
+if (!function_exists("search_client_od_items")) {
+
+    /**
+     * Search client drive items on MS One Drive
+     * @return array|bool result
+     */
+    function search_client_od_items($directory_path = "", $search_term = "")
+    {
+        $json = search_ms_onedrive_directory_items($directory_path, $search_term);
+        if ($json) {
+            $data = json_decode($json, TRUE);
+            if ($data && array_key_exists("value", $data)) {
+                return $data['value'];
             } else {
                 return false;
             }
@@ -1033,6 +1151,29 @@ if (!function_exists('move_files_from_temp_dir_to_permanent_dir')) {
 
 
 /**
+ * check pdf file is valid or not
+ * 
+ * @param string $file_name
+ * @return json data of success or error message
+ */
+if (!function_exists('validate_pdf_file')) {
+
+    function validate_pdf_file($file_name = "")
+    {
+        if (!ini_get('file_uploads')) {
+            echo json_encode(array("success" => false, 'message' => app_lang('please_enable_the_file_uploads_php_settings')));
+            exit();
+        }
+
+        if (is_valid_pdf_file_to_upload($file_name)) {
+            echo json_encode(array("success" => true));
+        } else {
+            echo json_encode(array("success" => false, 'message' => app_lang('invalid_file_type') . " ($file_name)"));
+        }
+    }
+}
+
+/**
  * check post file is valid or not
  * 
  * @param string $file_name
@@ -1078,6 +1219,28 @@ if (!function_exists('validate_workflow_file')) {
     }
 }
 
+
+/**
+ * check if the file type is PDF for upload
+ * 
+ * @param string $file_name
+ * @return true/false
+ */
+if (!function_exists('is_valid_pdf_file_to_upload')) {
+
+    function is_valid_pdf_file_to_upload($file_name = "")
+    {
+
+        if (!$file_name)
+            return false;
+
+        $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+        if ($file_ext == 'pdf') {
+            return true;
+        }
+    }
+}
 
 /**
  * check the file type is valid for upload

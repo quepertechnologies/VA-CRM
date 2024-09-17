@@ -35,6 +35,42 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="row">
+                    <label for="fresh_desk_domain" class=" col-md-2"><?php echo app_lang('fresh_desk_domain'); ?></label>
+                    <div class=" col-md-10">
+                        <?php
+                        echo form_input(array(
+                            "id" => "fresh_desk_domain",
+                            "name" => "fresh_desk_domain",
+                            "value" => get_setting('fresh_desk_domain'),
+                            "class" => "form-control",
+                            "placeholder" => app_lang('fresh_desk_domain'),
+                            "data-rule-required" => true,
+                            "data-msg-required" => app_lang("field_required"),
+                        ));
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label for="fresh_desk_company_name" class=" col-md-2"><?php echo app_lang('fresh_desk_company_name'); ?></label>
+                    <div class=" col-md-10">
+                        <?php
+                        echo form_input(array(
+                            "id" => "fresh_desk_company_name",
+                            "name" => "fresh_desk_company_name",
+                            "value" => get_setting('fresh_desk_company_name'),
+                            "class" => "form-control",
+                            "placeholder" => app_lang('fresh_desk_company_name'),
+                            "data-rule-required" => true,
+                            "data-msg-required" => app_lang("field_required"),
+                        ));
+                        ?>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -75,6 +111,10 @@
                 $saveBtn.removeClass("hide");
             }
         });
+
+        $('#fresh_desk_company_name').on("keyup", function() {
+            $(this).val(String($(this).val()).replace(' ', '').toLowerCase());
+        })
 
     });
 </script>

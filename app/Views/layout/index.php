@@ -15,7 +15,7 @@ $left_menu_minimized = get_cookie("left_menu_minimized");
 
     <?php
     if ($topbar) {
-        echo view($topbar, array('locations_dropdown' => $locations_dropdown));
+        echo view($topbar, array('locations_dropdown' => (isset($locations_dropdown) ? $locations_dropdown : array())));
     }
 
     $left_menu_toggle_id = "left-menu-toggle-mask";

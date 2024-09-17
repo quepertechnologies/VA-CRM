@@ -213,6 +213,8 @@ class Applications extends Security_Controller
 
         $view_data["selected_status_id"] = $status_id;
         $view_data['project_statuses'] = $this->Project_status_model->get_details()->getResult();
+        $view_data['partners_dropdown'] = json_encode($this->Clients_model->get_dropdown_list(array('first_name', 'last_name'), 'id', array('partner_type' => 'institute', 'account_type' => 3), true));
+        $view_data['workflows_dropdown'] = json_encode($this->make_workflow_dropdown(true));
 
         if ($this->login_user->user_type === "staff") {
             $view_data["can_edit_projects"] = $this->can_edit_projects();

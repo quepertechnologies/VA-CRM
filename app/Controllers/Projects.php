@@ -266,6 +266,10 @@ class Projects extends Security_Controller
             $view_data['model_info']->client_id = $client_id;
         }
 
+        if (!$client_id && $view_data['model_info']->client_id) {
+            $client_id = $view_data['model_info']->client_id;
+        }
+
         //check if it's from estimate. if so, then prepare for project
         $estimate_id = $this->request->getPost('estimate_id');
         if ($estimate_id) {
@@ -295,14 +299,42 @@ class Projects extends Security_Controller
         }
         $view_data['workflows_dropdown'] = $this->make_workflow_dropdown();
         $view_data['doc_check_list_dropdown'] = $this->make_doc_check_list_dropdown();
-        $view_data['partners_dropdown'] = $this->make_partners_dropdown();
+        $view_data['partners_dropdown'] = $this->make_partners_dropdown('institute');
+        $view_data['referrals_dropdown'] = $this->make_partners_dropdown('referral', true);
+        $view_data['subagent_commission'] = '';
+        if ($client_id) {
+            $client_info = $this->Clients_model->get_one($client_id);
+
+            if ($client_info && $client_info->partner_id) {
+                $subagent = $this->Clients_model->get_one($client_info->partner_id);
+                $partner_options = array(
+                    'partner_id' => $client_info->partner_id
+                );
+                $project_partner = $this->Project_partners_model->get_details($partner_options)->getRow();
+
+                if ($project_partner) {
+                    $view_data['subagent_commission'] = $project_partner->commission;
+                }
+
+                if ($subagent) {
+                    $view_data['subagent_full_name'] = $subagent->first_name . ' ' . $subagent->last_name;
+                    $view_data['subagent'] = $subagent;
+                }
+            }
+        }
+
+        $referral_info = $this->Project_partners_model->get_details(array('project_id' => $project_id, 'partner_type' => 'referral'))->getRow();
+        $view_data['referral_info'] = $referral_info;
 
         $view_data['label_suggestions'] = $this->make_labels_dropdown("project", $view_data['model_info']->labels);
         $view_data['statuses'] = $this->Project_status_model->get_details()->getResult();
         $view_data["can_edit_projects"] = $this->can_edit_projects();
-        $project_partner_options = array('project_id' => $project_id);
-        $view_data["project_partners"] = $this->Project_partners_model->get_details($project_partner_options)->getResult();
-
+        if ($project_id) {
+            $project_partner_options = array('project_id' => $project_id, 'partner_type' => 'institute');
+            $view_data["project_partners"] = $this->Project_partners_model->get_details($project_partner_options)->getResult();
+        } else {
+            $view_data["project_partners"] = array();
+        }
         return $this->template->view('projects/modal_form', $view_data);
     }
 
@@ -635,6 +667,7 @@ class Projects extends Security_Controller
         $doc_check_list_id = $this->request->getPost('doc_check_list_id');
         $project_type = $this->request->getPost('project_type');
         $client_id = $this->request->getPost('client_id') ? $this->request->getPost('client_id') : 0;
+        $partner_client_id = $this->request->getPost('partner_client_id') ? $this->request->getPost('partner_client_id') : '';
 
         $client_info = $this->Clients_model->get_one($client_id);
 
@@ -666,6 +699,7 @@ class Projects extends Security_Controller
             "title" => $_title,
             "description" => $this->request->getPost('description'),
             "client_id" => ($project_type === "internal_project") ? 0 : $client_id,
+            "partner_client_id" => $partner_client_id,
             "start_date" => $this->request->getPost('start_date'),
             "deadline" => $this->request->getPost('deadline'),
             "project_type" => $project_type,
@@ -678,7 +712,7 @@ class Projects extends Security_Controller
             "doc_check_list_id" => $doc_check_list_id ? $doc_check_list_id : 0,
             "partner_ids" => $this->request->getPost('partner_ids'),
             'location_id' => get_ltm_opl_id(),
-            'company_name' => $client_info->account_type === 'organization' ? $client_info->company_name : $client_info->first_name . ' ' . $client_info->last_name
+            'company_name' => $this->get_client_full_name(0, $client_info)
         );
 
         if (!$id) {
@@ -719,18 +753,18 @@ class Projects extends Security_Controller
             $timeline_data = array(
                 'client_id' => $data["client_id"],
                 'title' => get_login_team_member_profile_link(),
-                'caption' => timeline_label('created') . $_link
+                'caption' => $id ? timeline_label('updated') . $_link : timeline_label('created') . $_link
             );
             $this->Timeline_model->ci_save($timeline_data);
 
-            $this->Project_partners_model->delete_where(array('project_id' => $save_id));
+            // $this->Project_partners_model->delete_where(array('project_id' => $save_id));
 
-            $partner_options = array('account_type' => 3);
+            $partner_options = array('account_type' => 3, 'partner_type' => 'institute');
             $partners = $this->Clients_model->get_details($partner_options)->getResult();
 
             $partner_ids = [];
 
-            if (count($partners)) {
+            if (count($partners) && $id) {
                 foreach ($partners as $partner) {
                     if ($this->request->getPost('com_percentage_' . $partner->id)) {
                         $project_partner_data = array(
@@ -738,15 +772,59 @@ class Projects extends Security_Controller
                             'partner_id' => $partner->id,
                             'full_name'  => $this->get_client_full_name(0, $partner),
                             'commission' => $this->request->getPost('com_percentage_' . $partner->id),
-                            'created_date' => get_current_utc_time()
+                            'created_date' => get_current_utc_time(),
+                            'partner_type' => $partner->partner_type
                         );
 
-                        $this->Project_partners_model->ci_save($project_partner_data);
+                        $project_partner = $this->Project_partners_model->get_details(array('partner_id' => $partner->id))->getRow();
+
+                        if ($project_partner) {
+                            $this->Project_partners_model->ci_save($project_partner_data, $project_partner->id);
+                        } else {
+                            $this->Project_partners_model->ci_save($project_partner_data);
+                        }
 
                         $partner_ids[] = $partner->id;
                     }
                 }
             }
+            $subagent_id = 0;
+            $subagent_default_commission = 0;
+            if ($client_info && $client_info->partner_id) {
+                $subagent_id = $client_info->partner_id;
+
+                $partner = $this->Clients_model->get_one($subagent_id);
+
+                if ($partner) {
+                    $subagent_default_commission = $partner->com_percentage ? $partner->com_percentage : 0;
+                }
+            }
+            $subagent_commission = $this->request->getPost('subagent_commission');
+
+            if ($subagent_id) {
+                $project_partner_data = array(
+                    'project_id' => $save_id,
+                    'partner_id' => $subagent_id,
+                    'full_name'  => $this->get_client_full_name($subagent_id),
+                    'commission' => $subagent_commission ? $subagent_commission : $subagent_default_commission,
+                    'created_date' => get_current_utc_time(),
+                    'partner_type' => $partner->partner_type
+                );
+
+                if ($id) {
+                    $project_partner = $this->Project_partners_model->get_details(array('partner_id' => $subagent_id, 'project_id' => $save_id))->getRow();
+                    if ($project_partner) {
+                        $this->Project_partners_model->ci_save($project_partner_data, $project_partner->id);
+                    } else {
+                        $this->Project_partners_model->ci_save($project_partner_data);
+                    }
+                } else {
+                    $this->Project_partners_model->ci_save($project_partner_data);
+                }
+
+                $partner_ids[] = $partner->id;
+            }
+
             $project_data = array('partner_ids' => implode(',', $partner_ids));
             $this->Projects_model->ci_save($project_data, $save_id);
 
@@ -755,6 +833,58 @@ class Projects extends Security_Controller
             //send notification
             if ($status_id == 2) {
                 log_notification("project_completed", array("project_id" => $save_id));
+            }
+
+            $options = array('project_id' => $save_id);
+            $milestones = $this->Milestones_model->get_details($options)->getResult();
+            if ($workflow_id && count($milestones) == 0) {
+                $workflow = $this->General_files_model->get_details(array("id" => $workflow_id))->getRow();
+                if ($workflow) {
+                    $source_url = get_source_url_of_file(make_array_of_file($workflow), get_general_file_path("staff", $workflow->user_id));
+                    $content = file_get_contents($source_url);
+
+                    if ($content) {
+                        $content = json_decode($content, true);
+
+                        if ($content) {
+                            $is_current = 1;
+                            $sort = 1;
+                            foreach ($content as $key => $value) {
+                                $data = array(
+                                    // "due_date" => date_create()->modify("+3 month")->format("Y-m-d"),
+                                    "project_id" => $save_id,
+                                    "is_current" => $is_current,
+                                    'sort' => $sort,
+                                );
+                                $is_current = 0;
+                                $sort++;
+
+                                $doc_check_list = get_array_value($value, 'doc_check_list');
+                                if ($doc_check_list) {
+                                    $data['is_doc_check_list'] = $doc_check_list;
+                                } else {
+                                    $data['is_doc_check_list'] = 0;
+                                }
+
+                                $title = get_array_value($value, 'title');
+                                if ($title) {
+                                    $data['title'] = $title;
+                                } else {
+                                    $data['title'] = "N/A";
+                                }
+
+                                $description = get_array_value($value, 'description');
+                                if ($description) {
+                                    $data['description'] = $description;
+                                } else {
+                                    $data['description'] = "N/A";
+                                }
+
+                                $this->Milestones_model->ci_save($data);
+                            }
+                        }
+                    }
+                }
             }
 
             if (!$id) {
@@ -782,63 +912,6 @@ class Projects extends Security_Controller
                     $this->Orders_model->ci_save($data, $order_id);
                 }
 
-                if ($workflow_id) {
-                    $options = array('project_id' => $save_id);
-                    $milestones = $this->Milestones_model->get_details($options)->getResult();
-                    if (count($milestones)) {
-                        foreach ($milestones as $key => $milestone) {
-                            $this->Milestones_model->delete($milestone->id);
-                        }
-                    }
-                    $workflow = $this->General_files_model->get_details(array("id" => $workflow_id))->getRow();
-                    if ($workflow) {
-                        $source_url = get_source_url_of_file(make_array_of_file($workflow), get_general_file_path("staff", $workflow->user_id));
-                        $content = file_get_contents($source_url);
-
-                        if ($content) {
-                            $content = json_decode($content, true);
-
-                            if ($content) {
-                                $is_current = 1;
-                                $sort = 1;
-                                foreach ($content as $key => $value) {
-                                    $data = array(
-                                        // "due_date" => date_create()->modify("+3 month")->format("Y-m-d"),
-                                        "project_id" => $save_id,
-                                        "is_current" => $is_current,
-                                        'sort' => $sort,
-                                    );
-                                    $is_current = 0;
-                                    $sort++;
-
-                                    $doc_check_list = get_array_value($value, 'doc_check_list');
-                                    if ($doc_check_list) {
-                                        $data['is_doc_check_list'] = $doc_check_list;
-                                    } else {
-                                        $data['is_doc_check_list'] = 0;
-                                    }
-
-                                    $title = get_array_value($value, 'title');
-                                    if ($title) {
-                                        $data['title'] = $title;
-                                    } else {
-                                        $data['title'] = "N/A";
-                                    }
-
-                                    $description = get_array_value($value, 'description');
-                                    if ($description) {
-                                        $data['description'] = $description;
-                                    } else {
-                                        $data['description'] = "N/A";
-                                    }
-
-                                    $this->Milestones_model->ci_save($data);
-                                }
-                            }
-                        }
-                    }
-                }
-
                 $this->_handle_doc_check_list($doc_check_list_id, $save_id);
 
                 log_notification("project_created", array("project_id" => $save_id));
@@ -847,6 +920,36 @@ class Projects extends Security_Controller
         } else {
             echo json_encode(array("success" => false, 'message' => app_lang('error_occurred')));
         }
+    }
+
+
+    /* get list of milestones for filter */
+
+    function get_milestones_for_filter()
+    {
+        $this->access_only_team_members();
+        $milestones = array(array('id' => '', 'text' => '- ' . app_lang('milestone') . ' -'));
+        $workflow_id = $this->request->getPost("workflow_id");
+        if ($workflow_id) {
+            $workflow = $this->General_files_model->get_details(array("id" => $workflow_id))->getRow();
+
+            if ($workflow) {
+                $source_url = get_source_url_of_file(make_array_of_file($workflow), get_general_file_path("staff", $workflow->user_id));
+                $content = file_get_contents($source_url);
+                $content = json_decode($content, true);
+                if ($content) {
+                    foreach ($content as $key => $value) {
+                        $title = get_array_value($value, 'title');
+                        if (!$title) {
+                            $title = "N/A";
+                        }
+                        $milestones[]  = array('id' => $title, 'text' => $title);
+                    }
+                }
+            }
+        }
+
+        echo json_encode($milestones);
     }
 
     /* Change Current Milestone */
@@ -913,8 +1016,20 @@ class Projects extends Security_Controller
         echo json_encode(array("success" => true, 'message' => app_lang('success')));
     }
 
-    function next_milestone($project_id = 0)
+    function project_next_stage_modal_form()
     {
+        $project_id = $this->request->getPost('project_id');
+
+        $view_data['project_id'] = $project_id;
+
+        return $this->template->view('projects/project_next_stage_modal_form', $view_data);
+    }
+
+    function next_milestone()
+    {
+        $project_id = $this->request->getPost('project_id');
+        $note = $this->request->getPost('note');
+
         if (!$this->can_edit_milestones()) {
             app_redirect("forbidden");
         }
@@ -941,14 +1056,14 @@ class Projects extends Security_Controller
             $tasks = $this->Tasks_model->get_details($options)->getResult();
 
             $is_incomplete = false;
-            if (count($tasks)) {
-                foreach ($tasks as $key => $task) {
-                    if ((int)$task->status_id != 3) {
-                        $is_incomplete = true;
-                        break;
-                    }
-                }
-            }
+            // if (count($tasks)) {
+            //     foreach ($tasks as $key => $task) {
+            //         if ((int)$task->status_id != 3) {
+            //             $is_incomplete = true;
+            //             break;
+            //         }
+            //     }
+            // }
 
             if (!$is_incomplete) {
                 $next_sort = $milestone_info->sort;
@@ -967,6 +1082,20 @@ class Projects extends Security_Controller
                     $this->Milestones_model->ci_save($current_data, $milestone_info->id);
                     $this->Milestones_model->ci_save($data, $next_milestone_info->id);
                 }
+
+
+                $note_data = array(
+                    'created_by' => $this->login_user->id,
+                    'created_at' => get_current_utc_time(),
+                    'title' => 'Changed the stage to ' . $next_milestone_info->title,
+                    'description' => $note,
+                    'project_id' => $project_id,
+                    'milestone_id' => $this->get_current_milestone_id($project_id),
+                    'is_public' => 1
+                );
+
+                $this->Notes_model->ci_save($note_data);
+
                 echo json_encode(array("success" => true, 'message' => app_lang('success')));
             } else {
                 echo json_encode(array("success" => false, 'message' => app_lang('error_occurred')));
@@ -1331,7 +1460,7 @@ class Projects extends Security_Controller
         }
     }
 
-    /* list of projcts, prepared for datatable  */
+    /* list of projects, prepared for datatable  */
 
     function list_data()
     {
@@ -1348,6 +1477,10 @@ class Projects extends Security_Controller
             "start_date_from" => $this->request->getPost("start_date_from"),
             "start_date_to" => $this->request->getPost("start_date_to"),
             "deadline" => $this->request->getPost('deadline'),
+            "partner_id" => $this->request->getPost('partner_id'),
+            "workflow_id" => $this->request->getPost('workflow_id'),
+            "location_ids" => get_ltm_opl_id(false, ','),
+            "current_milestone_title" => $this->request->getPost('current_milestone_title'),
             "custom_field_filter" => $this->prepare_custom_field_filter_values("projects", $this->login_user->is_admin, $this->login_user->user_type)
         );
 
@@ -1368,11 +1501,14 @@ class Projects extends Security_Controller
             $result = array();
         }
 
+        $result_data = array();
         foreach ($list_data as $data) {
-            $result[] = $this->_make_row($data, $custom_fields);
+            $result_data[] = $this->_make_row($data, $custom_fields);
         }
 
-        echo json_encode(array("data" => $result));
+        $result["data"] = $result_data;
+
+        echo json_encode($result);
     }
 
     /* list of projects, prepared for data-table  */
@@ -1396,7 +1532,7 @@ class Projects extends Security_Controller
             app_redirect("forbidden");
         }
 
-        $options["user_id"] = $team_member_id;
+        $options["client_assignee"] = $team_member_id;
 
         $list_data = $this->Projects_model->get_details($options)->getResult();
         $result = array();
@@ -1417,14 +1553,23 @@ class Projects extends Security_Controller
         $status_ids = $this->request->getPost('status_id') ? implode(",", $this->request->getPost('status_id')) : "";
 
         $options = array(
-            "client_id" => $client_id,
+            // "client_id" => $client_id,
             "status_ids" => $status_ids,
             "project_label" => $this->request->getPost("project_label"),
             "custom_fields" => $custom_fields,
             "custom_field_filter" => $this->prepare_custom_field_filter_values("projects", $this->login_user->is_admin, $this->login_user->user_type)
         );
 
-        $list_data = $this->Projects_model->get_details($options)->getResult();
+        $client_info = $this->Clients_model->get_one($client_id);
+
+        if ((int)$client_info->account_type == 3) {
+            $list_data = $this->Projects_model->own_projects($client_id)->getResult();
+            // var_dump($list_data);exit();
+        } else {
+            $options['client_id'] = $client_id;
+            $list_data = $this->Projects_model->get_details($options)->getResult();
+        }
+
         $result = array();
         foreach ($list_data as $data) {
             $result[] = $this->_make_row($data, $custom_fields);
@@ -1456,7 +1601,8 @@ class Projects extends Security_Controller
             $client = $this->Clients_model->get_one($data->client_id);
         }
 
-        $progress = $data->total_points ? round(($data->completed_points / $data->total_points) * 100) : 0;
+        $progress_summary = $this->Projects_model->get_progress_summary($data->id);
+        $progress = $data->status_id == 2 ? 100 : $progress_summary->progress;
 
         $class = "bg-primary";
         if ($progress == 100) {
@@ -1531,19 +1677,24 @@ class Projects extends Security_Controller
             }
         }
 
+        $partner = '-';
+        $partner_info = $this->Project_partners_model->get_details(array('project_id' => $data->id, 'partner_type' => 'institute'))->getRow();
+        if ($partner_info) {
+            $partner = get_client_contact_profile_link($partner_info->partner_id, $this->get_client_full_name($partner_info->partner_id), array(), array('account_type' => 3));
+        }
+
         $status = $this->_get_project_status_label($data->status_id);
 
         $row_data = array(
             anchor(get_uri("projects/view/" . $data->id), $data->id),
             $title,
-            $start_date,
-            $client_name,
-            $phone,
+            '<small>Starts: ' . $start_date . '</small><br>' . $dateline,
+            $client_name . '<br><small>' . $phone . '</small>',
             $assignee,
-            $assignee,
+            // $assignee,
             $workflow,
             $current_stage,
-            $dateline,
+            $partner,
             $status,
             $progress_bar
         );
@@ -1679,7 +1830,8 @@ class Projects extends Security_Controller
                 $view_data['timer_status'] = "";
             }
 
-            $view_data['project_progress'] = $project_info->total_points ? round(($project_info->completed_points / $project_info->total_points) * 100) : 0;
+            $progress_summary = $this->Projects_model->get_progress_summary($project_id);
+            $view_data['project_progress'] = $project_info->status_id == 2 ? 100 : $progress_summary->progress;
 
             return $view_data;
         } else {
@@ -1712,8 +1864,9 @@ class Projects extends Security_Controller
         $view_data["branch"] = $this->get_location_label($view_data["project_info"]->location_id);
         $view_data["remaining_check_list_count"] = $this->get_remaining_project_doc_check_list_count($project_id);
 
-        $project_fees_options = array('project_id' => $project_id);
-        $view_data["project_fees"] = $this->Project_fees_model->get_details($project_fees_options)->getRow();
+        // $project_fees_options = array('project_id' => $project_id);
+        $view_data["project_fees"] = $this->_get_payment_schedule_overview_info($project_id);
+        // $view_data = $this->_get_payment_schedule_overview_info($project_id, $view_data); // appends & return the payment schedule overview data to the provided 2nd variable
 
         $view_data['status_label'] = $this->_get_project_status_label($view_data['project_info']->status_id, 'h4');
         $view_data['project_id'] = $project_id;
@@ -1726,7 +1879,6 @@ class Projects extends Security_Controller
 
         $view_data['custom_fields_list'] = $this->Custom_fields_model->get_combined_details("projects", $project_id, $this->login_user->is_admin, $this->login_user->user_type)->getResult();
 
-        $view_data = $this->_get_payment_schedule_overview_info($project_id, $view_data); // appends & return the payment schedule overview data to the provided 2nd variable
 
         //count total worked hours
         $options = array("project_id" => $project_id);
@@ -1822,11 +1974,12 @@ class Projects extends Security_Controller
         $view_data['project_id'] = $project_id;
 
         $view_data["view_type"] = $this->request->getPost("view_type");
+        $view_data['known_referrals'] = $this->Clients_model->get_details(array('partner_type' => 'referral', 'account_type' => '3'), true);
 
         $partners_dropdown = array();
         $users = $this->Project_partners_model->get_rest_partners_for_a_project($project_id)->getResult();
         foreach ($users as $user) {
-            $partners_dropdown[$user->id] = $user->member_name;
+            $partners_dropdown[$user->id] = $user->member_name . ' (' . ucwords($user->partner_type) . ')';
         }
 
         $view_data["partners_dropdown"] = $partners_dropdown;
@@ -1882,6 +2035,7 @@ class Projects extends Security_Controller
         $project_id = $this->request->getPost('project_id');
         $deadline = $this->request->getPost('deadline');
         $start_date = $this->request->getPost('start_date');
+        $note = $this->request->getPost('note');
 
         $this->init_project_permission_checker($project_id);
 
@@ -1889,10 +2043,12 @@ class Projects extends Security_Controller
             $this->validate_submitted_data(array(
                 'deadline' => 'required',
                 'start_date' => 'required',
+                'note' => 'required'
             ));
         } else {
             $this->validate_submitted_data(array(
-                'deadline' => 'required'
+                'deadline' => 'required',
+                'note' => 'required'
             ));
         }
 
@@ -1902,6 +2058,18 @@ class Projects extends Security_Controller
         }
 
         $save_id = $this->Projects_model->ci_save($project_data, $project_id);
+
+        $note_data = array(
+            'created_by' => $this->login_user->id,
+            'created_at' => get_current_utc_time(),
+            'title' => 'Changed the deadline to ' . date_format(new \DateTime($deadline), 'l , F d Y'),
+            'description' => $note,
+            'project_id' => $project_id,
+            'milestone_id' => $this->get_current_milestone_id($project_id),
+            'is_public' => 1
+        );
+
+        $this->Notes_model->ci_save($note_data);
 
         if ($save_id) {
             echo json_encode(array("success" => true, 'message' => 'success'));
@@ -1915,6 +2083,7 @@ class Projects extends Security_Controller
         $project_id = $this->request->getPost('project_id');
         $milestone_id = $this->request->getPost('id');
         $due_date = $this->request->getPost('due_date');
+        $note = $this->request->getPost('note');
 
         $this->init_project_permission_checker($project_id);
 
@@ -1924,11 +2093,24 @@ class Projects extends Security_Controller
 
         $this->validate_submitted_data(array(
             "id" => "required",
-            'due_date' => 'required'
+            'due_date' => 'required',
+            'note' => 'required'
         ));
 
         $milestone_data = array('due_date' => $due_date);
         $save_id = $this->Milestones_model->ci_save($milestone_data, $milestone_id);
+
+        $note_data = array(
+            'created_by' => $this->login_user->id,
+            'created_at' => get_current_utc_time(),
+            'title' => 'Changed the deadline to ' . date_format(new \DateTime($due_date), 'l , F d Y'),
+            'description' => $note,
+            'project_id' => $project_id,
+            'milestone_id' => $milestone_id,
+            'is_public' => 1
+        );
+
+        $this->Notes_model->ci_save($note_data);
 
         if ($save_id) {
             echo json_encode(array("success" => true, 'message' => 'success', 'due_date' => $due_date));
@@ -1951,7 +2133,7 @@ class Projects extends Security_Controller
 
         $this->validate_submitted_data(array(
             "partner_id.*" => "required",
-            "commission.*" => "required"
+            // "commission.*" => "required"
         ));
 
         $partner_ids = $this->request->getPost('partner_id');
@@ -1963,20 +2145,16 @@ class Projects extends Security_Controller
         if ($partner_ids) {
             for ($x = 0; $x < count($partner_ids); $x++) {
                 $partner_id = $partner_ids[$x];
-                $commission = $commissions[$x];
-                if ($partner_id && $commission) {
-                    $user = $this->Users_model->get_one($partner_id);
-                    $client_id = $partner_id;
-                    $full_name = '';
-                    if ($user) {
-                        $full_name = $this->get_client_full_name($user->client_id);
-                        $client_id = $user->client_id;
-                    }
+                $commission = get_array_value($commissions, $x);
+                if ($partner_id) {
+                    $client_info = $this->Clients_model->get_one($partner_id);
+                    $full_name = $this->get_client_full_name(0, $client_info);
                     $data = array(
                         "project_id" => $project_id,
-                        "partner_id" => $client_id,
+                        "partner_id" => $partner_id,
                         "full_name" => $full_name,
-                        'commission' => $commission,
+                        'commission' => $commission ? $commission : 0,
+                        'partner_type' => $client_info->partner_type,
                         'created_date' => get_current_utc_time(),
                         'deleted' => 0,
                     );
@@ -2203,8 +2381,8 @@ class Projects extends Security_Controller
     {
         $member_image = "<span class='avatar avatar-sm'><img src='" . get_avatar('') . "' alt='...'></span> ";
 
-        $member = get_client_contact_profile_link($data->partner_id, $member_image);
-        $member_name = get_client_contact_profile_link($data->partner_id, $data->full_name, array("class" => "dark strong"));
+        $member = get_client_contact_profile_link($data->partner_id, $member_image, array(), array('account_type' => 3));
+        $member_name = get_client_contact_profile_link($data->partner_id, $this->get_client_full_name($data->partner_id), array("class" => "dark strong"), array('account_type' => 3));
 
         $link = "";
 
@@ -2242,12 +2420,16 @@ class Projects extends Security_Controller
     {
         $row_fee_type = '';
         $row_fees = '';
+        // $claimable = '<span class="badge" style="background-color: #5DADE2;"> ' . app_lang('non_claimable') . '</span>';
         if ($data->fees) {
             $fees = unserialize($data->fees);
             if ($fees) {
                 $fees = json_decode(json_encode($fees), true);
                 $count = 1;
                 foreach ($fees as $fee) {
+                    // if (get_array_value($fee, 'is_claimable')) {
+                    //     $claimable = '<span class="badge" style="background-color: #198754;"> ' . app_lang('claimable') . '</span>';
+                    // }
                     $row_fee_type .= '<small>• ' . $fee['fee_type'] . '</small>';
                     $row_fees .= '<small>' . to_currency($fee['amount']) . '</small>';
                     if ($count < count($fees)) {
@@ -2261,23 +2443,21 @@ class Projects extends Security_Controller
 
         $status = $this->_get_payment_installment_status_pill($data->status);
 
-        $options = '';
-        if ($data->status == 0 || is_dev_mode()) {
-            $options = modal_anchor(get_uri("projects/schedule_modal_form"), "<i data-feather='edit' class='icon-16'></i>", array("class" => "edit", "title" => app_lang('edit_schedule'), 'data-post-schedule_id' => $data->id, 'data-post-project_id' => $data->project_id)) .
-                js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete_schedule'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("projects/delete_schedule"), "data-action" => "delete-confirmation"));
-        }
+        $options = $this->_make_payment_schedule_options_dropdown($data);
+
 
         $claimable = '<span class="badge" style="background-color: #5DADE2;"> ' . app_lang('non_claimable') . '</span>';
 
-        if ($data->is_claimable) {
+        if ((int)$data->is_claimable) {
             $claimable = '<span class="badge" style="background-color: #198754;"> ' . app_lang('claimable') . '</span>';
         }
 
         $row_data = array(
-            '<p>' . $data->installment_name . '<br><small>#' . $data->id . ' </small>' . $claimable . '</p>',
+            $data->sort,
+            '<p>' . $data->installment_name . '<br>' . $claimable . '</p>',
             $row_fee_type,
             $row_fees,
-            is_dev_mode() ? to_currency((float)$data->net_fee + (float)$data->discount) : to_currency((float)$data->net_fee),
+            to_currency((float)$data->net_fee + (float)$data->discount),
             to_currency((float)$data->discount),
             format_to_date($data->invoice_date),
             $status,
@@ -2287,6 +2467,31 @@ class Projects extends Security_Controller
         return $row_data;
     }
 
+    //prepare options dropdown for invoices list
+    private function _make_payment_schedule_options_dropdown($data)
+    {
+
+        $preview_invoice = '';
+        if ($data->invoice_id) {
+            $preview_invoice = anchor_popup(get_uri("invoices/preview/" . $data->invoice_id . '/0'), "<i data-feather='eye' class='icon-16'></i> " . app_lang('preview'), array("class" => "dropdown-item", "title" => app_lang('view_invoice')));
+        }
+
+        $edit = '';
+        $delete = '';
+        $add_invoice = '';
+        if ($data->status == 0 || is_dev_mode()) {
+            $edit = '<li role="presentation">' . modal_anchor(get_uri("projects/schedule_modal_form"), "<i data-feather='edit' class='icon-16'></i> " . app_lang('edit'), array("class" => "dropdown-item", "title" => app_lang('edit_schedule'), 'data-post-schedule_id' => $data->id, 'data-post-project_id' => $data->project_id, 'data-modal-lg' => true)) . '</li>';
+            $delete = '<li role="presentation">' . js_anchor("<i data-feather='x' class='icon-16'></i> " . app_lang('delete'), array('title' => app_lang('delete_schedule'), "class" => "delete dropdown-item", "data-id" => $data->id, "data-action-url" => get_uri("projects/delete_schedule"), "data-action" => "delete-confirmation")) . '</li>';
+            $add_invoice = '<li role="presentation">' . modal_anchor(get_uri("invoices/modal_form"), "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('add_invoice'), array("class" => "dropdown-item", "title" => app_lang('add_invoice'), 'data-post-schedule_id' => $data->id, 'data-post-project_id' => $data->project_id)) . '</li>';
+        }
+
+        return $data->status != 0 && $preview_invoice == '' ? "<span class='p15 inline-block'></span>" : '<span class="dropdown inline-block">
+                    <button class="btn btn-default dropdown-toggle caret mt0 mb0" type="button" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
+                        <i data-feather="tool" class="icon-16"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" role="menu">' . $preview_invoice . $add_invoice . $edit . $delete . '</ul>
+                </span>';
+    }
     /* prepare a row of project member list */
 
     private function _make_project_member_row($data, $can_send_message_to_client = false)
@@ -2746,7 +2951,6 @@ class Projects extends Security_Controller
 
         $this->init_project_permission_checker($project_id);
         $this->init_project_settings($project_id); //since we'll check this permission project wise
-
 
         if (!$this->can_view_timesheet($project_id, true)) {
             app_redirect("forbidden");
@@ -3488,11 +3692,12 @@ class Projects extends Security_Controller
         $view_data['can_add_files'] = $this->can_add_files();
         $options = array("project_id" => $project_id);
         $doc_check_list = $this->Project_doc_check_list_model->get_details($options)->getResult();
+
+        $view_data['can_add_checklist'] = true;
         if ($doc_check_list) {
             $view_data['can_add_checklist'] = false;
-        } else {
-            $view_data['can_add_checklist'] = true;
         }
+
         $view_data['files'] = $this->Project_files_model->get_details($options)->getResult();
         $view_data['project_id'] = $project_id;
 
@@ -3524,8 +3729,8 @@ class Projects extends Security_Controller
         );
         $project_info = $this->Projects_model->get_one($project_id);
         if ($project_info) {
-            $client_full_name = $this->get_client_full_name($project_info->client_id, null, '_');
-            $client_path = $client_full_name . "_VA" . $project_info->client_id;
+            // $client_full_name = $this->get_client_full_name($project_info->client_id, null, '_');
+            $client_path = "VA$project_info->client_id";
             $breadcrumbs[] = $client_path;
         }
 
@@ -3537,8 +3742,8 @@ class Projects extends Security_Controller
         $dir_path = get_setting("ms_onedrive_base_directory_path");
         $project_info = $this->Projects_model->get_one($project_id);
         if ($project_info) {
-            $client_full_name = $this->get_client_full_name($project_info->client_id, null, '_');
-            $client_path = $client_full_name . "_VA" . $project_info->client_id;
+            // $client_full_name = $this->get_client_full_name($project_info->client_id, null, '_');
+            $client_path = "VA$project_info->client_id";
             $dir_path .= "/Clients/" . $client_path;
         }
 
@@ -3915,40 +4120,174 @@ class Projects extends Security_Controller
         $list_data = $this->Project_doc_check_list_model->get_details($options)->getResult();
         $result = array();
 
-        $project_info = $this->Projects_model->get_one($project_id);
-        $client_full_name = $this->get_client_full_name($project_info->client_id, null, '_');
-        $directories = get_client_drive_items($client_full_name . "_VA" . $project_info->client_id);
+        // $project_info = $this->Projects_model->get_one($project_id);
+        // $client_full_name = $this->get_client_full_name($project_info->client_id, null, '_');
+        // $directories = get_client_drive_items($client_full_name . "_VA" . $project_info->client_id);
         foreach ($list_data as $data) {
-            $result[] = $this->_make_checklist_row($data, $project_id, $directories);
+            // $result[] = $this->_make_checklist_row($data, $project_id, $directories);
+            $result[] = $this->_make_checklist_row($data);
         }
 
         echo json_encode(array("data" => $result));
     }
 
 
-    function _make_checklist_row($data, $project_id = 0, $directories = array())
+    function _make_checklist_row($data)
     {
         // $options = array('doc_check_list_item_id' => $data->id, 'project_id' => $project_id);
         // $files = $this->Project_files_model->get_details($options)->getResult();
-        $files_count = 0;
+        // $files_count = 0;
         // echo json_encode($directories);
-        if ($directories) {
-            foreach ($directories as $dir) {
-                $is_folder =  get_array_value($dir, 'folder');
-                if ($is_folder && strtolower($data->label) == strtolower(get_array_value($dir, 'name'))) {
-                    $files_count = get_array_value($is_folder, 'childCount');
-                    break;
-                }
-            }
-        }
+        // if ($directories) {
+        //     foreach ($directories as $dir) {
+        //         $is_folder =  get_array_value($dir, 'folder');
+        //         if ($is_folder && strtolower($data->label) == strtolower(get_array_value($dir, 'name'))) {
+        //             $files_count = get_array_value($is_folder, 'childCount');
+        //             break;
+        //         }
+        //     }
+        // }
 
         // $options = modal_anchor(get_uri("projects/file_modal_form"), "<i data-feather='plus-circle' class='icon-16'></i> ", array("class" => "btn btn-default btn-sm", "title" => app_lang('add_file') . ": " . $data->label, "data-post-project_id" => $project_id, "data-post-doc_check_list_id" => $data->id, "data-post-doc_check_list_item" => $data->label));
 
+        $od_ref = "<i data-feather='alert-circle' class='icon-16 text-secondary'></i> Not Synced";
+
+        if ($data->od_ref == '0') {
+            $od_ref =  "<i data-feather='x-circle' class='icon-16 text-danger'></i> Not Found";
+        } elseif (is_string($data->od_ref) && strlen($data->od_ref) > 1) {
+            $od_ref = "<i data-feather='check-circle' class='icon-16 text-success'></i> Found";
+        }
+
         return array(
             $data->label,
-            $files_count,
-            ""
+            $od_ref,
+            ajax_anchor(get_uri("projects/sync_single_checklist_documents"), "<i data-feather='refresh-cw' class='icon-16'></i>", array("class" => "btn btn-default", "title" =>  app_lang('sync_checklist_documents'), "data-post-checklist_id" => $data->id, "data-post-project_id" => $data->project_id, "id" => "sync_single_checklist_docs", "data-reload-on-success" => true))
         );
+    }
+
+    /* list of files, prepared for datatable  */
+
+    function sync_message_modal_form()
+    {
+        $project_id = $this->request->getPost('project_id');
+
+        $view_data['project_id'] = $project_id;
+        return $this->template->view('projects/files/sync_message_modal_form', $view_data);
+    }
+
+    function sync_single_checklist_documents()
+    {
+        $checklist_id = $this->request->getPost('checklist_id');
+        $project_id = $this->request->getPost('project_id');
+        validate_numeric_value($project_id);
+        validate_numeric_value($checklist_id);
+        $this->init_project_permission_checker($project_id);
+
+        if (!$this->can_view_files()) {
+            app_redirect("forbidden");
+        }
+
+        $project_info = $this->Projects_model->get_one($project_id);
+
+        $checklist = $this->Project_doc_check_list_model->get_one($checklist_id);
+
+        $client_info = $this->Clients_model->get_one($project_info->client_id);
+
+        $od_dir_path = $client_info->unique_id;
+
+        if ($checklist) {
+            $cl_title = explode(' ', $checklist->label);
+            $od_directories = search_od_directory($od_dir_path, $cl_title[0]);
+            // $od_directories = search_od_directory("Khadijah_VA2445", $cl_title[0]);
+            if ($od_directories) {
+
+                $mix_od_files = get_array_value($od_directories, 'value');
+
+                $checklist_data = array(
+                    'od_ref' => 0
+                );
+                foreach ($mix_od_files as $od_item) {
+                    if (get_array_value($od_item, 'file')) {
+                        $filename = pathinfo(get_array_value($od_item, 'name'), PATHINFO_FILENAME);
+                        if (strtolower($filename) == strtolower($checklist->label)) {
+                            $checklist_data['od_ref'] = get_array_value($od_item, 'webUrl');
+                            break;
+                        }
+                    }
+                }
+
+                $this->Project_doc_check_list_model->ci_save($checklist_data, $checklist->id);
+            } else {
+                $checklist_data = array(
+                    'od_ref' => 0
+                );
+                $this->Project_doc_check_list_model->ci_save($checklist_data, $checklist->id);
+            }
+            echo json_encode(array("success" => true, 'message' => 'Document synced successfully'));
+        } else {
+            echo json_encode(array("success" => false, 'message' => 'Unable to sync the checklist documents. Client directory not found. Please make sure the client directory is available on OneDrive'));
+        }
+    }
+
+    function sync_checklist_documents()
+    {
+        ini_set('max_execution_time', 150); //execute maximum 150 seconds 
+        $project_id = $this->request->getPost('project_id');
+        validate_numeric_value($project_id);
+        $this->init_project_permission_checker($project_id);
+
+        if (!$this->can_view_files()) {
+            app_redirect("forbidden");
+        }
+
+        $project_info = $this->Projects_model->get_one($project_id);
+        // $client_full_name = $this->get_client_full_name($project_info->client_id, null, '_');
+
+        $checklist_options = array(
+            'project_id' => $project_id
+        );
+        $checklist_items = $this->Project_doc_check_list_model->get_details($checklist_options)->getResult();
+
+        $client_info = $this->Clients_model->get_one($project_info->client_id);
+
+        $od_dir_path = $client_info->unique_id;
+
+        foreach ($checklist_items as $key => $checklist) {
+            $cl_title = explode(' ', $checklist->label);
+            if ($key) {
+                sleep(0.3);
+            }
+            $od_directories = search_od_directory($od_dir_path, $cl_title[0]);
+            // $od_directories = search_od_directory("Khadijah_VA2445", $cl_title[0]);
+            if ($od_directories) {
+
+                $mix_od_files = get_array_value($od_directories, 'value');
+
+                $checklist_data = array(
+                    'od_ref' => 0
+                );
+                foreach ($mix_od_files as $od_item) {
+                    if (get_array_value($od_item, 'file')) {
+                        $filename = pathinfo(get_array_value($od_item, 'name'), PATHINFO_FILENAME);
+                        if (strtolower($filename) == strtolower($checklist->label)) {
+                            $checklist_data['od_ref'] = get_array_value($od_item, 'webUrl');
+                            break;
+                        }
+                    }
+                }
+
+                $this->Project_doc_check_list_model->ci_save($checklist_data, $checklist->id);
+            } else {
+                $checklist_data = array(
+                    'od_ref' => 0
+                );
+                $this->Project_doc_check_list_model->ci_save($checklist_data, $checklist->id);
+            }
+        }
+        echo json_encode(array("success" => true, 'message' => 'Document synced successfully'));
+        // else {
+        //     echo json_encode(array("success" => true, 'message' => 'Unable to sync the checklist documents. Client directory not found. Please make sure the client directory is available on OneDrive'));
+        // }
     }
 
     /* list of files, prepared for datatable  */
@@ -4840,61 +5179,30 @@ class Projects extends Security_Controller
 
     function project_payment_schedule_list_data($project_id)
     {
-        $options = array('project_id' => $project_id);
-        $payment_schedules = $this->Project_payment_schedule_setup_model->get_details($options)->getResult();
+        $options = array(
+            'project_id' => $project_id
+        );
 
+        $all_options = append_server_side_filtering_commmon_params($options);
 
-        $result = array();
-        foreach ($payment_schedules as $data) {
-            $result[] = $this->_make_project_payment_schedule_row($data);
-        }
-        echo json_encode(array("data" => $result));
-    }
+        $result = $this->Project_payment_schedule_setup_model->get_details($all_options);
 
-    function project_partners_revenue_overview()
-    {
-        $project_id = $this->request->getPost("project_id");
-
-        $options = array('project_id' => $project_id);
-        $modal_info = $this->Project_fees_model->get_details($options)->getRow();
-
-        if ($modal_info && $modal_info->fees) {
-            $modal_info->fees = unserialize($modal_info->fees);
+        //by this, we can handel the server side or client side from the app table prams.
+        if (get_array_value($all_options, "server_side")) {
+            $list_data = get_array_value($result, "data");
+        } else {
+            $list_data = $result->getResult();
+            $result = array();
         }
 
-        if ($modal_info && $modal_info->partners) {
-            $modal_info->partners = unserialize($modal_info->partners);
+        $result_data = array();
+        foreach ($list_data as $data) {
+            $result_data[] = $this->_make_project_payment_schedule_row($data);
         }
 
-        $view_data['modal_info'] = $modal_info;
+        $result["data"] = $result_data;
 
-        return $this->template->view('projects/project_partners_revenue_overview', $view_data);
-    }
-
-    function project_payment_schedule_setup_modal_form()
-    {
-        $project_id = $this->request->getPost("project_id");
-
-        $options = array('project_id' => $project_id);
-        $modal_info = $this->Project_fees_model->get_details($options)->getRow();
-
-        $view_data['modal_info'] = $modal_info;
-        $view_data['project_id'] = $project_id;
-
-        return $this->template->view('projects/project_payment_schedule_modal_form', $view_data);
-    }
-
-    function project_sales_forecast_modal_form()
-    {
-        $project_id = $this->request->getPost("project_id");
-
-        $options = array('project_id' => $project_id);
-        $modal_info = $this->Project_fees_model->get_details($options)->getRow();
-
-        $view_data['modal_info'] = $modal_info;
-        $view_data['project_id'] = $project_id;
-
-        return $this->template->view('projects/project_sales_forecast_modal_form', $view_data);
+        echo json_encode($result);
     }
 
     function schedule_modal_form($schedule_id = 0)
@@ -4922,6 +5230,7 @@ class Projects extends Security_Controller
             $view_data['client_id'] = $project->client_id;
         }
         $view_data['project_id'] = $project_id;
+        $view_data['institute'] = $this->Project_partners_model->get_details(array('project_id' => $project_id, 'partner_type' => 'institute'))->getRow();
 
         return $this->template->view('projects/schedule_modal_form', $view_data);
     }
@@ -4961,7 +5270,7 @@ class Projects extends Security_Controller
             'installment_name' => $this->request->getPost('installment_name'),
             'invoice_date' => $this->request->getPost('invoice_date'),
             'due_date' => $this->request->getPost('due_date'),
-            'is_claimable' => $this->request->getPost('is_claimable') ? $this->request->getPost('is_claimable') : 0,
+            'is_claimable' => 0,
             'discount' => $discount,
         );
 
@@ -4973,10 +5282,20 @@ class Projects extends Security_Controller
                 $fee = array();
 
                 $amount = (float)$this->request->getPost('amount_' . $x);
+                $is_claimable = $this->request->getPost('is_claimable_' . $x);
+                $is_taxable = $this->request->getPost('is_taxable_' . $x);
+                $commission = $this->request->getPost('commission_' . $x);
 
                 $fee['key'] = $x;
                 $fee['fee_type'] = $this->request->getPost('fee_type_' . $x);
                 $fee['amount'] = $amount;
+                $fee['is_claimable'] = $is_claimable;
+                $fee['is_taxable'] = $is_taxable;
+                $fee['commission'] = $commission ? $commission : 0;
+
+                if ($is_claimable == 1) {
+                    $data['is_claimable'] = 1;
+                }
 
                 $total_fee += $amount;
 
@@ -5088,6 +5407,7 @@ class Projects extends Security_Controller
                 $fee['amount'] = $amount;
                 $fee['installments'] = $installments;
                 $fee['claimable_installments'] = $this->request->getPost('claimable_installments_' . $x);
+                $fee['taxable'] = $this->request->getPost('taxable_' . $x);
                 $fee['row_total'] = (float)$row_total;
 
                 $total_fee += (float)$row_total;
@@ -5285,91 +5605,108 @@ class Projects extends Security_Controller
         $project_fees_option = array('project_id' => $project_id);
         $project_fee_info = $this->Project_fees_model->get_details($project_fees_option)->getRow();
         $project_info = $this->Projects_model->get_one($project_id);
+        $project_partner = $this->Project_partners_model->get_details(array('project_id' => $project_id, 'partner_type' => 'institute'))->getRow();
 
         if ($project_fee_info && $project_fee_info->first_invoice_date) {
-            $data = $this->_get_payment_schedule_info($project_id);
+            // $data = $this->_get_payment_schedule_info($project_id);
 
-            if (!get_array_value($data, 'is_payment_invoiced') && !get_array_value($data, 'is_auto_payment')) {
-                if ($project_fee_info->fees) {
-                    $fees = unserialize($project_fee_info->fees);
-                    $installment_prefix = $this->_get_payment_installment_prefix($project_fee_info->installment_type);
+            // if (!get_array_value($data, 'is_payment_invoiced') && !get_array_value($data, 'is_auto_payment')) {
+            if ($project_fee_info->fees) {
+                $fees = unserialize($project_fee_info->fees);
+                $installment_prefix = $this->_get_payment_installment_prefix($project_fee_info->installment_type);
 
-                    $default_gap_in_days = $this->_get_gap_btw_installments_in_days($project_fee_info->installment_type);
-                    $gap_in_days = 0;
-                    $installment_date = $project_fee_info->first_invoice_date;
+                $default_gap_in_days = $this->_get_gap_btw_installments_in_days($project_fee_info->installment_type);
+                $gap_in_days = 0;
+                $installment_date = $project_fee_info->first_invoice_date;
 
-                    if ($fees) {
-                        $fees = json_decode(json_encode($fees), true);
+                if ($fees) {
+                    $fees = json_decode(json_encode($fees), true);
 
-                        $max_installments = max_attribute_in_array($fees, 'installments');
+                    $max_installments = max_attribute_in_array($fees, 'installments');
 
-                        for ($x = 1; $x <= $max_installments; $x++) {
-                            $installment = array(
-                                'project_id' => $project_id,
-                                'client_id' => $project_info->client_id,
-                                'installment_name' => $installment_prefix . ' ' . $x
-                            );
+                    for ($x = 1; $x <= $max_installments; $x++) {
+                        $installment = array(
+                            'project_id' => $project_id,
+                            'client_id' => $project_info->client_id,
+                            'installment_name' => $installment_prefix . ' ' . $x
+                        );
 
-                            $installment_fees = array();
-                            $installment_total_amount = 0;
-                            $installment_is_claimable = 0;
+                        $installment_fees = array();
+                        $installment_total_amount = 0;
+                        $installment_is_claimable = 0;
 
-                            foreach ($fees as $fee) {
-                                if ($x <= (int)get_array_value($fee, 'installments')) {
-                                    $installment_fee = array();
-                                    $installment_fee['key'] = get_array_value($fee, 'key');
-                                    $installment_fee['fee_type'] = get_array_value($fee, 'fee_type');
-                                    $installment_fee['amount'] = (float)get_array_value($fee, 'amount');
-                                    if ((int)get_array_value($fee, 'claimable_installments') > 0 && $x <= (int)get_array_value($fee, 'claimable_installments')) {
-                                        $installment_is_claimable = 1;
-                                    }
-                                    $installment_total_amount += (float)get_array_value($fee, 'amount');
-
-                                    $installment_fees[] = $installment_fee;
+                        foreach ($fees as $fee) {
+                            if ($x <= (int)get_array_value($fee, 'installments')) {
+                                $installment_fee = array();
+                                $installment_fee['key'] = get_array_value($fee, 'key');
+                                $installment_fee['fee_type'] = get_array_value($fee, 'fee_type');
+                                $installment_fee['is_taxable'] = get_array_value($fee, 'taxable');
+                                $installment_fee['amount'] = (float)get_array_value($fee, 'amount');
+                                $installment_fee['commission'] = $project_partner ? $project_partner->commission : 0;
+                                if ((int)get_array_value($fee, 'claimable_installments') > 0 && $x <= (int)get_array_value($fee, 'claimable_installments')) {
+                                    $installment_fee['is_claimable'] = 1;
+                                    $installment_is_claimable = 1;
                                 }
+                                $installment_total_amount += (float)get_array_value($fee, 'amount');
+
+                                $installment_fees[] = $installment_fee;
                             }
-
-                            if ($x <= (int)$project_fee_info->discount_installments) {
-                                $installment['discount'] = (float)$project_fee_info->discount;
-                                $installment['net_fee'] = (float)$installment_total_amount - (float)$project_fee_info->discount;
-                            } else {
-                                $installment['net_fee'] = (float)$installment_total_amount;
-                            }
-
-                            $installment['is_claimable'] = $installment_is_claimable;
-                            $installment['total_fee'] = (float)$installment_total_amount;
-                            $installment['fees'] = serialize($installment_fees);
-                            $installment['rows_count'] = count($installment_fees);
-                            $installment['invoice_date'] = $installment_date;
-                            $installment['due_date'] = date_create($installment_date)->modify("+7 days")->format('Y-m-d');
-                            $installment['is_auto_created'] = 1;
-                            $installment['sort'] = $x;
-                            $installment['status'] = 0;
-                            $installment['created_date'] = get_current_utc_time();
-
-                            $this->Project_payment_schedule_setup_model->ci_save($installment);
-
-                            $gap_in_days += $default_gap_in_days; // double the gap for next installment
-                            $installment_date = date_create($project_fee_info->first_invoice_date)->modify("+" . $gap_in_days . " days")->format('Y-m-d');
                         }
+
+                        if ($x <= (int)$project_fee_info->discount_installments) {
+                            $installment['discount'] = (float)$project_fee_info->discount;
+                            $installment['net_fee'] = (float)$installment_total_amount - (float)$project_fee_info->discount;
+                        } else {
+                            $installment['net_fee'] = (float)$installment_total_amount;
+                        }
+
+                        $installment['is_claimable'] = $installment_is_claimable;
+                        $installment['total_fee'] = (float)$installment_total_amount;
+                        $installment['fees'] = serialize($installment_fees);
+                        $installment['rows_count'] = count($installment_fees);
+                        $installment['invoice_date'] = $installment_date;
+                        $installment['due_date'] = $installment_date;
+                        // $installment['due_date'] = date_create($installment_date)->modify("+7 days")->format('Y-m-d');
+                        $installment['is_auto_created'] = 1;
+                        $installment['sort'] = $x;
+                        $installment['status'] = 0;
+                        $installment['created_date'] = get_current_utc_time();
+
+                        $this->Project_payment_schedule_setup_model->ci_save($installment);
+
+                        $gap_in_days += $default_gap_in_days; // double the gap for next installment
+                        $installment_date = date_create($project_fee_info->first_invoice_date)->modify("+" . $gap_in_days . " days")->format('Y-m-d');
                     }
                 }
             }
+            // }
         }
     }
 
-    private function _get_payment_schedule_overview_info($project_id = 0, $append = null)
+    private function _get_payment_schedule_overview_info($project_id = 0)
     {
         $payment_options =  array('project_id' => $project_id);
         $payment_schedules = $this->Project_payment_schedule_setup_model->get_details($payment_options)->getResult();
-        $project_fees = $this->Project_fees_model->get_details($payment_options)->getRow();
+        // $project_fees = $this->Project_fees_model->get_details($payment_options)->getRow();
 
-        $scheduled_amount = 0;
-        $invoiced_amount = 0;
-        $pending_amount = 0;
-        $diff_amount = 0;
+        $scheduled_amount  = 0;
+        $invoiced_amount   = 0;
+        $pending_amount    = 0;
+        $diff_amount       = 0;
+        $total_fees        = 0;
+        $total_claimable   = 0;
+        $total_discount    = 0;
+        $institute_revenue = 0;
+        $subagent_revenue  = 0;
+        $referral_revenue  = 0;
+        $net_revenue       = 0;
 
-        if ($payment_schedules && $project_fees) {
+        $institute = $this->Project_partners_model->get_details(array('project_id' => $project_id, 'partner_type' => 'institute'))->getRow();
+        $subagents = $this->Project_partners_model->get_details(array('project_id' => $project_id, 'partner_type' => 'subagent'))->getResult();
+        $referrals = $this->Project_partners_model->get_details(array('project_id' => $project_id, 'partner_type' => 'referral'))->getResult();
+
+        // if ($payment_schedules && $project_fees) {
+        if ($payment_schedules) {
             foreach ($payment_schedules as $ps) {
                 if ((int)$ps->status == 0 || (int)$ps->status == 2 || (int)$ps->status == 5) { // scheduled payment
                     $scheduled_amount += $ps->net_fee + (is_dev_mode() ? (float)$ps->discount : 0);
@@ -5378,40 +5715,127 @@ class Projects extends Security_Controller
                 } elseif ((int)$ps->status == 4) {
                     $pending_amount += $ps->net_fee;
                 }
-            }
 
-            $total_scheduled_payment = $scheduled_amount + $invoiced_amount;
+                $total_discount += (float)$ps->discount;
 
-            if ($pending_amount > 0) {
-                $pending_total = (float)$project_fees->net_total - $pending_amount;
-                $pending_amount = $pending_total - $total_scheduled_payment;
-            } else {
-                $pending_amount = (float)$project_fees->net_total - $total_scheduled_payment;
-            }
+                $fees = unserialize($ps->fees);
 
-            if ($pending_amount < 0) {
-                $discount = (float)$project_fees->discount * (float)$project_fees->discount_installments;
-                $diff_amount = $discount + $pending_amount;
-                $pending_amount = 0;
+                foreach ($fees as $fee) {
+                    $fee = json_decode(json_encode($fee), true);
+
+                    $amount       = (float)get_array_value($fee, 'amount');
+                    $is_claimable = (float)get_array_value($fee, 'is_claimable');
+                    $total_fees += (float)$amount;
+
+                    if ($is_claimable && $institute) {
+                        $claimable_commission = calc_per($amount, $institute->commission);
+                        $total_claimable += $claimable_commission;
+
+                        $institute_revenue += $amount - $claimable_commission; // deduct commission form the amount. The remaining amount goes to the institute.
+                    } elseif ($institute) {
+                        // Fee is not claimable. So the amount goes to the institute
+                        $institute_revenue += $amount; // deduct commission form the amount. The remaining amount goes to the institute.
+                    }
+                }
             }
         }
 
-        if ($append) {
-            $append['scheduled_amount'] = $scheduled_amount;
-            $append['invoiced_amount'] = $invoiced_amount;
-            $append['pending_amount'] = $pending_amount;
-            $append['diff_amount'] = $diff_amount;
+        $net_income = $total_claimable - $total_discount;
 
-            return $append;
+        if ($subagents) {
+            foreach ($subagents as $subagent) {
+                $subagent_revenue += calc_per($net_income, $subagent->commission);
+            }
         }
 
-        $data['scheduled_amount'] = $scheduled_amount;
-        $data['invoiced_amount'] = $invoiced_amount;
-        $data['pending_amount'] = $pending_amount;
-        $data['diff_amount'] = $diff_amount;
+        if ($referrals) {
+            foreach ($referrals as $referral) {
+                $referral_revenue += calc_per($net_income, $referral->commission);
+            }
+        }
 
-        return $data;
+        $net_revenue = $net_income - ($subagent_revenue + $referral_revenue);
+
+        // if ($append) {
+        $append = new \stdClass();
+        $append->scheduled_amount   = $scheduled_amount;
+        $append->invoiced_amount    = $invoiced_amount;
+        $append->pending_amount     = $pending_amount;
+        $append->diff_amount        = $diff_amount;
+        $append->total_fees         = $total_fees;
+        $append->total_discount     = $total_discount;
+        $append->total_claimable    = $total_claimable;
+        $append->net_income         = $net_income;
+        $append->institute_revenue  = $institute_revenue;
+        $append->subagent_revenue   = $subagent_revenue;
+        $append->referral_revenue   = $referral_revenue;
+        $append->net_revenue        = $net_revenue;
+
+        return $append;
+        // }
+
+        // $data['scheduled_amount'] = $scheduled_amount;
+        // $data['invoiced_amount'] = $invoiced_amount;
+        // $data['pending_amount'] = $pending_amount;
+        // $data['diff_amount'] = $diff_amount;
+
+        // return $data;
     }
+
+    // private function _get_payment_schedule_overview_info($project_id = 0, $append = null)
+    // {
+    //     $payment_options =  array('project_id' => $project_id);
+    //     $payment_schedules = $this->Project_payment_schedule_setup_model->get_details($payment_options)->getResult();
+    //     $project_fees = $this->Project_fees_model->get_details($payment_options)->getRow();
+
+    //     $scheduled_amount = 0;
+    //     $invoiced_amount = 0;
+    //     $pending_amount = 0;
+    //     $diff_amount = 0;
+
+    //     if ($payment_schedules && $project_fees) {
+    //         foreach ($payment_schedules as $ps) {
+    //             if ((int)$ps->status == 0 || (int)$ps->status == 2 || (int)$ps->status == 5) { // scheduled payment
+    //                 $scheduled_amount += $ps->net_fee + (is_dev_mode() ? (float)$ps->discount : 0);
+    //             } elseif ((int)$ps->status == 1 || (int)$ps->status == 3) { // invoiced payment, even if the invoice is removed
+    //                 $invoiced_amount += $ps->net_fee + (is_dev_mode() ? (float)$ps->discount : 0);
+    //             } elseif ((int)$ps->status == 4) {
+    //                 $pending_amount += $ps->net_fee;
+    //             }
+    //         }
+
+    //         $total_scheduled_payment = $scheduled_amount + $invoiced_amount;
+
+    //         if ($pending_amount > 0) {
+    //             $pending_total = (float)$project_fees->net_total - $pending_amount;
+    //             $pending_amount = $pending_total - $total_scheduled_payment;
+    //         } else {
+    //             $pending_amount = (float)$project_fees->net_total - $total_scheduled_payment;
+    //         }
+
+    //         if ($pending_amount < 0) {
+    //             $discount = (float)$project_fees->discount * (float)$project_fees->discount_installments;
+    //             $diff_amount = $discount + $pending_amount;
+    //             $pending_amount = 0;
+    //         }
+    //     }
+
+    //     if ($append) {
+    //         $append['scheduled_amount'] = $scheduled_amount;
+    //         $append['invoiced_amount'] = $invoiced_amount;
+    //         $append['pending_amount'] = $pending_amount;
+    //         $append['diff_amount'] = $diff_amount;
+
+    //         return $append;
+    //     }
+
+    //     $data['scheduled_amount'] = $scheduled_amount;
+    //     $data['invoiced_amount'] = $invoiced_amount;
+    //     $data['pending_amount'] = $pending_amount;
+    //     $data['diff_amount'] = $diff_amount;
+
+    //     return $data;
+    // }
 
     private function _get_payment_schedule_info($project_id = 0)
     {
@@ -5676,14 +6100,9 @@ class Projects extends Security_Controller
     private function _handle_doc_check_list($doc_check_list_id = 0, $project_id = 0)
     {
         $success = false;
-        if ($doc_check_list_id) {
-            $options = array('project_id' => $project_id);
-            $doc_check_list_data = $this->Project_doc_check_list_model->get_details($options)->getResult();
-            if (count($doc_check_list_data)) {
-                foreach ($doc_check_list_data as $key => $doc_check) {
-                    $this->Project_doc_check_list_model->delete($doc_check->id);
-                }
-            }
+        $options = array('project_id' => $project_id);
+        $doc_check_list_data = $this->Project_doc_check_list_model->get_details($options)->getResult();
+        if ($doc_check_list_id && count($doc_check_list_data) == 0) {
             $doc_checklist_options = array('id' => $doc_check_list_id);
             $doc_check_list = $this->General_files_model->get_details($doc_checklist_options)->getRow();
             if ($doc_check_list) {

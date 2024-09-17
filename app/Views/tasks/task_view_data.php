@@ -10,7 +10,7 @@ if ($total_sub_tasks) {
         <div class="clearfix">
             <div class="container-fluid">
                 <div class="row">
-                    <div  class="col-md-12 mb15 task-title-right d-none">
+                    <div class="col-md-12 mb15 task-title-right d-none">
                         <strong><?php echo $model_info->title; ?></strong>
                     </div>
 
@@ -24,7 +24,7 @@ if ($total_sub_tasks) {
                             <div>
                                 <?php echo get_update_task_info_anchor_data($model_info, "user", $can_edit_tasks, "", $show_assign_to_dropdown); ?>
                             </div>
-                            <p> 
+                            <p>
                                 <span class='badge badge-light mr5' title='Point'><?php echo get_update_task_info_anchor_data($model_info, "points", $can_edit_tasks); ?></span>
 
                                 <?php
@@ -93,7 +93,7 @@ if ($total_sub_tasks) {
 
                     <?php if ($model_info->recurring_task_id) { ?>
                         <div class="col-md-12 mb15">
-                            <strong><?php echo app_lang('created_from') . ": "; ?> </strong> 
+                            <strong><?php echo app_lang('created_from') . ": "; ?> </strong>
                             <?php
                             echo modal_anchor(get_uri("tasks/view"), app_lang("task") . " " . $model_info->recurring_task_id, array("title" => app_lang('task_info') . " #$model_info->recurring_task_id", "data-post-id" => $model_info->recurring_task_id, "data-modal-lg" => "1"));
                             ?>
@@ -141,7 +141,7 @@ if ($total_sub_tasks) {
                             if ($show_timer) {
                                 echo view("tasks/task_timer");
                             }
-                            ?> 
+                            ?>
                         </div>
 
                         <?php if (get_setting("module_project_timesheet") == "1" && $show_timesheet_info) { ?>
@@ -187,7 +187,7 @@ if ($total_sub_tasks) {
         <div class="clearfix">
             <div class="container-fluid">
                 <div class="row">
-                    <div  class="col-md-12 mb15 task-title-left">
+                    <div class="col-md-12 mb15 task-title-left">
                         <strong><?php echo $model_info->title; ?></strong>
                     </div>
 
@@ -203,81 +203,83 @@ if ($total_sub_tasks) {
                         </div>
                     <?php } ?>
 
-                    <?php if ($model_info->project_id) { ?>
-                        <div class="col-md-12 mb15">
-                            <strong><?php echo app_lang('project') . ": "; ?> </strong> <?php echo anchor(get_uri("projects/view/" . $model_info->project_id), $model_info->project_title); ?>
-                        </div>
-                    <?php } ?>
+                    <div class="pt10 pb10 b-t">
+                        <?php if (isset($client_id) && $client_id && isset($client_full_name) && !$model_info->lead_id) { ?>
+                            <div class="col-md-12">
+                                <strong><?php echo app_lang('client') . ': '; ?></strong><?php echo anchor(get_uri("clients/view/" . $client_id), $client_full_name); ?>
+                            </div>
+                        <?php } ?>
 
-                    <?php if ($model_info->client_id) { ?>
-                        <div class="col-md-12 mb15">
-                            <strong><?php echo app_lang('client') . ": "; ?> </strong> <?php echo anchor(get_uri("clients/view/" . $model_info->client_id), $model_info->company_name); ?>
-                        </div>
-                    <?php } ?>
+                        <?php if ($model_info->project_id) { ?>
+                            <div class="col-md-12">
+                                <strong><?php echo app_lang('project') . ": "; ?> </strong> <?php echo anchor(get_uri("projects/view/" . $model_info->project_id), $model_info->project_title); ?>
+                            </div>
+                        <?php } ?>
 
-                    <?php if ($model_info->lead_id) { ?>
-                        <div class="col-md-12 mb15">
-                            <strong><?php echo app_lang('lead') . ": "; ?> </strong> <?php echo anchor(get_uri("leads/view/" . $model_info->lead_id), $model_info->company_name); ?>
-                        </div>
-                    <?php } ?>
+                        <?php if ($model_info->lead_id) { ?>
+                            <div class="col-md-12">
+                                <strong><?php echo app_lang('lead') . ": "; ?> </strong> <?php echo anchor(get_uri("leads/view/" . $model_info->lead_id), _get_client_full_name($model_info->lead_id)); ?>
+                            </div>
+                        <?php } ?>
 
-                    <?php if ($model_info->invoice_id) { ?>
-                        <div class="col-md-12 mb15">
-                            <strong><?php echo app_lang('invoice') . ": "; ?> </strong> <?php echo anchor(get_uri("invoices/view/" . $model_info->invoice_id), get_invoice_id($model_info->invoice_id)); ?>
-                        </div>
-                    <?php } ?>
+                        <?php if ($model_info->invoice_id) { ?>
+                            <div class="col-md-12">
+                                <strong><?php echo app_lang('invoice') . ": "; ?> </strong> <?php echo anchor(get_uri("invoices/view/" . $model_info->invoice_id), get_invoice_id($model_info->invoice_id)); ?>
+                            </div>
+                        <?php } ?>
 
-                    <?php if ($model_info->estimate_id) { ?>
-                        <div class="col-md-12 mb15">
-                            <strong><?php echo app_lang('estimate') . ": "; ?> </strong> <?php echo anchor(get_uri("estimates/view/" . $model_info->estimate_id), get_estimate_id($model_info->estimate_id)); ?>
-                        </div>
-                    <?php } ?>
+                        <?php if ($model_info->estimate_id) { ?>
+                            <div class="col-md-12">
+                                <strong><?php echo app_lang('estimate') . ": "; ?> </strong> <?php echo anchor(get_uri("estimates/view/" . $model_info->estimate_id), get_estimate_id($model_info->estimate_id)); ?>
+                            </div>
+                        <?php } ?>
 
-                    <?php if ($model_info->order_id) { ?>
-                        <div class="col-md-12 mb15">
-                            <strong><?php echo app_lang('order') . ": "; ?> </strong> <?php echo anchor(get_uri("orders/view/" . $model_info->order_id), get_order_id($model_info->order_id)); ?>
-                        </div>
-                    <?php } ?>
+                        <?php if ($model_info->order_id) { ?>
+                            <div class="col-md-12">
+                                <strong><?php echo app_lang('order') . ": "; ?> </strong> <?php echo anchor(get_uri("orders/view/" . $model_info->order_id), get_order_id($model_info->order_id)); ?>
+                            </div>
+                        <?php } ?>
 
-                    <?php if ($model_info->contract_id) { ?>
-                        <div class="col-md-12 mb15">
-                            <strong><?php echo app_lang('contract') . ": "; ?> </strong> <?php echo anchor(get_uri("contracts/view/" . $model_info->contract_id), $model_info->contract_title); ?>
-                        </div>
-                    <?php } ?>
+                        <?php if ($model_info->contract_id) { ?>
+                            <div class="col-md-12">
+                                <strong><?php echo app_lang('contract') . ": "; ?> </strong> <?php echo anchor(get_uri("contracts/view/" . $model_info->contract_id), $model_info->contract_title); ?>
+                            </div>
+                        <?php } ?>
 
-                    <?php if ($model_info->proposal_id) { ?>
-                        <div class="col-md-12 mb15">
-                            <strong><?php echo app_lang('proposal') . ": "; ?> </strong> <?php echo anchor(get_uri("proposals/view/" . $model_info->proposal_id), get_proposal_id($model_info->proposal_id)); ?>
-                        </div>
-                    <?php } ?>
+                        <?php if ($model_info->proposal_id) { ?>
+                            <div class="col-md-12">
+                                <strong><?php echo app_lang('proposal') . ": "; ?> </strong> <?php echo anchor(get_uri("proposals/view/" . $model_info->proposal_id), get_proposal_id($model_info->proposal_id)); ?>
+                            </div>
+                        <?php } ?>
 
-                    <?php if ($model_info->subscription_id) { ?>
-                        <div class="col-md-12 mb15">
-                            <strong><?php echo app_lang('subscription') . ": "; ?> </strong> <?php echo anchor(get_uri("subscriptions/view/" . $model_info->subscription_id), $model_info->subscription_title); ?>
-                        </div>
-                    <?php } ?>
+                        <?php if ($model_info->subscription_id) { ?>
+                            <div class="col-md-12">
+                                <strong><?php echo app_lang('subscription') . ": "; ?> </strong> <?php echo anchor(get_uri("subscriptions/view/" . $model_info->subscription_id), $model_info->subscription_title); ?>
+                            </div>
+                        <?php } ?>
 
-                    <?php if ($model_info->expense_id) { ?>
-                        <div class="col-md-12 mb15">
-                            <strong><?php echo app_lang('expense') . ": "; ?> </strong> <?php echo modal_anchor(get_uri("expenses/expense_details"), ($model_info->expense_title ? $model_info->expense_title : format_to_date($model_info->expense_date, false)), array("title" => app_lang("expense_details"), "data-post-id" => $model_info->expense_id, "data-modal-lg" => "1")); ?>
-                        </div>
-                    <?php } ?>
+                        <?php if ($model_info->expense_id) { ?>
+                            <div class="col-md-12">
+                                <strong><?php echo app_lang('expense') . ": "; ?> </strong> <?php echo modal_anchor(get_uri("expenses/expense_details"), ($model_info->expense_title ? $model_info->expense_title : format_to_date($model_info->expense_date, false)), array("title" => app_lang("expense_details"), "data-post-id" => $model_info->expense_id, "data-modal-lg" => "1")); ?>
+                            </div>
+                        <?php } ?>
 
-                    <?php if ($model_info->ticket_id && !$model_info->project_id) { ?>
-                        <div class="col-md-12 mb15">
-                            <strong><?php echo app_lang("ticket") . ": "; ?> </strong> <?php echo anchor(get_uri("tickets/view/" . $model_info->ticket_id), get_ticket_id($model_info->ticket_id) . " - " . $model_info->ticket_title); ?>
-                        </div>
-                    <?php } ?>
+                        <?php if ($model_info->ticket_id && !$model_info->project_id) { ?>
+                            <div class="col-md-12">
+                                <strong><?php echo app_lang("ticket") . ": "; ?> </strong> <?php echo anchor(get_uri("tickets/view/" . $model_info->ticket_id), get_ticket_id($model_info->ticket_id) . " - " . $model_info->ticket_title); ?>
+                            </div>
+                        <?php } ?>
+                    </div>
 
                     <?php
                     if (count($custom_fields_list)) {
                         foreach ($custom_fields_list as $data) {
                             if ($data->value) {
-                                ?>
+                    ?>
                                 <div class="col-md-12 mb15">
                                     <strong><?php echo $data->title . ": "; ?> </strong> <?php echo view("custom_fields/output_" . $data->field_type, array("value" => $data->value)); ?>
                                 </div>
-                                <?php
+                    <?php
                             }
                         }
                     }
@@ -334,7 +336,7 @@ if ($total_sub_tasks) {
                         <?php
                         foreach ($contexts as $context) {
                             $context_id_key = $context . "_id";
-                            ?>
+                        ?>
                             <input type="hidden" name="<?php echo $context_id_key; ?>" value="<?php echo $model_info->$context_id_key; ?>" />
                         <?php } ?>
 
@@ -361,7 +363,7 @@ if ($total_sub_tasks) {
                                 </div>
                             </div>
                             <div id="sub-task-options-panel" class="col-md-12 mb15 p0 hide">
-                                <button type="submit" class="btn btn-primary"><span data-feather="check-circle" class="icon-16"></span> <?php echo app_lang('create'); ?></button> 
+                                <button type="submit" class="btn btn-primary"><span data-feather="check-circle" class="icon-16"></span> <?php echo app_lang('create'); ?></button>
                                 <button id="sub-task-options-panel-close" type="button" class="btn btn-default"><span data-feather="x" class="icon-16"></span> <?php echo app_lang('cancel'); ?></button>
                             </div>
                         <?php } ?>
@@ -418,7 +420,7 @@ if ($total_sub_tasks) {
                         </div>
 
                         <div class="p0 mt10">
-                            <button type="submit" class="btn btn-primary"><span data-feather="check-circle" class="icon-16"></span> <?php echo app_lang('add'); ?></button> 
+                            <button type="submit" class="btn btn-primary"><span data-feather="check-circle" class="icon-16"></span> <?php echo app_lang('add'); ?></button>
                             <button type="button" class="dependency-tasks-close btn btn-default"><span data-feather="x" class="icon-16"></span> <?php echo app_lang('cancel'); ?></button>
                         </div>
 
@@ -441,7 +443,7 @@ if ($total_sub_tasks) {
 </div>
 
 <?php if ($login_user->user_type === "staff") { ?>
-    <div class="box-title"><span ><?php echo app_lang("activity"); ?></span></div>
+    <div class="box-title"><span><?php echo app_lang("activity"); ?></span></div>
     <div class="pl15 pr15 mt15 list-container project-activity-logs-container">
         <?php echo activity_logs_widget(array("limit" => 20, "offset" => 0, "log_type" => "task", "log_type_id" => $model_info->id)); ?>
     </div>

@@ -127,13 +127,23 @@ class Security_Controller extends App_Controller
             $client = $this->Clients_model->get_one($client_id);
         }
         if ($client) {
-            switch ($client->type) {
-                case 'person':
+            switch ($client->account_type) {
+                case '1':
                     $first_name = $client->first_name ?? "";
                     $last_name = $client->last_name ?? "";
                     $full_name = $first_name . $spacer . $last_name;
                     break;
-                case 'organization':
+                case '2':
+                    $first_name = $client->first_name ?? "";
+                    $last_name = $client->last_name ?? "";
+                    $full_name = $first_name . $spacer . $last_name;
+                    break;
+                case '3':
+                    $first_name = $client->first_name ?? "";
+                    $last_name = $client->last_name ?? "";
+                    $full_name = $first_name . $spacer . $last_name;
+                    break;
+                case '4':
                     $full_name = $client->company_name ?? "";
                     break;
 
@@ -481,6 +491,27 @@ class Security_Controller extends App_Controller
         return json_encode($clients_dropdown);
     }
 
+    protected function get_partners_members_dropdown($partner_types = 'subagent', $filter_label = '')
+    {
+        $clients_dropdown = array(
+            array('id' => '', 'text' => ($filter_label ? '- ' . $filter_label . ' -' : '-'))
+        );
+        $options = array('only_partner_types' => $partner_types, 'account_type' => '3');
+        $clients = $this->Clients_model->get_details($options)->getResult();
+
+        foreach ($clients as $client) {
+            $full_name = $this->get_client_full_name(0, $client);
+            // $full_name = $client->type === 'organization' ? $client->company_name : $client->first_name . ' ' . $client->last_name;
+
+            $clients_dropdown[] = array(
+                'id' => $client->id,
+                'text' => $full_name
+            );
+        }
+
+        return json_encode($clients_dropdown);
+    }
+
     //check if the login user has restriction to show all tasks
     protected function show_assigned_tasks_only_user_id()
     {
@@ -568,14 +599,18 @@ class Security_Controller extends App_Controller
         }
     }
 
-    protected function make_workflow_dropdown()
+    protected function make_workflow_dropdown($is_filter = false)
     {
-        $dropdown_list = array('' => '-');
+        $dropdown_list = $is_filter ? array(array('id' => '', 'text' => '- ' . app_lang('workflow') . ' -')) : array('' => '-');
         $options = array('file_type' => 'workflow');
         $list = $this->General_files_model->get_details($options)->getResult();
 
         foreach ($list as $item) {
-            $dropdown_list[$item->id] = $item->description;
+            if ($is_filter) {
+                $dropdown_list[] = array('id' => $item->id, 'text' => $item->description);
+            } else {
+                $dropdown_list[$item->id] = $item->description;
+            }
         }
 
         return $dropdown_list;
@@ -649,10 +684,13 @@ class Security_Controller extends App_Controller
         return $dropdown_list;
     }
 
-    protected function make_partners_dropdown()
+    protected function make_partners_dropdown($partner_type = '', $add_empty_row = false, $filter_label = '')
     {
-        $dropdown_list = array();
+        $dropdown_list = $add_empty_row ? array('' => ($filter_label ? '- ' . $filter_label . ' -' : '-')) : array();
         $options = array('account_type' => 3);
+        if ($partner_type) {
+            $options['only_partner_types'] = $partner_type;
+        }
         $list = $this->Clients_model->get_details($options)->getResult();
 
         foreach ($list as $item) {
@@ -673,6 +711,39 @@ class Security_Controller extends App_Controller
         return $dropdown_list;
     }
 
+    protected function get_visa_types_filter_dropdown($first_label = 'Visa Types')
+    {
+        $dropdown_list = array(array("id" => "", "text" => "- " . $first_label . " -"));
+        $options = array('order_by' => 'title', 'order_dir' => 'ASC');
+        $list = $this->Visa_model->get_details($options)->getResult();
+        foreach ($list as $item) {
+            $dropdown_list[] = array('id' => $item->title, 'text' => 'Subclass ' . $item->title);;
+        }
+        return json_encode($dropdown_list);
+    }
+
+    protected function get_visa_type_dropdown($first_label = 'Visa Types')
+    {
+        $dropdown_list = array(array("id" => "", "text" => "- " . $first_label . " -"));
+        $options = array('order_by' => 'title', 'order_dir' => 'ASC');
+        $list = $this->Visa_model->get_details($options)->getResult();
+        foreach ($list as $item) {
+            $dropdown_list[] = array('id' => $item->title, 'text' => 'Subclass ' . $item->title);
+        }
+        return json_encode($dropdown_list);
+    }
+
+    // protected function get_locations_dropdown_for_filter($first_label = "Branch")
+    // {
+    //     $dropdown_list = array(array("id" => "", "text" => "- " . $first_label . " -"));
+    //     $options = array();
+    //     $list = $this->Location_model->get_details($options)->getResult();
+    //     foreach ($list as $item) {
+    //         $dropdown_list[] = array('id' => $item->id, 'text' => $item->title);;
+    //     }
+    //     return $dropdown_list;
+    // }
+
     protected function get_account_types_dropdown_for_filter()
     {
         $dropdown_list = array(array("id" => "", "text" => "- " . "Account Type" . " -"));
@@ -684,20 +755,20 @@ class Security_Controller extends App_Controller
         return $dropdown_list;
     }
 
-    protected function make_locations_dropdown($first_item_label = '', $filter_offices = true)
+    protected function make_locations_dropdown($first_item_label = '', $filter_offices = true, $first_key = 0)
     {
-        $dropdown_list = array(0 => 'All Branches');
+        $dropdown_list = array($first_key => 'All Branches');
         if ($first_item_label) {
-            $dropdown_list = array(0 => $first_item_label);
+            $dropdown_list = array($first_key => $first_item_label);
         }
-        if ($this->login_user && $this->login_user->user_type === 'staff') {
+        if (isset($this->login_user) && $this->login_user->user_type === 'staff') {
             $options = array();
             $list = $this->Location_model->get_details($options)->getResult();
 
-            $office_options  = array('user_id' => $this->login_user->id);
 
             $location_ids = array();
             if ($filter_offices) {
+                $office_options  = array('user_id' => $this->login_user->id);
                 $user_offices = $this->Office_model->get_details($office_options)->getResult();
                 foreach ($user_offices as $office) {
                     $location_ids[] = $office->location_id;
@@ -705,7 +776,11 @@ class Security_Controller extends App_Controller
             }
 
             foreach ($list as $item) {
-                if ($filter_offices && in_array($item->id, $location_ids)) {
+                if ($filter_offices) {
+                    if (in_array($item->id, $location_ids)) {
+                        $dropdown_list[$item->id] = $item->title;
+                    }
+                } else {
                     $dropdown_list[$item->id] = $item->title;
                 }
             }
@@ -771,6 +846,23 @@ class Security_Controller extends App_Controller
         }
 
         return $labels_dropdown;
+    }
+
+    protected function make_partner_types_dropdown()
+    {
+        $list = array(
+            "" => "- Type -",
+            "institute" => "Institute",
+            "referral" => "Referral",
+            'subagent' => 'Sub Agent',
+            'superagent' => "Super Agent"
+        );
+        $types_dropdown = [];
+        foreach ($list as $key => $value) {
+            $types_dropdown[] = array("id" => $key, "text" => $value);
+        }
+
+        return $types_dropdown;
     }
 
     protected function make_phases_dropdown()
@@ -914,7 +1006,8 @@ class Security_Controller extends App_Controller
                 return true;
             }
         } else {
-            if ($this->login_user->client_id === $client_id) {
+            // if ($this->login_user->client_id === $client_id) {
+            if ($this->login_user->client_id) {
                 return true;
             }
         }
@@ -1506,11 +1599,31 @@ class Security_Controller extends App_Controller
         }
     }
 
+    protected function can_send_invoice()
+    {
+        $allowed_users = array(
+            1, // Basanta
+            3189, // Naina
+            6864, // Krishna
+        );
+        // var_dump((int)$this->login_user->id);exit();
+        if (in_array((int)$this->login_user->id, $allowed_users)) {
+            return true;
+        }
+
+        return false;
+    }
+
     //prevent editing of invoice after certain state
     protected function is_invoice_editable($_invoice, $is_clone = 0)
     {
+        $invoice_info = is_object($_invoice) ? $_invoice : $this->Invoices_model->get_one($_invoice);
+
+        if (($invoice_info->va_invoice_id > 0 || $invoice_info->schedule_id) && $invoice_info->invoice_type !== 'general') {
+            return false;
+        }
+
         if (get_setting("enable_invoice_lock_state")) {
-            $invoice_info = is_object($_invoice) ? $_invoice : $this->Invoices_model->get_one($_invoice);
             if (!$invoice_info->id || $is_clone) {
                 return true;
             }

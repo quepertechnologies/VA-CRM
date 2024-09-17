@@ -14,7 +14,7 @@
                 $contexts_dropdown[$context] = app_lang($context);
             ?>
 
-                <input type="hidden" name="<?php echo $context_id_key; ?>" value="<?php echo ${$context_id_key}; ?>" />
+                <input type="hidden" name="<?php echo isset(${$context_id_key}) ? $context_id_key : 'client_id'; ?>" value="<?php echo isset(${$context_id_key}) ? ${$context_id_key} : 0; ?>" />
 
             <?php } ?>
 
@@ -86,7 +86,7 @@
             //when opening from global task creation link, there might be only one context perimission
             //and don't have any context_id selected. So, have to show the context dropdown
             if (!$show_contexts_dropdown) {
-                $context_id_key = $selected_context . "_id";
+                $context_id_key = isset(${$selected_context . "_id"}) ? $selected_context . "_id" : 'client_id';
                 if (!${$context_id_key}) {
                     $show_contexts_dropdown = true;
                 }

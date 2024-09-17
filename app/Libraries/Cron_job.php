@@ -52,14 +52,20 @@ class Cron_job
             echo $e;
         }
 
-        try {
-            $this->manage_payment_schedule(); // schedule invoices if the date is reached
-        } catch (\Exception $e) {
-            echo $e;
-        }
+        // try {
+        //     $this->manage_payment_schedule(); // schedule invoices if the date is reached
+        // } catch (\Exception $e) {
+        //     echo $e;
+        // }
+
+        // try {
+        //     $this->manage_upcoming_payment_schedule(); // send email to the application owner
+        // } catch (\Exception $e) {
+        //     echo $e;
+        // }
 
         try {
-            $this->manage_upcoming_payment_schedule(); // send email to the application owner
+            $this->sync_fresh_desk_agents(); // sync fresh desk tickets
         } catch (\Exception $e) {
             echo $e;
         }
@@ -73,6 +79,179 @@ class Cron_job
 
     private function sync_fresh_desk_tickets()
     {
+        $tickets = $this->_fresh_desk_api('tickets?include=requester,stats');
+
+        $fd_ticket_status = array(
+            2 => 'open',
+            3 => 'open',
+            4 => 'open',
+            5 => 'closed',
+        );
+
+        if ($tickets) {
+            foreach ($tickets as $fresh_desk_ticket) {
+                $ticket_id = null;
+
+                $client_id = 0;
+                $project_id = 0;
+                $ticket_type_id = 1;
+                $location_id = 0;
+                $fresh_desk_ticket_id = get_array_value($fresh_desk_ticket, 'id');
+                $title = get_array_value($fresh_desk_ticket, 'subject');
+                $created_by = 1;
+                $requested_by = 0;
+                $created_at = date('Y-m-d H:i:s', strtotime(get_array_value($fresh_desk_ticket, 'created_at')));
+                $status = 'new';
+                $last_activity_at = date('Y-m-d H:i:s', strtotime(get_array_value($fresh_desk_ticket, 'updated_at')));
+                $assigned_to = 1;
+                $creator_name = '';
+                $creator_email = '';
+                $labels = array();
+                $task_id = 0;
+                $closed_at = '';
+                $merged_with_ticket_id = '';
+
+                $ticket = $this->ci->Tickets_model->get_details(array('fresh_desk_ticket_id' => $fresh_desk_ticket_id))->getRow();
+                if ($ticket && $ticket->id) {
+                    $ticket_id = $ticket->id;
+                }
+
+                $requester = get_array_value($fresh_desk_ticket, 'requester');
+                if ($requester) {
+                    $requester_email = get_array_value($requester, 'email');
+                    $client = $this->ci->Clients_model->get_details(array('email' => $requester_email))->getRow();
+
+                    if ($client && $client->id) {
+                        $client_id = $client->id;
+                    }
+                }
+
+                $ticket_type = get_array_value($fresh_desk_ticket, 'type');
+                if ($ticket_type) {
+                    $ticket_type_id = ticket_type($ticket_type);
+                }
+
+                $responder_id = get_array_value($fresh_desk_ticket, 'responder_id');
+                if ($responder_id) {
+                    $user = $this->ci->Users_model->get_details(array('fresh_desk_agent_id' => $responder_id))->getRow();
+                    if ($user) {
+                        $created_by = $user->id;
+                        $assigned_to = $user->id;
+                        $creator_name = $user->first_name . ' ' . $user->last_name;
+                        $creator_email = $user->email;
+                    }
+                }
+
+                $status_id = get_array_value($fresh_desk_ticket, 'status');
+                if ($status_id) {
+                    $status = $fd_ticket_status[$status_id];
+                }
+
+                $stats = get_array_value($fresh_desk_ticket, 'stats');
+                if ($status_id == 5) { // the ticket is closed
+                    $fd_ticket_closed_at = get_array_value($stats, 'closed_at');
+                    if ($fd_ticket_closed_at) {
+                        $closed_at = date('Y-m-d H:i:s', strtotime($fd_ticket_closed_at));
+                    }
+                }
+
+                $tags = get_array_value($fresh_desk_ticket, 'tags');
+                if ($tags) {
+                    foreach ($tags as $tag) {
+                        $labels[] = context_label($tag, 'ticket');
+                    }
+                }
+
+                $ticket_data = array(
+                    'client_id' => $client_id,
+                    'project_id' => $project_id,
+                    'ticket_type_id' => $ticket_type_id,
+                    'location_id' => $location_id,
+                    'fresh_desk_ticket_id' => $fresh_desk_ticket_id,
+                    'title' => $title,
+                    'created_by' => $created_by,
+                    'requested_by' => $requested_by,
+                    'created_at' => $created_at,
+                    'status' => $status,
+                    'last_activity_at' => $last_activity_at,
+                    'assigned_to' => $assigned_to,
+                    'creator_name' => $creator_name,
+                    'creator_email' => $creator_email,
+                    'labels' => implode(',', $labels),
+                    'task_id' => $task_id,
+                    'closed_at' => $closed_at,
+                    'merged_with_ticket_id' => $merged_with_ticket_id
+                );
+
+                $success = $this->ci->Tickets_model->ci_save($ticket_data, $ticket_id);
+
+                if ($success) {
+                    $agent_responded_at = get_array_value($fresh_desk_ticket, 'agent_responded_at');
+                    $requester_responded_at = get_array_value($fresh_desk_ticket, 'requester_responded_at');
+                    $first_responded_at = get_array_value($fresh_desk_ticket, 'first_responded_at');
+
+                    if ($agent_responded_at || $requester_responded_at || $first_responded_at) {
+                        $comments = $this->_fresh_desk_api('tickets/' . $fresh_desk_ticket_id . '/conversations');
+                        if ($comments) {
+                            foreach ($comments as $comment) {
+                                $ticket_comment_id = null;
+
+                                $ticket_comment = $this->ci->Ticket_comments_model->get_details(array('fresh_desk_comment_id' => get_array_value($comment, 'id')))->getRow();
+                                if ($ticket_comment) {
+                                    $ticket_comment_id = $ticket_comment->id;
+                                }
+
+                                $comment_data = array(
+                                    'ticket_id' => $success,
+                                    'fresh_desk_comment_id' => get_array_value($comment, 'id'),
+                                );
+
+                                $created_by_user = $this->ci->Users_model->get_details(array('email' => get_array_value($comment, 'from_email')))->getRow();
+                                if ($created_by_user) {
+                                    $comment_data['created_by'] = $created_by_user->id;
+                                } else {
+                                    $comment_data['created_by'] = 0;
+                                }
+
+                                $comment_data['created_at'] = date('Y-m-d H:i:s', strtotime(get_array_value($comment, 'created_at')));
+                                $comment_data['description'] = get_array_value($comment, 'body');
+                                $comment_data['files'] = serialize(array());
+                                $comment_data['is_note'] = $comment_data['created_by'] == 0 ? 1 : 0;
+
+                                $this->ci->Ticket_comments_model->ci_save($comment_data, $ticket_comment_id);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private function sync_fresh_desk_agents()
+    {
+        $result = $this->_fresh_desk_api('agents');
+
+        if ($result) {
+            foreach ($result as $fresh_desk_agent) {
+                $agent_id = get_array_value($fresh_desk_agent, 'id');
+                $contact = get_array_value($fresh_desk_agent, 'contact');
+                $email = get_array_value($contact, 'email');
+
+                $user = $this->ci->Users_model->get_details(array('email' => $email))->getRow();
+
+                if ($user) {
+                    $user_data = array(
+                        'fresh_desk_agent_id' => $agent_id
+                    );
+
+                    $this->ci->Users_model->ci_save($user_data, $user->id);
+                }
+            }
+        }
+    }
+
+    private function _fresh_desk_api($url_path = "")
+    {
         $headers = array('Content-type: application/json');
 
         $api_key = get_setting('fresh_desk_api_key');
@@ -82,20 +261,20 @@ class Cron_job
 
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL, get_setting('fresh_desk_domain') . 'tickets');
+        curl_setopt($ch, CURLOPT_URL, get_setting('fresh_desk_domain') . $url_path);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         $response = curl_exec($ch);
-        $result = json_decode($response, true);
         curl_close($ch); // Close the connection
 
-        foreach ($result as $fresh_desk_ticket) {
-            $ticket_options = array('fresh_desk_ticket_id');
-            $this->ci->Tickets_model->get_details()->getRow();
+        if ($response) {
+            return json_decode($response, true);
         }
+
+        return false;
     }
 
     private function manage_upcoming_payment_schedule()

@@ -58,7 +58,6 @@
             echo "<div class='text-center'>" . anchor("invoices/download_pdf/" . $invoice_info->id, app_lang("download_pdf"), array("class" => "btn btn-default round")) . "</div>";
         }
 
-
         if ($show_close_preview) {
             echo "<div class='text-center'>" . anchor("invoices/view/" . $invoice_info->id, app_lang("close_preview"), array("class" => "btn btn-default round")) . "</div>";
         }

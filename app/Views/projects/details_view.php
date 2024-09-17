@@ -229,22 +229,24 @@ load_js(array(
 
     $(document).ready(function() {
         setTimeout(function() {
-            var tab = "<?php echo $tab; ?>";
-            if (tab === "comment") {
-                $("[data-bs-target='#project-comments-section']").trigger("click");
-            } else if (tab === "customer_feedback") {
-                $("[data-bs-target='#project-customer_feedback-section']").trigger("click");
-            } else if (tab === "files") {
-                $("[data-bs-target='#project-files-section']").trigger("click");
-            } else if (tab === "gantt") {
-                $("[data-bs-target='#project-gantt-section']").trigger("click");
-            } else if (tab === "tasks") {
-                $("[data-bs-target='#project-tasks_list-section']").trigger("click");
-            } else if (tab === "tasks_kanban") {
-                $("[data-bs-target='#project-tasks_kanban-section']").trigger("click");
-            } else if (tab === "milestones") {
-                $("[data-bs-target='#project-milestones-section']").trigger("click");
-            }
+            // var tab = "<?php echo $tab; ?>";
+            // if (tab === "comment") {
+            //     $("[data-bs-target='#project-comments-section']").trigger("click");
+            // } else if (tab === "customer_feedback") {
+            //     $("[data-bs-target='#project-customer_feedback-section']").trigger("click");
+            // } else if (tab === "files") {
+            //     $("[data-bs-target='#project-files-section']").trigger("click");
+            // } else if (tab === "gantt") {
+            //     $("[data-bs-target='#project-gantt-section']").trigger("click");
+            // } else if (tab === "tasks") {
+            //     $("[data-bs-target='#project-tasks_list-section']").trigger("click");
+            // } else if (tab === "tasks_kanban") {
+            //     $("[data-bs-target='#project-tasks_kanban-section']").trigger("click");
+            // } else if (tab === "milestones") {
+            //     $("[data-bs-target='#project-milestones-section']").trigger("click");
+            // }
+
+            $("[data-bs-target='#project-overview-section']").trigger("click");
         }, 210);
 
 

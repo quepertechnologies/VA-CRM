@@ -37,27 +37,55 @@
 
         $("#project-table").appTable({
             source: '<?php echo_uri("projects/list_data") ?>',
-            serverSide: false,
+            serverSide: true,
+            order: [
+                [0, "desc"]
+            ],
+            responsive: false, //hide responsive (+) icon
             smartFilterIdentity: "all_projects_list", //a to z and _ only. should be unique to avoid conflicts 
             ignoreSavedFilter: ignoreSavedFilter,
             multiSelect: [{
                 name: "status_id",
+                class: "w200",
                 text: "<?php echo app_lang('status'); ?>",
                 options: <?php echo view("project_status/project_status_dropdown", array("project_statuses" => $project_statuses, "selected_status_id" => $selected_status_id, "selected_status_key" => is_dev_mode() ? array("open", 'completed', 'hold', 'canceled') : array("open", 'completed', 'hold'))); ?>
             }],
             filterDropdown: [{
-                name: "project_label",
-                class: "w200",
-                options: <?php echo $project_labels_dropdown; ?>
-            }, <?php echo $custom_field_filters; ?>],
+                    name: "project_label",
+                    class: "w200",
+                    options: <?php echo $project_labels_dropdown; ?>
+                },
+                {
+                    name: "workflow_id",
+                    class: "w200",
+                    options: <?php echo $workflows_dropdown; ?>,
+                    dependent: ["current_milestone_title"]
+                },
+                {
+                    name: "current_milestone_title",
+                    class: "w200",
+                    options: [{
+                        id: "",
+                        text: "- <?php echo app_lang('milestone'); ?> -"
+                    }],
+                    dependency: ["workflow_id"],
+                    dataSource: '<?php echo_uri("projects/get_milestones_for_filter") ?>'
+                }, //milestone is dependent on workflow
+                {
+                    name: "partner_id",
+                    class: "w200",
+                    options: <?php echo $partners_dropdown; ?>
+                },
+                <?php echo $custom_field_filters; ?>
+            ],
             rangeDatepicker: [{
                 startDate: {
                     name: "start_date_from",
-                    value: moment().startOf('month').format("YYYY-MM-DD")
+                    // value: moment().startOf('month').format("YYYY-MM-DD")
                 },
                 endDate: {
                     name: "start_date_to",
-                    value: moment().endOf('month').format('YYYY-MM-DD')
+                    // value: moment().endOf('month').format('YYYY-MM-DD')
                 },
                 showClearButton: true,
                 label: "<?php echo app_lang('start_date'); ?>",
@@ -65,6 +93,7 @@
             }],
             singleDatepicker: [{
                 name: "deadline",
+                class: "w200",
                 defaultText: "<?php echo app_lang('deadline') ?>",
                 options: [{
                         value: "expired",
@@ -91,7 +120,9 @@
             columns: [{
                     title: '<?php echo app_lang("id") ?>',
                     "class": "all w10p",
-                    visible: true
+                    visible: true,
+                    order_by: "id",
+                    order_dir: "DESC"
                 },
                 {
                     title: '<?php echo app_lang("title") ?>',
@@ -99,7 +130,7 @@
                     visible: true
                 },
                 {
-                    title: '<?php echo app_lang("start_date") ?>',
+                    title: '<?php echo app_lang("deadline") ?>',
                     "class": "w10p",
                     "iDataSort": 2,
                     visible: true
@@ -109,21 +140,21 @@
                     "class": "w10p",
                     visible: true
                 },
-                {
-                    title: '<?php echo app_lang("phone") ?>',
-                    "class": "w10p",
-                    visible: true
-                },
+                // {
+                //     title: '<?php echo app_lang("phone") ?>',
+                //     "class": "w10p",
+                //     visible: true
+                // },
                 {
                     title: '<?php echo app_lang("application_assignees") ?>',
                     "class": "w10p",
                     visible: true
                 },
-                {
-                    title: '<?php echo app_lang("application_owner") ?>',
-                    "class": "w10p",
-                    visible: true
-                },
+                // {
+                //     title: '<?php echo app_lang("application_owner") ?>',
+                //     "class": "w10p",
+                //     visible: true
+                // },
                 {
                     title: '<?php echo app_lang("workflow") ?>',
                     "class": "w10p",
@@ -135,9 +166,8 @@
                     visible: true
                 },
                 {
-                    title: '<?php echo app_lang("deadline") ?>',
+                    title: '<?php echo app_lang("partner") ?>',
                     "class": "w10p",
-                    "iDataSort": 9,
                     visible: true
                 },
                 {

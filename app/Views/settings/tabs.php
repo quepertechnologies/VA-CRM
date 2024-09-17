@@ -46,6 +46,7 @@ if (get_setting("module_attendance") == "1") {
 }
 
 $settings_menu["sales_and_prospects"][] = array("name" => "item_categories", "url" => "item_categories");
+$settings_menu["sales_and_prospects"][] = array("name" => "items", "url" => "items");
 
 if (get_setting("module_invoice") == "1") {
     $settings_menu["sales_and_prospects"][] = array("name" => "invoices", "url" => "settings/invoices");

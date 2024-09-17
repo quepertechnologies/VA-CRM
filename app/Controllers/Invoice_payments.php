@@ -6,16 +6,19 @@ use App\Libraries\Paytm;
 use App\Libraries\Stripe;
 use App\Libraries\Paypal;
 
-class Invoice_payments extends Security_Controller {
+class Invoice_payments extends Security_Controller
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->init_permission_checker("invoice");
     }
 
     /* load invoice list view */
 
-    function index() {
+    function index()
+    {
         if ($this->login_user->user_type === "staff") {
             $view_data['payment_method_dropdown'] = $this->get_payment_method_dropdown();
             $view_data["currencies_dropdown"] = $this->_get_currencies_dropdown();
@@ -30,7 +33,8 @@ class Invoice_payments extends Security_Controller {
         }
     }
 
-    function get_payment_method_dropdown() {
+    function get_payment_method_dropdown()
+    {
         $this->access_only_team_members();
 
         $payment_methods = $this->Payment_methods_model->get_all_where(array("deleted" => 0))->getResult();
@@ -44,18 +48,21 @@ class Invoice_payments extends Security_Controller {
     }
 
     //load the payment list yearly view
-    function yearly() {
+    function yearly()
+    {
         return $this->template->view("invoices/yearly_payments");
     }
 
     //load custom payment list
-    function custom() {
+    function custom()
+    {
         return $this->template->view("invoices/custom_payments_list");
     }
 
     /* load payment modal */
 
-    function payment_modal_form() {
+    function payment_modal_form()
+    {
         $this->access_only_allowed_members();
 
         $this->validate_submitted_data(array(
@@ -94,7 +101,8 @@ class Invoice_payments extends Security_Controller {
 
     /* add or edit a payment */
 
-    function save_payment() {
+    function save_payment()
+    {
         $this->access_only_allowed_members();
 
         $this->validate_submitted_data(array(
@@ -113,16 +121,33 @@ class Invoice_payments extends Security_Controller {
             "payment_date" => $this->request->getPost('invoice_payment_date'),
             "payment_method_id" => $this->request->getPost('invoice_payment_method_id'),
             "note" => $this->request->getPost('invoice_payment_note'),
-            "amount" => unformat_currency($this->request->getPost('invoice_payment_amount')),
-            "created_at" => get_current_utc_time(),
-            "created_by" => $this->login_user->id,
+            "amount" => unformat_currency($this->request->getPost('invoice_payment_amount'))
         );
+
+        if (!$id) {
+            $invoice_payment_data['created_at'] = get_current_utc_time();
+            $invoice_payment_data['created_by'] = $this->login_user->id;
+        }
 
         $invoice_payment_id = $this->Invoice_payments_model->ci_save($invoice_payment_data, $id);
         if ($invoice_payment_id) {
 
             //As receiving payment for the invoice, we'll remove the 'draft' status from the invoice 
             $this->Invoices_model->update_invoice_status($invoice_id);
+
+            // sleep(0.2);
+            $invoice_info = $this->Invoices_model->get_invoice_total_summary($invoice_id);
+
+            if ($invoice_info->balance_due <= 0) {
+                $invoice_incomes = $this->Invoice_incomes_model->get_details(array('invoice_id' => $invoice_id, 'status' => 'not_initiated'))->getResult();
+                foreach ($invoice_incomes as $income) {
+                    $income_data = array(
+                        'status' => 'initiated'
+                    );
+
+                    $this->Invoice_incomes_model->ci_save($income_data, $income->id);
+                }
+            }
 
             if (!$id) {
                 //show payment confirmation and payment received notification for new payments only
@@ -140,7 +165,8 @@ class Invoice_payments extends Security_Controller {
 
     /* delete or undo a payment */
 
-    function delete_payment() {
+    function delete_payment()
+    {
         $this->access_only_allowed_members();
 
         $this->validate_submitted_data(array(
@@ -168,7 +194,8 @@ class Invoice_payments extends Security_Controller {
 
     /* list of invoice payments, prepared for datatable  */
 
-    function payment_list_data($invoice_id = 0) {
+    function payment_list_data($invoice_id = 0)
+    {
         if (!$this->can_view_invoices()) {
             app_redirect("forbidden");
         }
@@ -196,7 +223,8 @@ class Invoice_payments extends Security_Controller {
 
     /* list of invoice payments, prepared for datatable  */
 
-    function payment_list_data_of_client($client_id = 0) {
+    function payment_list_data_of_client($client_id = 0)
+    {
         if (!$this->can_view_invoices($client_id)) {
             app_redirect("forbidden");
         }
@@ -213,7 +241,8 @@ class Invoice_payments extends Security_Controller {
 
     /* list of invoice payments, prepared for datatable  */
 
-    function payment_list_data_of_project($project_id = 0) {
+    function payment_list_data_of_project($project_id = 0)
+    {
         validate_numeric_value($project_id);
         $options = array("project_id" => $project_id);
 
@@ -227,7 +256,8 @@ class Invoice_payments extends Security_Controller {
 
     /* prepare a row of invoice payment list table */
 
-    private function _make_payment_row($data) {
+    private function _make_payment_row($data)
+    {
         $invoice_url = "";
         if (!$this->can_view_invoices($data->client_id)) {
             app_redirect("forbidden");
@@ -246,13 +276,15 @@ class Invoice_payments extends Security_Controller {
             $data->note,
             to_currency($data->amount, $data->currency_symbol),
             modal_anchor(get_uri("invoice_payments/payment_modal_form"), "<i data-feather='edit' class='icon-16'></i>", array("class" => "edit", "title" => app_lang('edit_payment'), "data-post-id" => $data->id, "data-post-invoice_id" => $data->invoice_id,))
-            . js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("invoice_payments/delete_payment"), "data-action" => "delete"))
+                . js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("invoice_payments/delete_payment"), "data-action" => "delete"))
         );
     }
 
     /* invoice total section */
 
-    private function _get_invoice_total_view($invoice_id = 0) {
+    private function _get_invoice_total_view($invoice_id = 0)
+    {
+        $view_data = get_invoice_making_data($invoice_id);
         $view_data["invoice_total_summary"] = $this->Invoices_model->get_invoice_total_summary($invoice_id);
         $view_data["invoice_id"] = $invoice_id;
         $can_edit_invoices = false;
@@ -264,12 +296,14 @@ class Invoice_payments extends Security_Controller {
     }
 
     //load the expenses yearly chart view
-    function yearly_chart() {
+    function yearly_chart()
+    {
         $view_data["currencies_dropdown"] = $this->_get_currencies_dropdown();
         return $this->template->view("invoices/yearly_payments_chart", $view_data);
     }
 
-    function yearly_chart_data() {
+    function yearly_chart_data()
+    {
 
         $months = array("january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december");
 
@@ -293,7 +327,8 @@ class Invoice_payments extends Security_Controller {
         }
     }
 
-    function get_paytm_checksum_hash() {
+    function get_paytm_checksum_hash()
+    {
         $paytm = new Paytm();
         $payment_data = $paytm->get_paytm_checksum_hash($this->request->getPost("input_data"), $this->request->getPost("verification_data"));
 
@@ -304,7 +339,8 @@ class Invoice_payments extends Security_Controller {
         }
     }
 
-    function get_stripe_checkout_session() {
+    function get_stripe_checkout_session()
+    {
         $this->access_only_clients();
         $stripe = new Stripe();
         try {
@@ -319,7 +355,8 @@ class Invoice_payments extends Security_Controller {
         }
     }
 
-    function get_paypal_checkout_url() {
+    function get_paypal_checkout_url()
+    {
         $this->access_only_clients();
         $paypal = new Paypal();
         try {
@@ -334,7 +371,8 @@ class Invoice_payments extends Security_Controller {
         }
     }
 
-    function payments_summary() {
+    function payments_summary()
+    {
         if (!$this->can_view_invoices()) {
             app_redirect("forbidden");
         }
@@ -345,7 +383,8 @@ class Invoice_payments extends Security_Controller {
         return $this->template->rander("invoices/reports/yearly_payments_summary", $view_data);
     }
 
-    function yearly_payment_summary_list_data() {
+    function yearly_payment_summary_list_data()
+    {
         if (!$this->can_view_invoices()) {
             app_redirect("forbidden");
         }
@@ -381,13 +420,15 @@ class Invoice_payments extends Security_Controller {
         echo json_encode(array("data" => $result));
     }
 
-    function clients_payment_summary() {
+    function clients_payment_summary()
+    {
         $view_data["currencies_dropdown"] = $this->_get_currencies_dropdown(false);
         $view_data['payment_method_dropdown'] = $this->get_payment_method_dropdown();
         return $this->template->view("invoices/reports/clients_payment_summary", $view_data);
     }
 
-    function clients_payment_summary_list_data() {
+    function clients_payment_summary_list_data()
+    {
         $start_date = $this->request->getPost('start_date');
         $end_date = $this->request->getPost('end_date');
         $options = array(
@@ -415,7 +456,8 @@ class Invoice_payments extends Security_Controller {
         echo json_encode(array("data" => $result));
     }
 
-    function get_invoice_payment_amount_suggestion($invoice_id) {
+    function get_invoice_payment_amount_suggestion($invoice_id)
+    {
         $invoice_total_summary = $this->Invoices_model->get_invoice_total_summary($invoice_id);
         if ($invoice_total_summary) {
             $invoice_total_summary->balance_due = $invoice_total_summary->balance_due ? to_decimal_format($invoice_total_summary->balance_due) : "";
@@ -427,7 +469,8 @@ class Invoice_payments extends Security_Controller {
 
     /* list of invoice payments, prepared for datatable  */
 
-    function payment_list_data_of_order($order_id, $client_id = 0) {
+    function payment_list_data_of_order($order_id, $client_id = 0)
+    {
         if (!$this->can_view_invoices($client_id)) {
             app_redirect("forbidden");
         }
@@ -444,7 +487,6 @@ class Invoice_payments extends Security_Controller {
         }
         echo json_encode(array("data" => $result));
     }
-
 }
 
 /* End of file payments.php */

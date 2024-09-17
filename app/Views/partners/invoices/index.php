@@ -10,13 +10,13 @@
         <?php } else { ?>
             <div class="tab-title clearfix">
                 <h4><?php echo app_lang('invoices'); ?></h4>
-                <div class="title-button-group">
+                <!-- <div class="title-button-group">
                     <?php
                     if ($can_edit_invoices) {
                         echo modal_anchor(get_uri("invoices/modal_form"), "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('add_invoice'), array("class" => "btn btn-default mb0", "data-post-client_id" => $client_id, "title" => app_lang('add_invoice')));
                     }
                     ?>
-                </div>
+                </div> -->
             </div>
         <?php } ?>
 

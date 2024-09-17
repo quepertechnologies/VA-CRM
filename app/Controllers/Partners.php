@@ -96,6 +96,9 @@ class Partners extends Security_Controller
 
         $view_data["countries_dropdown"] = $this->get_countries_dropdown([]);
         $view_data["languages_dropdown"] = $this->get_languages_dropdown([]);
+        $view_data["locations_dropdown"] = $this->get_locations_dropdown_for_filter("Location");
+        $view_data['sources_dropdown'] = json_encode($this->_get_sources_dropdown_select2_data());
+
 
         //prepare label suggestions
         $view_data['label_suggestions'] = $this->make_labels_dropdown("client", $view_data['model_info']->labels);
@@ -120,10 +123,9 @@ class Partners extends Security_Controller
         ));
 
         $data = array(
-            "location_id" => get_ltm_opl_id(),
+            "location_id" => $this->request->getPost('location_id') ? $this->request->getPost('location_id') : get_ltm_opl_id(),
             "first_name" => $this->request->getPost('first_name'),
             "last_name" => $this->request->getPost('last_name'),
-            "unique_id" => $this->request->getPost('unique_id'),
             "partner_type" => $this->request->getPost('partner_type'),
             "type" => $this->request->getPost('type'),
             "account_type" => $this->request->getPost('consultancy_type') ? $this->request->getPost('consultancy_type') : 3,
@@ -167,6 +169,8 @@ class Partners extends Security_Controller
 
         if (!$client_id) {
             $data["created_date"] = get_current_utc_time();
+            $data['created_by_location_id'] = get_ltm_opl_id();
+            $data["unique_id"] = _gen_va_uid($this->request->getPost('first_name') . ' ' . $this->request->getPost('last_name'));
         }
 
 
@@ -176,13 +180,13 @@ class Partners extends Security_Controller
             $data["disable_online_payment"] = $this->request->getPost('disable_online_payment') ? $this->request->getPost('disable_online_payment') : 0;
 
             //check if the currency is editable
-            if ($client_id) {
-                $client_info = $this->Clients_model->get_one($client_id);
-                if ($client_info->currency !== $data["currency"] && !$this->Clients_model->is_currency_editable($client_id)) {
-                    echo json_encode(array("success" => false, 'message' => app_lang('client_currency_not_editable_message')));
-                    exit();
-                }
-            }
+            // if ($client_id) {
+            //     $client_info = $this->Clients_model->get_one($client_id);
+            //     if ($client_info->currency !== $data["currency"] && !$this->Clients_model->is_currency_editable($client_id)) {
+            //         echo json_encode(array("success" => false, 'message' => app_lang('client_currency_not_editable_message')));
+            //         exit();
+            //     }
+            // }
         }
 
         if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "client") === "all") {
@@ -284,7 +288,9 @@ class Partners extends Security_Controller
                     $message = $this->parser->setData($parser_data)->renderString($email_template->message);
                     $subject = $this->parser->setData($parser_data)->renderString($email_template->subject);
 
-                    send_app_mail($this->request->getPost('email'), $subject, $message);
+                    if (!is_server_localhost()) {
+                        send_app_mail($this->request->getPost('email'), $subject, $message);
+                    }
                 }
             } else {
                 $user = $this->Clients_model->get_one($client_id);
@@ -326,6 +332,7 @@ class Partners extends Security_Controller
             "created_by" => $this->request->getPost("created_by"),
             "client_groups" => $this->allowed_client_groups,
             "location_ids" => get_ltm_opl_id(false, ','),
+            "partner_type" => $this->request->getPost('partner_type'),
             "label_id" => $this->request->getPost('label_id'),
             'type' => 'person',
             'account_type' => '3'
@@ -374,7 +381,7 @@ class Partners extends Security_Controller
     private function _make_row($data, $custom_fields)
     {
         // $client_labels = make_labels_view_data($data->labels_list, true);
-
+        $projects = $this->Projects_model->own_projects($data->id)->getResult();
         $created_at = date_format(date_create($data->created_date), 'd M Y');
         $branch = $this->get_location_label($data->location_id);
         $row_data = array(
@@ -385,7 +392,7 @@ class Partners extends Security_Controller
             $data->phone,
             $data->email,
             $branch,
-            to_decimal_format($data->total_projects),
+            to_decimal_format(count($projects)),
         );
 
         foreach ($custom_fields as $field) {
@@ -407,13 +414,14 @@ class Partners extends Security_Controller
 
         if ($client_id) {
             $options = array("id" => $client_id);
-            $client_info = $this->Clients_model->get_details($options)->getRow();
+            $client_info = $this->Clients_model->get_one($client_id);
             if ($client_info && !$client_info->is_lead) {
 
                 $view_data = $this->make_access_permissions_view_data();
 
                 $view_data["show_note_info"] = (get_setting("module_note")) ? true : false;
                 $view_data["show_event_info"] = (get_setting("module_event")) ? true : false;
+                $view_data["show_clients_info"] = true;
 
                 $access_info = $this->get_access_info("expense");
                 $view_data["show_expense_info"] = (get_setting("module_expense") && $access_info->access_type == "all") ? true : false;
@@ -462,6 +470,24 @@ class Partners extends Security_Controller
     {
         $view_data["clients"] = $this->Clients_model->get_starred_clients($this->login_user->id, $this->allowed_client_groups)->getResult();
         return $this->template->view('partners/star/clients_list', $view_data);
+    }
+
+    /* load projects tab  */
+
+    function clients($client_id)
+    {
+        $this->access_only_allowed_members();
+
+        $view_data = $this->make_access_permissions_view_data();
+
+        $view_data['can_edit_clients'] = $this->can_edit_clients();
+        $view_data["show_project_info"] = $this->can_manage_all_projects() && !$this->has_all_projects_restricted_role();
+
+        $view_data["show_own_clients_only_user_id"] = $this->show_own_clients_only_user_id();
+        $view_data["allowed_client_groups"] = $this->allowed_client_groups;
+        $view_data["client_id"] = $client_id;
+
+        return $this->template->view("partners/clients/index", $view_data);
     }
 
     /* load projects tab  */
@@ -522,6 +548,10 @@ class Partners extends Security_Controller
 
             $view_data["custom_field_headers"] = $this->Custom_fields_model->get_custom_field_headers_for_table("invoices", $this->login_user->is_admin, $this->login_user->user_type);
             $view_data["custom_field_filters"] = $this->Custom_fields_model->get_custom_field_filters("invoices", $this->login_user->is_admin, $this->login_user->user_type);
+
+            if ($view_data["client_info"] && $view_data["client_info"]->account_type == 3) {
+                $view_data["hide_due_amount"] = true;
+            }
 
             $view_data["can_edit_invoices"] = $this->can_edit_invoices();
 
@@ -1240,6 +1270,7 @@ class Partners extends Security_Controller
 
             $view_data["team_members_dropdown"] = $this->get_team_members_dropdown();
             $view_data["currency_dropdown"] = $this->_get_currency_dropdown_select2_data();
+            $view_data['sources_dropdown'] = json_encode($this->_get_sources_dropdown_select2_data());
             $view_data['label_suggestions'] = $this->make_labels_dropdown("client", $view_data['model_info']->labels);
 
             $view_data["timezone_dropdown"] = $this->_get_timezones_dropdown_select2_data();
@@ -1247,6 +1278,7 @@ class Partners extends Security_Controller
 
             $view_data["countries_dropdown"] = $this->get_countries_dropdown([]);
             $view_data["languages_dropdown"] = $this->get_languages_dropdown([]);
+            $view_data["locations_dropdown"] = $this->get_locations_dropdown_for_filter("Location");
             $view_data["is_overview"] = true;
 
             return $this->template->view('partners/contacts/company_info_tab', $view_data);
@@ -1358,7 +1390,9 @@ class Partners extends Security_Controller
                 $message = $this->parser->setData($parser_data)->renderString($email_template->message);
                 $subject = $this->parser->setData($parser_data)->renderString($email_template->subject);
 
-                send_app_mail($this->request->getPost('email'), $subject, $message);
+                if (!is_server_localhost()) {
+                    send_app_mail($this->request->getPost('email'), $subject, $message);
+                }
             }
 
             echo json_encode(array("success" => true, "data" => $this->_contact_row_data($save_id), 'id' => $contact_id, "client_id" => $client_id, 'message' => app_lang('record_saved')));
@@ -1468,7 +1502,9 @@ class Partners extends Security_Controller
 
                 $message = $this->parser->setData($parser_data)->renderString($message);
                 $subject = $this->parser->setData($parser_data)->renderString($subject);
-                send_app_mail($email, $subject, $message);
+                if (!is_server_localhost()) {
+                    send_app_mail($email, $subject, $message);
+                }
             }
 
             echo json_encode(array("success" => true, 'message' => app_lang('record_updated')));
@@ -1561,6 +1597,96 @@ class Partners extends Security_Controller
                 echo json_encode(array("success" => false, 'message' => app_lang('record_cannot_be_deleted')));
             }
         }
+    }
+
+    /* list of contacts, prepared for datatable  */
+
+    function clients_list_data($client_id = 0)
+    {
+        $this->_validate_client_view_access($client_id);
+
+        $partner = $this->Clients_model->get_one($client_id);
+
+        $custom_fields = $this->Custom_fields_model->get_available_fields_for_table("clients", $this->login_user->is_admin, $this->login_user->user_type);
+        $options = array(
+            "custom_fields" => $custom_fields,
+            "custom_field_filter" => $this->prepare_custom_field_filter_values("clients", $this->login_user->is_admin, $this->login_user->user_type),
+            "group_id" => $this->request->getPost("group_id"),
+            "show_own_clients_only_user_id" => $this->show_own_clients_only_user_id(),
+            "quick_filter" => $this->request->getPost("quick_filter"),
+            "created_by" => $this->request->getPost("created_by"),
+            "client_groups" => $this->allowed_client_groups,
+            "location_ids" => get_ltm_opl_id(false, ','),
+            "label_id" => $this->request->getPost('label_id'),
+            "visa_type" => $this->request->getPost('visa_type'),
+            "expiry" => $this->request->getPost('expiry'),
+            'type' => 'person',
+            'partner_id' => $client_id
+        );
+
+        $all_options = append_server_side_filtering_commmon_params($options);
+        if ($partner->partner_type == 'subagent') {
+            $result = $this->Clients_model->get_details($all_options);
+        } else {
+            $result = $this->Project_partners_model->own_clients($client_id);
+            // var_dump($result);exit();
+        }
+
+        //by this, we can handel the server side or client side from the app table prams.
+        if (get_array_value($all_options, "server_side")) {
+            $list_data = get_array_value($result, "data");
+        } else {
+            $list_data = $result->getResult();
+            $result = array();
+        }
+
+        // var_dump($list_data);exit();
+
+        $result_data = array();
+        foreach ($list_data as $data) {
+            $result_data[] = $this->_make_clients_row($data, $custom_fields);
+        }
+
+        $result["data"] = $result_data;
+
+        echo json_encode($result);
+    }
+
+    private function _make_clients_row($data)
+    {
+        $client_labels = make_labels_view_data($data->labels_list, true);
+
+        $now = get_my_local_time("Y-m-d");
+        if ($data->visa_expiry < $now) {
+            $expiry = '<font color="red">' . $data->visa_expiry . '</font>';
+        } else {
+            $expiry = $data->visa_expiry;
+        }
+
+        $visa = 'Subclass ' . $data->visa_type . '<br>' . $expiry;
+        if ($data->visa_type == '') {
+            $visa = 'N/A<br>' . $expiry;
+        } elseif ($data->visa_expiry == '') {
+            $visa = 'Subclass ' . $data->visa_type . '<br>N/A';
+        }
+
+        $created_at = date_format(date_create($data->created_date), 'd M Y');
+        $branch = $this->get_location_label($data->location_id);
+        $row_data = array(
+            $data->id,
+            get_client_contact_profile_link($data->id, $data->first_name . " " . $data->last_name, array(), array('caption' => $data->unique_id, 'account_type' => $data->account_type)) . '<br>' . $client_labels,
+            $visa,
+            $created_at,
+            $data->phone,
+            $data->email,
+            $branch,
+            to_decimal_format($data->total_projects),
+        );
+
+        $row_data[] = modal_anchor(get_uri("migration_clients/modal_form"), "<i data-feather='edit' class='icon-16'></i>", array("class" => "edit", "title" => app_lang('edit_client'), "data-post-id" => $data->id))
+            . js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete_client'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("migration_clients/delete"), "data-action" => "delete-confirmation"));
+
+        return $row_data;
     }
 
     /* list of contacts, prepared for datatable  */
@@ -2377,6 +2503,7 @@ class Partners extends Security_Controller
         $view_data["team_members_dropdown"] = $this->get_team_members_dropdown(true);
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data['phases_dropdown'] = json_encode($this->make_phases_dropdown());
+        $view_data['partner_types_dropdown'] = json_encode($this->make_partner_types_dropdown());
 
         return $this->template->view("partners/clients_list", $view_data);
     }

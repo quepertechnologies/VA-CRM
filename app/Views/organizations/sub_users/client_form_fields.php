@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <div class="row">
             <label for="client_id" class="<?php echo $label_column; ?> client_id_section"><?php echo app_lang('client_id'); ?></label>
             <div class="<?php echo $field_column; ?>">
@@ -37,7 +37,7 @@
                 echo form_input(array(
                     "id" => "unique_id",
                     "name" => "unique_id",
-                    "value" => isset($model_info->unique_id) && !empty($model_info->unique_id) ? $model_info->unique_id : uniqid('VA' . date('-y-')),
+                    "value" => isset($model_info->unique_id) && !empty($model_info->unique_id) ? $model_info->unique_id : '',
                     "class" => "form-control company_name_input_section",
                     "placeholder" => app_lang('client_id'),
                     'readonly' => true,

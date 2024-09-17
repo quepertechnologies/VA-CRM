@@ -57,6 +57,25 @@
 
             <div class="form-group">
                 <div class="row">
+                    <label for="xero_api_webhook_key" class=" col-md-2"><?php echo app_lang('xero_api_webhook_key'); ?></label>
+                    <div class=" col-md-10">
+                        <?php
+                        echo form_input(array(
+                            "id" => "xero_api_webhook_key",
+                            "name" => "xero_api_webhook_key",
+                            "value" => get_setting('xero_api_webhook_key'),
+                            "class" => "form-control",
+                            "placeholder" => app_lang('xero_api_webhook_key'),
+                            "data-rule-required" => true,
+                            "data-msg-required" => app_lang("field_required"),
+                        ));
+                        ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
                     <label for="xero_api_redirect_uri" class=" col-md-2"><?php echo app_lang('xero_api_redirect_uri'); ?></label>
                     <div class=" col-md-10">
                         <?php

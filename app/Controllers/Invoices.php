@@ -47,6 +47,9 @@ class Invoices extends Security_Controller
             return $this->template->rander("invoices/index", $view_data);
         } else {
             $view_data["client_info"] = $this->Clients_model->get_one($this->login_user->client_id);
+            if ($view_data["client_info"] && $view_data["client_info"]->account_type == 3) {
+                $view_data["hide_due_amount"] = true;
+            }
             $view_data['client_id'] = $this->login_user->client_id;
             $view_data['page_type'] = "full";
             return $this->template->rander("clients/invoices/index", $view_data);
@@ -96,6 +99,7 @@ class Invoices extends Security_Controller
 
         $client_id = $this->request->getPost('client_id');
         $project_id = $this->request->getPost('project_id');
+        $schedule_id = $this->request->getPost('schedule_id');
         $model_info = $this->Invoices_model->get_one($invoice_id);
 
         //check if estimate_id/order_id/proposal_id/contract_id posted. if found, generate related information
@@ -106,7 +110,40 @@ class Invoices extends Security_Controller
         $view_data['estimate_id'] = $estimate_id;
         $view_data['contract_id'] = $contract_id;
         $view_data['proposal_id'] = $proposal_id;
+        $view_data['schedule_id'] = $schedule_id;
         $view_data['order_id'] = $order_id;
+
+        //here has a project id. now set the client from the project
+        if ($project_id) {
+            $client_id = $this->Projects_model->get_one($project_id)->client_id;
+            $model_info->client_id = $client_id;
+
+            $income_sharing_partners = $this->Project_partners_model->get_details(array('project_id' => $project_id, 'only_partner_types' => 'subagent,referral,superagent'))->getRow();
+            $view_data['income_sharing_partners'] = $income_sharing_partners;
+
+            $partner_options = array(
+                'project_id' => $project_id,
+                'only_partner_types' => 'institute,superagent'
+            );
+            $project_partners = $this->Project_partners_model->get_details($partner_options)->getResult();
+
+            $partners_dropdown = array('' => '-');
+            foreach ($project_partners as $partner) {
+                $partners_dropdown[$partner->partner_id] = ucfirst($partner->partner_type) . ': ' . $partner->full_name;
+            }
+
+            $view_data['partners_dropdown'] = $partners_dropdown;
+        }
+
+        if ($schedule_id) {
+            $schedule_info = $this->Project_payment_schedule_setup_model->get_one($schedule_id);
+            if ($schedule_info) {
+                $model_info->bill_date = $schedule_info->invoice_date;
+                $model_info->due_date = $schedule_info->due_date;
+                $schedule_info->fees = unserialize($schedule_info->fees);
+                $view_data['schedule_info'] = $schedule_info;
+            }
+        }
 
         if ($estimate_id || $order_id || $proposal_id || $contract_id) {
             $info = null;
@@ -133,12 +170,6 @@ class Invoices extends Security_Controller
             }
         }
 
-        //here has a project id. now set the client from the project
-        if ($project_id) {
-            $client_id = $this->Projects_model->get_one($project_id)->client_id;
-            $model_info->client_id = $client_id;
-        }
-
 
         $project_client_id = $client_id;
         if ($model_info->client_id) {
@@ -148,6 +179,8 @@ class Invoices extends Security_Controller
         $view_data['model_info'] = $model_info;
 
         //make the dropdown lists
+        $tax_options = array('is_default' => 1);
+        $view_data['default_tax'] = $this->Taxes_model->get_details($tax_options)->getRow();
         $view_data['taxes_dropdown'] = array("" => "-") + $this->Taxes_model->get_dropdown_list(array("title"));
         $view_data['clients_dropdown'] = array("" => "-") + $this->Clients_model->get_dropdown_list(array("company_name", 'first_name', 'last_name'), "id", array("is_lead" => 0));
         $projects = $this->Projects_model->get_dropdown_list(array("title"), "id", array("client_id" => $project_client_id, "project_type" => "client_project"));
@@ -158,7 +191,7 @@ class Invoices extends Security_Controller
         $view_data['projects_suggestion'] = $suggestion;
 
         $view_data['client_id'] = $client_id;
-        $view_data['project_id'] = $project_id;
+        $view_data['project_id'] = isset($model_info->project_id) && $model_info->project_id ? $model_info->project_id : $project_id;
 
         //prepare label suggestions
         $view_data['label_suggestions'] = $this->make_labels_dropdown("invoice", $model_info->labels);
@@ -235,16 +268,22 @@ class Invoices extends Security_Controller
         ));
 
         $client_id = $this->request->getPost('invoice_client_id');
+        $partner_id = $this->request->getPost('invoice_partner_id');
 
         $target_path = get_setting("timeline_file_path");
         $files_data = move_files_from_temp_dir_to_permanent_dir($target_path, "invoice");
         $new_files = unserialize($files_data);
 
         $estimate_id = $this->request->getPost('estimate_id');
+        $schedule_id = $this->request->getPost('schedule_id') ? $this->request->getPost('schedule_id') : 0;
+        $invoice_type = $this->request->getPost('invoice_type') ? $this->request->getPost('invoice_type') : 'general';
 
         $_invoice_data = array(
             "client_id" => $client_id,
+            "partner_id" => $partner_id ? $partner_id : 0,
             "project_id" => $this->request->getPost('invoice_project_id') ? $this->request->getPost('invoice_project_id') : 0,
+            "schedule_id" => $schedule_id,
+            "invoice_type" => $invoice_type,
             "bill_date" => $this->request->getPost('invoice_bill_date'),
             "due_date" => $this->request->getPost('invoice_due_date'),
             "tax_id" => $this->request->getPost('tax_id') ? $this->request->getPost('tax_id') : 0,
@@ -255,6 +294,7 @@ class Invoices extends Security_Controller
             "labels" => $this->request->getPost('labels'),
             "estimate_id" => $estimate_id ? $estimate_id : 0,
         );
+
 
         $invoice_data = array_merge($_invoice_data, $this->_get_recurring_data($id));
 
@@ -281,24 +321,94 @@ class Invoices extends Security_Controller
             // save discount when cloning and creating from estimate
             $invoice_data["discount_amount"] = $this->request->getPost('discount_amount') ? $this->request->getPost('discount_amount') : 0;
             $invoice_data["discount_amount_type"] = $this->request->getPost('discount_amount_type') ? $this->request->getPost('discount_amount_type') : "percentage";
-            $invoice_data["discount_type"] = $this->request->getPost('discount_type') ? $this->request->getPost('discount_type') : "before_tax";
+            // $invoice_data["discount_type"] = $this->request->getPost('discount_type') ? $this->request->getPost('discount_type') : "before_tax";
+            $invoice_data["discount_type"] = "on_income";
 
             $invoice_data["order_id"] = $order_id ? $order_id : 0;
         }
 
+        if ($schedule_id) {
+            $schedule = $this->Project_payment_schedule_setup_model->get_one($schedule_id);
+
+            if ($schedule) {
+                $invoice_data["discount_amount"] = $schedule->discount ? (float)$schedule->discount : 0;
+                $invoice_data["discount_amount_type"] = "fixed_amount";
+            }
+        }
+        $invoice_data["discount_type"] = "on_income";
+
         $invoice_id = $this->Invoices_model->save_invoice_and_update_total($invoice_data, $id);
         if ($invoice_id) {
-            $_link = anchor(get_uri("invoices/view/" . $invoice_id), "Invoice #" . $invoice_id);
-            $timeline_data = array(
-                'client_id' => $invoice_data["client_id"],
-                'title' => get_login_team_member_profile_link(),
-                'caption' => timeline_label('created') . $_link
-            );
-            $this->Timeline_model->ci_save($timeline_data);
+            if (!$id) {
+                $_link = anchor(get_uri("invoices/view/" . $invoice_id), "Invoice #" . $invoice_id);
+                $timeline_data = array(
+                    'client_id' => $invoice_data["client_id"],
+                    'title' => get_login_team_member_profile_link(),
+                    'caption' => timeline_label('created') . $_link
+                );
+                $this->Timeline_model->ci_save($timeline_data);
+            }
+
+            if ($schedule_id) {
+                $schedule = $this->Project_payment_schedule_setup_model->get_one($schedule_id);
+
+                if ($schedule) {
+                    $fees = unserialize($schedule->fees);
+                    if ($fees) {
+                        $income_type = '';
+                        if ($invoice_type == 'gross_claim') {
+                            $income_type = 'income';
+                        } elseif ($invoice_type == 'net_claim') {
+                            $income_type = 'payable';
+                        }
+
+                        $institute = $this->Project_partners_model->get_details(array('project_id' => $schedule->project_id, 'partner_type' => 'institute'))->getRow();
+
+                        if ($institute) {
+                            foreach ($fees as $fee_key => $fee) {
+                                $is_claimable = get_array_value($fee, 'is_claimable');
+                                if ($invoice_type == 'general' || (int)$is_claimable) {
+                                    $amount = (float)get_array_value($fee, 'amount');
+                                    $key = (int)get_array_value($fee, 'key');
+                                    $is_taxable = (int)get_array_value($fee, 'is_taxable');
+                                    $fee_type = get_array_value($fee, 'fee_type');
+                                    $commission = get_array_value($fee, 'commission');
+
+                                    if ($invoice_type == 'net_claim' && (int)$commission == 100) {
+                                        $is_taxable = 0;
+                                    }
+
+                                    $invoice_item_data = array(
+                                        'title' => $fee_type,
+                                        'quantity' => 1,
+                                        'unit_type' => '',
+                                        'income_type' => $income_type,
+                                        'commission' => $commission ? $commission : $institute->commission,
+                                        'rate' => $amount,
+                                        'total' => $amount,
+                                        'sort' => $key ? $key : $fee_key,
+                                        'invoice_id' => $invoice_id,
+                                        'schedule_id' => $schedule_id,
+                                        'schedule_fee_id' => $key,
+                                        'taxable' => $is_taxable ? 1 : 0
+                                    );
+
+                                    $this->Invoice_items_model->ci_save($invoice_item_data);
+                                }
+                            }
+                            if ($invoice_id) {
+                                $project_payment_schedule_setup_data = array('status' => 1, 'invoice_id' => $invoice_id);
+                                $this->Project_payment_schedule_setup_model->ci_save($project_payment_schedule_setup_data, $schedule_id);
+                            }
+                        }
+
+                        $this->_handle_income_sharing($invoice_id, $schedule->project_id);
+                    }
+                }
+            }
 
             if ($is_clone && $main_invoice_id) {
                 //add invoice items
-
                 save_custom_fields("invoices", $invoice_id, 1, "staff"); //we have to keep this regarding as an admin user because non-admin user also can acquire the access to clone a invoice
 
                 $invoice_items = $this->Invoice_items_model->get_all_where(array("invoice_id" => $main_invoice_id, "deleted" => 0))->getResult();
@@ -326,6 +436,44 @@ class Invoices extends Security_Controller
             echo json_encode(array("success" => true, "data" => $this->_row_data($invoice_id), 'id' => $invoice_id, 'message' => app_lang('record_saved')));
         } else {
             echo json_encode(array("success" => false, 'message' => app_lang('error_occurred')));
+        }
+    }
+
+    private function _handle_income_sharing($invoice_id = 0, $project_id = 0)
+    {
+        $income_sharing = $this->Invoice_incomes_model->get_details(array('invoice_id' => $invoice_id))->getResult();
+        if ($income_sharing && count($income_sharing)) {
+            foreach ($income_sharing as $_income_sharing) {
+                $this->Invoice_incomes_model->delete($_income_sharing->id);
+            }
+        }
+
+        $income_sharing_partners = $this->Project_partners_model->get_details(array('project_id' => $project_id, 'only_partner_types' => 'subagent,referral'))->getResult();
+        if (count($income_sharing_partners)) {
+            $invoice_meta_info = $this->Invoices_model->get_invoice_total_meta($invoice_id);
+            $net_total_income = $invoice_meta_info->net_total_income; // net income after discount deduction
+            // $default_tax_info = $this->Taxes_model->get_details(array('is_default' => true))->getRow();
+            foreach ($income_sharing_partners as $partner) {
+
+                $shared_income = calc_per($net_total_income, $partner->commission);
+
+                $tax = 0;
+                // if ($partner->partner_type == 'subagent') { // GST tax will only be given to subagents
+                //     $tax = calc_per($shared_income, $default_tax_info->percentage);
+                // }
+
+                $income_sharing_data = array(
+                    'invoice_id' => $invoice_id,
+                    'partner_id' => $partner->partner_id,
+                    'commission' => $partner->commission,
+                    'amount' => $shared_income,
+                    'tax' => $tax,
+                    'status' => 'not_initiated',
+                    'created_date' => get_current_utc_time()
+                );
+
+                $this->Invoice_incomes_model->ci_save($income_sharing_data);
+            }
         }
     }
 
@@ -487,8 +635,12 @@ class Invoices extends Security_Controller
                 }
             }
 
+            // delete income sharing
+            $delete_options = array('invoice_id' => $id);
+            $this->Invoice_incomes_model->delete_where($delete_options);
+
             if ($invoice_info->schedule_id) {
-                $schedule_data = array('status' => 2);
+                $schedule_data = array('status' => 0, 'invoice_id' => 0);
                 $this->Project_payment_schedule_setup_model->ci_save($schedule_data, $invoice_info->schedule_id);
             }
 
@@ -500,7 +652,7 @@ class Invoices extends Security_Controller
 
     /* list of invoices, prepared for datatable  */
 
-    function list_data()
+    function list_data($invoice_type = 'general')
     {
         if (!$this->can_view_invoices()) {
             app_redirect("forbidden");
@@ -508,23 +660,47 @@ class Invoices extends Security_Controller
 
         $custom_fields = $this->Custom_fields_model->get_available_fields_for_table("invoices", $this->login_user->is_admin, $this->login_user->user_type);
 
+        $location_ids = '';
+        if ($this->login_user->user_type == 'staff') {
+            if ($this->login_user->location_id) {
+                $location_ids = $this->login_user->location_id;
+            } else {
+                $location_ids = get_ltm_opl_id(false, ',');
+            }
+        }
+
         $options = array(
             "type" => $this->request->getPost("type"),
             "status" => $this->request->getPost("status"),
-            "start_date" => $this->request->getPost("start_date"),
-            "end_date" => $this->request->getPost("end_date"),
+            "bill_start_date" => $this->request->getPost("start_date"),
+            "bill_end_date" => $this->request->getPost("end_date"),
             "currency" => $this->request->getPost("currency"),
+            "invoice_type" => $this->login_user->user_type == 'staff' ? $invoice_type : "",
+            "location_ids" => $location_ids,
             "custom_fields" => $custom_fields,
             "custom_field_filter" => $this->prepare_custom_field_filter_values("invoices", $this->login_user->is_admin, $this->login_user->user_type)
         );
 
-        $list_data = $this->Invoices_model->get_details($options)->getResult();
-        $result = array();
-        foreach ($list_data as $data) {
-            $result[] = $this->_make_row($data, $custom_fields);
+        $all_options = append_server_side_filtering_commmon_params($options);
+
+        $result = $this->Invoices_model->get_details($all_options);
+
+        //by this, we can handel the server side or client side from the app table prams.
+        if (get_array_value($all_options, "server_side")) {
+            $list_data = get_array_value($result, "data");
+        } else {
+            $list_data = $result->getResult();
+            $result = array();
         }
 
-        echo json_encode(array("data" => $result));
+        $result_data = array();
+        foreach ($list_data as $data) {
+            $result_data[] = $this->_make_row($data, $custom_fields);
+        }
+
+        $result["data"] = $result_data;
+
+        echo json_encode($result);
     }
 
     /* list of invoice of a specific client, prepared for datatable  */
@@ -539,7 +715,7 @@ class Invoices extends Security_Controller
         $custom_fields = $this->Custom_fields_model->get_available_fields_for_table("invoices", $this->login_user->is_admin, $this->login_user->user_type);
 
         $options = array(
-            "client_id" => $client_id,
+            // "client_id" => $client_id,
             "status" => $this->request->getPost("status"),
             "type" => $this->request->getPost("type"),
             "start_date" => $this->request->getPost("start_date"),
@@ -553,11 +729,18 @@ class Invoices extends Security_Controller
             $options["exclude_draft"] = true;
         }
 
+        $client_info = $this->Clients_model->get_one($client_id);
 
-        $list_data = $this->Invoices_model->get_details($options)->getResult();
+        if ((int)$client_info->account_type == 3) {
+            $list_data = $this->Invoices_model->own_invoices($client_id)->getResult();
+        } else {
+            $options['client_id'] = $client_id;
+            $list_data = $this->Invoices_model->get_details($options)->getResult();
+        }
+
         $result = array();
         foreach ($list_data as $data) {
-            $result[] = $this->_make_row($data, $custom_fields);
+            $result[] = $this->_make_row($data, $custom_fields, $client_id);
         }
         echo json_encode(array("data" => $result));
     }
@@ -677,7 +860,7 @@ class Invoices extends Security_Controller
 
     /* prepare a row of invoice list table */
 
-    private function _make_row($data, $custom_fields)
+    private function _make_row($data, $custom_fields, $partner_id = 0)
     {
         $invoice_url = "";
         $main_invoice_url = "";
@@ -713,24 +896,38 @@ class Invoices extends Security_Controller
         $invoice_labels = " " . make_labels_view_data($data->labels_list, true, true);
 
         if ($data->main_invoice_id) {
-            $due = to_currency(0, $data->currency_symbol);
+            // $due = to_currency(0, $data->currency_symbol);
             $due_date = "-";
         } else {
-            $due = to_currency($data->invoice_value - $data->payment_received, $data->currency_symbol);
+            // $due = to_currency($data->invoice_value - $data->payment_received, $data->currency_symbol);
             $due_date = format_to_date($data->due_date, false);
         }
 
-        if ($data->credit_note_id) {
-            if ($data->payment_received) {
-                $due = to_currency(($data->payment_received) * (-1), $data->currency_symbol);
-            } else {
-                $due = to_currency(0, $data->currency_symbol);
-            }
-        }
+        // if ($data->credit_note_id) {
+        //     if ($data->payment_received) {
+        //         $due = to_currency(($data->payment_received) * (-1), $data->currency_symbol);
+        //     } else {
+        //         $due = to_currency(0, $data->currency_symbol);
+        //     }
+        // }
 
         $client_data = $this->Clients_model->get_one($data->client_id);
         $client_name = $this->get_client_full_name(0, $client_data);
         $profile_link = get_client_contact_profile_link($data->client_id, $client_name, array(), array('account_type' => $client_data->account_type, 'partner_type' => $client_data->partner_type));
+
+        $invoice_meta_info = $this->Invoices_model->get_invoice_total_meta($data->id);
+
+        $partner_info = $this->Clients_model->get_one($partner_id);
+        $_partner_commission = '';
+        if ($partner_info && $partner_info->id && $partner_info->account_type == 3 && in_array($partner_info->partner_type, array('subagent', 'referral'))) {
+            $invoice_income_info = $this->Invoice_incomes_model->get_details(array('partner_id' => $partner_id, 'invoice_id' => $data->id))->getRow();
+            if ($invoice_income_info) {
+                $_partner_commission = '(' . $invoice_income_info->commission . '%)' . '<br/><small>' . to_currency($invoice_income_info->amount + $invoice_income_info->tax, $data->currency_symbol) . '</small>';
+            } else {
+                $_partner_commission = '(0%)' . '<br/><small>' . to_currency(0, $data->currency_symbol) . '</small>';
+            }
+        }
+
         $row_data = array(
             $data->id,
             $invoice_url,
@@ -740,9 +937,9 @@ class Invoices extends Security_Controller
             format_to_date($data->bill_date, false),
             $data->due_date,
             $due_date,
-            to_currency($data->invoice_value, $data->currency_symbol),
-            to_currency($data->payment_received, $data->currency_symbol),
-            $due,
+            to_currency($data->invoice_type == 'net_claim' ? $invoice_meta_info->invoice_subtotal : $invoice_meta_info->invoice_total, $data->currency_symbol),
+            $_partner_commission ? $_partner_commission : to_currency($data->payment_received, $data->currency_symbol),
+            to_currency(($data->invoice_type == 'net_claim' ? ($invoice_meta_info->invoice_subtotal - $invoice_meta_info->discount_total) : $invoice_meta_info->invoice_total) - $data->payment_received, $data->currency_symbol),
             $status . $invoice_labels
         );
 
@@ -776,8 +973,7 @@ class Invoices extends Security_Controller
 
         $add_payment = '<li role="presentation">' . modal_anchor(get_uri("invoice_payments/payment_modal_form"), "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('add_payment'), array("title" => app_lang('add_payment'), "data-post-invoice_id" => $data->id, "class" => "dropdown-item")) . '</li>';
 
-        return '
-                <span class="dropdown inline-block">
+        return '<span class="dropdown inline-block">
                     <button class="btn btn-default dropdown-toggle caret mt0 mb0" type="button" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
                         <i data-feather="tool" class="icon-16"></i>
                     </button>
@@ -886,12 +1082,14 @@ class Invoices extends Security_Controller
                 if ($storage->isAccessTokenExpired()) {
                     $view_data["xero_auth_required"] = TRUE;
                     $view_data["xero_auth_url"] = $this->_xero_auth();
+                    // var_dump($view_data["xero_auth_url"]);exit();
                 } else {
                     $view_data["xero_auth_required"] = FALSE;
                 }
 
                 $view_data['invoice_status'] = $this->_get_invoice_status_label($view_data["invoice_info"], false);
                 $view_data["can_edit_invoices"] = $this->can_edit_invoices();
+                $view_data["can_send_invoice"] = $this->can_send_invoice();
                 $view_data["is_invoice_editable"] = $this->is_invoice_editable($invoice_id);
                 return $this->template->rander("invoices/view", $view_data);
             } else {
@@ -900,10 +1098,204 @@ class Invoices extends Security_Controller
         }
     }
 
-    /* invoice total section */
+    function income_sharing()
+    {
+        $view_data["conversion_rate"] = $this->get_conversion_rate_with_currency_symbol();
+        $view_data['team_member_dropdown'] = $this->get_team_members_dropdown(false, 'Paid By');
+        $view_data['partners_dropdown'] = $this->get_partners_members_dropdown('subagent,referral', 'Partner');
 
+        return $this->template->rander("invoices/income_sharing/index", $view_data);
+    }
+
+    function paid_income_sharing()
+    {
+        return $this->template->view("invoices/income_sharing/paid_income_list");
+    }
+
+    function income_list_data($status = 'not_initiated,initiated,claimed')
+    {
+        if (!$this->can_view_invoices()) {
+            app_redirect("forbidden");
+        }
+
+        $options = array(
+            "only_status" => $status,
+            "bill_start_date" => $this->request->getPost("start_date"),
+            "end_date" => $this->request->getPost("end_date"),
+            "paid_by" => $this->request->getPost("paid_by"),
+            "partner_id" => $this->login_user->user_type !== 'staff' ? $this->login_user->client_id : $this->request->getPost("partner_id"),
+            "payment_method_id" => $this->request->getPost("payment_method_id"),
+            "location_ids" => get_ltm_opl_id(false, ',')
+        );
+
+        $all_options = append_server_side_filtering_commmon_params($options);
+
+        $result = $this->Invoice_incomes_model->get_details($all_options);
+
+        //by this, we can handel the server side or client side from the app table prams.
+        if (get_array_value($all_options, "server_side")) {
+            $list_data = get_array_value($result, "data");
+        } else {
+            $list_data = $result->getResult();
+            $result = array();
+        }
+
+        $result_data = array();
+        foreach ($list_data as $data) {
+            $result_data[] = $this->_make_income_row($data);
+        }
+
+        $result["data"] = $result_data;
+
+        echo json_encode($result);
+    }
+
+    function income_payment_modal_form()
+    {
+        $income_id = $this->request->getPost("invoice_income_id");
+
+        $payment_methods_dropdown = $this->Payment_methods_model->get_dropdown_list(array("title"), "id", array("online_payable" => 0, "deleted" => 0));
+        $view_data['id'] = $income_id;
+        $view_data['model_info'] = $this->Invoice_incomes_model->get_one($income_id);
+
+        $view_data['payment_methods_dropdown'] = array();
+        foreach ($payment_methods_dropdown as $key => $value) {
+            $view_data['payment_methods_dropdown'][] = array('id' => $key, 'text' => $value);
+        }
+
+        return $this->template->view('invoices/income_sharing/income_payment_modal_form', $view_data);
+    }
+
+    function save_income_payment()
+    {
+        $this->validate_submitted_data(array(
+            "id" => "required|numeric",
+            "payment_method_id" => "required|numeric",
+            'payment_date' => 'required'
+        ));
+
+        $income_id = $this->request->getPost("id");
+        $payment_method_id = $this->request->getPost("payment_method_id");
+        $payment_date = $this->request->getPost("payment_date");
+
+        $invoice_income_data = array(
+            'payment_method_id' => $payment_method_id,
+            'payment_date' => $payment_date,
+            'paid_by' => $this->login_user->id,
+            'status' => 'paid'
+        );
+
+        $success = $this->Invoice_incomes_model->ci_save($invoice_income_data, $income_id);
+
+        if ($success) {
+            echo json_encode(array('success' => true, 'message' => 'Success, the income payment is added successfully'));
+        }
+    }
+
+    function delete_income_payment()
+    {
+        $this->validate_submitted_data(array(
+            "id" => "required|numeric"
+        ));
+
+        $id = $this->request->getPost('id');
+        $income_info = $this->Invoice_incomes_model->get_one($id);
+
+        if ($this->request->getPost('undo')) {
+            if ($this->Invoice_incomes_model->delete($id, true)) {
+                $options = array("id" => $id);
+                $income_info = $this->Invoice_incomes_model->get_details($options)->getRow();
+                echo json_encode(array("success" => true, "income_id" => $income_info->id, "data" => $this->_make_income_row($income_info), "message" => app_lang('record_undone')));
+            } else {
+                echo json_encode(array("success" => false, app_lang('error_occurred')));
+            }
+        } else {
+            if ($this->Invoice_incomes_model->delete($id)) {
+                $income_info = $this->Invoice_incomes_model->get_one($id);
+                echo json_encode(array("success" => true, "income_id" => $income_info->id, 'message' => app_lang('record_deleted')));
+            } else {
+                echo json_encode(array("success" => false, 'message' => app_lang('record_cannot_be_deleted')));
+            }
+        }
+    }
+
+    function change_income_status()
+    {
+        $invoice_income_id = $this->request->getPost('invoice_income_id');
+        $status = $this->request->getPost('status');
+
+        $this->validate_submitted_data(array(
+            "invoice_income_id" => "required|numeric",
+            'status' => 'required'
+        ));
+
+        $income_data = array(
+            'status' => $status
+        );
+
+        $success = $this->Invoice_incomes_model->ci_save($income_data, $invoice_income_id);
+
+        if ($success) {
+            echo json_encode(array("success" => true, 'message' => 'Success'));
+        } else {
+            echo json_encode(array("success" => false, 'message' => 'Something went wrong!'));
+        }
+    }
+
+    private function _make_income_row($data)
+    {
+        $invoice_link = anchor(get_uri('invoices/view/' . $data->invoice_id), get_invoice_id($data->invoice_id));
+        $partner_link = get_client_contact_profile_link($data->partner_id, $data->partner_full_name, array(), array('account_type' => 3, 'partner_type' => $data->partner_type));
+        $user_link = '-';
+        $client_link = get_client_contact_profile_link($data->client_id, $data->client_full_name);
+        $project_link = anchor(get_uri('projects/view/' . $data->project_id), $data->project_title);
+        if ($data->paid_by) {
+            $user_info = $this->Users_model->get_one($data->paid_by);
+            $user_link = get_team_member_profile_link($user_info->id, $user_info->first_name . ' ' . $user_info->last_name);
+        }
+
+        $options = $this->_make_income_options_dropdown($data);
+
+        $row_data = array(
+            $invoice_link,
+            $partner_link,
+            $client_link,
+            $project_link,
+            to_currency($data->amount),
+            to_currency($data->tax),
+            to_currency($data->amount + $data->tax),
+            format_to_date($data->payment_date),
+            $user_link,
+            timeline_label($data->status),
+            $options
+        );
+
+        return $row_data;
+    }
+
+    //prepare options dropdown for invoices list
+    private function _make_income_options_dropdown($data)
+    {
+        $delete = $data->status == 'not_initiated' && $this->login_user->user_type == 'staff' ? '<li role="presentation">' . js_anchor("<i data-feather='x' class='icon-16'></i>" . app_lang('delete'), array('title' => app_lang('delete_invoice'), "class" => "delete dropdown-item", "data-id" => $data->id, "data-action-url" => get_uri("invoices/delete_income_payment"), "data-action" => "delete-confirmation")) . '</li>' : "";
+
+        $mark_as_initiated = $data->status == 'not_initiated' ? '<li role="presentation">' . ajax_anchor(get_uri("invoices/change_income_status"), "<i data-feather='refresh-ccw' class='icon-16'></i> " . app_lang('mark_as_initiated'), array("title" => app_lang('mark_as_initiated'), "data-post-invoice_income_id" => $data->id, "data-post-status" => "initiated", "data-reload-on-success" => "1", "class" => "dropdown-item")) . '</li>' : '';
+
+        $mark_as_claimed = $data->status == 'initiated' ? '<li role="presentation">' . ajax_anchor(get_uri("invoices/change_income_status"), "<i data-feather='refresh-ccw' class='icon-16'></i> " . app_lang('mark_as_claimed'), array("title" => app_lang('mark_as_claimed'), "data-post-invoice_income_id" => $data->id, "data-post-status" => "claimed", "data-reload-on-success" => "1", "class" => "dropdown-item")) . '</li>' : '';
+
+        $add_payment = $data->status == 'claimed' ? '<li role="presentation">' . modal_anchor(get_uri("invoices/income_payment_modal_form"), "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('make_payment'), array("title" => app_lang('make_payment'), "data-post-invoice_income_id" => $data->id, "class" => "dropdown-item")) . '</li>' : '';
+
+        return $data->status == 'paid' || ($this->login_user->user_type == 'staff' && !$this->login_user->is_admin && $data->status == 'initiated') || ($this->login_user->user_type !== 'staff' && in_array($data->status, array('not_initiated', 'claimed'))) ? '' : '<span class="dropdown inline-block">
+                    <button class="btn btn-default dropdown-toggle caret mt0 mb0" type="button" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
+                        <i data-feather="tool" class="icon-16"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" role="menu">' . $mark_as_initiated . $mark_as_claimed . $add_payment . $delete . '</ul>
+                </span>';
+    }
+
+    /* invoice total section */
     private function _get_invoice_total_view($invoice_id = 0)
     {
+        $view_data["invoice_info"] = $this->Invoices_model->get_one($invoice_id);
         $view_data["invoice_total_summary"] = $this->Invoices_model->get_invoice_total_summary($invoice_id);
         $view_data["invoice_id"] = $invoice_id;
         $can_edit_invoices = false;
@@ -937,6 +1329,19 @@ class Invoices extends Security_Controller
             $invoice_id = $view_data['model_info']->invoice_id;
         }
         $view_data['invoice_id'] = $invoice_id;
+        $invoice_info = $this->Invoices_model->get_one($invoice_id);
+
+        $view_data['is_project_invoice'] = $invoice_info->project_id ? true : false;
+        $view_data['partners_commission_dropdown'] = array(array('id' => '', 'text' => '-'));
+
+        if ($invoice_info && $invoice_info->project_id) {
+            $partners = $this->Project_partners_model->get_details(array('project_id' => $invoice_info->project_id))->getResult();
+            foreach ($partners as $partner) {
+                $view_data['partners_commission_dropdown'][] = array('id' => $partner->commission, 'text' => "(" . $partner->commission . "%) " . $partner->full_name);
+            }
+        }
+        // $view_data['partners_commission_dropdown'][] = array('id' => "+", 'text' => "+ Add commission");
+
         return $this->template->view('invoices/item_modal_form', $view_data);
     }
 
@@ -946,7 +1351,8 @@ class Invoices extends Security_Controller
     {
         $this->validate_submitted_data(array(
             "id" => "numeric",
-            "invoice_id" => "required|numeric"
+            "invoice_id" => "required|numeric",
+            "invoice_item_title" => "required|string"
         ));
 
         $invoice_id = $this->request->getPost('invoice_id');
@@ -989,6 +1395,8 @@ class Invoices extends Security_Controller
             "description" => $this->request->getPost('invoice_item_description'),
             "quantity" => $quantity,
             "unit_type" => $this->request->getPost('invoice_unit_type'),
+            "income_type" => $this->request->getPost('income_type'),
+            "commission" => $this->request->getPost('commission') ? $this->request->getPost('commission') : 0,
             "rate" => unformat_currency($this->request->getPost('invoice_item_rate')),
             "total" => $rate * $quantity,
             "taxable" => $this->request->getPost('taxable') ? $this->request->getPost('taxable') : ""
@@ -1002,7 +1410,10 @@ class Invoices extends Security_Controller
         if ($invoice_item_id) {
             $options = array("id" => $invoice_item_id);
             $item_info = $this->Invoice_items_model->get_details($options)->getRow();
-            echo json_encode(array("success" => true, "invoice_id" => $item_info->invoice_id, "data" => $this->_make_item_row($item_info, true), "invoice_total_view" => $this->_get_invoice_total_view($item_info->invoice_id), 'id' => $invoice_item_id, 'message' => app_lang('record_saved')));
+
+            $invoice_data = $this->Invoices_model->get_invoice_total_meta($invoice_id);
+            $invoice_info = $this->Invoices_model->get_one($invoice_id);
+            echo json_encode(array("success" => true, "invoice_id" => $item_info->invoice_id, "data" => $this->_make_item_row($item_info, true, $invoice_data, $invoice_info), "invoice_total_view" => $this->_get_invoice_total_view($item_info->invoice_id), 'id' => $invoice_item_id, 'message' => app_lang('record_saved')));
         } else {
             echo json_encode(array("success" => false, 'message' => app_lang('error_occurred')));
         }
@@ -1031,19 +1442,20 @@ class Invoices extends Security_Controller
             if ($this->Invoice_items_model->delete_item_and_update_invoice($id, true)) {
                 $options = array("id" => $id);
                 $item_info = $this->Invoice_items_model->get_details($options)->getRow();
-                if ($item_info->schedule_id && $item_info->schedule_fee_id) {
-                    $this->_sync_schedule_item($item_info, true);
-                }
-                echo json_encode(array("success" => true, "invoice_id" => $item_info->invoice_id, "data" => $this->_make_item_row($item_info, true), "invoice_total_view" => $this->_get_invoice_total_view($item_info->invoice_id), "message" => app_lang('record_undone')));
+                // if ($item_info->schedule_id && $item_info->schedule_fee_id) {
+                //     $this->_sync_schedule_item($item_info, true);
+                // }
+                $invoice_data = $this->Invoices_model->get_invoice_total_meta($item_info->invoice_id);
+                echo json_encode(array("success" => true, "invoice_id" => $item_info->invoice_id, "data" => $this->_make_item_row($item_info, true, $invoice_data), "invoice_total_view" => $this->_get_invoice_total_view($item_info->invoice_id), "message" => app_lang('record_undone')));
             } else {
                 echo json_encode(array("success" => false, app_lang('error_occurred')));
             }
         } else {
             if ($this->Invoice_items_model->delete_item_and_update_invoice($id)) {
                 $item_info = $this->Invoice_items_model->get_one($id);
-                if ($item_info->schedule_id && $item_info->schedule_fee_id) {
-                    $this->_sync_schedule_item($item_info);
-                }
+                // if ($item_info->schedule_id && $item_info->schedule_fee_id) {
+                //     $this->_sync_schedule_item($item_info);
+                // }
                 echo json_encode(array("success" => true, "invoice_id" => $item_info->invoice_id, "invoice_total_view" => $this->_get_invoice_total_view($item_info->invoice_id), 'message' => app_lang('record_deleted')));
             } else {
                 echo json_encode(array("success" => false, 'message' => app_lang('record_cannot_be_deleted')));
@@ -1051,87 +1463,87 @@ class Invoices extends Security_Controller
         }
     }
 
-    private function _sync_schedule($invoice)
-    {
-        if ($invoice && $invoice->schedule_id) {
-            $discount = $invoice ? $invoice->discount_total : 0;
+    // private function _sync_schedule($invoice)
+    // {
+    //     if ($invoice && $invoice->schedule_id) {
+    //         $discount = $invoice ? $invoice->discount_total : 0;
 
-            $data['discount'] = $discount;
+    //         $data['discount'] = $discount;
 
-            $this->Project_payment_schedule_setup_model->ci_save($data, $invoice->schedule_id);
-        }
-    }
+    //         $this->Project_payment_schedule_setup_model->ci_save($data, $invoice->schedule_id);
+    //     }
+    // }
 
-    private function _sync_schedule_item($item, $undo_remove = false)
-    {
-        $schedule = $this->Project_payment_schedule_setup_model->get_one($item->schedule_id);
-        $invoice = $this->Invoices_model->get_one($item->invoice_id);
+    // private function _sync_schedule_item($item, $undo_remove = false)
+    // {
+    //     $schedule = $this->Project_payment_schedule_setup_model->get_one($item->schedule_id);
+    //     $invoice = $this->Invoices_model->get_one($item->invoice_id);
 
-        $fees = unserialize($schedule->fees);
-        $fees = json_decode(json_encode($fees), true); // convert to associative array
+    //     $fees = unserialize($schedule->fees);
+    //     $fees = json_decode(json_encode($fees), true); // convert to associative array
 
-        $updated_fees = array();
-        $total_fee = 0;
+    //     $updated_fees = array();
+    //     $total_fee = 0;
 
-        if ($undo_remove && $item->schedule_fee_id) { // undo invoice item
-            $updated_fees = $fees;
-            $updated_fees[] = array(
-                'key' => $item->schedule_fee_id,
-                'fee_type' => $item->title,
-                'amount' => $item->total ? $item->total : $item->rate
-            );
+    //     if ($undo_remove && $item->schedule_fee_id) { // undo invoice item
+    //         $updated_fees = $fees;
+    //         $updated_fees[] = array(
+    //             'key' => $item->schedule_fee_id,
+    //             'fee_type' => $item->title,
+    //             'amount' => $item->total ? $item->total : $item->rate
+    //         );
 
-            foreach ($updated_fees as $fee) {
-                $amount = get_array_value($fee, 'amount');
-                if ($amount) {
-                    $total_fee += (int)$amount;
-                }
-            }
-        } else { // update payment schedule
-            if ($item->deleted = 1) { // An item is deleted from the invoice
-                foreach ($fees as $fee) {
-                    if ((int)get_array_value($fee, 'key') !== (int)$item->schedule_fee_id) {
-                        $updated_fees[] = $fee;
-                        $amount = get_array_value($fee, 'amount');
-                        if ($amount) {
-                            $total_fee += (int)$amount;
-                        }
-                    }
-                }
-            } else { // An item is updated in invoice
-                foreach ($fees as $fee) {
-                    if ((int)get_array_value($fee, 'key') == (int)$item->schedule_fee_id) {
-                        $amount = $item->total ? $item->total : $item->rate;
-                        $updated_fees[] = array(
-                            'key' => $item->schedule_fee_id,
-                            'fee_type' => $item->title,
-                            'amount' => (int)$amount
-                        );
+    //         foreach ($updated_fees as $fee) {
+    //             $amount = get_array_value($fee, 'amount');
+    //             if ($amount) {
+    //                 $total_fee += (int)$amount;
+    //             }
+    //         }
+    //     } else { // update payment schedule
+    //         if ($item->deleted = 1) { // An item is deleted from the invoice
+    //             foreach ($fees as $fee) {
+    //                 if ((int)get_array_value($fee, 'key') !== (int)$item->schedule_fee_id) {
+    //                     $updated_fees[] = $fee;
+    //                     $amount = get_array_value($fee, 'amount');
+    //                     if ($amount) {
+    //                         $total_fee += (int)$amount;
+    //                     }
+    //                 }
+    //             }
+    //         } else { // An item is updated in invoice
+    //             foreach ($fees as $fee) {
+    //                 if ((int)get_array_value($fee, 'key') == (int)$item->schedule_fee_id) {
+    //                     $amount = $item->total ? $item->total : $item->rate;
+    //                     $updated_fees[] = array(
+    //                         'key' => $item->schedule_fee_id,
+    //                         'fee_type' => $item->title,
+    //                         'amount' => (int)$amount
+    //                     );
 
-                        if ($amount) {
-                            $total_fee += (int)$amount;
-                        }
-                    } else {
-                        $updated_fees[] = $fee;
-                        $amount = get_array_value($fee, 'amount');
-                        if ($amount) {
-                            $total_fee += (int)$amount;
-                        }
-                    }
-                }
-            }
-        }
+    //                     if ($amount) {
+    //                         $total_fee += (int)$amount;
+    //                     }
+    //                 } else {
+    //                     $updated_fees[] = $fee;
+    //                     $amount = get_array_value($fee, 'amount');
+    //                     if ($amount) {
+    //                         $total_fee += (int)$amount;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
 
-        $discount = $invoice ? $invoice->discount_total : 0;
+    //     $discount = $invoice ? $invoice->discount_total : 0;
 
-        $data['discount'] = $discount;
-        $data['fees'] = serialize($updated_fees);
-        $data['total_fee'] = $total_fee;
-        $net_fee = (int)$total_fee - (int)$discount;
-        $data['net_fee'] = $net_fee;
+    //     $data['discount'] = $discount;
+    //     $data['fees'] = serialize($updated_fees);
+    //     $data['total_fee'] = $total_fee;
+    //     $net_fee = (int)$total_fee - (int)$discount;
+    //     $data['net_fee'] = $net_fee;
 
-        $this->Project_payment_schedule_setup_model->ci_save($data, $schedule->id);
-    }
+    //     $this->Project_payment_schedule_setup_model->ci_save($data, $schedule->id);
+    // }
 
     /* list of invoice items, prepared for datatable  */
 
@@ -1145,6 +1557,11 @@ class Invoices extends Security_Controller
 
         $list_data = $this->Invoice_items_model->get_details(array("invoice_id" => $invoice_id))->getResult();
 
+        $invoice_meta_info = $this->Invoices_model->get_invoice_total_meta($invoice_id);
+        $invoice_info = $this->Invoices_model->get_one($invoice_id);
+        // var_dump($invoice_data);
+        // exit();
+
         $is_ediable = false;
         if ($this->can_edit_invoices() && $this->is_invoice_editable($invoice_id)) {
             $is_ediable = true;
@@ -1152,14 +1569,14 @@ class Invoices extends Security_Controller
 
         $result = array();
         foreach ($list_data as $data) {
-            $result[] = $this->_make_item_row($data, $is_ediable);
+            $result[] = $this->_make_item_row($data, $is_ediable, $invoice_meta_info, $invoice_info);
         }
         echo json_encode(array("data" => $result));
     }
 
     /* prepare a row of invoice item list table */
 
-    private function _make_item_row($data, $is_ediable)
+    private function _make_item_row($data, $is_ediable, $invoice_meta_info = null, $invoice_info = null)
     {
         $move_icon = "";
         $desc_style = "";
@@ -1171,20 +1588,56 @@ class Invoices extends Security_Controller
         if ($data->description) {
             $item .= "<span class='text-wrap' $desc_style>" . nl2br($data->description) . "</span>";
         }
-        $type = $data->unit_type ? $data->unit_type : "";
+        // $type = $data->unit_type ? $data->unit_type : "";
 
-        $taxable = app_lang("no");
-        if ($data->taxable) {
-            $taxable = app_lang("yes");
+        $cur = $data->currency_symbol;
+        $item_commission = "0% (No Commission)";
+        $commission_amount = 0;
+        $total_amount = to_currency($data->total, $cur);
+        // $item_tax_amount = to_currency(0, $cur);
+        if ($data->commission > 0) {
+            $item_commission = "Commission (" . $data->commission . '%)';
+            $commission_amount = calc_per($data->rate, (float)$data->commission);
+        }
+
+        $tax_title = "(No Tax)";
+        $item_tax_amount = to_currency(0, $cur);
+        $tax_amount = 0;
+        $total_amount = to_currency(0, $cur);
+        if ($invoice_info->invoice_type == 'general') {
+            if ($data->taxable) {
+                $tax_title = $invoice_meta_info->tax_name;
+                $tax_per = $invoice_meta_info->tax_percentage;
+                $tax_amount = calc_per($data->rate, $tax_per);
+                $item_tax_amount = to_currency($tax_amount, $cur);
+            }
+            $total_amount = to_currency((float)$data->rate + $tax_amount, $cur);
+        } elseif ($invoice_info->invoice_type == 'gross_claim') {
+            if ($data->taxable) {
+                $tax_title = $invoice_meta_info->tax_name;
+                $tax_per = $invoice_meta_info->tax_percentage;
+                $tax_amount = calc_per($commission_amount, $tax_per);
+                $item_tax_amount = to_currency($tax_amount, $cur);
+            }
+            $total_amount = to_currency((float)$commission_amount + $tax_amount, $cur);
+        } elseif ($invoice_info->invoice_type == 'net_claim') {
+            if ($data->taxable) {
+                $tax_title = $invoice_meta_info->tax_name;
+                $tax_per = $invoice_meta_info->tax_percentage;
+                $tax_amount = calc_per($commission_amount, $tax_per);
+                $item_tax_amount = to_currency($tax_amount, $cur);
+            }
+            $total_amount = to_currency((float)$data->rate - ($commission_amount + $tax_amount), $cur);
         }
 
         return array(
             $data->sort,
             $item,
-            to_decimal_format($data->quantity) . " " . $type,
-            to_currency($data->rate, $data->currency_symbol),
-            $taxable,
-            to_currency($data->total, $data->currency_symbol),
+            ucfirst($data->income_type),
+            to_currency($data->rate, $cur),
+            '<small>' . $item_commission . '</small><br>' . to_currency($commission_amount, $cur),
+            '<small>' . $tax_title . '</small><br>' . $item_tax_amount,
+            $total_amount,
             modal_anchor(get_uri("invoices/item_modal_form"), "<i data-feather='edit' class='icon-16'></i>", array("class" => "edit", "title" => app_lang('edit_invoice'), "data-post-id" => $data->id, "data-post-invoice_id" => $data->invoice_id))
                 . js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("invoices/delete_item"), "data-action" => "delete"))
         );
@@ -1261,6 +1714,7 @@ class Invoices extends Security_Controller
             $view_data['show_close_preview'] = $show_close_preview && $this->login_user->user_type === "staff" ? true : false;
 
             $view_data['invoice_id'] = $invoice_id;
+            $view_data['client_full_name'] = $this->get_client_full_name(0, $view_data['client_info']);
             $view_data['payment_methods'] = $this->Payment_methods_model->get_available_online_payment_methods();
 
             $paytm = new Paytm();
@@ -1328,14 +1782,14 @@ class Invoices extends Security_Controller
 
         //check for security
         $invoice_info = get_array_value($invoice_data, "invoice_info");
-        if ($this->login_user->user_type == "client") {
-            if ($this->login_user->client_id != $invoice_info->client_id) {
-                app_redirect("forbidden");
-            }
-        } else {
-            if (!$this->can_view_invoices()) {
-                app_redirect("forbidden");
-            }
+        // if ($this->login_user->user_type == "client") {
+        //     if ($this->login_user->client_id != $invoice_info->client_id) {
+        //         app_redirect("forbidden");
+        //     }
+        // } else {
+        // }
+        if (!$this->can_view_invoices()) {
+            app_redirect("forbidden");
         }
     }
 
@@ -1549,13 +2003,13 @@ class Invoices extends Security_Controller
         //add invoice pdf
         array_unshift($attachments, array("file_path" => $attachement_url));
 
-        if (send_app_mail($contact->email, $subject, $message, array("attachments" => $attachments, "cc" => $cc_array, "bcc" => $bcc_emails))) {
+        if (is_server_localhost() || send_app_mail($contact->email, $subject, $message, array("attachments" => $attachments, "cc" => $cc_array, "bcc" => $bcc_emails))) {
             // change email status
             // invoice status won't change if status is credited
             if (get_array_value($invoice_data, "invoice_info")->status == "credited") {
                 $status_data = array("last_email_sent_date" => get_my_local_time());
             } else {
-                $status_data = array("status" => "not_paid", "last_email_sent_date" => get_my_local_time());
+                $status_data = array("status" => "unpaid", "last_email_sent_date" => get_my_local_time());
             }
 
             if ($this->Invoices_model->ci_save($status_data, $invoice_id)) {
@@ -1574,6 +2028,8 @@ class Invoices extends Security_Controller
                     delete_app_files($target_path, array($file));
                 }
             }
+
+            $this->_handle_income_sharing($invoice_id, get_array_value($invoice_data, "invoice_info")->project_id);
         } else {
             echo json_encode(array('success' => false, 'message' => app_lang('error_occurred')));
         }
@@ -1641,8 +2097,60 @@ class Invoices extends Security_Controller
         return $this->template->view('invoices/discount_modal_form', $view_data);
     }
 
-    /* save discount */
+    /* load discount modal */
 
+    function bonus_modal_form()
+    {
+        $this->validate_submitted_data(array(
+            "invoice_id" => "required|numeric"
+        ));
+
+        $invoice_id = $this->request->getPost('invoice_id');
+
+        if (!$this->can_edit_invoices()) {
+            app_redirect("forbidden");
+        }
+
+        if (!$this->is_invoice_editable($invoice_id)) {
+            app_redirect("forbidden");
+        }
+
+        $view_data['model_info'] = $this->Invoices_model->get_one($invoice_id);
+
+        return $this->template->view('invoices/bonus_modal_form', $view_data);
+    }
+
+    /* save discount */
+    function save_bonus()
+    {
+        $this->validate_submitted_data(array(
+            "invoice_id" => "required|numeric",
+            "bonus_amount" => "numeric",
+        ));
+
+        $invoice_id = $this->request->getPost('invoice_id');
+
+        if (!($this->can_edit_invoices() && $this->is_invoice_editable($invoice_id))) {
+            app_redirect("forbidden");
+        }
+
+        $data = array(
+            "bonus_amount" => $this->request->getPost('bonus_amount')
+        );
+
+        $data = clean_data($data);
+
+        $save_data = $this->Invoices_model->save_invoice_and_update_total($data, $invoice_id);
+        if ($save_data) {
+            // $invoice = $this->Invoices_model->get_one($invoice_id);
+            // $this->_sync_schedule($invoice);
+            echo json_encode(array("success" => true, "invoice_total_view" => $this->_get_invoice_total_view($invoice_id), 'message' => app_lang('record_saved'), "invoice_id" => $invoice_id));
+        } else {
+            echo json_encode(array("success" => false, 'message' => app_lang('error_occurred')));
+        }
+    }
+
+    /* save discount */
     function save_discount()
     {
         $this->validate_submitted_data(array(
@@ -1676,8 +2184,8 @@ class Invoices extends Security_Controller
 
         $save_data = $this->Invoices_model->save_invoice_and_update_total($data, $invoice_id);
         if ($save_data) {
-            $invoice = $this->Invoices_model->get_one($invoice_id);
-            $this->_sync_schedule($invoice);
+            // $invoice = $this->Invoices_model->get_one($invoice_id);
+            // $this->_sync_schedule($invoice);
             echo json_encode(array("success" => true, "invoice_total_view" => $this->_get_invoice_total_view($invoice_id), 'message' => app_lang('record_saved'), "invoice_id" => $invoice_id));
         } else {
             echo json_encode(array("success" => false, 'message' => app_lang('error_occurred')));
@@ -1782,7 +2290,6 @@ class Invoices extends Security_Controller
             }
         }
     }
-
 
     private function _xero_auth()
     {

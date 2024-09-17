@@ -917,7 +917,9 @@ class Settings extends Security_Controller
     {
         $settings = array(
             "enable_fresh_desk_api",
-            "fresh_desk_api_key"
+            "fresh_desk_api_key",
+            "fresh_desk_domain",
+            "fresh_desk_company_name"
         );
 
         foreach ($settings as $setting) {
@@ -1261,6 +1263,7 @@ class Settings extends Security_Controller
     private function get_client_hidden_fields_dropdown()
     {
         $hidden_fields = array(
+            'company_name',
             "first_name",
             "last_name",
             "email",
@@ -1269,7 +1272,8 @@ class Settings extends Security_Controller
             "state",
             "zip",
             "country",
-            "phone"
+            "phone",
+            'date_of_birth'
         );
 
         $hidden_fields_dropdown = array();

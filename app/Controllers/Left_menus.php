@@ -11,16 +11,19 @@ use App\Libraries\Left_menu;
  * "client_default" - Clients default
  */
 
-class Left_menus extends Security_Controller {
+class Left_menus extends Security_Controller
+{
 
     private $left_menu;
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->left_menu = new Left_menu();
     }
 
-    private function check_left_menu_permission($type = "") {
+    private function check_left_menu_permission($type = "")
+    {
         if ($type == "user") {
             if ($this->login_user->user_type == "staff") {
                 $this->access_only_team_members();
@@ -32,7 +35,8 @@ class Left_menus extends Security_Controller {
         }
     }
 
-    function index($type = "default") {
+    function index($type = "default")
+    {
         $this->check_left_menu_permission($type);
 
         $view_data["available_items"] = $this->left_menu->get_available_items($type);
@@ -49,7 +53,8 @@ class Left_menus extends Security_Controller {
         }
     }
 
-    function save() {
+    function save()
+    {
         if (get_setting("disable_editing_left_menu_by_clients") && $this->login_user->user_type == "client") {
             app_redirect("forbidden");
         }
@@ -70,6 +75,7 @@ class Left_menus extends Security_Controller {
         }
 
         if ($type == "user") {
+            $this->Settings_model->save_setting("default_left_menu", $items_data);
             $this->Settings_model->save_setting("user_" . $this->login_user->id . "_left_menu", $items_data);
             echo json_encode(array("success" => true, 'redirect_to' => get_uri($this->_prepare_user_custom_redirect_to_url()), 'message' => app_lang('settings_updated')));
         } else {
@@ -83,7 +89,8 @@ class Left_menus extends Security_Controller {
         }
     }
 
-    private function _prepare_user_custom_redirect_to_url() {
+    private function _prepare_user_custom_redirect_to_url()
+    {
         $redirect_to = "team_members/view/" . $this->login_user->id . "/left_menu";
         if ($this->login_user->user_type == "client") {
             $redirect_to = "clients/contact_profile/" . $this->login_user->id . "/left_menu";
@@ -92,7 +99,8 @@ class Left_menus extends Security_Controller {
         return $redirect_to;
     }
 
-    function add_menu_item_modal_form() {
+    function add_menu_item_modal_form()
+    {
         $model_info = new \stdClass();
         $model_info->title = $this->request->getPost("title");
         $model_info->language_key = $this->request->getPost("language_key");
@@ -106,7 +114,8 @@ class Left_menus extends Security_Controller {
         return $this->template->view("left_menu/add_menu_item_modal_form", $view_data);
     }
 
-    function prepare_custom_menu_item_data() {
+    function prepare_custom_menu_item_data()
+    {
         $title = $this->request->getPost("title");
         $language_key = $this->request->getPost("language_key");
         $url = $this->request->getPost("url");
@@ -124,7 +133,8 @@ class Left_menus extends Security_Controller {
         }
     }
 
-    function restore($type = "") {
+    function restore($type = "")
+    {
         $this->check_left_menu_permission($type);
 
         if ($type == "user") {
@@ -140,7 +150,6 @@ class Left_menus extends Security_Controller {
             }
         }
     }
-
 }
 
 /* End of file Left_menu.php */

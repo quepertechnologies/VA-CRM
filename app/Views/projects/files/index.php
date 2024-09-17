@@ -23,6 +23,9 @@
                 <?php
                 if ($can_add_checklist) {
                     echo modal_anchor(get_uri("projects/checklist_modal_form"), "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('add_checklist'), array("class" => "btn btn-default", "title" => app_lang('add_checklist'), "data-post-project_id" => $project_id, "id" => "checklist_add_button", "data-reload-on-success" => true));
+                } else {
+                    // echo ajax_anchor(get_uri("projects/sync_checklist_documents"), "<i data-feather='refresh-cw' class='icon-16'></i> " . app_lang('sync_checklist_documents'), array("class" => "btn btn-default", "title" => app_lang('add_checklist'), "data-post-project_id" => $project_id, "id" => "sync_checklist_docs"));
+                    echo modal_anchor(get_uri("projects/sync_message_modal_form"), "<i data-feather='refresh-cw' class='icon-16'></i> " . app_lang('sync_checklist_documents'), array("class" => "btn btn-default", "title" =>  app_lang('sync_checklist_documents'), "data-post-project_id" => $project_id, "id" => "sync_checklist_docs", "data-show-response" => true));
                 }
                 if ($can_add_files) {
                     echo modal_anchor(get_uri("projects/file_modal_form"), "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('add_files'), array("class" => "btn btn-default", "title" => app_lang('add_files'), "data-post-project_id" => $project_id, "data-post-full_check_list" => '1', "id" => "file_or_category_add_button"));
@@ -164,29 +167,29 @@
             showUploadeBy = false;
         }
 
-        $("#project-file-table").appTable({
-            source: '<?php echo_uri("projects/files_list_data/" . $project_id) ?>',
-            order: [
-                [0, "desc"]
-            ],
-            columns: [{
-                    title: '<?php echo app_lang("name") ?>'
-                },
-                {
-                    title: '<?php echo app_lang("last_updated_by") ?>'
-                },
-                {
-                    title: '<?php echo app_lang("last_updated_date") ?>'
-                }
-                <?php echo $custom_field_headers; ?>,
-                {
-                    title: '<i data-feather="menu" class="icon-16"></i>',
-                    "class": "text-center option w150"
-                }
-            ],
-            printColumns: combineCustomFieldsColumns([0, 1, 2, 3, 4, 5], '<?php echo $custom_field_headers; ?>'),
-            xlsColumns: combineCustomFieldsColumns([0, 1, 2, 3, 4, 5], '<?php echo $custom_field_headers; ?>')
-        });
+        // $("#project-file-table").appTable({
+        //     source: '<?php echo_uri("projects/files_list_data/" . $project_id) ?>',
+        //     order: [
+        //         [0, "desc"]
+        //     ],
+        //     columns: [{
+        //             title: '<?php echo app_lang("name") ?>'
+        //         },
+        //         {
+        //             title: '<?php echo app_lang("last_updated_by") ?>'
+        //         },
+        //         {
+        //             title: '<?php echo app_lang("last_updated_date") ?>'
+        //         }
+        //         <?php echo $custom_field_headers; ?>,
+        //         {
+        //             title: '<i data-feather="menu" class="icon-16"></i>',
+        //             "class": "text-center option w150"
+        //         }
+        //     ],
+        //     printColumns: combineCustomFieldsColumns([0, 1, 2, 3, 4, 5], '<?php echo $custom_field_headers; ?>'),
+        //     xlsColumns: combineCustomFieldsColumns([0, 1, 2, 3, 4, 5], '<?php echo $custom_field_headers; ?>')
+        // });
 
         //change the add button attributes on changing tab panel
         var addButton = $("#file_or_category_add_button");

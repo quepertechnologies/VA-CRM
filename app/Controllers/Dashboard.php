@@ -242,6 +242,7 @@ class Dashboard extends Security_Controller
 
         //universal widgets
         $widget["sticky_note"] = true;
+        $widget["visa_expiring_clients_overview"] = true;
 
         return $widget;
     }
@@ -890,6 +891,7 @@ class Dashboard extends Security_Controller
                 "next_reminder",
                 "leads_overview",
                 "my_tasks_overview",
+                "visa_expiring_clients_overview"
             );
         } else {
             $default_widgets_array = array(
@@ -1215,6 +1217,8 @@ class Dashboard extends Security_Controller
                 return leads_overview_widget();
             } else if ($widget == "my_tasks_overview") {
                 return tasks_overview_widget("my_tasks_overview");
+            } else if ($widget == 'visa_expiring_clients_overview') {
+                return visa_expiring_clients_widget();
             }
 
             $plugin_widget = $this->_get_plugin_widgets($widget);

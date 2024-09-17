@@ -1,7 +1,7 @@
 <?php
 $card = "";
 $icon = "";
-$value = "";
+$value = "N/A";
 $link = "";
 
 $view_type = "client_dashboard";
@@ -21,19 +21,15 @@ if (!is_object($client_info)) {
 
 if ($tab == "projects") {
     $card = "bg-info";
-    $icon = "grid";
+    $icon = "globe";
     $tab = 'Nationality'; // This is not a language and going custom for now
     if (isset($nationality)) {
-        if($student_onshore == 1)
-        {
-          $tab = 'Nationality - The Student is onshore';  
-          $value = $nationality;
+        if ($student_onshore == 1) {
+            $tab = 'The Student is onshore';
+            $value = $nationality;
+        } else {
+            $value = $nationality;
         }
-        else
-        {
-           $value = $nationality;
-        }
-       
     }
     if ($view_type == "client_dashboard") {
         $link = "";
@@ -42,42 +38,50 @@ if ($tab == "projects") {
     }
 } else if ($tab == "total_invoiced") {
     $card = "bg-primary";
-    $icon = "file-text";
-    $tab = 'Level of Education'; // This is not a language and going custom for now
-    if (property_exists($client_info, "lvl_of_edu") && !empty($client_info->lvl_of_edu)) {
-        $value = $client_info->lvl_of_edu;
+    $icon = "book-open";
+    $tab = 'Visa Info'; // This is not a language and going custom for now
+    if (property_exists($client_info, "visa_type") && !empty($client_info->visa_type)) {
+        $value = 'Subclass ' . $client_info->visa_type;
     } else {
         $value = "N/A";
     }
-    if ($view_type == "client_dashboard") {
-        $link = get_uri('invoices/index');
-    } else {
-        $link = get_uri('students/view/' . $client_info->id . '/info');
+
+    if (property_exists($client_info, "visa_expiry") && !empty($client_info->visa_expiry)) {
+
+        $tab = 'Expires at ' . format_to_date($client_info->visa_expiry);
     }
+    // if ($view_type == "client_dashboard") {
+    //     $link = get_uri('invoices/index');
+    // } else {
+    //     $link = get_uri('students/view/' . $client_info->id . '/info');
+    // }
+    $link = get_uri('students/view/' . $client_info->id . '/info');
 } else if ($tab == "payments") {
     $card = "bg-success";
-    $icon = "check-square";
-    $tab = 'Active Tasks'; // This is not a language and going custom for now
-    if (isset($client_tasks_count)) {
-        $value = $client_tasks_count;
+    $icon = "user";
+    $tab = 'Assignee'; // This is not a language and going custom for now
+    if (isset($assignee_full_name)) {
+        $value = $assignee_full_name;
     }
-    if ($view_type == "client_dashboard") {
-        $link = get_uri('invoice_payments/index');
-    } else {
-        $link = get_uri('students/view/' . $client_info->id . '/tasks');
-    }
+    // if ($view_type == "client_dashboard") {
+    //     $link = get_uri('invoice_payments/index');
+    // } else {
+    //     $link = get_uri('students/view/' . $client_info->id . '/tasks');
+    // }
+    $link = get_uri('students/view/' . $client_info->id . '/tasks');
 } else if ($tab == "due") {
     $card = "bg-coral";
-    $icon = "compass";
-    $tab = 'Total Invoices'; // This is not a language and going custom for now
-    if (property_exists($client_info, "invoice_value")) {
-        $value = to_currency(ignor_minor_value($client_info->invoice_value - $client_info->payment_received), $client_info->currency_symbol);
+    $icon = "help-circle";
+    $tab = 'Source'; // This is not a language and going custom for now
+    if (property_exists($client_info, "source") && $client_info->source) {
+        $value = $client_info->source;
     }
-    if ($view_type == "client_dashboard") {
-        $link = get_uri('invoices/index');
-    } else {
-        $link = get_uri('students/view/' . $client_info->id . '/invoices');
-    }
+    // if ($view_type == "client_dashboard") {
+    //     $link = get_uri('invoices/index');
+    // } else {
+    //     $link = get_uri('students/view/' . $client_info->id . '/invoices');
+    // }
+    $link = get_uri('students/view/' . $client_info->id . '/invoices');
 }
 ?>
 
@@ -88,7 +92,7 @@ if ($tab == "projects") {
                 <i data-feather="<?php echo $icon; ?>" class="icon"></i>
             </div>
             <div class="widget-details">
-                <h1><?php echo $value; ?></h1>
+                <h1><?php echo strlen($value) > 18 ? substr($value, 0, 16) . '...' : $value; ?></h1>
                 <span class="bg-transparent-white"><?php echo $tab; ?></span>
             </div>
         </div>

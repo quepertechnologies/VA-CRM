@@ -40,6 +40,16 @@ class Project_partners_model extends Crud_model
             $query .= " AND $project_partners.partner_id='$partner_id'";
         }
 
+        $partner_type = $this->_get_clean_value($options, "partner_type");
+        if ($partner_type) {
+            $query .= " AND $project_partners.partner_type='$partner_type'";
+        }
+
+        $only_partner_types = $this->_get_clean_value($options, "only_partner_types");
+        if ($only_partner_types) {
+            $query .= " AND FIND_IN_SET($project_partners.partner_type, '$only_partner_types')";
+        }
+
         $sql = "SELECT $project_partners.* FROM $project_partners
         WHERE $project_partners.deleted=0 $query";
 
@@ -50,19 +60,52 @@ class Project_partners_model extends Crud_model
         return $raw_query;
     }
 
+    function own_clients_only_client_id($partner_id = 0, $partner_type = "institute")
+    {
+        $projects_table = $this->db->prefixTable('projects');
+        $project_partners_table = $this->db->prefixTable('project_partners');
+        $clients_table = $this->db->prefixTable('clients');
+
+        $sql = "SELECT $clients_table.id
+        FROM $clients_table
+        LEFT JOIN $projects_table ON $projects_table.client_id=$clients_table.id
+        LEFT JOIN $project_partners_table ON $project_partners_table.project_id=$projects_table.id
+        WHERE $project_partners_table.partner_type='$partner_type' AND $project_partners_table.partner_id=$partner_id AND $clients_table.deleted=0
+        ORDER BY $clients_table.first_name ASC";
+
+        return $this->db->query($sql);
+    }
+
+    function own_clients($partner_id = 0, $partner_type = "institute")
+    {
+        $labels_table = $this->db->prefixTable("labels");
+        $projects_table = $this->db->prefixTable('projects');
+        $project_partners_table = $this->db->prefixTable('project_partners');
+        $clients_table = $this->db->prefixTable('clients');
+        $labels_query = "(SELECT GROUP_CONCAT($labels_table.id, '--::--', $labels_table.title, '--::--', $labels_table.color, ':--::--:') FROM $labels_table WHERE FIND_IN_SET($labels_table.id, $clients_table.labels)) AS labels_list";
+
+        $sql = "SELECT $clients_table.*, $labels_query, project_table.total_projects
+        FROM $clients_table
+        LEFT JOIN (SELECT id, client_id, COUNT(id) AS total_projects FROM $projects_table WHERE deleted=0 AND project_type='client_project' GROUP BY client_id) AS project_table ON project_table.client_id=$clients_table.id
+        LEFT JOIN $project_partners_table ON $project_partners_table.project_id=project_table.id
+        WHERE $project_partners_table.partner_id=$partner_id AND $clients_table.deleted=0
+        ORDER BY $clients_table.first_name ASC";
+
+        return $this->db->query($sql);
+    }
+
 
     function get_rest_partners_for_a_project($project_id = 0)
     {
         $project_members_table = $this->db->prefixTable('project_partners');
-        $users_table = $this->db->prefixTable('users');
+        // $users_table = $this->db->prefixTable('users');
         $clients_table = $this->db->prefixTable('clients');
 
-        $sql = "SELECT $users_table.id, CONCAT($users_table.first_name, ' ',$users_table.last_name) AS member_name
-        FROM $users_table
-        LEFT JOIN $project_members_table ON $project_members_table.partner_id=$users_table.client_id
-        WHERE $users_table.user_type='client' AND $users_table.status='active' AND $users_table.deleted=0 AND $users_table.id NOT IN (SELECT $project_members_table.partner_id FROM $project_members_table WHERE $project_members_table.project_id='$project_id' AND deleted=0)
-        AND $users_table.id IN (SELECT $clients_table.primary_contact_id FROM $clients_table WHERE $clients_table.account_type='3' AND deleted=0)
-        ORDER BY $users_table.first_name ASC";
+        $sql = "SELECT $clients_table.id, CONCAT($clients_table.first_name, ' ',$clients_table.last_name) AS member_name, $clients_table.partner_type
+        FROM $clients_table
+        LEFT JOIN $project_members_table ON $project_members_table.partner_id=$clients_table.id
+        WHERE $clients_table.account_type='3' AND $clients_table.id NOT IN (SELECT $project_members_table.partner_id FROM $project_members_table WHERE $project_members_table.project_id='$project_id' AND deleted=0)
+        ORDER BY $clients_table.first_name ASC";
 
         return $this->db->query($sql);
     }
@@ -72,17 +115,16 @@ class Project_partners_model extends Crud_model
     {
         $partner_id = $this->_get_clean_value($data, "partner_id");
         $project_id = $this->_get_clean_value($data, "project_id");
-        $commission = $this->_get_clean_value($data, "commission");
         if (!$partner_id || !$project_id) {
             return false;
         }
 
-        $exists = $this->get_one_where($where = array("partner_id" => $partner_id, "project_id" => $project_id));
+        $exists = $this->get_one_where(array("partner_id" => $partner_id, "project_id" => $project_id));
         // print_r($exists);
         if ($exists->id && $exists->deleted == 0) {
             //already exists
             return "exists";
-        } else if ($commission && $exists->id && $exists->deleted == 1) {
+        } else if ($exists->id && $exists->deleted == 1) {
             //add new
             return parent::ci_save($data, $id);
         } else if ($exists->id && $exists->deleted == 1) {

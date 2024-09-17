@@ -18,6 +18,26 @@
                 </div>
             </div>
         </div>
+        <div class="form-group" id='note-container'>
+            <div class="row">
+                <label for="note" class=" col-md-3"><?php echo app_lang('note'); ?></label>
+                <div class=" col-md-9">
+                    <?php
+                    echo form_textarea(array(
+                        "id" => "note",
+                        "name" => "note",
+                        "value" => "",
+                        "class" => "form-control validate-hidden",
+                        "placeholder" => "Write a note when you change the deadline",
+                        "style" => "height:150px;",
+                        "data-rich-text-editor" => true,
+                        "data-rule-required" => true,
+                        'data-msg-required' => app_lang('field_required')
+                    ));
+                    ?>
+                </div>
+            </div>
+        </div>
         <?php
         if (is_dev_mode()) {
         ?>

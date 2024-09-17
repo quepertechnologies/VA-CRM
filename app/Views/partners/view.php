@@ -4,7 +4,8 @@
             <div class="col-md-12">
                 <div class="page-title clearfix no-border no-border-top-radius no-bg">
                     <h1 class="pl0">
-                        <?php echo app_lang('client_details') . " - " . $client_info->first_name . ' ' . $client_info->last_name ?>
+                        <?php echo app_lang('partner_details') . " - " . $client_info->first_name . ' ' . $client_info->last_name ?>
+                        <?php echo $client_info->deleted ? timeline_label('lost', 'font-size:18px') : '' ?>
                         <span id="star-mark">
                             <?php
                             if ($is_starred) {
@@ -26,7 +27,7 @@
                             <?php if ($client_info->last_lead_status) { ?>
                                 <?php $lead_information .= app_lang("last_status") . ": " . $client_info->last_lead_status . "<br />"; ?>
                             <?php } ?>
-                            <?php if ($client_info->owner_id) { ?>
+                            <?php if ($client_info->owner_id && isset($client_info->owner_name)) { ?>
                                 <?php $lead_information .= app_lang("owner") . ": " . $client_info->owner_name; ?>
                             <?php } ?>
 
@@ -56,6 +57,10 @@
 
                     <?php if ($show_project_info) { ?>
                         <li><a role="presentation" data-bs-toggle="tab" href="<?php echo_uri("partners/projects/" . $client_info->id); ?>" data-bs-target="#client-projects"><?php echo app_lang('projects'); ?></a></li>
+                    <?php } ?>
+
+                    <?php if ($show_clients_info) { ?>
+                        <li><a role="presentation" data-bs-toggle="tab" href="<?php echo_uri("partners/clients/" . $client_info->id); ?>" data-bs-target="#client-clients"><?php echo app_lang('clients'); ?></a></li>
                     <?php } ?>
 
                     <li><a role="presentation" data-bs-toggle="tab" href="<?php echo_uri("partners/tasks/" . $client_info->id); ?>" data-bs-target="#client-tasks"><?php echo app_lang('tasks'); ?></a></li>
@@ -111,6 +116,7 @@
                     <div role="tabpanel" class="tab-pane fade" id="client-emails"></div>
                     <!-- <div role="tabpanel" class="tab-pane fade" id="client-whatsapp"></div> -->
                     <div role="tabpanel" class="tab-pane fade" id="client-projects"></div>
+                    <div role="tabpanel" class="tab-pane fade" id="client-clients"></div>
                     <div role="tabpanel" class="tab-pane fade" id="client-tasks"></div>
                     <div role="tabpanel" class="tab-pane fade" id="client-files"></div>
                     <div role="tabpanel" class="tab-pane fade" id="client-info"></div>
@@ -139,16 +145,17 @@
     $(document).ready(function() {
 
         setTimeout(function() {
-            var tab = "<?php echo $tab; ?>";
-            if (tab === "info") {
-                $("[data-bs-target='#client-info']").trigger("click");
-            } else if (tab === "projects") {
-                $("[data-bs-target='#client-projects']").trigger("click");
-            } else if (tab === "invoices") {
-                $("[data-bs-target='#client-invoices']").trigger("click");
-            } else if (tab === "payments") {
-                $("[data-bs-target='#client-payments']").trigger("click");
-            }
+            // var tab = "<?php echo $tab; ?>";
+            $("[data-bs-target='#client-info']").trigger("click");
+            // if (tab === "info") {
+            //     $("[data-bs-target='#client-info']").trigger("click");
+            // } else if (tab === "projects") {
+            //     $("[data-bs-target='#client-projects']").trigger("click");
+            // } else if (tab === "invoices") {
+            //     $("[data-bs-target='#client-invoices']").trigger("click");
+            // } else if (tab === "payments") {
+            //     $("[data-bs-target='#client-payments']").trigger("click");
+            // }
         }, 210);
 
         $('[data-bs-toggle="tooltip"]').tooltip();

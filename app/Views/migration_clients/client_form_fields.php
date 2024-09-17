@@ -17,7 +17,7 @@
         </div>
     </div>
 </div> -->
-<div class="form-group">
+<div class="form-group hide">
     <div class="row">
         <label for="client_id" class="<?php echo $label_column; ?> client_id_section"><?php echo app_lang('client_id'); ?></label>
         <div class="<?php echo $field_column; ?>">
@@ -25,13 +25,33 @@
             echo form_input(array(
                 "id" => "unique_id",
                 "name" => "unique_id",
-                "value" => isset($model_info->unique_id) && !empty($model_info->unique_id) ? $model_info->unique_id : uniqid('VA' . date('-y-')),
+                "value" => isset($model_info->unique_id) && !empty($model_info->unique_id) ? $model_info->unique_id : '',
                 "class" => "form-control company_name_input_section",
                 "placeholder" => app_lang('client_id'),
                 "autofocus" => true,
                 'disabled' => true,
                 'style' => "cursor: not-allowed"
             ));
+            ?>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="row">
+        <label for="student-onshore" class="<?php echo $label_column; ?>"><?php echo app_lang('client_onshore'); ?></label>
+        <div class="<?php echo $field_column; ?>">
+            <?php
+            $list = array(
+                '' => '-',
+                '0' => 'No',
+                '1' => "Yes"
+            );
+            echo form_dropdown(
+                'student_onshore',
+                $list,
+                $model_info->student_onshore ? $model_info->student_onshore : '',
+                "class='form-control validate-hidden' id='student-onshore' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "'"
+            );
             ?>
         </div>
     </div>
@@ -168,6 +188,57 @@
 
 <div class="form-group">
     <div class="row">
+        <label for="visa_type" class="<?php echo $label_column; ?>"><?php echo app_lang('visa_type'); ?>
+            <span class="help" data-container="body" data-bs-toggle="tooltip" title="<?php echo app_lang('the_person_who_will_manage_this_client') ?>"><i data-feather="help-circle" class="icon-16"></i></span>
+        </label>
+        <div class="<?php echo $field_column; ?>">
+            <?php
+            echo form_input(array(
+                "id" => "visa_type",
+                "name" => "visa_type",
+                "value" => isset($model_info->visa_type) ? $model_info->visa_type : '',
+                "class" => "form-control validate-hidden",
+                "placeholder" => app_lang('visa_type'),
+            ));
+            ?>
+        </div>
+    </div>
+</div>
+<div class="form-group" id="visa_2_field">
+    <div class="row">
+        <label for="visa_2" class="<?php echo $label_column; ?>">Visa Applied For</label>
+        <div class=" <?php echo $field_column; ?>">
+            <?php
+            echo form_input(array(
+                "id" => "visa_2",
+                "name" => "visa_2",
+                "value" => isset($model_info->visa_2) ? $model_info->visa_2 : '',
+                "class" => "form-control select2",
+                "placeholder" => 'Visa Applied For',
+            ));
+            ?>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="row">
+        <label for="visa_expiry" class="<?php echo $label_column; ?> visa_expiry"><?php echo app_lang('visa_expiry'); ?></label>
+        <div class="<?php echo $field_column; ?>">
+            <?php
+            echo form_input(array(
+                "id" => "visa_expiry",
+                "name" => "visa_expiry",
+                "value" => isset($model_info->visa_expiry) ? $model_info->visa_expiry : '',
+                "class" => "form-control company_name_input_section",
+                "placeholder" => app_lang('visa_expiry'),
+            ));
+            ?>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="row">
         <label for="state" class="<?php echo $label_column; ?>"><?php echo app_lang('state'); ?></label>
         <div class="<?php echo $field_column; ?>">
             <?php
@@ -261,6 +332,7 @@
                 "data-msg-required" => app_lang("field_required"),
             ));
             ?>
+            <p class="text-danger d-none" id="email-alert-cont"></p>
         </div>
     </div>
 </div>
@@ -374,64 +446,8 @@
                     'Domestic Partnership / Civil Union' => 'Domestic Partnership / Civil Union'
                 ),
                 isset($model_info->marriage_status) ? $model_info->marriage_status : '',
-                "class='select2' placeholder='" . app_lang('marital_status') . "'"
+                "class='form-control select2' placeholder='" . app_lang('marital_status') . "' id='marriage-status'"
             );
-            ?>
-        </div>
-    </div>
-</div>
-<div class="form-group">
-    <div class="row">
-        <label for="source" class="<?php echo $label_column; ?> source_section"><?php echo app_lang('source'); ?></label>
-        <div class="<?php echo $field_column; ?>">
-            <?php
-            $list = array(
-                'Search Engine (e.g., Google, Bing)',
-                'Facebook',
-                'Instagram',
-                'X (Twitter)',
-                'LinkedIn',
-                'Pinterest',
-                'Snapchat',
-                'TikTok',
-                'YouTube',
-                'Reddit',
-                'WhatsApp',
-                'Quora',
-                'WeChat',
-                'Telegram',
-                'Referral from a Friend or Family Member',
-                'Online Advertisement',
-                'Printed Advertisement (Magazine, Newspaper, Brochure)',
-                'Event or Conference',
-                'Educational Institution',
-                'Employment Agency',
-                'News Article or Blog'
-            );
-            asort($list);
-            echo form_datalist(
-                'source',
-                isset($model_info->source) ? $model_info->source : '',
-                $list,
-                "class='form-control company_name_input_section' placeholder='" . app_lang('source') . "'"
-            );
-            ?>
-        </div>
-    </div>
-</div>
-<div class="form-group">
-    <div class="row">
-        <label for="tag_name" class="<?php echo $label_column; ?> tag_name_section"><?php echo app_lang('tag_name'); ?></label>
-        <div class="<?php echo $field_column; ?>">
-            <?php
-            echo form_input(array(
-                "id" => "tag_name",
-                "name" => "tag_name",
-                "value" => isset($model_info->tag_name) ? $model_info->tag_name : '',
-                "class" => "form-control company_name_input_section",
-                "placeholder" => app_lang('tag_name'),
-                "autofocus" => true,
-            ));
             ?>
         </div>
     </div>
@@ -482,6 +498,24 @@
     <?php } ?>
     <div class="form-group">
         <div class="row">
+            <label for="location_id" class="<?php echo $label_column; ?>"><?php echo app_lang('location'); ?></label>
+            <div class="<?php echo $field_column; ?>">
+                <?php
+                echo form_input(array(
+                    "id" => "location_id",
+                    "name" => "location_id",
+                    "value" => isset($model_info->location_id) ? $model_info->location_id : '',
+                    "class" => "form-control",
+                    "placeholder" => app_lang('location'),
+                    "data-rule-required" => true,
+                    "data-msg-required" => app_lang("field_required")
+                ));
+                ?>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
             <label for="assignee" class="<?php echo $label_column; ?>"><?php echo app_lang('assignee'); ?>
                 <span class="help" data-container="body" data-bs-toggle="tooltip" title="<?php echo app_lang('the_person_who_will_manage_this_client') ?>"><i data-feather="help-circle" class="icon-16"></i></span>
             </label>
@@ -500,7 +534,25 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
+    <?php if ($login_user->user_type === "staff") { ?>
+        <div class="form-group">
+            <div class="row">
+                <label for="groups" class="<?php echo $label_column; ?>"><?php echo app_lang('client_groups'); ?></label>
+                <div class="<?php echo $field_column; ?>">
+                    <?php
+                    echo form_input(array(
+                        "id" => "group_ids",
+                        "name" => "group_ids",
+                        "value" => $model_info->group_ids,
+                        "class" => "form-control",
+                        "placeholder" => app_lang('client_groups')
+                    ));
+                    ?>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
+    <!-- <div class="form-group">
         <div class="row">
             <label for="assignee-manager" class="<?php echo $label_column; ?> assignee_manager_section"><?php echo app_lang('assignee_manager'); ?></label>
             <div class="<?php echo $field_column; ?>">
@@ -516,42 +568,53 @@
                 ?>
             </div>
         </div>
+    </div> -->
+    <div class="form-group">
+        <div class="row">
+            <label for="parent_id" class="<?php echo $label_column; ?>"><?php echo app_lang('attach_to_organization'); ?></label>
+            <div class="<?php echo $field_column; ?>">
+                <?php
+                echo form_input(array(
+                    "id" => "attach-organization",
+                    "name" => "parent_id",
+                    "value" => isset($model_info->parent_id) ? $model_info->parent_id : '',
+                    "class" => "form-control select2",
+                    "placeholder" => app_lang('partner'),
+
+                ));
+                ?>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <label for="partner_id" class="<?php echo $label_column; ?>"><?php echo app_lang('subagent'); ?></label>
+            <div class="<?php echo $field_column; ?>">
+                <?php
+                echo form_input(array(
+                    "id" => "partner_id",
+                    "name" => "partner_id",
+                    "value" => isset($model_info->partner_id) ? $model_info->partner_id : '',
+                    "class" => "form-control select2",
+                    "placeholder" => app_lang('partner'),
+
+                ));
+                ?>
+            </div>
+        </div>
     </div>
     <div class="form-group">
         <div class="row">
             <label for="source" class="<?php echo $label_column; ?> source_section"><?php echo app_lang('source'); ?></label>
             <div class="<?php echo $field_column; ?>">
                 <?php
-                $list = array(
-                    'Search Engine (e.g., Google, Bing)',
-                    'Facebook',
-                    'Instagram',
-                    'X (Twitter)',
-                    'LinkedIn',
-                    'Pinterest',
-                    'Snapchat',
-                    'TikTok',
-                    'YouTube',
-                    'Reddit',
-                    'WhatsApp',
-                    'Quora',
-                    'WeChat',
-                    'Telegram',
-                    'Referral from a Friend or Family Member',
-                    'Online Advertisement',
-                    'Printed Advertisement (Magazine, Newspaper, Brochure)',
-                    'Event or Conference',
-                    'Educational Institution',
-                    'Employment Agency',
-                    'News Article or Blog'
-                );
-                asort($list);
-                echo form_datalist(
-                    'source',
-                    isset($model_info->source) ? $model_info->source : '',
-                    $list,
-                    "class='form-control company_name_input_section' placeholder='" . app_lang('source') . "'"
-                );
+                echo form_input(array(
+                    "id" => "source",
+                    "name" => "source",
+                    "value" => isset($model_info->source) ? $model_info->source : '',
+                    "class" => "form-control",
+                    "placeholder" => app_lang('source'),
+                ));
                 ?>
             </div>
         </div>
@@ -603,6 +666,85 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
+        $("#visa_2_field").hide();
+
+        setDatePicker("#visa_expiry,#date_of_birth");
+
+        $('#marriage-status').select2();
+        $('#select-phone-code').select2();
+
+        $('#visa_type').select2({
+            data: <?php echo $visa_type_dropdown; ?>
+        }).on('change', function() {
+            value = $(this).val();
+            if (['010', '020', '030', '040', '600'].includes(value)) {
+                $('#visa_expiry')
+                    .removeAttr('data-rule-required')
+                    .removeAttr('required');
+                $("#visa_2_field").show();
+            } else {
+                $('#visa_expiry').attr('data-rule-required', true);
+                $("#visa_2_field").hide();
+            }
+        });
+
+        $('#student-onshore').select2().on('change', function() {
+            if ($(this).val() == '1') {
+                $('#visa_type')
+                    .attr('required', 'required')
+                    .attr('data-rule-required', true)
+                    .attr('data-msg-required', '<?php echo app_lang("field_required") ?>');
+                $('#visa_expiry')
+                    .attr('required', 'required')
+                    .attr('data-rule-required', true)
+                    .attr('data-msg-required', '<?php echo app_lang("field_required") ?>');
+            } else {
+                $('#visa_type')
+                    .removeAttr('data-rule-required')
+                    .removeAttr('data-msg-required')
+                    .removeAttr('required')
+                    .removeAttr('aria-describedby')
+                    .parent()
+                    .parent()
+                    .parent()
+                    .removeClass("has-error");
+                $('#visa_expiry')
+                    .removeAttr('data-rule-required')
+                    .removeAttr('data-msg-required')
+                    .removeAttr('required')
+                    .removeAttr('aria-describedby')
+                    .parent()
+                    .parent()
+                    .parent()
+                    .removeClass("has-error");
+                $('#visa_expiry-error').remove();
+                $('#visa_expiry_msg_cont').remove();
+                $('#visa_type-error').remove();
+                $('#visa_type_msg_count').remove();
+            }
+        });
+
+        // $('#visa_type').on('change', function() {
+        //     value = this.value;
+        //     if (value == '010' || value == '020' || value == '030' || value == '040' || value == '600') {
+        //         $('#visa_expiry').prop('required', false);
+        //         $("#visa_2_field").show();
+        //     } else {
+        //         $('#visa_expiry').prop('required', true);
+        //         $("#visa_2_field").hide();
+        //     }
+        // });
+
+        // $('#student-onshore').select2().on('change', function() {
+        //     if (this.checked) {
+        //         $('#visa_type').prop('required', true);
+        //         $('#visa_expiry').prop('required', true);
+        //     } else {
+        //         $('#visa_type').prop('required', false);
+        //         $('#visa_expiry').prop('required', false);
+        //     }
+        // });
+
         $("#password").val(getRndomString(8));
         $('[data-bs-toggle="tooltip"]').tooltip();
 
@@ -625,9 +767,30 @@
             $('#created_by').select2({
                 data: <?php echo $team_members_dropdown; ?>
             });
+
             $('#created_by_manager').select2({
                 data: <?php echo $team_members_dropdown; ?>
             });
+
+            $('#partner_id').select2({
+                data: <?php echo $partners_members_dropdown; ?>
+            });
+
+            $('#source').select2({
+                data: <?php echo $sources_dropdown; ?>
+            });
+
+            $('#location_id').select2({
+                data: <?php echo json_encode($locations_dropdown); ?>
+            });
+
+            $('#attach-organization').select2({
+                data: <?php echo json_encode($organizations_dropdown); ?>
+            });
+
+            // $('#visa_type').select2({
+            //     data: <?php echo $visa_type_dropdown; ?>
+            // });
         <?php } ?>
 
         <?php if ($login_user->user_type === "staff") { ?>

@@ -4,7 +4,8 @@
             <div class="col-md-12">
                 <div class="page-title clearfix no-border no-border-top-radius no-bg">
                     <h1 class="pl0">
-                        Organization Details<?php echo " - " . $client_info->company_name ?>
+                        <?php echo app_lang('organization_details') . " - " . $client_info->company_name ?>
+                        <?php echo $client_info->deleted ? timeline_label('lost', 'font-size:18px') : '' ?>
                         <span id="star-mark">
                             <?php
                             if ($is_starred) {
@@ -26,7 +27,7 @@
                             <?php if ($client_info->last_lead_status) { ?>
                                 <?php $lead_information .= app_lang("last_status") . ": " . $client_info->last_lead_status . "<br />"; ?>
                             <?php } ?>
-                            <?php if ($client_info->owner_id) { ?>
+                            <?php if ($client_info->owner_id && isset($client_info->owner_name)) { ?>
                                 <?php $lead_information .= app_lang("owner") . ": " . $client_info->owner_name; ?>
                             <?php } ?>
 
@@ -141,16 +142,17 @@
     $(document).ready(function() {
 
         setTimeout(function() {
-            var tab = "<?php echo $tab; ?>";
-            if (tab === "info") {
-                $("[data-bs-target='#client-info']").trigger("click");
-            } else if (tab === "projects") {
-                $("[data-bs-target='#client-projects']").trigger("click");
-            } else if (tab === "invoices") {
-                $("[data-bs-target='#client-invoices']").trigger("click");
-            } else if (tab === "payments") {
-                $("[data-bs-target='#client-payments']").trigger("click");
-            }
+            // var tab = "<?php echo $tab; ?>";
+            $("[data-bs-target='#client-info']").trigger("click");
+            // if (tab === "info") {
+            //     $("[data-bs-target='#client-info']").trigger("click");
+            // } else if (tab === "projects") {
+            //     $("[data-bs-target='#client-projects']").trigger("click");
+            // } else if (tab === "invoices") {
+            //     $("[data-bs-target='#client-invoices']").trigger("click");
+            // } else if (tab === "payments") {
+            //     $("[data-bs-target='#client-payments']").trigger("click");
+            // }
         }, 210);
 
         $('[data-bs-toggle="tooltip"]').tooltip();

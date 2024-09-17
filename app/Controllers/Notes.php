@@ -82,6 +82,8 @@ class Notes extends Security_Controller
             $view_data['team_members_dropdown'] = $this->get_team_members_dropdown(false, 'Created BY');
         }
 
+        $view_data['recovered_note'] = $this->Auto_save_user_notes_model->get_details(array('user_id' => $this->login_user->id))->getRow();
+
         //check permission for saved note
         if ($view_data['model_info']->id) {
             $this->validate_access_to_note($view_data['model_info'], true);
@@ -130,7 +132,7 @@ class Notes extends Security_Controller
             "project_id" => $this->request->getPost('project_id') ? $this->request->getPost('project_id') : 0,
             "client_id" => $this->request->getPost('client_id') ? $this->request->getPost('client_id') : 0,
             "user_id" => $this->request->getPost('user_id') ? $this->request->getPost('user_id') : 0,
-            "is_public" => $this->request->getPost('is_public') ? $this->request->getPost('is_public') : 0,
+            "is_public" => $this->request->getPost('is_public') ? $this->request->getPost('is_public') : 1,
             "milestone_id" => $this->request->getPost('milestone_id') ? $this->request->getPost('milestone_id') : 0
         );
 
@@ -160,7 +162,7 @@ class Notes extends Security_Controller
 
         $save_id = $this->Notes_model->ci_save($data, $id);
         if ($save_id) {
-            if ($data["client_id"]) {
+            if ($data["client_id"] && !$id) {
                 $_link = modal_anchor(get_uri("notes/view/" . $save_id), "Note #" . $save_id, array("title" => "Note #" . $save_id, "data-post-id" => $save_id));
                 $timeline_data = array(
                     'client_id' => $data["client_id"],
@@ -174,6 +176,30 @@ class Notes extends Security_Controller
         } else {
             echo json_encode(array("success" => false, 'message' => app_lang('error_occurred')));
         }
+    }
+
+    function auto_save_note()
+    {
+
+        $title = $this->request->getPost('title');
+        $description = $this->request->getPost('description');
+
+        $auto_saved_note_info = $this->Auto_save_user_notes_model->get_details(array('user_id' => $this->login_user->id))->getRow();
+
+        $note_data = array(
+            'user_id' => $this->login_user->id,
+            'title' => $title ? $title : '',
+            'description' => $description ? $description : '',
+            'updated_date' => get_current_utc_time()
+        );
+
+        if ($auto_saved_note_info && $auto_saved_note_info->id) {
+            $this->Auto_save_user_notes_model->ci_save($note_data, $auto_saved_note_info->id);
+        } else {
+            $this->Auto_save_user_notes_model->ci_save($note_data);
+        }
+
+        echo json_encode(array('success' => true, 'message' => 'Success'));
     }
 
     function delete()

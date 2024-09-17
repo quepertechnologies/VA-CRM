@@ -2,17 +2,20 @@
 
 namespace App\Models;
 
-class Payment_methods_model extends Crud_model {
+class Payment_methods_model extends Crud_model
+{
 
     protected $table = null;
 
-    function __construct() {
+    function __construct()
+    {
         $this->table = 'payment_methods';
         parent::__construct($this->table);
     }
 
     //define different types of payment gateway settings
-    function get_settings($type = "") {
+    function get_settings($type = "")
+    {
         $settings = array(
             "stripe" => array(
                 array("name" => "pay_button_text", "text" => app_lang("pay_button_text"), "type" => "text", "default" => "Stripe"),
@@ -34,7 +37,7 @@ class Payment_methods_model extends Crud_model {
                 array("name" => "industry_type", "text" => "Industry Type", "type" => "text", "default" => ""),
             ),
         );
-        
+
         $settings = app_hooks()->apply_filters('app_filter_payment_method_settings', $settings);
 
         if ($type && get_array_value($settings, $type)) {
@@ -44,17 +47,20 @@ class Payment_methods_model extends Crud_model {
         }
     }
 
-    function get_one_with_settings($id = 0) {
+    function get_one_with_settings($id = 0)
+    {
         $info = $this->get_one($id);
         return $this->_merge_online_settings_with_default($info);
     }
 
-    function get_oneline_payment_method($type) {
+    function get_oneline_payment_method($type)
+    {
         $info = $this->get_one_where(array("deleted" => 0, "type" => $type, "online_payable" => 1));
         return $this->_merge_online_settings_with_default($info);
     }
 
-    private function _merge_online_settings_with_default($info) {
+    private function _merge_online_settings_with_default($info)
+    {
         $settings = $this->get_settings($info->type);
         $settings_data = $info->settings ? @unserialize($info->settings) : array();
 
@@ -75,20 +81,26 @@ class Payment_methods_model extends Crud_model {
         return $info;
     }
 
-    function get_details($options = array()) {
+    function get_details($options = array())
+    {
         $payment_methods_table = $this->db->prefixTable('payment_methods');
-        
+
         $where = "";
         $id = $this->_get_clean_value($options, "id");
         if ($id) {
             $where = " AND $payment_methods_table.id=$id";
         }
-        
+
+        $title = $this->_get_clean_value($options, "title");
+        if ($title) {
+            $where = " AND $payment_methods_table.title='$title'";
+        }
+
         $online_payable = $this->_get_clean_value($options, "online_payable");
         if ($online_payable) {
             $where = " AND $payment_methods_table.online_payable=$online_payable";
         }
-        
+
         $available_on_invoice = $this->_get_clean_value($options, "available_on_invoice");
         if ($available_on_invoice) {
             $where = " AND $payment_methods_table.available_on_invoice=$available_on_invoice";
@@ -101,7 +113,8 @@ class Payment_methods_model extends Crud_model {
         return $this->db->query($sql);
     }
 
-    function delete($id = 0, $undo = false) {
+    function delete($id = 0, $undo = false)
+    {
 
         $exists = $this->get_one_where($where = array("id" => $id));
         if ($exists->online_payable == 1) {
@@ -112,15 +125,15 @@ class Payment_methods_model extends Crud_model {
         }
     }
 
-    function get_available_online_payment_methods() {
+    function get_available_online_payment_methods()
+    {
 
         $settings = $this->get_details(array("online_payable" => 1, "available_on_invoice" => 1))->getResult();
-        
+
         $final_settings = array();
         foreach ($settings as $setting) {
             $final_settings[] = (array) $this->_merge_online_settings_with_default($setting);
         }
         return $final_settings;
     }
-
 }
