@@ -150,6 +150,11 @@ class Tasks_model extends Crud_model
             $where .= " AND $tasks_table.id=$id";
         }
 
+        $title = $this->_get_clean_value($options, "title");
+        if ($title) {
+            $where .= " AND $tasks_table.title LIKE '%$title%' ESCAPE '!' ";
+        }
+
         $project_id = $this->_get_clean_value($options, "project_id");
         if ($project_id) {
             $where .= " AND $tasks_table.project_id=$project_id";
@@ -180,6 +185,11 @@ class Tasks_model extends Crud_model
             $where .= " AND $tasks_table.status_id!=$exclude_status_id ";
         }
 
+        $created_by = $this->_get_clean_value($options, "created_by");
+        if ($created_by) {
+            $where .= " AND $tasks_table.created_by=$created_by";
+        }
+
         $assigned_to = $this->_get_clean_value($options, "assigned_to");
         if ($assigned_to) {
             $where .= " AND $tasks_table.assigned_to=$assigned_to";
@@ -187,7 +197,7 @@ class Tasks_model extends Crud_model
 
         $client_id = $this->_get_clean_value($options, "client_id");
         if ($client_id) {
-            $where .= " AND $tasks_table.client_id=$client_id";
+            $where .= " AND ($tasks_table.client_id=$client_id OR $tasks_table.lead_id=$client_id)";
         }
 
         $lead_id = $this->_get_clean_value($options, "lead_id");
@@ -247,13 +257,11 @@ class Tasks_model extends Crud_model
             // $where .= " AND ($tasks_table.assigned_to=$show_assigned_tasks_only_user_id OR FIND_IN_SET('$show_assigned_tasks_only_user_id', $tasks_table.collaborators))";
         }
 
-
         $project_status = $this->_get_clean_value($options, "project_status");
         $context_options = get_array_value($options, "context_options");
         if ($project_status && !$context_options) {
             $where .= " AND $projects_table.status_id ='$project_status' ";
         }
-
 
         $milestone_id = $this->_get_clean_value($options, "milestone_id");
         if ($milestone_id) {
@@ -399,6 +407,8 @@ class Tasks_model extends Crud_model
                 $where .= " OR $tasks_table.deadline LIKE '%$search_by%' ESCAPE '!' ";
                 $where .= " OR $milestones_table.title LIKE '%$search_by%' ESCAPE '!' ";
                 $where .= " OR CONCAT($users_table.first_name, ' ', $users_table.last_name) LIKE '%$search_by%' ESCAPE '!' ";
+                $where .= " OR $clients_table.company_name LIKE '%$search_by%' ESCAPE '!' ";
+                $where .= " OR CONCAT($clients_table.first_name, ' ', $clients_table.last_name) LIKE '%$search_by%' ESCAPE '!' ";
                 $where .= " OR $task_status_table.key_name LIKE '%$search_by%' ESCAPE '!' ";
                 $where .= " OR $task_status_table.title LIKE '%$search_by%' ESCAPE '!' ";
                 $where .= " OR $projects_table.title LIKE '%$search_by%' ESCAPE '!' ";
@@ -418,7 +428,7 @@ class Tasks_model extends Crud_model
 
         $this->db->query('SET SQL_BIG_SELECTS=1');
 
-        $sql = "SELECT SQL_CALC_FOUND_ROWS $tasks_table.*, $task_status_table.key_name AS status_key_name, $task_status_table.title AS status_title,  $task_status_table.color AS status_color, CONCAT($users_table.first_name, ' ',$users_table.last_name) AS assigned_to_user, $users_table.image as assigned_to_avatar, $users_table.user_type,
+        $sql = "SELECT SQL_CALC_FOUND_ROWS $tasks_table.*, $task_status_table.key_name AS status_key_name, $task_status_table.title AS status_title,  $task_status_table.color AS status_color, CONCAT($users_table.first_name, ' ',$users_table.last_name) AS assigned_to_user,CONCAT(t2.first_name, ' ',t2.last_name) AS created_by_user, t2.image AS created_by_avatar, $users_table.user_type ,$users_table.image AS assigned_to_avatar, $users_table.user_type,
                     $projects_table.title AS project_title, $milestones_table.title AS milestone_title, IF($tasks_table.deadline IS NULL, $milestones_table.due_date,$tasks_table.deadline) AS deadline,$ticket_table.title AS ticket_title,
                     (SELECT GROUP_CONCAT($users_table.id, '--::--', $users_table.first_name, ' ', $users_table.last_name, '--::--' , IFNULL($users_table.image,''), '--::--', $users_table.user_type) FROM $users_table WHERE $users_table.deleted=0 AND FIND_IN_SET($users_table.id, $tasks_table.collaborators)) AS collaborator_list,
                     $task_priority_table.title AS priority_title, $task_priority_table.icon AS priority_icon, $task_priority_table.color AS priority_color,
@@ -430,12 +440,13 @@ class Tasks_model extends Crud_model
                         
         FROM $tasks_table
         LEFT JOIN $users_table ON $users_table.id= $tasks_table.assigned_to
+        LEFT JOIN $users_table t2 ON t2.id= $tasks_table.created_by
         LEFT JOIN $projects_table ON $tasks_table.project_id=$projects_table.id 
         LEFT JOIN $milestones_table ON $tasks_table.milestone_id=$milestones_table.id 
         LEFT JOIN $contracts_table ON $contracts_table.id=$tasks_table.contract_id 
         LEFT JOIN $subscriptions_table ON $subscriptions_table.id=$tasks_table.subscription_id 
         LEFT JOIN $expenses_table ON $expenses_table.id=$tasks_table.expense_id 
-        LEFT JOIN $clients_table ON ($clients_table.id=$tasks_table.client_id OR $clients_table.id=$tasks_table.lead_id)
+        LEFT JOIN $clients_table ON ($clients_table.id=$tasks_table.client_id OR $clients_table.id=$tasks_table.lead_id OR $tasks_table.client_id=$projects_table.client_id)
         LEFT JOIN $task_status_table ON $tasks_table.status_id = $task_status_table.id 
         LEFT JOIN $task_priority_table ON $tasks_table.priority_id = $task_priority_table.id 
         LEFT JOIN $ticket_table ON $tasks_table.ticket_id = $ticket_table.id
@@ -752,7 +763,7 @@ class Tasks_model extends Crud_model
         } else {
             $sql = "SELECT $tasks_table.id, $tasks_table.title, $tasks_table.start_date, $tasks_table.deadline, $tasks_table.sort, IF($tasks_table.sort!=0, $tasks_table.sort, $tasks_table.id) AS new_sort, $tasks_table.assigned_to, $tasks_table.labels, $tasks_table.status_id, $tasks_table.project_id, CONCAT($users_table.first_name, ' ',$users_table.last_name) AS assigned_to_user, $tasks_table.priority_id, $projects_table.title AS project_title, (SELECT $clients_table.company_name FROM $clients_table WHERE id=(SELECT $projects_table.client_id FROM $projects_table WHERE $projects_table.id=$tasks_table.project_id)) AS client_name, $projects_table.project_type AS project_type,
                 $task_priority_table.title AS priority_title, $task_priority_table.icon AS priority_icon, $task_priority_table.color AS priority_color,
-                $users_table.image as assigned_to_avatar, $tasks_table.parent_task_id, sub_tasks_table.id AS has_sub_tasks, parent_tasks_table.title AS parent_task_title, $notifications_table.id AS unread, 
+                $users_table.image as assigned_to_avatar,$users_table.image as created_by_avatar, $tasks_table.parent_task_id, sub_tasks_table.id AS has_sub_tasks, parent_tasks_table.title AS parent_task_title, $notifications_table.id AS unread, 
                 (SELECT COUNT($checklist_items_table.id) FROM $checklist_items_table WHERE $checklist_items_table.deleted=0 AND $checklist_items_table.task_id=$tasks_table.id) AS total_checklist,
                 (SELECT COUNT($checklist_items_table.id) FROM $checklist_items_table WHERE $checklist_items_table.is_checked=1 AND $checklist_items_table.deleted=0 AND $checklist_items_table.task_id=$tasks_table.id) AS total_checklist_checked,
                 COUNT(sub_tasks_table.id) AS total_sub_tasks, completed_sub_tasks_table.total_sub_tasks_done, $tasks_table.client_id, $tasks_table.contract_id, $tasks_table.estimate_id, $tasks_table.expense_id, $tasks_table.invoice_id, $tasks_table.lead_id, $tasks_table.order_id, $tasks_table.proposal_id, $tasks_table.subscription_id, $tasks_table.ticket_id, $tasks_table.collaborators,

@@ -49,6 +49,11 @@
                     options: <?php echo $groups_dropdown; ?>
                 },
                 {
+                    name: "partner_type",
+                    class: "w200",
+                    options: <?php echo $partner_types_dropdown; ?>
+                },
+                {
                     name: "label_id",
                     class: "w200",
                     options: <?php echo $labels_dropdown; ?>
@@ -63,7 +68,7 @@
                 {
                     title: "<?php echo app_lang("name") ?>",
                     "class": "all",
-                    order_by: "first_name"
+                    order_by: "full_name"
                 },
                 {
                     title: "<?php echo app_lang("created_at") ?>",

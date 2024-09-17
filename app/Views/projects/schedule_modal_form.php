@@ -77,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group col-md-6">
+            <!-- <div class="form-group col-md-6">
                 <div class="row">
                     <label for="due_date" class=" col-md-4"><?php echo app_lang("invoice_is_claimable") ?></label>
                     <div class=" col-md-8">
@@ -91,7 +91,7 @@
                         ?>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <?php if (is_dev_mode()) { ?>
                 <div class="form-group col-md-6">
                     <div class="row">
@@ -120,12 +120,15 @@
             <?php } ?>
         </div>
         <div class='row col-md-12 border-top py-3'>
-            <div class="col-md-6"><strong><?php echo app_lang("fee_type"); ?></strong></div>
-            <div class="col-md-4"><strong><?php echo app_lang("fee_amount"); ?></strong></div>
+            <div class="col-md-3"><strong><?php echo app_lang("fee_type"); ?></strong></div>
+            <div class="col-md-2"><strong><?php echo app_lang("fee_amount"); ?></strong></div>
+            <div class="col-md-2"><strong><?php echo app_lang("commission") . ' (%)'; ?></strong></div>
+            <div class="col-md-2"><strong><?php echo app_lang("is_claimable"); ?></strong></div>
+            <div class="col-md-2"><strong><?php echo app_lang("is_taxable"); ?></strong></div>
         </div>
         <div class="border-top pb-3" id='fee-row-container'>
             <div class='row col-md-12 pt-3' id='fee-row'>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <?php
                     $list = array(
                         'Accommodation Fee',
@@ -425,12 +428,51 @@
                     );
                     ?>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <?php
                     echo form_input(
                         'amount',
                         '',
                         "class='form-control' min='0' step='0.01' onkeypress='javascript: return validateNum(this,event);' id='amount' placeholder='0.00'",
+                    );
+                    ?>
+                </div>
+                <div class="col-md-2">
+                    <?php
+                    echo form_input(
+                        'commission',
+                        isset($institute) && $institute ? $institute->commission : '0.00',
+                        "class='form-control' min='0' max='100' step='0.01' onkeypress='javascript: return validateNum(this,event);' id='commission' placeholder='0.00 %'",
+                    );
+                    ?>
+                </div>
+                <div class=" col-md-2">
+                    <?php
+                    $list = array(
+                        0 => "No",
+                        1 => 'Yes'
+                    );
+
+                    echo form_dropdown(
+                        'is_claimable',
+                        $list,
+                        '',
+                        "class='form-control' id='is-claimable'",
+                    );
+                    ?>
+                </div>
+                <div class=" col-md-2">
+                    <?php
+                    $list = array(
+                        0 => "No",
+                        1 => 'Yes'
+                    );
+
+                    echo form_dropdown(
+                        'is_taxable',
+                        $list,
+                        '',
+                        "class='form-control' id='is-taxable'",
                     );
                     ?>
                 </div>
@@ -442,10 +484,10 @@
             </div>
         </div>
         <div class='row col-md-12 pb-3'>
-            <div class="col-md-6 d-flex align-items-center">
+            <div class="col-md-3 d-flex align-items-center">
                 <strong><?php echo app_lang("discount") ?></strong>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <?php
                 echo form_input(
                     'discount',
@@ -456,7 +498,7 @@
             </div>
         </div>
         <div class='row col-md-12 border-top py-3'>
-            <div class="col-md-3">
+            <div class="col-md-7">
                 <button id='add-new-row' type="button" class="btn btn-success"><span data-feather="plus-circle" class="icon-16"></span> <?php echo app_lang("add_fee") ?></button>
             </div>
             <div class="col-md-3">
@@ -496,10 +538,10 @@
                 closeModalOnSuccess: false,
                 onSuccess: function(result) {
                     window.projectScheduleForm.closeModal();
-                    $("#project-payment-schedule-list-table").appTable({
-                        reload: true
-                    });
-                    // location.reload();
+                    // $("#project-payment-schedule-list-table").appTable({
+                    //     reload: true
+                    // });
+                    location.reload();
                 }
             });
 
@@ -517,7 +559,7 @@
             if (fees && fees.length) {
                 fees.forEach((fee, i) => addNewRow(fee, i + 1));
             } else {
-                addNewRow();
+                addNewRow(); //? add an empty row
             }
 
             $("#project-schedule-form").on('click', '#add-new-row', function() {
@@ -534,20 +576,41 @@
                 handleTotal();
             });
 
-            $(document).on('blur', '#amount,#discount', function(e) {
+            $(document).on('input', '#commission', function(e) {
+                handleZeroVal(this, 100);
+            });
+
+            $(document).on('blur', '#amount,#discount,#commission', function(e) {
                 handleZeroValSuffix(this);
             });
 
-            function handleZeroVal(el) {
+            // $(document).on('input', '#commission', function(e) {
+            //     handleMaxVal(this, 100);
+            // });
+
+            function handleZeroVal(el, maxVal = null) {
                 var val = $(el).val();
                 if (!val || val == '' || val == null || (val && Number(val) == 0)) {
                     $(el).val('0.00');
                 } else if (val && +val < 1) {
                     $(el).val(String(val).charAt(String(val).length - 1));
                 } else {
-                    $(el).val(val);
+                    if (maxVal) {
+                        if (Number(val) > maxVal) {
+                            $(el).val(Number(maxVal));
+                        } else {
+                            $(el).val(val);
+                        }
+                    } else {
+                        $(el).val(val);
+                    }
                 }
             }
+
+            // function handleMaxVal(el, maxVal = 100) {
+            //     var val = $(el).val();
+            //     $(el).val(Number(val) > maxVal ? Number(maxVal) : Number(val));
+            // }
 
             function handleZeroValSuffix(el) {
                 var val = $(el).val();
@@ -564,6 +627,9 @@
                     newNode.find('#fee-type').attr('name', 'fee_type_' + key).attr('list', 'fee_type_' + key + '_list').val(fee.fee_type);
                     newNode.find('#fee_type_list').attr('id', 'fee_type_' + key + '_list');
                     newNode.find('#amount').attr('name', 'amount_' + key).val(fee.amount);
+                    newNode.find('#commission').attr('name', 'commission_' + key).val(fee.commission ? fee.commission : 0);
+                    newNode.find('#is-claimable').attr('name', 'is_claimable_' + key).val(fee.is_claimable ? fee.is_claimable : 0);
+                    newNode.find('#is-taxable').attr('name', 'is_taxable_' + key).val(fee.is_taxable ? fee.is_taxable : 0);
 
                     if (key > 1) { // show remove btn if not first row
                         newNode.find('#remove-btn-container').removeClass("d-none");
@@ -581,6 +647,9 @@
                     newNode.find('#fee-type').attr('name', 'fee_type_' + rowSerial).attr('list', 'fee_type_' + rowSerial + '_list');
                     newNode.find('#fee_type_list').attr('id', 'fee_type_' + rowSerial + '_list');
                     newNode.find('#amount').attr('name', 'amount_' + rowSerial);
+                    newNode.find('#commission').attr('name', 'commission_' + rowSerial);
+                    newNode.find('#is-claimable').attr('name', 'is_claimable_' + rowSerial);
+                    newNode.find('#is-taxable').attr('name', 'is_taxable_' + rowSerial);
 
                     if (rowSerial > 1) { // show remove btn if not first row
                         newNode.find('#remove-btn-container').removeClass("d-none");
@@ -651,10 +720,5 @@
                     return true;
             }
             return true;
-            var charCode = (evt.which) ? evt.which : event.keyCode;
-            var number = evt.value.split('.');
-            if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
-                return false;
-            }
         };
     </script>

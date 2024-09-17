@@ -1,3 +1,5 @@
 /app/Config/Database.php
 /vendor
+/system
+/app_temp
 /files

@@ -39,6 +39,10 @@ class Tickets_model extends Crud_model
         if ($task_id) {
             $where .= " AND $task_table.id=$task_id";
         }
+        $fresh_desk_ticket_id = $this->_get_clean_value($options, "fresh_desk_ticket_id");
+        if ($fresh_desk_ticket_id) {
+            $where .= " AND $tickets_table.fresh_desk_ticket_id=$fresh_desk_ticket_id";
+        }
 
         $status = $this->_get_clean_value($options, "status");
         if ($status === "closed") {

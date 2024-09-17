@@ -7,7 +7,8 @@
                 <label for="discount_type" class="col-md-3"><?php echo app_lang('discount_type'); ?></label>
                 <div class="col-md-9">
                     <?php
-                    $discount_type_dropdown = array("before_tax" => app_lang("before_tax"), "after_tax" => app_lang("after_tax"));
+                    // $discount_type_dropdown = array("before_tax" => app_lang("before_tax"), "after_tax" => app_lang("after_tax"), 'on_income' => app_lang('on_income'));
+                    $discount_type_dropdown = array('on_income' => app_lang('on_income'));
                     echo form_dropdown("discount_type", $discount_type_dropdown, $model_info->discount_type, "class='select2'");
                     ?>
                 </div>
@@ -32,7 +33,8 @@
                 </div>
                 <div class="col-md-5">
                     <?php
-                    $discount_percentage_dropdown = array("percentage" => app_lang("percentage"), "fixed_amount" => app_lang("fixed_amount"));
+                    // $discount_percentage_dropdown = array("percentage" => app_lang("percentage"), "fixed_amount" => app_lang("fixed_amount"));
+                    $discount_percentage_dropdown = array("fixed_amount" => app_lang("fixed_amount"));
                     echo form_dropdown("discount_amount_type", $discount_percentage_dropdown, $model_info->discount_amount_type, "class='select2'");
                     ?>
                 </div>
@@ -48,9 +50,9 @@
 <?php echo form_close(); ?>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#discount-form").appForm({
-            onSuccess: function (result) {
+            onSuccess: function(result) {
                 if (result.success && result.invoice_total_view) {
                     $("#invoice-total-section").html(result.invoice_total_view);
                 } else {
@@ -61,5 +63,4 @@
 
         $("#discount-form .select2").select2();
     });
-
 </script>

@@ -1,0 +1,1124 @@
+ERROR - 2024-08-10 00:00:05 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 00:00:05 --> 
+ERROR - 2024-08-10 00:05:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 00:05:03 --> 
+ERROR - 2024-08-10 00:15:02 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 00:15:02 --> 
+ERROR - 2024-08-10 00:20:02 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 00:20:02 --> 
+ERROR - 2024-08-10 00:30:04 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 00:30:04 --> 
+ERROR - 2024-08-10 00:40:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 00:40:03 --> 
+ERROR - 2024-08-10 00:50:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 00:50:03 --> 
+ERROR - 2024-08-10 01:00:04 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 01:00:04 --> 
+ERROR - 2024-08-10 01:10:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 01:10:03 --> 
+ERROR - 2024-08-10 01:20:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 01:20:03 --> 
+ERROR - 2024-08-10 01:30:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 01:30:03 --> 
+ERROR - 2024-08-10 01:35:34 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php:173
+Stack trace:
+#0 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php(173): mysqli->real_connect('127.0.0.1', 'root', Object(SensitiveParameterValue), 'visaalliance_cr...', 3306, '', 0)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = ...')
+#4 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Factories.php(113): App\Models\Settings_model->__construct(NULL)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/system/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', Array)
+#7 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(117): model('App\\Models\\Sett...')
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(20): App\Controllers\App_Controller->__construct()
+#9 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Dashboard.php(13): App\Controllers\Security_Controller->__construct()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#12 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 /home/visaalliance/public_html/crm.visaalliance.com/index.php(84): CodeIgniter\CodeIgniter->run()
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php:218
+Stack trace:
+#0 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = ...')
+#3 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Factories.php(113): App\Models\Settings_model->__construct(NULL)
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', Array)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(117): model('App\\Models\\Sett...')
+#7 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(20): App\Controllers\App_Controller->__construct()
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Dashboard.php(13): App\Controllers\Security_Controller->__construct()
+#9 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 /home/visaalliance/public_html/crm.visaalliance.com/index.php(84): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2024-08-10 01:35:34 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = \'\'')
+ 3 APPPATH/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+ 4 SYSTEMPATH/Config/Factories.php(113): App\Models\Settings_model->__construct(null)
+ 5 SYSTEMPATH/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 6 APPPATH/Controllers/App_Controller.php(117): model('App\\Models\\Settings_model')
+ 7 APPPATH/Controllers/Security_Controller.php(20): App\Controllers\App_Controller->__construct()
+ 8 APPPATH/Controllers/Dashboard.php(13): App\Controllers\Security_Controller->__construct()
+ 9 SYSTEMPATH/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+10 SYSTEMPATH/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+11 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-08-10 01:35:36 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php:173
+Stack trace:
+#0 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php(173): mysqli->real_connect('127.0.0.1', 'root', Object(SensitiveParameterValue), 'visaalliance_cr...', 3306, '', 0)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = ...')
+#4 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Factories.php(113): App\Models\Settings_model->__construct(NULL)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/system/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', Array)
+#7 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(117): model('App\\Models\\Sett...')
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(20): App\Controllers\App_Controller->__construct()
+#9 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Dashboard.php(13): App\Controllers\Security_Controller->__construct()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#12 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 /home/visaalliance/public_html/crm.visaalliance.com/index.php(84): CodeIgniter\CodeIgniter->run()
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php:218
+Stack trace:
+#0 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = ...')
+#3 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Factories.php(113): App\Models\Settings_model->__construct(NULL)
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', Array)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(117): model('App\\Models\\Sett...')
+#7 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(20): App\Controllers\App_Controller->__construct()
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Dashboard.php(13): App\Controllers\Security_Controller->__construct()
+#9 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 /home/visaalliance/public_html/crm.visaalliance.com/index.php(84): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2024-08-10 01:35:36 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = \'\'')
+ 3 APPPATH/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+ 4 SYSTEMPATH/Config/Factories.php(113): App\Models\Settings_model->__construct(null)
+ 5 SYSTEMPATH/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 6 APPPATH/Controllers/App_Controller.php(117): model('App\\Models\\Settings_model')
+ 7 APPPATH/Controllers/Security_Controller.php(20): App\Controllers\App_Controller->__construct()
+ 8 APPPATH/Controllers/Dashboard.php(13): App\Controllers\Security_Controller->__construct()
+ 9 SYSTEMPATH/CodeIgniter.php(904): App\Controllers\Dashboard->__construct()
+10 SYSTEMPATH/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+11 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-08-10 01:40:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 01:40:03 --> 
+ERROR - 2024-08-10 01:50:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 01:50:03 --> 
+ERROR - 2024-08-10 01:56:37 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php:173
+Stack trace:
+#0 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php(173): mysqli->real_connect('127.0.0.1', 'root', Object(SensitiveParameterValue), 'visaalliance_cr...', 3306, '', 0)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = ...')
+#4 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Factories.php(113): App\Models\Settings_model->__construct(NULL)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/system/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', Array)
+#7 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(117): model('App\\Models\\Sett...')
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(20): App\Controllers\App_Controller->__construct()
+#9 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Messages.php(8): App\Controllers\Security_Controller->__construct()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Messages->__construct()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#12 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 /home/visaalliance/public_html/crm.visaalliance.com/index.php(84): CodeIgniter\CodeIgniter->run()
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php:218
+Stack trace:
+#0 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = ...')
+#3 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Factories.php(113): App\Models\Settings_model->__construct(NULL)
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', Array)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(117): model('App\\Models\\Sett...')
+#7 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(20): App\Controllers\App_Controller->__construct()
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Messages.php(8): App\Controllers\Security_Controller->__construct()
+#9 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Messages->__construct()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 /home/visaalliance/public_html/crm.visaalliance.com/index.php(84): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2024-08-10 01:56:37 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = \'\'')
+ 3 APPPATH/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+ 4 SYSTEMPATH/Config/Factories.php(113): App\Models\Settings_model->__construct(null)
+ 5 SYSTEMPATH/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 6 APPPATH/Controllers/App_Controller.php(117): model('App\\Models\\Settings_model')
+ 7 APPPATH/Controllers/Security_Controller.php(20): App\Controllers\App_Controller->__construct()
+ 8 APPPATH/Controllers/Messages.php(8): App\Controllers\Security_Controller->__construct()
+ 9 SYSTEMPATH/CodeIgniter.php(904): App\Controllers\Messages->__construct()
+10 SYSTEMPATH/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+11 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-08-10 01:57:00 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php:173
+Stack trace:
+#0 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php(173): mysqli->real_connect('127.0.0.1', 'root', Object(SensitiveParameterValue), 'visaalliance_cr...', 3306, '', 0)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = ...')
+#4 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Factories.php(113): App\Models\Settings_model->__construct(NULL)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/system/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', Array)
+#7 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(117): model('App\\Models\\Sett...')
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(20): App\Controllers\App_Controller->__construct()
+#9 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Notifications.php(8): App\Controllers\Security_Controller->__construct()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Notifications->__construct()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#12 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 /home/visaalliance/public_html/crm.visaalliance.com/index.php(84): CodeIgniter\CodeIgniter->run()
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php:218
+Stack trace:
+#0 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = ...')
+#3 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Factories.php(113): App\Models\Settings_model->__construct(NULL)
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', Array)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(117): model('App\\Models\\Sett...')
+#7 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php(20): App\Controllers\App_Controller->__construct()
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Notifications.php(8): App\Controllers\Security_Controller->__construct()
+#9 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Notifications->__construct()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 /home/visaalliance/public_html/crm.visaalliance.com/index.php(84): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2024-08-10 01:57:00 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = \'\'')
+ 3 APPPATH/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+ 4 SYSTEMPATH/Config/Factories.php(113): App\Models\Settings_model->__construct(null)
+ 5 SYSTEMPATH/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 6 APPPATH/Controllers/App_Controller.php(117): model('App\\Models\\Settings_model')
+ 7 APPPATH/Controllers/Security_Controller.php(20): App\Controllers\App_Controller->__construct()
+ 8 APPPATH/Controllers/Notifications.php(8): App\Controllers\Security_Controller->__construct()
+ 9 SYSTEMPATH/CodeIgniter.php(904): App\Controllers\Notifications->__construct()
+10 SYSTEMPATH/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+11 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-08-10 02:00:02 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: NO) in /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php:173
+Stack trace:
+#0 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php(173): mysqli->real_connect('127.0.0.1', 'root', Object(SensitiveParameterValue), 'visaalliance_cr...', 3306, '', 0)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#3 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = ...')
+#4 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Factories.php(113): App\Models\Settings_model->__construct(NULL)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/system/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', Array)
+#7 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(117): model('App\\Models\\Sett...')
+#8 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Cron.php(12): App\Controllers\App_Controller->__construct()
+#9 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Cron->__construct()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#11 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 /home/visaalliance/public_html/crm.visaalliance.com/index.php(84): CodeIgniter\CodeIgniter->run()
+#13 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: NO) in /home/visaalliance/public_html/crm.visaalliance.com/system/Database/MySQLi/Connection.php:218
+Stack trace:
+#0 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(391): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 /home/visaalliance/public_html/crm.visaalliance.com/system/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+#2 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = ...')
+#3 /home/visaalliance/public_html/crm.visaalliance.com/app/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+#4 /home/visaalliance/public_html/crm.visaalliance.com/system/Config/Factories.php(113): App\Models\Settings_model->__construct(NULL)
+#5 /home/visaalliance/public_html/crm.visaalliance.com/system/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', Array)
+#6 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/App_Controller.php(117): model('App\\Models\\Sett...')
+#7 /home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Cron.php(12): App\Controllers\App_Controller->__construct()
+#8 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(904): App\Controllers\Cron->__construct()
+#9 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+#10 /home/visaalliance/public_html/crm.visaalliance.com/system/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 /home/visaalliance/public_html/crm.visaalliance.com/index.php(84): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2024-08-10 02:00:02 --> Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: NO)
+in SYSTEMPATH/Database/BaseConnection.php on line 427.
+ 1 SYSTEMPATH/Database/BaseConnection.php(574): CodeIgniter\Database\BaseConnection->initialize()
+ 2 APPPATH/Models/Crud_model.php(32): CodeIgniter\Database\BaseConnection->query('SET sql_mode = \'\'')
+ 3 APPPATH/Models/Settings_model.php(11): App\Models\Crud_model->__construct('settings')
+ 4 SYSTEMPATH/Config/Factories.php(113): App\Models\Settings_model->__construct(null)
+ 5 SYSTEMPATH/Common.php(825): CodeIgniter\Config\Factories::__callStatic('models', [...])
+ 6 APPPATH/Controllers/App_Controller.php(117): model('App\\Models\\Settings_model')
+ 7 APPPATH/Controllers/Cron.php(12): App\Controllers\App_Controller->__construct()
+ 8 SYSTEMPATH/CodeIgniter.php(904): App\Controllers\Cron->__construct()
+ 9 SYSTEMPATH/CodeIgniter.php(488): CodeIgniter\CodeIgniter->createController()
+10 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-08-10 02:05:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 02:05:03 --> 
+ERROR - 2024-08-10 02:15:08 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 02:15:08 --> 
+ERROR - 2024-08-10 02:25:02 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 02:25:02 --> 
+ERROR - 2024-08-10 02:35:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 02:35:03 --> 
+ERROR - 2024-08-10 02:45:05 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 02:45:05 --> 
+ERROR - 2024-08-10 02:55:06 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 02:55:06 --> 
+ERROR - 2024-08-10 03:05:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 03:05:03 --> 
+ERROR - 2024-08-10 03:10:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 03:10:03 --> 
+ERROR - 2024-08-10 03:20:04 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 03:20:04 --> 
+ERROR - 2024-08-10 03:30:02 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 03:30:02 --> 
+ERROR - 2024-08-10 03:35:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 03:35:03 --> 
+ERROR - 2024-08-10 03:40:04 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 03:40:04 --> 
+ERROR - 2024-08-10 03:45:05 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 03:45:05 --> 
+ERROR - 2024-08-10 03:50:14 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 03:50:14 --> 
+CRITICAL - 2024-08-10 03:50:16 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 03:55:05 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 03:55:05 --> 
+CRITICAL - 2024-08-10 03:55:06 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 04:00:05 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 04:00:05 --> 
+CRITICAL - 2024-08-10 04:00:06 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 04:05:06 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 04:05:06 --> 
+CRITICAL - 2024-08-10 04:05:07 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 04:10:12 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 04:10:12 --> 
+CRITICAL - 2024-08-10 04:10:14 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 04:15:13 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 04:15:13 --> 
+CRITICAL - 2024-08-10 04:15:14 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 04:20:05 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 04:20:05 --> 
+CRITICAL - 2024-08-10 04:20:06 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-08-10 04:22:12 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 8388616 bytes)
+in APPPATH/Models/Crud_model.php on line 131.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 04:25:04 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 04:25:04 --> 
+CRITICAL - 2024-08-10 04:25:04 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 04:30:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 04:30:03 --> 
+CRITICAL - 2024-08-10 04:30:03 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 04:35:07 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 04:35:07 --> 
+CRITICAL - 2024-08-10 04:35:08 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 04:40:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 04:40:03 --> 
+CRITICAL - 2024-08-10 04:40:04 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 04:45:09 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 04:45:09 --> 
+CRITICAL - 2024-08-10 04:45:10 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 04:50:04 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 04:50:04 --> 
+CRITICAL - 2024-08-10 04:50:05 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 04:55:03 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 04:55:03 --> 
+CRITICAL - 2024-08-10 04:55:04 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+ERROR - 2024-08-10 05:00:06 --> Email: Unable to send email using PHP mail(). Your server might not be configured to send mail using this method.
+ERROR - 2024-08-10 05:00:06 --> 
+CRITICAL - 2024-08-10 05:00:06 --> Allowed memory size of 134217728 bytes exhausted (tried to allocate 20480 bytes)
+in SYSTEMPATH/Database/MySQLi/Result.php on line 154.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+CRITICAL - 2024-08-10 19:51:36 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('status_id', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24611')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:02:25 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('description', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24614')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:09:14 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('collaborators', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24615')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:11:01 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24617')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-08-10 20:11:05 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH/Helpers/currency_helper.php on line 96.
+ 1 APPPATH/Helpers/currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH/Controllers/Projects.php(706): unformat_currency(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:13:37 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24619')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:15:52 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24621')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:17:40 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24623')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:18:46 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24625')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:18:57 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('collaborators', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24626')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:20:42 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24628')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:20:51 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('collaborators', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24629')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:22:11 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24631')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:22:22 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('collaborators', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24632')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:48:47 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24636')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:50:16 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24638')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:51:20 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24640')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:51:28 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('collaborators', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24641')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 20:52:47 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24643')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:31:20 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('status_id', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24645')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:39:47 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:42:18 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24648')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:43:28 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24650')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:44:07 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24651')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:44:32 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24652')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:48:53 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24655')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:49:37 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24657')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:52:20 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:52:20 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:52:21 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:52:27 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:56:53 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24661')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 21:59:45 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24664')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 22:03:50 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 22:03:50 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 22:07:38 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 22:07:39 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 22:07:39 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 22:29:13 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('collaborators', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24665')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 22:30:01 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24667')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 22:44:22 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24672')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 22:51:24 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24674')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 22:51:45 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24675')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 22:52:11 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24677')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-08-10 22:52:40 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH/Helpers/currency_helper.php on line 96.
+ 1 APPPATH/Helpers/currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH/Controllers/Projects.php(706): unformat_currency(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:11:22 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('assigned_to', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24686')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:11:56 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24689')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:12:46 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24691')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-08-10 23:18:22 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH/Helpers/currency_helper.php on line 96.
+ 1 APPPATH/Helpers/currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH/Controllers/Projects.php(706): unformat_currency(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:19:39 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('status_id', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24700')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:22:17 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24701')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:22:44 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('tasks/view', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:28:31 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24704')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:34:19 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24707')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-08-10 23:41:36 --> [DEPRECATED] substr(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Helpers/date_time_helper.php on line 596.
+ 1 APPPATH/Helpers/date_time_helper.php(596): substr(null, 0, 10)
+ 2 APPPATH/Controllers/Tasks.php(3442): get_date_from_datetime(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Tasks->update_task_info('10799', 'status_id')
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tasks))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-08-10 23:41:36 --> [DEPRECATED] substr(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Helpers/date_time_helper.php on line 611.
+ 1 APPPATH/Helpers/date_time_helper.php(611): substr(null, 11)
+ 2 APPPATH/Controllers/Tasks.php(3444): get_time_from_datetime(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Tasks->update_task_info('10799', 'status_id')
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tasks))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:41:36 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('status_id', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24709')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-08-10 23:41:41 --> [DEPRECATED] substr(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Helpers/date_time_helper.php on line 596.
+ 1 APPPATH/Helpers/date_time_helper.php(596): substr(null, 0, 10)
+ 2 APPPATH/Controllers/Tasks.php(3442): get_date_from_datetime(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Tasks->update_task_info('10799', 'deadline')
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tasks))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-08-10 23:41:41 --> [DEPRECATED] substr(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Helpers/date_time_helper.php on line 611.
+ 1 APPPATH/Helpers/date_time_helper.php(611): substr(null, 11)
+ 2 APPPATH/Controllers/Tasks.php(3444): get_time_from_datetime(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Tasks->update_task_info('10799', 'deadline')
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tasks))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:41:41 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24710')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:46:44 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:47:15 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('status_id', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24711')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:48:16 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24712')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:48:59 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24713')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:49:51 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24715')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:51:51 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24717')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:52:16 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24718')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:53:04 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('collaborators', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24719')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-08-10 23:53:35 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '24720')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-08-10 23:59:52 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH/Helpers/currency_helper.php on line 96.
+ 1 APPPATH/Helpers/currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH/Controllers/Projects.php(706): unformat_currency(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()

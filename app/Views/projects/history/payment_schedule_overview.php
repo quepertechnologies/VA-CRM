@@ -5,10 +5,7 @@
                 <span>
                     <?php echo app_lang('scheduled') ?>
                     <br>
-                    <h3><strong><?php echo to_currency($scheduled_amount); ?></strong></h3>
-                    <?php if ($diff_amount < 0) { ?>
-                        <small class="text-danger" title="You've scheduled <?php echo str_replace('-', '', to_currency($diff_amount)) ?> more than the net fee amount"><span data-feather="info" class="icon-16"></span> Diff. <?php echo to_currency($diff_amount); ?></small>
-                    <?php } ?>
+                    <h3><strong><?php echo to_currency($project_fees->scheduled_amount); ?></strong></h3>
                 </span>
             </div>
         </div>
@@ -19,7 +16,7 @@
                 <span>
                     <?php echo app_lang('invoiced') ?>
                     <br>
-                    <h3><strong><?php echo to_currency($invoiced_amount); ?></strong></h3>
+                    <h3><strong><?php echo to_currency($project_fees->invoiced_amount); ?></strong></h3>
                 </span>
             </div>
         </div>
@@ -30,7 +27,7 @@
                 <span>
                     <?php echo app_lang('pending') ?>
                     <br>
-                    <h3><strong><?php echo to_currency($pending_amount); ?></strong></h3>
+                    <h3><strong><?php echo to_currency($project_fees->pending_amount); ?></strong></h3>
                 </span>
             </div>
         </div>
@@ -52,30 +49,41 @@
         $("#project-payment-schedule-list-table").appTable({
             source: '<?php echo_uri("projects/project_payment_schedule_list_data/" . $project_id) ?>',
             order: [],
+            serverSide: true,
+            smartFilterIdentity: "project_payment_schedule_list", //a to z and _ only. should be unique to avoid conflicts
             columns: [{
-                    title: '<?php echo app_lang("installment") ?>'
+                    visible: false,
+                    searchable: false
+                }, {
+                    title: '<?php echo app_lang("installment") ?>',
+                    order_by: 'sort'
                 },
                 {
-                    title: '<?php echo app_lang("fee_type") ?>'
+                    title: '<?php echo app_lang("fee_type") ?>',
                 },
                 {
-                    title: '<?php echo app_lang("fee") ?>'
+                    title: '<?php echo app_lang("fee") ?>',
                 },
                 {
-                    title: '<?php echo app_lang("total_fee") ?>'
+                    title: '<?php echo app_lang("total_fee") ?>',
                 },
                 {
-                    title: '<?php echo app_lang("discounts") ?>'
+                    title: '<?php echo app_lang("discounts") ?>',
                 },
                 {
-                    title: '<?php echo app_lang("invoicing") ?>'
+                    title: '<?php echo app_lang("invoicing") ?>',
+                    order_by: 'invoice_date',
+                    // type: "date"
                 },
                 {
-                    title: '<?php echo app_lang("status") ?>'
+                    title: '<?php echo app_lang("status") ?>',
+                    order_by: "status"
                 },
                 {
                     title: '<i data-feather="menu" class="icon-16"></i>',
-                    "class": "text-center option w100"
+                    "class": "text-center w100",
+                    searchable: false,
+                    sortable: false
                 }
             ],
             printColumns: [0, 1, 2, 3, 4, 5, 6],

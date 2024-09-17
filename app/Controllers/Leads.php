@@ -48,6 +48,7 @@ class Leads extends Security_Controller
         $view_data['lead_statuses'] = $this->Lead_status_model->get_details()->getResult();
         $view_data['lead_sources'] = $this->Lead_source_model->get_details()->getResult();
         $view_data['owners_dropdown'] = $this->_get_owners_dropdown("filter");
+        $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data['locations_filter_dropdown'] = $this->get_locations_dropdown_for_filter();
 
@@ -61,6 +62,7 @@ class Leads extends Security_Controller
         $view_data = $this->make_lead_modal_form_data($lead_id);
         $view_data['account_types_filter_dropdown'] = $this->make_type_dropdown();
         $view_data["countries_dropdown"] = $this->get_countries_dropdown([]);
+        $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
         return $this->template->view('leads/modal_form', $view_data);
     }
 
@@ -136,36 +138,46 @@ class Leads extends Security_Controller
 
         $this->validate_submitted_data(array(
             "id" => "numeric",
+            "first_name" => "required",
+            "last_name" => "required",
             "lead_status_id" => "numeric"
         ));
 
         $data = array(
+            "student_onshore" => $this->request->getPost('student_onshore') ? $this->request->getPost('student_onshore') : 0,
             "company_name" => $this->request->getPost('company_name'),
             "first_name" => $this->request->getPost('first_name'),
             "last_name" => $this->request->getPost('last_name'),
             "email" => $this->request->getPost('email'),
             "account_type" => $this->request->getPost('account_type'),
-            "location_id" => $this->request->getPost('location_id') ? $this->request->getPost('location_id') : get_ltm_opl_id(),
+            "visa_type" => $this->request->getPost('visa_type'),
+            "visa_2" => $this->request->getPost('visa_2'),
+            "visa_expiry" => $this->request->getPost('visa_expiry'),
+            "location_id" => $this->request->getPost('location_id') ? $this->request->getPost('location_id') : get_ltm_opl_id(true),
+            "created_by" => $this->login_user->id,
+            "phone_code" => $this->request->getPost('phone_code'),
+            "phone" => $this->request->getPost('phone'),
+            "date_of_birth" => $this->request->getPost('date_of_birth'),
+            "is_lead" => 1,
+            "lead_status_id" => $this->request->getPost('lead_status_id'),
+            "lead_source_id" => $this->request->getPost('lead_source_id'),
+            "owner_id" => $this->request->getPost('owner_id') ? $this->request->getPost('owner_id') : $this->login_user->id,
+            "labels" => $this->request->getPost('labels'),
             // "address" => $this->request->getPost('address'),
             // "city" => $this->request->getPost('city'),
             // "state" => $this->request->getPost('state'),
             // "zip" => $this->request->getPost('zip'),
-            "phone_code" => $this->request->getPost('country'),
-            "phone" => $this->request->getPost('phone'),
             // "website" => $this->request->getPost('website'),
             // "vat_number" => $this->request->getPost('vat_number'),
             // "gst_number" => $this->request->getPost('gst_number'),
             // "currency_symbol" => $this->request->getPost('currency_symbol') ? $this->request->getPost('currency_symbol') : "",
             // "currency" => $this->request->getPost('currency') ? $this->request->getPost('currency') : "",
-            // "is_lead" => 1,
-            "lead_status_id" => $this->request->getPost('lead_status_id'),
-            "lead_source_id" => $this->request->getPost('lead_source_id'),
-            "owner_id" => $this->request->getPost('owner_id') ? $this->request->getPost('owner_id') : $this->login_user->id,
-            "labels" => $this->request->getPost('labels')
         );
 
         if (!$client_id) {
             $data["created_date"] = get_current_utc_time();
+            $data['created_by_location_id'] = get_ltm_opl_id();
+            $data["unique_id"] = _gen_va_uid($this->request->getPost('company_name') ? $this->request->getPost('company_name') : $this->request->getPost('first_name') . ' ' . $this->request->getPost('last_name'));
         }
 
 
@@ -214,6 +226,7 @@ class Leads extends Security_Controller
         $view_data['lead_statuses'] = $this->Lead_status_model->get_details()->getResult();
         $view_data['lead_sources'] = $this->Lead_source_model->get_details()->getResult();
         $view_data['owners_dropdown'] = $this->_get_owners_dropdown("filter");
+        $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data['locations_filter_dropdown'] = $this->get_locations_dropdown_for_filter();
         //$view_data['team_members_dropdown'] = json_encode($this->_get_members_dropdown_list_for_filter());
@@ -231,6 +244,7 @@ class Leads extends Security_Controller
         $view_data['lead_statuses'] = $this->Lead_status_model->get_details()->getResult();
         $view_data['lead_sources'] = $this->Lead_source_model->get_details()->getResult();
         $view_data['owners_dropdown'] = $this->_get_owners_dropdown("filter");
+        $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data['locations_filter_dropdown'] = $this->get_locations_dropdown_for_filter();
         //$view_data['team_members_dropdown'] = json_encode($this->_get_members_dropdown_list_for_filter());
@@ -250,6 +264,7 @@ class Leads extends Security_Controller
         $view_data['lead_statuses'] = $this->Lead_status_model->get_details()->getResult();
         $view_data['lead_sources'] = $this->Lead_source_model->get_details()->getResult();
         $view_data['owners_dropdown'] = $this->_get_owners_dropdown("filter");
+        $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data['locations_filter_dropdown'] = $this->get_locations_dropdown_for_filter();
 
@@ -266,7 +281,7 @@ class Leads extends Security_Controller
         $options = array(
             "custom_fields" => $custom_fields,
             "leads_only" => true,
-            "current_lead_status" => "lead",
+            // "current_lead_status" => "lead",
             "lead_status_id" => 1,
             "status" => $status,
             "source" => $this->request->getPost('source'),
@@ -324,8 +339,8 @@ class Leads extends Security_Controller
         $owner = "-";
         if ($data->created_by) {
             $user = $this->Users_model->get_one($data->created_by);
-            $owner_image_url = get_avatar($data->owner_avatar);
-            $owner_user = "<span class='avatar avatar-xs mr10'><img src='$owner_image_url' alt='...'></span> $user->first_name $user->last_name";
+            //$owner_image_url = get_avatar($data->owner_avatar);
+            $owner_user = "$user->first_name $user->last_name";
             $owner = get_team_member_profile_link($data->created_by, $owner_user);
         }
 
@@ -335,7 +350,7 @@ class Leads extends Security_Controller
 
         $full_name = $this->get_client_full_name(0, $data);
         $image_url = get_avatar("");
-        $contact = "<span class='avatar avatar-xs mr10'><img src='$image_url' alt='...'></span> $full_name" . ' (' . $account_type . ')';
+        $contact = "<div class='d-flex align-items-center'><span class='avatar avatar-xs mr10'><img src='$image_url' alt='...'></span> <div>$full_name " . timeline_label(strtolower(str_replace(' ', '_', $account_type))) . "<br><small>" . $data->unique_id . "</small></div></div>";
 
         $location_label = $data->location_id ? $this->get_location_label($data->location_id) : '-';
 
@@ -358,10 +373,50 @@ class Leads extends Security_Controller
             $row_data[] = $this->template->view("custom_fields/output_" . $field->field_type, array("value" => $data->$cf_id));
         }
 
-        $row_data[] = modal_anchor(get_uri("leads/modal_form"), "<i data-feather='edit' class='icon-16'></i>", array("class" => "edit", "title" => app_lang('edit_lead'), "data-post-id" => $data->id))
-            . js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete_lead'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("leads/delete"), "data-action" => "delete-confirmation"));
+        // $row_data[] = modal_anchor(get_uri("leads/modal_form"), "<i data-feather='edit' class='icon-16'></i>", array("class" => "edit", "title" => app_lang('edit_lead'), "data-post-id" => $data->id))
+        //     . js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete_lead'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("leads/delete"), "data-action" => "delete-confirmation"));
+
+        $row_data[] = $this->_make_options_dropdown($data);
 
         return $row_data;
+    }
+
+    //prepare options dropdown for leads list
+    private function _make_options_dropdown($data)
+    {
+        $convert = $data->lead_status_id == 3 ? '' : '<li role="presentation">' . ajax_anchor(get_uri("leads/convert_status"), "<i data-feather='refresh-cw' class='icon-16'></i> " . app_lang($data->lead_status_id == 1 ? 'convert_to_prospect' : "convert_to_cold_lead"), array("title" => app_lang($data->lead_status_id == 1 ? 'convert_to_prospect' : "convert_to_cold_lead"), "data-post-client_id" => $data->id, 'data-post-status' => $data->lead_status_id == 1 ? 2 : 3,  "class" => "dropdown-item", 'data-reload-on-success' => true)) . '</li>';
+
+        $edit = '<li role="presentation">' . modal_anchor(get_uri("leads/modal_form"), "<i data-feather='edit' class='icon-16'></i> " . app_lang("edit_lead"), array("class" => "dropdown-item", "title" => app_lang('edit_lead'), "data-post-id" => $data->id)) . '</li>';
+
+        $delete = '<li role="presentation">' . js_anchor("<i data-feather='x' class='icon-16'></i> " . app_lang('delete_lead'), array('title' => app_lang('delete_lead'), "class" => "dropdown-item", "data-id" => $data->id, "data-action-url" => get_uri("leads/delete"), "data-action" => "delete-confirmation")) . '</li>';
+
+
+        return '<span class="dropdown inline-block">
+                    <button class="btn btn-default dropdown-toggle caret mt0 mb0" type="button" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
+                        <i data-feather="tool" class="icon-16"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" role="menu">' . $convert . $edit . $delete . '</ul>
+                </span>';
+    }
+
+    function convert_status()
+    {
+        $client_id = $this->request->getPost("client_id");
+        $status = $this->request->getPost("status");
+
+        $client_info = $this->Clients_model->get_one($client_id);
+
+        if ($client_info) {
+            $client_data =  array(
+                'lead_status_id' => $status
+            );
+
+            $success = $this->Clients_model->ci_save($client_data, $client_id);
+
+            if ($success) {
+                echo json_encode(array('success' => true, 'message' => 'success'));
+            }
+        }
     }
 
     /* load lead details view */
@@ -767,6 +822,7 @@ class Leads extends Security_Controller
             $view_data['field_column'] = "col-md-10";
 
             $view_data["owners_dropdown"] = $this->_get_owners_dropdown();
+            $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
             $view_data['label_suggestions'] = $this->make_labels_dropdown("client", $view_data['model_info']->labels);
             $view_data['account_types_filter_dropdown'] = $this->make_type_dropdown();
             $view_data["countries_dropdown"] = $this->get_countries_dropdown([]);
@@ -1075,6 +1131,7 @@ class Leads extends Security_Controller
         $this->check_module_availability("module_lead");
 
         $view_data['owners_dropdown'] = $this->_get_owners_dropdown("filter");
+        $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
         $view_data['lead_sources'] = $this->Lead_source_model->get_details()->getResult();
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data["custom_field_filters"] = $this->Custom_fields_model->get_custom_field_filters("leads", $this->login_user->is_admin, $this->login_user->user_type);
@@ -1535,6 +1592,7 @@ class Leads extends Security_Controller
 
         $view_data['sources_dropdown'] = json_encode($this->_get_sources_dropdown());
         $view_data['owners_dropdown'] = json_encode($this->_get_owners_dropdown("filter"));
+        $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
 
         return $this->template->rander("leads/reports/converted_to_client", $view_data);
     }

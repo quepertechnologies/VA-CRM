@@ -70,6 +70,10 @@ class Left_menu
                 $sidebar_menu["clients"] = array("name" => "clients", "class" => "briefcase", "submenu" => $clients_submenu);
             }
 
+            if ($this->ci->login_user->is_admin || $access_client) {
+                $sidebar_menu["lost_clients"] = array("name" => "lost_clients", "class" => "archive", "url" => "clients/lost_clients_list");
+            }
+
             //  if ($this->ci->login_user->is_admin || $access_client) {
             //     $sidebar_menu["Services"] = array("name" => "services", "url" => "services", "class" => "service");
             // }
@@ -126,6 +130,10 @@ class Left_menu
 
             if (get_setting("module_contract") && ($this->ci->login_user->is_admin || $access_contract)) {
                 $sales_submenu[] = array("name" => "contracts", "url" => "contracts", "class" => "lock");
+            }
+
+            if (get_setting("module_invoice") == "1" && ($this->ci->login_user->is_admin || $access_invoice)) {
+                $sales_submenu[] = array("name" => "income_sharing", "url" => "invoices/income_sharing", "class" => "dollar-sign");
             }
 
             if (count($sales_submenu)) {
@@ -226,7 +234,9 @@ class Left_menu
             }
 
             $sidebar_menu["reports"] = array(
-                "name" => "reports", "url" => "reports/index", "class" => "pie-chart",
+                "name" => "reports",
+                "url" => "reports/index",
+                "class" => "pie-chart",
                 "sub_pages" => array(
                     "invoices/invoices_summary",
                     "orders/orders_summary",
@@ -275,7 +285,9 @@ class Left_menu
                 }
 
                 $sidebar_menu["help_and_support"] = array(
-                    "name" => "help_and_support", "url" => $main_url, "class" => "help-circle",
+                    "name" => "help_and_support",
+                    "url" => $main_url,
+                    "class" => "help-circle",
                     "submenu" => $help_knowledge_base_menues
                 );
             }
@@ -284,7 +296,9 @@ class Left_menu
 
             if ($this->ci->login_user->is_admin || get_array_value($this->ci->login_user->permissions, "can_manage_all_kinds_of_settings")) {
                 $sidebar_menu["settings"] = array(
-                    "name" => "settings", "url" => "settings/general", "class" => "settings",
+                    "name" => "settings",
+                    "url" => "settings/general",
+                    "class" => "settings",
                     "sub_pages" => array(
                         "email_templates/index",
                         "left_menu/index",

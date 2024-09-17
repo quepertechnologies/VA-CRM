@@ -22,6 +22,7 @@ class Invoices_model extends Crud_model
         $invoice_payments_table = $this->db->prefixTable('invoice_payments');
         $invoice_items_table = $this->db->prefixTable('invoice_items');
         $users_table = $this->db->prefixTable('users');
+        $locations_table = $this->db->prefixTable('location');
 
         $tolarance = get_paid_status_tolarance();
 
@@ -30,14 +31,32 @@ class Invoices_model extends Crud_model
         if ($id) {
             $where .= " AND $invoices_table.id=$id";
         }
+
+        $only_invoice_ids = $this->_get_clean_value($options, "only_invoice_ids");
+        if ($only_invoice_ids) {
+            $where .= " AND (FIND_IN_SET($invoices_table.id, '$only_invoice_ids'))";
+        }
+
         $type = $this->_get_clean_value($options, "type");
         if ($type) {
             $where .= " AND $invoices_table.type='$type'";
         }
+
         $client_id = $this->_get_clean_value($options, "client_id");
         if ($client_id) {
             $where .= " AND $invoices_table.client_id=$client_id";
         }
+
+        $va_invoice_id = $this->_get_clean_value($options, "va_invoice_id");
+        if ($va_invoice_id) {
+            $where .= " AND $invoices_table.va_invoice_id=$va_invoice_id";
+        }
+
+        $location_id = get_array_value($options, "location_id");
+        if ($location_id) {
+            $where .= " AND $clients_table.location_id=$location_id";
+        }
+
         $subscription_id = get_array_value($options, "subscription_id");
         if ($subscription_id) {
             $where .= " AND $invoices_table.subscription_id=$subscription_id";
@@ -61,6 +80,27 @@ class Invoices_model extends Crud_model
         $schedule_id = $this->_get_clean_value($options, "schedule_id");
         if ($schedule_id) {
             $where .= " AND $invoices_table.schedule_id=$schedule_id";
+        }
+
+        $invoice_type = $this->_get_clean_value($options, "invoice_type");
+        if ($invoice_type) {
+            $where .= " AND $invoices_table.invoice_type='$invoice_type'";
+        }
+
+        $location_ids = $this->_get_clean_value($options, "location_ids");
+        if ($location_ids) {
+            $where .= " AND (FIND_IN_SET($clients_table.location_id, '$location_ids'))";
+        }
+
+        $labels = $this->_get_clean_value($options, "labels");
+        if ($labels) {
+            $where .= " AND $invoices_table.labels=$labels";
+        }
+
+        $bill_start_date = $this->_get_clean_value($options, "bill_start_date");
+        $bill_end_date = $this->_get_clean_value($options, "bill_end_date");
+        if ($bill_start_date && $bill_end_date) {
+            $where .= " AND ($invoices_table.bill_date BETWEEN '$bill_start_date' AND '$bill_end_date') ";
         }
 
         $start_date = $this->_get_clean_value($options, "start_date");
@@ -147,7 +187,46 @@ class Invoices_model extends Crud_model
         $join_custom_fieds = get_array_value($custom_field_query_info, "join_string");
         $custom_fields_where = get_array_value($custom_field_query_info, "where_string");
 
-        $sql = "SELECT $invoices_table.*, $clients_table.currency, $clients_table.currency_symbol, $clients_table.company_name, $clients_table.first_name, $clients_table.last_name, $projects_table.title AS project_title, credit_note_table.id AS credit_note_id,
+        $this->db->query('SET SQL_BIG_SELECTS=1');
+
+        $limit_offset = "";
+        $limit = $this->_get_clean_value($options, "limit");
+        if ($limit) {
+            $skip = $this->_get_clean_value($options, "skip");
+            $offset = $skip ? $skip : 0;
+            $limit_offset = " LIMIT $limit OFFSET $offset ";
+        }
+
+        $available_order_by_list = array(
+            "id" => $projects_table . ".id",
+        );
+
+        $order_by = get_array_value($available_order_by_list, $this->_get_clean_value($options, "order_by"));
+
+        $order = "";
+
+        if ($order_by) {
+            $order_dir = $this->_get_clean_value($options, "order_dir");
+            $order = " ORDER BY $order_by $order_dir ";
+        }
+
+
+        $search_by = get_array_value($options, "search_by");
+        if ($search_by) {
+            $search_by = $this->db->escapeLikeString($search_by);
+            $labels_table = $this->db->prefixTable("labels");
+
+            $where .= " AND (";
+            $where .= " $invoices_table.id LIKE '%$search_by%' ESCAPE '!' ";
+            $where .= " OR $projects_table.title LIKE '%$search_by%' ESCAPE '!' ";
+            $where .= " OR $clients_table.company_name LIKE '%$search_by%' ESCAPE '!' ";
+            $where .= " OR CONCAT($clients_table.first_name, ' ', $clients_table.last_name) LIKE '%$search_by%' ESCAPE '!' ";
+            $where .= " OR (SELECT GROUP_CONCAT($labels_table.title, ', ') FROM $labels_table WHERE FIND_IN_SET($labels_table.id, $clients_table.labels)) LIKE '%$search_by%' ESCAPE '!' ";
+
+            $where .= " )";
+        }
+
+        $sql = "SELECT SQL_CALC_FOUND_ROWS $invoices_table.*, $clients_table.currency, $clients_table.currency_symbol, $clients_table.company_name, $clients_table.first_name, $clients_table.last_name, $projects_table.title AS project_title, credit_note_table.id AS credit_note_id, $clients_table.location_id, $locations_table.title AS location_label,
            $invoices_table.invoice_total AS invoice_value, IFNULL(payments_table.payment_received,0) AS payment_received, tax_table.percentage AS tax_percentage, tax_table2.percentage AS tax_percentage2, tax_table3.percentage AS tax_percentage3, CONCAT($users_table.first_name, ' ',$users_table.last_name) AS cancelled_by_user, $select_labels_data_query $select_custom_fieds
         FROM $invoices_table
         LEFT JOIN (
@@ -158,13 +237,66 @@ class Invoices_model extends Crud_model
         LEFT JOIN $clients_table ON $clients_table.id= $invoices_table.client_id
         LEFT JOIN $projects_table ON $projects_table.id= $invoices_table.project_id
         LEFT JOIN $users_table ON $users_table.id= $invoices_table.cancelled_by
+        LEFT JOIN $locations_table ON $locations_table.id= $clients_table.location_id
         LEFT JOIN (SELECT $taxes_table.* FROM $taxes_table) AS tax_table ON tax_table.id = $invoices_table.tax_id
         LEFT JOIN (SELECT $taxes_table.* FROM $taxes_table) AS tax_table2 ON tax_table2.id = $invoices_table.tax_id2
         LEFT JOIN (SELECT $taxes_table.* FROM $taxes_table) AS tax_table3 ON tax_table3.id = $invoices_table.tax_id3
         LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM $invoice_payments_table WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id = $invoices_table.id 
         LEFT JOIN (SELECT invoice_id, SUM(total) AS invoice_value FROM $invoice_items_table WHERE deleted=0 GROUP BY invoice_id) AS items_table ON items_table.invoice_id = $invoices_table.id 
         $join_custom_fieds
-        WHERE $invoices_table.deleted=0 $where $custom_fields_where";
+        WHERE $invoices_table.deleted=0 $where $custom_fields_where
+        $order $limit_offset";
+
+        $raw_query = $this->db->query($sql);
+
+        $total_rows = $this->db->query("SELECT FOUND_ROWS() as found_rows")->getRow();
+
+        if ($limit) {
+            return array(
+                "data" => $raw_query->getResult(),
+                "recordsTotal" => $total_rows->found_rows,
+                "recordsFiltered" => $total_rows->found_rows,
+            );
+        } else {
+            return $raw_query;
+        }
+    }
+
+    function own_invoices($client_id = 0)
+    {
+        $project_partners_table = $this->db->prefixTable('project_partners');
+        $labels_table = $this->db->prefixTable('labels');
+        $invoices_table = $this->db->prefixTable('invoices');
+        $clients_table = $this->db->prefixTable('clients');
+        $projects_table = $this->db->prefixTable('projects');
+        $taxes_table = $this->db->prefixTable('taxes');
+        $invoice_payments_table = $this->db->prefixTable('invoice_payments');
+        $invoice_items_table = $this->db->prefixTable('invoice_items');
+        $users_table = $this->db->prefixTable('users');
+        $locations_table = $this->db->prefixTable('location');
+
+        $select_labels_data_query = "(SELECT GROUP_CONCAT($labels_table.id, '--::--', $labels_table.title, '--::--', $labels_table.color, ':--::--:') FROM $labels_table WHERE FIND_IN_SET($labels_table.id, $projects_table.labels)) AS labels_list";
+        $sql = "SELECT $invoices_table.*, $clients_table.currency, $clients_table.currency_symbol, $clients_table.company_name, $clients_table.first_name, $clients_table.last_name, $projects_table.title AS project_title, credit_note_table.id AS credit_note_id, $clients_table.location_id, $locations_table.title AS location_label,
+           $invoices_table.invoice_total AS invoice_value, IFNULL(payments_table.payment_received,0) AS payment_received, tax_table.percentage AS tax_percentage, tax_table2.percentage AS tax_percentage2, tax_table3.percentage AS tax_percentage3, CONCAT($users_table.first_name, ' ',$users_table.last_name) AS cancelled_by_user, $select_labels_data_query
+        FROM $invoices_table
+        LEFT JOIN (
+            SELECT $invoices_table.id, $invoices_table.main_invoice_id
+            FROM $invoices_table 
+            WHERE $invoices_table.deleted=0 AND $invoices_table.main_invoice_id!=0
+        ) AS credit_note_table ON credit_note_table.main_invoice_id=$invoices_table.id
+        LEFT JOIN $clients_table ON $clients_table.id= $invoices_table.client_id
+        LEFT JOIN $projects_table ON $projects_table.id= $invoices_table.project_id
+        LEFT JOIN $users_table ON $users_table.id= $invoices_table.cancelled_by
+        LEFT JOIN $locations_table ON $locations_table.id= $clients_table.location_id
+        LEFT JOIN (SELECT $taxes_table.* FROM $taxes_table) AS tax_table ON tax_table.id = $invoices_table.tax_id
+        LEFT JOIN (SELECT $taxes_table.* FROM $taxes_table) AS tax_table2 ON tax_table2.id = $invoices_table.tax_id2
+        LEFT JOIN (SELECT $taxes_table.* FROM $taxes_table) AS tax_table3 ON tax_table3.id = $invoices_table.tax_id3
+        LEFT JOIN (SELECT invoice_id, SUM(amount) AS payment_received FROM $invoice_payments_table WHERE deleted=0 GROUP BY invoice_id) AS payments_table ON payments_table.invoice_id = $invoices_table.id 
+        LEFT JOIN (SELECT invoice_id, SUM(total) AS invoice_value FROM $invoice_items_table WHERE deleted=0 GROUP BY invoice_id) AS items_table ON items_table.invoice_id = $invoices_table.id
+        LEFT JOIN $project_partners_table ON $project_partners_table.project_id=$projects_table.id
+        WHERE $invoices_table.deleted=0 AND $project_partners_table.partner_id = $client_id AND $project_partners_table.deleted=0
+        ORDER BY $invoices_table.id";
+        // AND $invoices_table.status!='draft'
         return $this->db->query($sql);
     }
 
@@ -188,7 +320,11 @@ class Invoices_model extends Crud_model
         $payment = $this->db->query($payment_sql)->getRow();
 
         $result->total_paid = is_null($payment->total_paid) ? 0 : $payment->total_paid;
-        $result->balance_due = number_format($result->invoice_total, 2, ".", "") - number_format($result->total_paid, 2, ".", "");
+        if ($result->invoice_type == 'net_claim') {
+            $result->balance_due = (number_format($result->invoice_subtotal - $result->discount_total, 2, ".", "") - number_format($result->total_paid, 2, ".", "")) + number_format($result->bonus_amount, 2, ".", "");
+        } else {
+            $result->balance_due = (number_format($result->invoice_total, 2, ".", "") - number_format($result->total_paid, 2, ".", "")) + number_format($result->bonus_amount, 2, ".", "");
+        }
 
         return $result;
     }

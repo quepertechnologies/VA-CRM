@@ -29,6 +29,27 @@ class Clients extends Security_Controller
 
     /* load clients list view */
 
+    function visa_update()
+    {
+        $options = array();
+        $result = $this->Clients_model->get_details($options);
+        $list_data = $result->getResult();
+        $count = 0;
+        foreach ($list_data as $data) {
+            $client = $this->Clients_model->get_one($data->id);
+            $client_ID = $client->id;
+            preg_match_all('!\d+!', $client->visa_type, $matches);
+            //var_dump($matches);
+            //   exit();
+            if (count($matches[0]) > 0) {
+                $data = array('visa_type' => $matches[0][0]);
+                $save_id = $this->Clients_model->ci_save($data, $client_ID);
+                $count++;
+            }
+        }
+        echo $count;
+    }
+
     function index($tab = "")
     {
         $this->access_only_allowed_members();
@@ -149,13 +170,13 @@ class Clients extends Security_Controller
             $data["disable_online_payment"] = $this->request->getPost('disable_online_payment') ? $this->request->getPost('disable_online_payment') : 0;
 
             //check if the currency is editable
-            if ($client_id) {
-                $client_info = $this->Clients_model->get_one($client_id);
-                if ($client_info->currency !== $data["currency"] && !$this->Clients_model->is_currency_editable($client_id)) {
-                    echo json_encode(array("success" => false, 'message' => app_lang('client_currency_not_editable_message')));
-                    exit();
-                }
-            }
+            // if ($client_id) {
+            //     $client_info = $this->Clients_model->get_one($client_id);
+            //     if ($client_info->currency !== $data["currency"] && !$this->Clients_model->is_currency_editable($client_id)) {
+            //         echo json_encode(array("success" => false, 'message' => app_lang('client_currency_not_editable_message')));
+            //         exit();
+            //     }
+            // }
         }
 
         if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "client") === "all") {
@@ -192,6 +213,21 @@ class Clients extends Security_Controller
         }
     }
 
+    function validate_email()
+    {
+        $this->validate_submitted_data(array(
+            "email" => "required|valid_email"
+        ));
+
+        $email = $this->request->getPost('email');
+
+        if ($this->Users_model->is_email_exists($email) || $this->Clients_model->is_email_exists($email)) {
+            echo json_encode(array("success" => true, 'message' => "This email is already exists."));
+        } else {
+            echo json_encode(array("success" => false, 'message' => "Success"));
+        }
+    }
+
     /* delete or undo a client */
 
     function delete()
@@ -210,11 +246,28 @@ class Clients extends Security_Controller
         }
     }
 
-    /* list of clients, prepared for datatable  */
+    function convert_to_client()
+    {
+        $id = $this->request->getPost('id');
+        $this->_validate_client_manage_access($id);
 
+        $this->validate_submitted_data(array(
+            "id" => "required|numeric"
+        ));
+
+        $client_data = array(
+            'deleted' => 0
+        );
+        if ($this->Clients_model->ci_save($client_data, $id)) {
+            echo json_encode(array("success" => true, 'message' => app_lang('converted_to_client_msg')));
+        } else {
+            echo json_encode(array("success" => false, 'message' => app_lang('record_cannot_be_converted_to_client')));
+        }
+    }
+
+    /* list of clients, prepared for datatable  */
     function list_data()
     {
-
         $this->access_only_allowed_members();
         $custom_fields = $this->Custom_fields_model->get_available_fields_for_table("clients", $this->login_user->is_admin, $this->login_user->user_type);
         $options = array(
@@ -250,6 +303,153 @@ class Clients extends Security_Controller
         echo json_encode($result);
     }
 
+    function clients_list_data_of_team_member($user_id)
+    {
+        $this->access_only_allowed_members();
+        $custom_fields = $this->Custom_fields_model->get_available_fields_for_table("clients", $this->login_user->is_admin, $this->login_user->user_type);
+        $options = array(
+            "custom_fields" => $custom_fields,
+            "custom_field_filter" => $this->prepare_custom_field_filter_values("clients", $this->login_user->is_admin, $this->login_user->user_type),
+            "group_id" => $this->request->getPost("group_id"),
+            "show_own_clients_only_user_id" => $this->show_own_clients_only_user_id(),
+            "quick_filter" => $this->request->getPost("quick_filter"),
+            "client_groups" => $this->allowed_client_groups,
+            "location_ids" => get_ltm_opl_id(false, ','),
+            "label_id" => $this->request->getPost('label_id'),
+            "visa_type" => $this->request->getPost('visa_type'),
+            "expiry" => $this->request->getPost('expiry'),
+            'account_type' => $this->request->getPost('account_type'),
+            "created_by" => $this->login_user->id,
+            'with_leads' => true
+        );
+
+        if ($this->request->getPost('visa_phase')) {
+            $options['visa_phase'] = $this->request->getPost('visa_phase');
+        }
+
+        $all_options = append_server_side_filtering_commmon_params($options);
+
+        if (get_array_value($all_options, "server_side") && $this->request->getPost('page_no')) {
+            $limit = get_array_value($all_options, "limit");
+            $all_options['skip'] = $limit * (int)$this->request->getPost('page_no');
+            $all_options['page_no'] = $this->request->getPost('page_no');
+        }
+        // var_dump($all_options);exit();
+
+        $result = $this->Clients_model->get_details($all_options);
+
+        //by this, we can handel the server side or client side from the app table prams.
+        if (get_array_value($all_options, "server_side")) {
+            $list_data = get_array_value($result, "data");
+        } else {
+            $list_data = $result->getResult();
+            $result = array();
+        }
+
+        $result_data = array();
+        foreach ($list_data as $data) {
+            $result_data[] = $this->_make_row($data, $custom_fields);
+        }
+
+        $result["data"] = $result_data;
+
+        echo json_encode($result);
+    }
+
+    function lost_clients_list_data()
+    {
+        $this->access_only_allowed_members();
+        $custom_fields = $this->Custom_fields_model->get_available_fields_for_table("clients", $this->login_user->is_admin, $this->login_user->user_type);
+        $options = array(
+            "custom_fields" => $custom_fields,
+            "custom_field_filter" => $this->prepare_custom_field_filter_values("clients", $this->login_user->is_admin, $this->login_user->user_type),
+            "group_id" => $this->request->getPost("group_id"),
+            "show_own_clients_only_user_id" => $this->show_own_clients_only_user_id(),
+            "quick_filter" => $this->request->getPost("quick_filter"),
+            "created_by" => $this->request->getPost("created_by"),
+            "client_groups" => $this->allowed_client_groups,
+            "location_ids" => get_ltm_opl_id(false, ','),
+            "label_id" => $this->request->getPost('label_id'),
+            "visa_type" => $this->request->getPost('visa_type'),
+            "expiry" => $this->request->getPost('expiry'),
+            'account_type' => $this->request->getPost('account_type'),
+            'deleted' => 1,
+            'with_leads' => true
+        );
+
+        if ($this->request->getPost('visa_phase')) {
+            $options['visa_phase'] = $this->request->getPost('visa_phase');
+        }
+
+        $all_options = append_server_side_filtering_commmon_params($options);
+
+        if (get_array_value($all_options, "server_side") && $this->request->getPost('page_no')) {
+            $limit = get_array_value($all_options, "limit");
+            $all_options['skip'] = $limit * (int)$this->request->getPost('page_no');
+            $all_options['page_no'] = $this->request->getPost('page_no');
+        }
+        // var_dump($all_options);exit();
+
+        $result = $this->Clients_model->get_details($all_options);
+
+        //by this, we can handel the server side or client side from the app table prams.
+        if (get_array_value($all_options, "server_side")) {
+            $list_data = get_array_value($result, "data");
+        } else {
+            $list_data = $result->getResult();
+            $result = array();
+        }
+
+        $result_data = array();
+        foreach ($list_data as $data) {
+            $result_data[] = $this->_make_row($data, $custom_fields);
+        }
+
+        $result["data"] = $result_data;
+
+        echo json_encode($result);
+    }
+
+    function visa_expiring_clients_list_data()
+    {
+        $this->access_only_allowed_members();
+        $visa_expiry_start_date = date('Y-m-d', time());
+        $visa_expiry_end_date = date_create($visa_expiry_start_date)->modify("+30 days")->format('Y-m-d');
+        $options = array(
+            'visa_expiry_start_date' => $visa_expiry_start_date,
+            'visa_expiry_end_date' => $visa_expiry_end_date,
+            'only_account_types' => '1,2,4',
+            'location_ids' => get_ltm_opl_id(false, ',')
+        );
+        $all_options = append_server_side_filtering_commmon_params($options);
+
+        if (!$all_options['order_by']) {
+            $all_options['order_by'] = 'visa_expiry';
+            $all_options['order_dir'] = 'ASC';
+        }
+
+        $result = $this->Clients_model->get_details($all_options);
+
+        //by this, we can handel the server side or client side from the app table prams.
+        if (get_array_value($all_options, "server_side")) {
+            $list_data = get_array_value($result, "data");
+        } else {
+            $list_data = $result->getResult();
+            $result = array();
+        }
+
+        $result_data = array();
+        foreach ($list_data as $data) {
+            if ($data->visa_type && $data->visa_expiry) {
+                $result_data[] = $this->_make_visa_expiring_clients_row($data);
+            }
+        }
+
+        $result["data"] = $result_data;
+
+        echo json_encode($result);
+    }
+
     /* return a row of client list  table */
 
     private function _row_data($id)
@@ -265,14 +465,8 @@ class Clients extends Security_Controller
 
     /* prepare a row of client list table */
 
-    private function _make_row($data, $custom_fields)
+    private function _make_visa_expiring_clients_row($data)
     {
-
-
-        $image_url = get_avatar($data->contact_avatar);
-        $contact = "<span class='avatar avatar-xs mr10'><img src='$image_url' alt='...'></span> $data->primary_contact";
-        $primary_contact = get_client_contact_profile_link($data->primary_contact_id, $contact);
-
         $group_list = "";
         if ($data->client_groups) {
             $groups = explode(",", $data->client_groups);
@@ -287,26 +481,56 @@ class Clients extends Security_Controller
             $group_list = "<ul class='pl15'>" . $group_list . "</ul>";
         }
 
-
-        $due = 0;
-        if ($data->invoice_value) {
-            $due = ignor_minor_value($data->invoice_value - $data->payment_received);
-        }
-
         $client_labels = make_labels_view_data($data->labels_list, true);
 
         $full_name = $this->get_client_full_name($data->id, $data);
+        $account_type = $this->get_account_label($data->account_type);
 
         $row_data = array(
-            $data->id,
-            anchor(get_uri("clients/view/" . $data->id), $full_name),
-            $data->primary_contact ? $primary_contact : "",
-            $group_list,
-            $client_labels,
+            // $data->id,
+            anchor(get_uri("clients/view/" . $data->id), $full_name . '<br/><small>' . $data->unique_id . '</small>') . '<br>' . timeline_label(strtolower(str_replace(' ', '_', $account_type))) . '<br>' . $group_list . '<br>' . $client_labels,
+            "Subclass " . $data->visa_type . '<br/><small class="text-danger">' . format_to_date($data->visa_expiry) . '</small>',
+            $full_name,
+            $data->unique_id,
+            "Subclass " . $data->visa_type,
+            format_to_date($data->visa_expiry)
+        );
+
+        return $row_data;
+    }
+
+    private function _make_row($data, $custom_fields)
+    {
+        $client_labels = make_labels_view_data($data->labels_list, true);
+        $now = get_my_local_time("Y-m-d");
+        if ($data->visa_expiry < $now) {
+            $expiry = '<font color="red">' . $data->visa_expiry . '</font>';
+        } else {
+            $expiry = $data->visa_expiry;
+        }
+
+        $visa = 'Subclass ' . $data->visa_type . '<br>' . $expiry;
+        if ($data->visa_type == '') {
+            $visa = 'N/A<br>' . $expiry;
+        } elseif ($data->visa_expiry == '') {
+            $visa = 'Subclass ' . $data->visa_type . '<br>N/A';
+        }
+
+        $created_at = date_format(date_create($data->created_date), 'd M Y');
+        $branch = $this->get_location_label($data->location_id);
+
+        $full_name = $this->get_client_full_name(0, $data);
+        $account_type = $this->get_account_label($data->account_type);
+
+        $row_data = array(
+            $data->total_projects && is_dev_mode() ? "<strong class='text-danger'>" . $data->id . "</strong>" : $data->id,
+            get_client_contact_profile_link($data->id, $full_name, array(), array('caption' => $data->unique_id, 'account_type' => $data->account_type)) . '<br>' . timeline_label(strtolower(str_replace(' ', '_', $account_type))) . '<br>' . $client_labels,
+            $visa,
+            $created_at,
+            $data->phone_code . $data->phone,
+            $data->email,
+            $branch,
             to_decimal_format($data->total_projects),
-            to_currency($data->invoice_value, $data->currency_symbol),
-            to_currency($data->payment_received, $data->currency_symbol),
-            to_currency($due, $data->currency_symbol)
         );
 
         foreach ($custom_fields as $field) {
@@ -314,10 +538,88 @@ class Clients extends Security_Controller
             $row_data[] = $this->template->view("custom_fields/output_" . $field->field_type, array("value" => $data->$cf_id));
         }
 
-        $row_data[] = modal_anchor(get_uri("clients/modal_form"), "<i data-feather='edit' class='icon-16'></i>", array("class" => "edit", "title" => app_lang('edit_client'), "data-post-id" => $data->id))
-            . js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete_client'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("clients/delete"), "data-action" => "delete-confirmation"));
+        // $row_data[] = modal_anchor(get_uri("students/modal_form"), "<i data-feather='edit' class='icon-16'></i>", array("class" => "edit", "title" => app_lang('edit_client'), "data-post-id" => $data->id))
+        //     . js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete_client'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("students/delete"), "data-action" => "delete-confirmation"));
+        $row_data[] = $this->_make_lost_client_options_dropdown($data);
 
         return $row_data;
+    }
+
+    // private function _make_row($data, $custom_fields)
+    // {
+    //     $image_url = get_avatar($data->contact_avatar);
+    //     $contact = "<span class='avatar avatar-xs mr10'><img src='$image_url' alt='...'></span> $data->primary_contact";
+    //     $primary_contact = get_client_contact_profile_link($data->primary_contact_id, $contact);
+
+    //     $group_list = "";
+    //     if ($data->client_groups) {
+    //         $groups = explode(",", $data->client_groups);
+    //         foreach ($groups as $group) {
+    //             if ($group) {
+    //                 $group_list .= "<li>" . $group . "</li>";
+    //             }
+    //         }
+    //     }
+
+    //     if ($group_list) {
+    //         $group_list = "<ul class='pl15'>" . $group_list . "</ul>";
+    //     }
+
+
+    //     $due = 0;
+    //     if ($data->invoice_value) {
+    //         $due = ignor_minor_value($data->invoice_value - $data->payment_received);
+    //     }
+
+    //     $client_labels = make_labels_view_data($data->labels_list, true);
+
+    //     $full_name = $this->get_client_full_name($data->id, $data);
+
+    //     $row_data = array(
+    //         $data->id,
+    //         anchor(get_uri("clients/view/" . $data->id), $full_name),
+    //         $data->primary_contact ? $primary_contact : "",
+    //         $group_list,
+    //         $client_labels,
+    //         to_decimal_format($data->total_projects),
+    //         to_currency($data->invoice_value, $data->currency_symbol),
+    //         to_currency($data->payment_received, $data->currency_symbol),
+    //         to_currency($due, $data->currency_symbol)
+    //     );
+
+    //     foreach ($custom_fields as $field) {
+    //         $cf_id = "cfv_" . $field->id;
+    //         $row_data[] = $this->template->view("custom_fields/output_" . $field->field_type, array("value" => $data->$cf_id));
+    //     }
+
+    //     $row_data[] = modal_anchor(get_uri("clients/modal_form"), "<i data-feather='edit' class='icon-16'></i>", array("class" => "edit", "title" => app_lang('edit_client'), "data-post-id" => $data->id))
+    //         . js_anchor("<i data-feather='x' class='icon-16'></i>", array('title' => app_lang('delete_client'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("clients/delete"), "data-action" => "delete-confirmation"));
+
+    //     return $row_data;
+    // }
+
+
+    //prepare options dropdown for invoices list
+    private function _make_lost_client_options_dropdown($data)
+    {
+        $edit = '';
+
+        $edit_url = "clients/modal_form";
+        $route_prefix = $this->get_client_view_route($data->id);
+        if ($route_prefix) {
+            $edit_url = $route_prefix . "/modal_form";
+        }
+
+        $edit = '<li role="presentation">' . modal_anchor(get_uri($edit_url), "<i data-feather='edit' class='icon-16'></i> " . app_lang('edit'), array("title" => app_lang('edit'), "data-post-id" => $data->id, "class" => "dropdown-item")) . '</li>';
+
+        $delete = $data->deleted == 1 ? '<li role="presentation">' . js_anchor("<i data-feather='user-check' class='icon-16'></i> " . app_lang('convert_to_client'), array('title' => app_lang('convert_to_client'), "class" => "dropdown-item", "data-id" => $data->id, "data-action-url" => get_uri("clients/convert_to_client"), "data-action" => "delete")) . '</li>' : '';
+
+        return '<span class="dropdown inline-block">
+                    <button class="btn btn-default dropdown-toggle caret mt0 mb0" type="button" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
+                        <i data-feather="tool" class="icon-16"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" role="menu">' . $edit . $delete . '</ul>
+                </span>';
     }
 
     /* load client details view */
@@ -326,6 +628,9 @@ class Clients extends Security_Controller
     {
         $client = $this->Clients_model->get_one($client_id);
         if ($client) {
+            if ($client->is_lead) {
+                return redirect()->to(get_uri('leads/view/' . $client->id));
+            }
             return redirect()->to(get_client_contact_profile_link($client_id, "", array(), array('account_type' => $client->account_type, 'only_url' => TRUE)));
         }
 
@@ -445,6 +750,10 @@ class Clients extends Security_Controller
 
             $view_data["custom_field_headers"] = $this->Custom_fields_model->get_custom_field_headers_for_table("invoices", $this->login_user->is_admin, $this->login_user->user_type);
             $view_data["custom_field_filters"] = $this->Custom_fields_model->get_custom_field_filters("invoices", $this->login_user->is_admin, $this->login_user->user_type);
+
+            if ($view_data["client_info"] && $view_data["client_info"]->account_type == 3) {
+                $view_data["hide_due_amount"] = true;
+            }
 
             $view_data["can_edit_invoices"] = $this->can_edit_invoices();
 
@@ -2124,6 +2433,29 @@ class Clients extends Security_Controller
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
 
         return $this->template->view("clients/clients_list", $view_data);
+    }
+
+    function lost_clients_list()
+    {
+        $this->access_only_allowed_members();
+
+        $view_data["custom_field_filters"] = $this->Custom_fields_model->get_custom_field_filters("clients", $this->login_user->is_admin, $this->login_user->user_type);
+
+        $access_info = $this->get_access_info("invoice");
+        $view_data["show_invoice_info"] = (get_setting("module_invoice") && $access_info->access_type == "all") ? true : false;
+        $view_data["custom_field_headers"] = $this->Custom_fields_model->get_custom_field_headers_for_table("clients", $this->login_user->is_admin, $this->login_user->user_type);
+
+        $view_data['groups_dropdown'] = json_encode($this->_get_groups_dropdown_select2_data(true));
+        $view_data['can_edit_clients'] = $this->can_edit_clients();
+        $view_data["team_members_dropdown"] = $this->get_team_members_dropdown(true);
+        $view_data["partners_members_dropdown"] = $this->get_partners_members_dropdown();
+        $view_data["visa_types"] = $this->get_visa_types_filter_dropdown();
+        $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
+        $view_data['phases_dropdown'] = json_encode($this->make_phases_dropdown());
+        $view_data['account_types_dropdown'] = json_encode($this->get_account_types_dropdown_for_filter());
+        $view_data['jump_to_page_dropdown'] = json_encode($this->make_jump_to_page_dropdown('students'));
+
+        return $this->template->rander("clients/lost_clients_list", $view_data);
     }
 
     private function make_access_permissions_view_data()

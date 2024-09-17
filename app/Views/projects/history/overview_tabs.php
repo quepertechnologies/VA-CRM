@@ -13,7 +13,7 @@
                         <?php echo modal_anchor(get_uri('projects/preview_schedule_modal_form'), '<i data-feather="eye" class="icon-16"></i> ' . app_lang("preview"), array("class" => "btn btn-primary btn-sm", "title" => app_lang("preview_schedule"), "data-post-project_id" => $project_info->id)); ?>
                         <?php echo modal_anchor(get_uri('projects/email_schedule_modal_form'), '<i data-feather="send" class="icon-16"></i> ' . app_lang("email"), array("class" => "btn btn-primary btn-sm", "title" => app_lang("email_schedule"), "data-post-project_id" => $project_info->id)); ?>
                     </div> -->
-                    <?php echo modal_anchor(get_uri('projects/schedule_modal_form'), '<i data-feather="plus-circle" class="icon-16"></i> ' . app_lang("add_schedule"), array("class" => "btn btn-primary", "title" => app_lang("add_payment_schedule"), "data-post-project_id" => $project_info->id)); ?>
+                    <?php echo modal_anchor(get_uri('projects/schedule_modal_form'), '<i data-feather="plus-circle" class="icon-16"></i> ' . app_lang("add_schedule"), array("class" => "btn btn-primary", "title" => app_lang("add_payment_schedule"), "data-post-project_id" => $project_info->id, 'data-modal-lg' => true)); ?>
                 </div>
             </div>
         <?php } ?>

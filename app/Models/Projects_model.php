@@ -17,6 +17,8 @@ class Projects_model extends Crud_model
     {
         $projects_table = $this->db->prefixTable('projects');
         $project_members_table = $this->db->prefixTable('project_members');
+        $project_partners_table = $this->db->prefixTable('project_partners');
+        $milestones_table = $this->db->prefixTable('milestones');
         $clients_table = $this->db->prefixTable('clients');
         $tasks_table = $this->db->prefixTable('tasks');
         $users_table = $this->db->prefixTable('users');
@@ -56,6 +58,11 @@ class Projects_model extends Crud_model
         $location_ids = $this->_get_clean_value($options, "location_ids");
         if ($location_ids) {
             $where .= " AND $projects_table.location_id IN ($location_ids)";
+        }
+
+        $client_assignee = $this->_get_clean_value($options, "client_assignee");
+        if ($client_assignee) {
+            $where .= " AND $clients_table.assignee='$client_assignee'";
         }
 
         $status_ids = $this->_get_clean_value($options, "status_ids");
@@ -105,8 +112,20 @@ class Projects_model extends Crud_model
         }
 
         if (!$client_id && $user_id && !$starred_projects) {
-            $extra_join = " LEFT JOIN (SELECT $project_members_table.user_id, $project_members_table.project_id FROM $project_members_table WHERE $project_members_table.user_id=$user_id AND $project_members_table.deleted=0 GROUP BY $project_members_table.project_id) AS project_members_table ON project_members_table.project_id= $projects_table.id ";
-            $extra_where = " AND project_members_table.user_id=$user_id";
+            $extra_join .= " LEFT JOIN (SELECT $project_members_table.user_id, $project_members_table.project_id FROM $project_members_table WHERE $project_members_table.user_id=$user_id AND $project_members_table.deleted=0 GROUP BY $project_members_table.project_id) AS project_members_table ON project_members_table.project_id= $projects_table.id ";
+            $extra_where .= " AND project_members_table.user_id=$user_id";
+        }
+
+        $partner_id = $this->_get_clean_value($options, "partner_id");
+        if ($partner_id) {
+            $extra_join .= " LEFT JOIN (SELECT $project_partners_table.partner_id, $project_partners_table.project_id FROM $project_partners_table WHERE $project_partners_table.partner_id=$partner_id AND $project_partners_table.deleted=0 GROUP BY $project_partners_table.project_id) AS project_partners_table ON project_partners_table.project_id= $projects_table.id ";
+            $extra_where .= " AND project_partners_table.partner_id=$partner_id";
+        }
+
+        $current_milestone_title = $this->_get_clean_value($options, "current_milestone_title");
+        if ($current_milestone_title) {
+            $extra_join .= " LEFT JOIN (SELECT $milestones_table.title, $milestones_table.project_id FROM $milestones_table WHERE $milestones_table.is_current=1 AND $milestones_table.deleted=0 GROUP BY $milestones_table.project_id) AS milestones_table ON milestones_table.project_id= $projects_table.id ";
+            $extra_where .= " AND milestones_table.title='$current_milestone_title'";
         }
 
         $select_labels_data_query = $this->get_labels_data_query();
@@ -157,11 +176,11 @@ class Projects_model extends Crud_model
             $where .= " )";
         }
 
-        $sql = "SELECT $projects_table.*, $clients_table.company_name, $clients_table.first_name, $clients_table.last_name, $clients_table.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, $project_status_table.key_name AS status_key_name, $project_status_table.title_language_key, $project_status_table.title AS status_title,  $project_status_table.icon AS status_icon, $select_labels_data_query $select_custom_fieds
+        $sql = "SELECT SQL_CALC_FOUND_ROWS $projects_table.*, $clients_table.company_name, $clients_table.first_name, $clients_table.last_name, $clients_table.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, $project_status_table.key_name AS status_key_name, $project_status_table.title_language_key, $project_status_table.title AS status_title,  $project_status_table.icon AS status_icon, $select_labels_data_query $select_custom_fieds
         FROM $projects_table
         LEFT JOIN $clients_table ON $clients_table.id= $projects_table.client_id
-        LEFT JOIN (SELECT project_id, SUM(points) AS total_points FROM $tasks_table WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= $projects_table.id
-        LEFT JOIN (SELECT project_id, SUM(points) AS completed_points FROM $tasks_table WHERE deleted=0 AND status_id=3 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= $projects_table.id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS total_points FROM $milestones_table WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= $projects_table.id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS completed_points FROM $milestones_table WHERE deleted=0 AND is_current=2 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= $projects_table.id
         LEFT JOIN $project_status_table ON $projects_table.status_id = $project_status_table.id 
         $extra_join   
         $join_custom_fieds    
@@ -173,24 +192,53 @@ class Projects_model extends Crud_model
         $total_rows = $this->db->query("SELECT FOUND_ROWS() as found_rows")->getRow();
 
         if ($limit) {
-            $page_no = $this->_get_clean_value($options, "page_no");
-            if ($page_no) {
-                $data = $raw_query->getResult();
-                return array(
-                    "data" => $data,
-                    "recordsTotal" => count($data),
-                    "recordsFiltered" => count($data),
-                );
-            } else {
-                return array(
-                    "data" => $raw_query->getResult(),
-                    "recordsTotal" => $total_rows->found_rows,
-                    "recordsFiltered" => $total_rows->found_rows,
-                );
-            }
+            return array(
+                "data" => $raw_query->getResult(),
+                "recordsTotal" => $total_rows->found_rows,
+                "recordsFiltered" => $total_rows->found_rows,
+            );
         } else {
             return $raw_query;
         }
+    }
+
+    function own_projects($client_id = 0)
+    {
+        $projects_table = $this->db->prefixTable('projects');
+        $project_partners_table = $this->db->prefixTable('project_partners');
+        $labels_table = $this->db->prefixTable('labels');
+        $select_labels_data_query = "(SELECT GROUP_CONCAT($labels_table.id, '--::--', $labels_table.title, '--::--', $labels_table.color, ':--::--:') FROM $labels_table WHERE FIND_IN_SET($labels_table.id, $projects_table.labels)) AS labels_list";
+        $sql = "SELECT $projects_table.*, $select_labels_data_query, $project_partners_table.full_name AS partner_full_name
+        FROM $projects_table
+        LEFT JOIN $project_partners_table ON $project_partners_table.project_id=$projects_table.id
+        WHERE $projects_table.deleted=0 AND $project_partners_table.partner_id = $client_id AND $project_partners_table.deleted=0
+        ORDER BY $projects_table.title";
+        return $this->db->query($sql);
+    }
+
+    function get_progress_summary($project_id = 0)
+    {
+        $milestones_table = $this->db->prefixTable('milestones');
+        $sql = "SELECT $milestones_table.*
+        FROM $milestones_table
+        WHERE $milestones_table.deleted=0 AND $milestones_table.project_id=$project_id";
+        $milestones = $this->db->query($sql)->getResult();
+
+        $total_milestones = count($milestones);
+        $completed_milestones = 0;
+
+        foreach ($milestones as $milestone) {
+            if ($milestone->is_current == 2) {
+                $completed_milestones++;
+            }
+        }
+
+        $info = new \stdClass();
+        $info->total_milestones = $total_milestones;
+        $info->completed_milestones = $completed_milestones;
+        $info->progress = $total_milestones ? round(($completed_milestones / $total_milestones) * 100) : 0;
+
+        return $info;
     }
 
     function get_label_suggestions()
@@ -213,6 +261,11 @@ class Projects_model extends Crud_model
         if ($user_id) {
             $extra_join = " LEFT JOIN (SELECT $project_members_table.user_id, $project_members_table.project_id FROM $project_members_table WHERE $project_members_table.user_id=$user_id AND $project_members_table.deleted=0 GROUP BY $project_members_table.project_id) AS project_members_table ON project_members_table.project_id= $projects_table.id ";
             $extra_where = " AND project_members_table.user_id=$user_id";
+        }
+
+        $location_ids = $this->_get_clean_value($options, "location_ids");
+        if ($location_ids) {
+            $extra_where .= " AND $projects_table.location_id IN ($location_ids)";
         }
 
         $sql = "SELECT $projects_table.status_id, COUNT($projects_table.id) as total
@@ -392,8 +445,6 @@ class Projects_model extends Crud_model
             }
         }
 
-
-
         //delete the project files from directory
         $file_path = get_setting("project_file_path") . $project_id . "/";
         foreach ($project_files as $file) {
@@ -435,6 +486,7 @@ class Projects_model extends Crud_model
     {
         $projects_table = $this->db->prefixTable('projects');
         $project_members_table = $this->db->prefixTable('project_members');
+        $milestones_table = $this->db->prefixTable('milestones');
         $tasks_table = $this->db->prefixTable('tasks');
 
         $where = "";
@@ -446,10 +498,15 @@ class Projects_model extends Crud_model
             $where = " AND project_members_table.user_id=$user_id";
         }
 
+        $location_ids = $this->_get_clean_value($options, "location_ids");
+        if ($location_ids) {
+            $where .= " AND $projects_table.location_id IN ($location_ids)";
+        }
+
         $sql = "SELECT SUM(total_points_table.total_points) AS total_points, SUM(completed_points_table.completed_points) AS completed_points
         FROM $projects_table
-        LEFT JOIN (SELECT project_id, SUM(points) AS total_points FROM $tasks_table WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= $projects_table.id
-        LEFT JOIN (SELECT project_id, SUM(points) AS completed_points FROM $tasks_table WHERE deleted=0 AND status_id=3 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= $projects_table.id  
+        LEFT JOIN (SELECT project_id, COUNT(id) AS total_points FROM $milestones_table WHERE deleted=0 GROUP BY project_id) AS total_points_table ON total_points_table.project_id= $projects_table.id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS completed_points FROM $milestones_table WHERE deleted=0 AND is_current=2 GROUP BY project_id) AS completed_points_table ON completed_points_table.project_id= $projects_table.id  
         $extra_join
         WHERE $projects_table.deleted=0 AND status_id=1 $where";
         return $this->db->query($sql)->getRow();

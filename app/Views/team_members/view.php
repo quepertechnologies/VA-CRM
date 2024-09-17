@@ -58,6 +58,10 @@
             <li><a  role="presentation" data-bs-toggle="tab" href="<?php echo_uri("team_members/files/" . $user_info->id); ?>" data-bs-target="#tab-files"> <?php echo app_lang('files'); ?></a></li>
         <?php } ?>
 
+        <?php if ($show_clients) { ?>
+            <li><a role="presentation" data-bs-toggle="tab" href="<?php echo_uri("team_members/clients_info/" . $user_info->id); ?>" data-bs-target="#tab-clients-info"><?php echo app_lang('clients'); ?></a></li>
+        <?php } ?> 
+
         <?php if ($show_projects) { ?>
             <li><a role="presentation" data-bs-toggle="tab" href="<?php echo_uri("team_members/projects_info/" . $user_info->id); ?>" data-bs-target="#tab-projects-info"><?php echo app_lang('projects'); ?></a></li>
         <?php } ?> 
@@ -105,6 +109,7 @@
         <div role="tabpanel" class="tab-pane fade" id="tab-account-settings"></div>
         <div role="tabpanel" class="tab-pane fade" id="tab-my-preferences"></div>
         <div role="tabpanel" class="tab-pane fade" id="tab-user-left-menu"></div>
+        <div role="tabpanel" class="tab-pane fade" id="tab-clients-info"></div>
         <div role="tabpanel" class="tab-pane fade" id="tab-projects-info"></div>
         <div role="tabpanel" class="tab-pane fade" id="tab-attendance-info"></div>
         <div role="tabpanel" class="tab-pane fade" id="tab-leave-info"></div>

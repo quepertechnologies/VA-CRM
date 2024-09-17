@@ -111,6 +111,7 @@ class Users_model extends Crud_model
 
         $where = "";
         $id = $this->_get_clean_value($options, "id");
+        $fresh_desk_agent_id = $this->_get_clean_value($options, "fresh_desk_agent_id");
         $status = $this->_get_clean_value($options, "status");
         $user_type = $this->_get_clean_value($options, "user_type");
         $client_id = $this->_get_clean_value($options, "client_id");
@@ -122,6 +123,11 @@ class Users_model extends Crud_model
         if ($id) {
             $where .= " AND $users_table.id=$id";
         }
+
+        if ($fresh_desk_agent_id) {
+            $where .= " AND $users_table.fresh_desk_agent_id=$fresh_desk_agent_id";
+        }
+
         if ($status === "active") {
             $where .= " AND $users_table.status='active'";
         } else if ($status === "inactive") {
@@ -258,6 +264,28 @@ class Users_model extends Crud_model
             );
         } else {
             return $raw_query;
+        }
+    }
+
+
+    function get_by_full_name($full_name = "", $info = false)
+    {
+        $users_table = $this->db->prefixTable('users');
+
+        $where = "";
+
+        $full_name = $this->db->escapeString($full_name);
+
+        $sql = "SELECT $users_table.*
+        FROM $users_table
+        WHERE $users_table.deleted=0 AND CONCAT($users_table.first_name, ' ', $users_table.last_name) = '$full_name' $where";
+        $result = $this->db->query($sql);
+        if ($result->resultID->num_rows) {
+            if ($info) {
+                return $result->getRow();
+            } else {
+                return $result->getRow()->id;
+            }
         }
     }
 

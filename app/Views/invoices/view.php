@@ -32,16 +32,19 @@
                                     <i data-feather="tool" class="icon-16"></i> <?php echo app_lang('actions'); ?>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
-                                    <?php if ($xero_auth_required) { ?>
-                                        <li role="presentation"><?php echo anchor($xero_auth_url, "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('create_invoice_on_xero'), array("title" => app_lang('create_invoice_on_xero'), "class" => "dropdown-item")); ?> </li>
-                                    <?php } else { ?>
-                                        <li role="presentation"><?php echo modal_anchor(get_uri("xero_api/create_invoice_modal_form"), "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('create_invoice_on_xero'), array("title" => app_lang('create_invoice_on_xero'), "data-post-invoice_id" => $invoice_info->id, "role" => "menuitem", "tabindex" => "-1", "class" => "dropdown-item")); ?></li>
-                                    <?php } ?>
-                                    <?php if ($invoice_status !== "cancelled" && $can_edit_invoices) { ?>
-                                        <?php if ($invoice_info->type == "invoice") { ?>
-                                            <li role="presentation"><?php echo modal_anchor(get_uri("invoices/send_invoice_modal_form/" . $invoice_info->id), "<i data-feather='mail' class='icon-16'></i> " . app_lang('email_invoice_to_client'), array("title" => app_lang('email_invoice_to_client'), "data-post-id" => $invoice_info->id, "role" => "menuitem", "tabindex" => "-1", "class" => "dropdown-item")); ?> </li>
+                                    <?php
+                                    if ($can_send_invoice && $invoice_info->invoice_type != 'net_claim') { ?>
+                                        <?php if ($xero_auth_required) { ?>
+                                            <li role="presentation"><?php echo anchor($xero_auth_url, "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('create_invoice_on_xero'), array("title" => app_lang('create_invoice_on_xero'), "class" => "dropdown-item")); ?> </li>
                                         <?php } else { ?>
-                                            <li role="presentation"><?php echo modal_anchor(get_uri("invoices/send_invoice_modal_form/" . $invoice_info->id), "<i data-feather='mail' class='icon-16'></i> " . app_lang('email_credit_note_to_client'), array("title" => app_lang('email_credit_note_to_client'), "data-post-id" => $invoice_info->id, "role" => "menuitem", "tabindex" => "-1", "class" => "dropdown-item")); ?> </li>
+                                            <li role="presentation"><?php echo modal_anchor(get_uri("xero_api/create_invoice_modal_form"), "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('create_invoice_on_xero'), array("title" => app_lang('create_invoice_on_xero'), "data-post-invoice_id" => $invoice_info->id, "role" => "menuitem", "tabindex" => "-1", "class" => "dropdown-item")); ?></li>
+                                        <?php } ?>
+                                        <?php if ($invoice_status !== "cancelled" && $can_edit_invoices) { ?>
+                                            <?php if ($invoice_info->type == "invoice") { ?>
+                                                <li role="presentation"><?php echo modal_anchor(get_uri("invoices/send_invoice_modal_form/" . $invoice_info->id), "<i data-feather='mail' class='icon-16'></i> " . app_lang('email_invoice_to_client'), array("title" => app_lang('email_invoice_to_client'), "data-post-id" => $invoice_info->id, "role" => "menuitem", "tabindex" => "-1", "class" => "dropdown-item")); ?> </li>
+                                            <?php } else { ?>
+                                                <li role="presentation"><?php echo modal_anchor(get_uri("invoices/send_invoice_modal_form/" . $invoice_info->id), "<i data-feather='mail' class='icon-16'></i> " . app_lang('email_credit_note_to_client'), array("title" => app_lang('email_credit_note_to_client'), "data-post-id" => $invoice_info->id, "role" => "menuitem", "tabindex" => "-1", "class" => "dropdown-item")); ?> </li>
+                                            <?php } ?>
                                         <?php } ?>
                                     <?php } ?>
                                     <li role="presentation"><?php echo anchor(get_uri("invoices/download_pdf/" . $invoice_info->id), "<i data-feather='download' class='icon-16'></i> " . app_lang('download_pdf'), array("title" => app_lang('download_pdf'), "class" => "dropdown-item")); ?> </li>
@@ -59,13 +62,17 @@
                                         }
                                         ?>
 
+                                        <?php if ($can_edit_invoices && $is_invoice_editable) { ?>
+                                            <li role="presentation"><?php echo modal_anchor(get_uri($edit_url), "<i data-feather='edit' class='icon-16'></i> " . app_lang('edit_invoice'), array("title" => app_lang('edit_invoice'), "data-post-id" => $invoice_info->id, "role" => "menuitem", "tabindex" => "-1", "class" => "dropdown-item")); ?> </li>
+                                        <?php } ?>
+
                                         <li role="presentation"><?php echo modal_anchor(get_uri($edit_url), "<i data-feather='edit' class='icon-16'></i> " . app_lang('edit_invoice'), array("title" => app_lang('edit_invoice'), "data-post-id" => $invoice_info->id, "role" => "menuitem", "tabindex" => "-1", "class" => "dropdown-item")); ?> </li>
 
 
                                         <?php if ($invoice_status == "draft" && $invoice_status !== "cancelled") { ?>
-                                            <li role="presentation"><?php echo ajax_anchor(get_uri("invoices/update_invoice_status/" . $invoice_info->id . "/not_paid"), "<i data-feather='check' class='icon-16'></i> " . app_lang('mark_invoice_as_not_paid'), array("data-reload-on-success" => "1", "class" => "dropdown-item")); ?> </li>
+                                            <!-- <li role="presentation"><?php echo ajax_anchor(get_uri("invoices/update_invoice_status/" . $invoice_info->id . "/not_paid"), "<i data-feather='check' class='icon-16'></i> " . app_lang('mark_invoice_as_not_paid'), array("data-reload-on-success" => "1", "class" => "dropdown-item")); ?> </li> -->
                                         <?php } else if ($invoice_status == "not_paid" || $invoice_status == "overdue" || $invoice_status == "partially_paid") { ?>
-                                            <li role="presentation"><?php echo js_anchor("<i data-feather='x' class='icon-16'></i> " . app_lang('mark_invoice_as_cancelled'), array('title' => app_lang('mark_invoice_as_cancelled'), "data-action-url" => get_uri("invoices/update_invoice_status/" . $invoice_info->id . "/cancelled"), "data-action" => "delete-confirmation", "data-reload-on-success" => "1", "class" => "dropdown-item")); ?> </li>
+                                            <!-- <li role="presentation"><?php echo js_anchor("<i data-feather='x' class='icon-16'></i> " . app_lang('mark_invoice_as_cancelled'), array('title' => app_lang('mark_invoice_as_cancelled'), "data-action-url" => get_uri("invoices/update_invoice_status/" . $invoice_info->id . "/cancelled"), "data-action" => "delete-confirmation", "data-reload-on-success" => "1", "class" => "dropdown-item")); ?> </li> -->
                                         <?php } ?>
 
                                         <?php if ($invoice_status !== "draft" && $invoice_status !== "cancelled" && $invoice_info->status !== "credited") { ?>

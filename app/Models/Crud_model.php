@@ -241,11 +241,11 @@ class Crud_model extends Model
                             "log_for3" => $this->log_for3,
                             "log_for_id3" => $log_for_id3,
                         );
-                        if (!is_dev_mode() && $this->log_type !== 'milestone') {
-                            $this->Activity_logs_model->ci_save($log_data, $activity_log_created_by_app);
-                            $activity_log_id = $this->db->insertID();
-                            $data["activity_log_id"] = $activity_log_id;
-                        }
+                        // if (!is_dev_mode() && $this->log_type !== 'milestone') {
+                        // }
+                        $this->Activity_logs_model->ci_save($log_data, $activity_log_created_by_app);
+                        $activity_log_id = $this->db->insertID();
+                        $data["activity_log_id"] = $activity_log_id;
                     }
                 }
             }
@@ -440,11 +440,11 @@ class Crud_model extends Model
         return $success;
     }
 
-    function get_dropdown_list($option_fields = array(), $key = "id", $where = array())
+    function get_dropdown_list($option_fields = array(), $key = "id", $where = array(), $is_filter_list = false)
     {
         $where["deleted"] = 0;
         $list_data = $this->get_all_where($where, 0, 0, $option_fields[0])->getResult();
-        $result = array();
+        $result = $is_filter_list ? array(array('id' => '', 'text' => '- ' . app_lang('partner') . ' -')) : array();
         foreach ($list_data as $data) {
             $text = "";
             foreach ($option_fields as $option) {
@@ -452,7 +452,11 @@ class Crud_model extends Model
                     $text .= $data->$option . " ";
                 }
             }
-            $result[$data->$key] = $text;
+            if ($is_filter_list) {
+                $result[] = array('id' => $data->$key, 'text' => $text);
+            } else {
+                $result[$data->$key] = $text;
+            }
         }
         return $result;
     }
@@ -569,19 +573,25 @@ class Crud_model extends Model
         //$items_table like as invoice_items_table
         $taxes_table = $this->db->prefixTable('taxes');
 
-        $invoice_sql = "SELECT $main_table.id, $main_table.discount_amount, $main_table.discount_amount_type, $main_table.discount_type,
+        $invoice_sql = "SELECT $main_table.id, $main_table.discount_amount, $main_table.discount_amount_type, $main_table.discount_type, $main_table.invoice_type, $main_table.bonus_amount, 
                 tax_table.percentage AS tax_percentage, tax_table2.percentage AS tax_percentage2, tax_table3.percentage AS tax_percentage3,
                 tax_table.title AS tax_name, tax_table2.title AS tax_name2, tax_table3.title AS tax_name3,
-                taxable_item.total_taxable, non_taxable_item.total_non_taxable
+                taxable_item.total_taxable, non_taxable_item.total_non_taxable, payable_item.total_payable, income_item.total_income, income_item.commission
                 FROM $main_table
                 LEFT JOIN (SELECT $taxes_table.id, $taxes_table.percentage, $taxes_table.title FROM $taxes_table) AS tax_table ON tax_table.id = $main_table.tax_id
                 LEFT JOIN (SELECT $taxes_table.id, $taxes_table.percentage, $taxes_table.title FROM $taxes_table) AS tax_table2 ON tax_table2.id = $main_table.tax_id2
                 LEFT JOIN (SELECT $taxes_table.id, $taxes_table.percentage, $taxes_table.title FROM $taxes_table) AS tax_table3 ON tax_table3.id = $main_table.tax_id3
                 LEFT JOIN (SELECT SUM($items_table.total) AS total_taxable, $items_table.invoice_id FROM $items_table WHERE $items_table.deleted=0 AND $items_table.taxable = 1 GROUP BY $items_table.invoice_id) AS taxable_item ON taxable_item.invoice_id = $main_table.id
-                LEFT JOIN (SELECT SUM($items_table.total) AS total_non_taxable, $items_table.invoice_id  FROM $items_table WHERE $items_table.deleted=0 AND $items_table.taxable = 0 GROUP BY $items_table.invoice_id) AS non_taxable_item ON non_taxable_item.invoice_id = $main_table.id
+                LEFT JOIN (SELECT SUM($items_table.total) AS total_non_taxable, $items_table.invoice_id FROM $items_table WHERE $items_table.deleted=0 AND $items_table.taxable = 0 GROUP BY $items_table.invoice_id) AS non_taxable_item ON non_taxable_item.invoice_id = $main_table.id
+                LEFT JOIN (SELECT SUM($items_table.total) AS total_payable, $items_table.invoice_id FROM $items_table WHERE $items_table.deleted=0 AND $items_table.income_type = 'payable' GROUP BY $items_table.invoice_id) AS payable_item ON payable_item.invoice_id = $main_table.id
+                LEFT JOIN (SELECT SUM($items_table.total) AS total_income, $items_table.commission, $items_table.invoice_id FROM $items_table WHERE $items_table.deleted=0 AND $items_table.income_type = 'income' GROUP BY $items_table.invoice_id) AS income_item ON income_item.invoice_id = $main_table.id
                 WHERE $main_table.deleted=0 AND $main_table.id = $id";
-
         $invoice_info = $this->db->query($invoice_sql)->getRow();
+        $items_sql = "SELECT $items_table.* FROM $items_table WHERE $items_table.commission > 0 AND $items_table.invoice_id = $id";
+        if ($invoice_info->invoice_type == 'net_claim') {
+            $items_sql = "SELECT $items_table.* FROM $items_table WHERE $items_table.invoice_id = $id";
+        }
+        $invoice_items = $this->db->query($items_sql)->getResult();
 
         if (!$invoice_info->id) {
             return null;
@@ -589,60 +599,191 @@ class Crud_model extends Model
 
         $total_taxable = $invoice_info->total_taxable ? $invoice_info->total_taxable : 0;
         $total_non_taxable = $invoice_info->total_non_taxable ? $invoice_info->total_non_taxable : 0;
+        $total_payable = $invoice_info->total_payable ? $invoice_info->total_payable : 0;
+        $total_income = $invoice_info->total_income ? $invoice_info->total_income : 0;
         $sub_total = $total_taxable + $total_non_taxable;
         $discount_total = 0;
+        $invoice_total_incl_tax = 0;
         $invoice_total = 0;
+        $commission_total = 0;
+        $com_deducted_income = 0;
+        $discount_deducted_income = 0;
+        $gross_income = 0;
+        $net_total_income = 0;
 
         if ($invoice_info->discount_amount_type == "percentage") {
+            if ($invoice_info->discount_type == 'on_income') {
+                // if ($invoice_items) {
+                //     foreach ($invoice_items as $item) {
+                //         if ($item->income_type == 'income') {
+                //             $commission_total += calc_per((float)$item->rate, (float)$item->commission);
+                //         }
+                //     }
+                // }
+                $discount_total = calc_per($total_income, $invoice_info->discount_amount);
+                $$total_taxable = $total_taxable - $discount_total; // deduct discount before tax calculation
+                $tax1 = calc_per($total_taxable, $invoice_info->tax_percentage);
+                $tax2 = calc_per($total_taxable, $invoice_info->tax_percentage2);
+                $tax3 = calc_per($total_taxable, $invoice_info->tax_percentage3);
+                $discount_deducted_income = $total_income - $discount_total;
+                $net_total_income = $total_income - $discount_total; // deduct discount amount from the remaining gross income
+                $invoice_total = $total_income + $total_payable + $tax1 + $tax2 - $discount_total; // total chargeable amount
+                $invoice_total_incl_tax = $total_income + $total_payable + $tax1 + $tax2; // total chargeable amount
+            } else {
+                if ($invoice_items) {
+                    foreach ($invoice_items as $item) {
+                        if ($item->income_type == 'income') {
+                            $commission_total += calc_per((float)$item->rate, (float)$item->commission);
+                        }
+                    }
+                }
+                $non_taxable_discount_value = $total_non_taxable * ($invoice_info->discount_amount / 100);
+                if ($invoice_info->discount_type == "before_tax") {
+                    $taxable_discount_value = $total_taxable * ($invoice_info->discount_amount / 100);
+                    $total_taxable = $total_taxable - $taxable_discount_value; //apply discount before tax
+                }
 
-            $non_taxable_discount_value = $total_non_taxable * ($invoice_info->discount_amount / 100);
+                $tax1 = $total_taxable * ($invoice_info->tax_percentage / 100);
+                $tax2 = $total_taxable * ($invoice_info->tax_percentage2 / 100);
+                $tax3 = $total_taxable * ($invoice_info->tax_percentage3 / 100);
+                $total_taxable = $total_taxable + $tax1 + $tax2 - $tax3;
 
-            if ($invoice_info->discount_type == "before_tax") {
-                $taxable_discount_value = $total_taxable * ($invoice_info->discount_amount / 100);
-                $total_taxable = $total_taxable - $taxable_discount_value; //apply discount before tax
+                $invoice_total = $total_taxable + $total_non_taxable - $non_taxable_discount_value; //deduct only non-taxable discount since the taxable discount already deducted 
+
+                if ($invoice_info->discount_type == "after_tax") {
+                    $taxable_discount_value = $total_taxable * ($invoice_info->discount_amount / 100);
+                    $invoice_total = $total_taxable + $total_non_taxable - $taxable_discount_value - $non_taxable_discount_value;
+                }
+                $com_deducted_income = $total_income - $commission_total; // deduct commission from the total income
+                $gross_income = $com_deducted_income - $total_payable; // deduct total payable form the gross income
+                $discount_total = $taxable_discount_value + $non_taxable_discount_value;
+                $discount_deducted_income = $com_deducted_income - $discount_total;
+                $net_total_income = $gross_income - $discount_total; // deduct discount amount from the remaining gross income
             }
-
-            $tax1 = $total_taxable * ($invoice_info->tax_percentage / 100);
-            $tax2 = $total_taxable * ($invoice_info->tax_percentage2 / 100);
-            $tax3 = $total_taxable * ($invoice_info->tax_percentage3 / 100);
-            $total_taxable = $total_taxable + $tax1 + $tax2 - $tax3;
-
-            $invoice_total = $total_taxable + $total_non_taxable - $non_taxable_discount_value; //deduct only non-taxable discount since the taxable discount already deducted 
-
-            if ($invoice_info->discount_type == "after_tax") {
-                $taxable_discount_value = $total_taxable * ($invoice_info->discount_amount / 100);
-                $invoice_total = $total_taxable + $total_non_taxable - $taxable_discount_value - $non_taxable_discount_value;
-            }
-
-            $discount_total = $taxable_discount_value + $non_taxable_discount_value;
         } else {
-            //discount_amount_type is fixed_amount
+            if ($invoice_info->discount_type == 'on_income') {
+                if ($invoice_info->invoice_type == 'gross_claim') {
+                    $tax1 = 0;
+                    $tax2 = 0;
+                    $tax3 = 0;
+                    $sub_total = 0;
+                    foreach ($invoice_items as $item) {
+                        $commission = calc_per((float)$item->rate, (float)$item->commission);
+                        $sub_total += $commission;
+                        if ($item->taxable) {
+                            $tax1 += calc_per((float)$commission, $invoice_info->tax_percentage);
+                        }
+                    }
+                    $com_deducted_income = $total_income - $commission_total; // deduct commission from the total income
+                    $gross_income = $com_deducted_income - $total_payable; // deduct total payable form the gross income
+                    $discount_total = $invoice_info->discount_amount;
+                    $discount_deducted_income = $com_deducted_income - $discount_total;
+                    $net_total_income = $sub_total - $discount_total; // deduct discount amount from the remaining gross income
 
-            $discount_total = $invoice_info->discount_amount; //fixed amount 
-            //fixed amount discount. fixed amount can't be applied before tax when there are both taxable and non-taxable items.
-            //calculate all togather 
+                    $invoice_total = $sub_total + $tax1 + $tax2;
+                    $invoice_total_incl_tax = $sub_total + $tax1 + $tax2;
+                } elseif ($invoice_info->invoice_type == 'net_claim') {
+                    $tax1 = 0;
+                    $tax2 = 0;
+                    $tax3 = 0;
+                    $sub_total = 0;
+                    $income_sub_total = 0;
+                    $total_payable = 0;
+                    foreach ($invoice_items as $item) {
+                        $commission = calc_per((float)$item->rate, (float)$item->commission);
+                        // $item_total = (float)$item->rate - $commission;
+                        $income_sub_total += $commission;
+                        if ($item->taxable) {
+                            $tax1 += calc_per((float)$commission, $invoice_info->tax_percentage);
+                            // $total_payable += $item->rate - ($commission + $tax1);
+                        } else {
+                            // $total_payable += (float)$item->rate - $commission;
+                        }
+                        // $sub_total += $item_total;
+                        $sub_total += (float)$item->rate;
+                    }
+                    // $sub_total = $total_payable + $tax1 + $tax2;
+                    $commission_total = $income_sub_total;
+                    $com_deducted_income = $total_income - $commission_total; // deduct commission from the total income
+                    $gross_income = $com_deducted_income - ($total_payable + $tax1 + $tax2); // deduct total payable form the gross income
+                    $discount_total = $invoice_info->discount_amount;
+                    $discount_deducted_income = $com_deducted_income - $discount_total;
+                    $net_total_income = $income_sub_total - $discount_total; // deduct discount amount from the remaining gross income
 
-            if ($invoice_info->discount_type == "before_tax" && $total_taxable > 0) {
-                $total_taxable = $total_taxable - $discount_total;
-            } else if ($invoice_info->discount_type == "before_tax" && $total_taxable == 0) {
-                $total_non_taxable = $total_non_taxable - $discount_total;
-            }
+                    $invoice_total = $sub_total - ($commission_total + $tax1 + $tax2);
+                    $total_payable = $invoice_total;
+                    $invoice_total_incl_tax = $income_sub_total + $tax1 + $tax2;
+                } elseif ($invoice_info->invoice_type == 'general') {
+                    // if ($invoice_items) {
+                    //     foreach ($invoice_items as $item) {
+                    //         if ($item->income_type == 'income') {
+                    //             $commission_total += calc_per((float)$item->rate, (float)$item->commission);
+                    //         }
+                    //     }
+                    // }
+                    $discount_total = $invoice_info->discount_amount;
+                    $total_taxable = $total_taxable;
+                    $tax1 = $total_taxable * ($invoice_info->tax_percentage / 100);
+                    $tax2 = $total_taxable * ($invoice_info->tax_percentage2 / 100);
+                    $tax3 = $total_taxable * ($invoice_info->tax_percentage3 / 100);
+                    $com_deducted_income = $total_income; // deduct commission from the total income
+                    $gross_income = $com_deducted_income; // deduct total payable form the gross income
+                    $discount_deducted_income = $com_deducted_income - $discount_total;
+                    $net_total_income = $total_income - $discount_total; // deduct discount amount from the remaining gross income
 
+                    $invoice_total_incl_tax  = $total_income + $total_payable + $tax1 + $tax2;
+                    $invoice_total  = $total_income + $total_payable + $tax1 + $tax2 - $discount_total;
+                }
+            } else {
+                if ($invoice_items) {
+                    foreach ($invoice_items as $item) {
+                        if ($item->income_type == 'income') {
+                            $commission_total += calc_per((float)$item->rate, (float)$item->commission);
+                        }
+                    }
+                }
+                //discount_amount_type is fixed_amount
+                $com_deducted_income = $total_income - $commission_total; // deduct commission from the total income
+                $gross_income = $com_deducted_income - $total_payable; // deduct total payable form the gross income
 
-            $tax1 = $total_taxable * ($invoice_info->tax_percentage / 100);
-            $tax2 = $total_taxable * ($invoice_info->tax_percentage2 / 100);
-            $tax3 = $total_taxable * ($invoice_info->tax_percentage3 / 100);
-            $invoice_total = $total_taxable + $total_non_taxable + $tax1 + $tax2 - $tax3; //discount before tax
+                $discount_total = $invoice_info->discount_amount; //fixed amount 
+                $discount_deducted_income = $com_deducted_income - $discount_total;
+                $net_total_income = $gross_income - $discount_total; // deduct discount amount from the remaining gross income
+                //fixed amount discount. fixed amount can't be applied before tax when there are both taxable and non-taxable items.
+                //calculate all togather 
 
-            if ($invoice_info->discount_type == "after_tax") {
-                $invoice_total = $total_taxable + $total_non_taxable + $tax1 + $tax2 - $tax3 - $discount_total;
+                if ($invoice_info->discount_type == "before_tax" && $total_taxable > 0) {
+                    $total_taxable = $total_taxable - $discount_total;
+                } else if ($invoice_info->discount_type == "before_tax" && $total_taxable == 0) {
+                    $total_non_taxable = $total_non_taxable - $discount_total;
+                }
+
+                $tax1 = $total_taxable * ($invoice_info->tax_percentage / 100);
+                $tax2 = $total_taxable * ($invoice_info->tax_percentage2 / 100);
+                $tax3 = $total_taxable * ($invoice_info->tax_percentage3 / 100);
+                $invoice_total_incl_tax = $total_taxable + $total_non_taxable + $tax1 + $tax2 - $tax3; //discount before tax
+                $invoice_total = $total_taxable + $total_non_taxable + $tax1 + $tax2 - $tax3; //discount before tax
+
+                if ($invoice_info->discount_type == "after_tax") {
+                    $invoice_total_incl_tax = $total_taxable + $total_non_taxable + $tax1 + $tax2 - $tax3 - $discount_total;
+                }
             }
         }
 
         $info = new \stdClass();
         $info->invoice_total = number_format($invoice_total, 2, ".", "") * 1;
+        $info->invoice_total_incl_tax = number_format($invoice_total_incl_tax, 2, ".", "") * 1;
         $info->invoice_subtotal = number_format($sub_total, 2, ".", "") * 1;
         $info->discount_total = number_format($discount_total, 2, ".", "") * 1;
+        $info->bonus_amount = number_format($invoice_info->bonus_amount, 2, ".", "") * 1;
+
+        $info->total_payable = number_format($total_payable, 2, ".", "") * 1;
+        $info->total_income = number_format($total_income, 2, ".", "") * 1;
+        $info->commission_total = number_format($commission_total, 2, ".", "") * 1;
+        $info->com_deducted_income = number_format($com_deducted_income, 2, ".", "") * 1;
+        $info->discount_deducted_income = number_format($discount_deducted_income, 2, ".", "") * 1;
+        $info->gross_income = number_format($gross_income, 2, ".", "") * 1;
+        $info->net_total_income = number_format($net_total_income, 2, ".", "") * 1;
 
         $info->tax_percentage = $invoice_info->tax_percentage;
         $info->tax_percentage2 = $invoice_info->tax_percentage2;
@@ -656,6 +797,7 @@ class Crud_model extends Model
         $info->tax3 = number_format($tax3, 2, ".", "") * 1;
 
         $info->discount_type = $invoice_info->discount_type;
+        $info->invoice_type = $invoice_info->invoice_type;
         return $info;
     }
 }

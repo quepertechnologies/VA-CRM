@@ -1,0 +1,1080 @@
+CRITICAL - 2024-09-06 00:01:55 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:01:55 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:01:55 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:01:56 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:01:56 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:00 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:01 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:04 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:04 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:04 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:05 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:06 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:06 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:06 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:07 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:07 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:08 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:08 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:02:09 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:03:36 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('tasks/view', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:04:28 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('status_id', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75154')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:04:46 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('status_id', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75158')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:04:54 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('status_id', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75160')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:06:49 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('status_id', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75169')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 00:07:41 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH/Helpers/currency_helper.php on line 96.
+ 1 APPPATH/Helpers/currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH/Controllers/Projects.php(706): unformat_currency(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 00:08:08 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH/Helpers/currency_helper.php on line 96.
+ 1 APPPATH/Helpers/currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH/Controllers/Projects.php(706): unformat_currency(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:10:03 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75179')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:28:19 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75191')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:30:44 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:30:44 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:30:45 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:30:45 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:30:46 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:30:47 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:30:47 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:30:48 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:30:48 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:30:48 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:30:50 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:37:02 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:37:03 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:37:05 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:37:06 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:37:28 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:37:29 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:37:31 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:37:34 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:44:05 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:44:06 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:44:06 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:44:07 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 00:45:34 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75206')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:06:27 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('status_id', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75218')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:07:40 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:12:22 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75227')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 01:14:02 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH/Helpers/currency_helper.php on line 96.
+ 1 APPPATH/Helpers/currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH/Controllers/Projects.php(706): unformat_currency(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:37:46 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:37:46 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:37:47 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:37:52 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:40:47 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/save_project_fees', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:41:44 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:41:45 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:41:45 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:41:45 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:41:58 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:41:59 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:42:00 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:42:01 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:42:02 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:42:02 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:42:03 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:42:04 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:45:28 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('projects/project_fees_modal_form', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 01:54:32 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('tasks/save', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 02:02:15 --> [DEPRECATED] substr(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Helpers/date_time_helper.php on line 596.
+ 1 APPPATH/Helpers/date_time_helper.php(596): substr(null, 0, 10)
+ 2 APPPATH/Controllers/Tasks.php(3441): get_date_from_datetime(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Tasks->update_task_info('10936', 'status_id')
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tasks))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 02:02:15 --> [DEPRECATED] substr(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Helpers/date_time_helper.php on line 611.
+ 1 APPPATH/Helpers/date_time_helper.php(611): substr(null, 11)
+ 2 APPPATH/Controllers/Tasks.php(3443): get_time_from_datetime(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Tasks->update_task_info('10936', 'status_id')
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tasks))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:04:13 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('tasks/view/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:05:35 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('collaborators', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75257')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:10:02 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75267')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 02:13:25 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH/Helpers/currency_helper.php on line 96.
+ 1 APPPATH/Helpers/currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH/Controllers/Projects.php(706): unformat_currency(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 02:21:12 --> [DEPRECATED] preg_replace(): Passing null to parameter #3 ($subject) of type array|string is deprecated in APPPATH/Helpers/currency_helper.php on line 96.
+ 1 APPPATH/Helpers/currency_helper.php(96): preg_replace('/[^\\d,-\\.]/', '', null)
+ 2 APPPATH/Controllers/Projects.php(706): unformat_currency(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Projects->save()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:21:54 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('tasks/view', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 02:22:13 --> [DEPRECATED] hex2bin(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Helpers/general_helper.php on line 327.
+ 1 APPPATH/Helpers/general_helper.php(327): hex2bin(null)
+ 2 APPPATH/Controllers/Notification_processor.php(35): decode_id(null, 'notification')
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:23:34 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:23:34 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:23:35 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:23:37 --> The action you requested is not allowed.
+in SYSTEMPATH/Security/Security.php on line 306.
+ 1 SYSTEMPATH/Security/Security.php(306): CodeIgniter\Security\Exceptions\SecurityException::forDisallowedAction()
+ 2 SYSTEMPATH/Filters/CSRF.php(55): CodeIgniter\Security\Security->verify(Object(CodeIgniter\HTTP\IncomingRequest))
+ 3 SYSTEMPATH/Filters/Filters.php(173): CodeIgniter\Filters\CSRF->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+ 4 SYSTEMPATH/CodeIgniter.php(471): CodeIgniter\Filters\Filters->run('search/get_search_suggestion/', 'before')
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:25:35 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('title', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75279')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 02:27:06 --> [DEPRECATED] substr(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Helpers/date_time_helper.php on line 596.
+ 1 APPPATH/Helpers/date_time_helper.php(596): substr(null, 0, 10)
+ 2 APPPATH/Controllers/Tasks.php(3441): get_date_from_datetime(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Tasks->update_task_info('10799', 'deadline')
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tasks))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 02:27:06 --> [DEPRECATED] substr(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Helpers/date_time_helper.php on line 611.
+ 1 APPPATH/Helpers/date_time_helper.php(611): substr(null, 11)
+ 2 APPPATH/Controllers/Tasks.php(3443): get_time_from_datetime(null)
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Tasks->update_task_info('10799', 'deadline')
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Tasks))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:27:07 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75282')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:29:16 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75283')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:29:39 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75284')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:29:50 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75285')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:34:03 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75287')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 02:34:28 --> [DEPRECATED] hex2bin(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Helpers/general_helper.php on line 327.
+ 1 APPPATH/Helpers/general_helper.php(327): hex2bin(null)
+ 2 APPPATH/Controllers/Notification_processor.php(35): decode_id(null, 'notification')
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:34:33 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75289')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:39:07 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75302')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 02:39:54 --> [DEPRECATED] hex2bin(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Helpers/general_helper.php on line 327.
+ 1 APPPATH/Helpers/general_helper.php(327): hex2bin(null)
+ 2 APPPATH/Controllers/Notification_processor.php(35): decode_id(null, 'notification')
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:39:55 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75305')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 02:40:28 --> [DEPRECATED] hex2bin(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH/Helpers/general_helper.php on line 327.
+ 1 APPPATH/Helpers/general_helper.php(327): hex2bin(null)
+ 2 APPPATH/Controllers/Notification_processor.php(35): decode_id(null, 'notification')
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 02:40:33 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75307')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+WARNING - 2024-09-06 02:52:48 --> [DEPRECATED] date_create(): Passing null to parameter #1 ($datetime) of type string is deprecated in APPPATH/Controllers/Students.php on line 420.
+ 1 APPPATH/Controllers/Students.php(420): date_create(null)
+ 2 APPPATH/Controllers/Students.php(382): App\Controllers\Students->_make_row(Object(stdClass), [])
+ 3 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Students->list_data()
+ 4 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Students))
+ 5 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 09:41:30 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/general_helper.php(1585): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Controllers/Request_estimate.php(222): log_notification('estimate_request_received', [...])
+ 5 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Request_estimate->save_estimate_request()
+ 6 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Request_estimate))
+ 7 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:00:23 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75309')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:13:24 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('title', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75312')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:14:10 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75314')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:26:14 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('status_id', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75316')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:26:21 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75317')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:27:11 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75319')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:27:24 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75320')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:28:39 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75322')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:30:02 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75324')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:30:24 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75326')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:31:33 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75328')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:32:06 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75330')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:32:13 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75331')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2024-09-06 21:33:17 --> Undefined property: stdClass::$user_type
+in APPPATH/Controllers/Security_Controller.php on line 764.
+ 1 APPPATH/Controllers/Security_Controller.php(764): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$user_type', '/home/visaalliance/public_html/crm.visaalliance.com/app/Controllers/Security_Controller.php', 764)
+ 2 APPPATH/Controllers/Security_Controller.php(53): App\Controllers\Security_Controller->make_locations_dropdown()
+ 3 APPPATH/Helpers/activity_logs_helper.php(166): App\Controllers\Security_Controller->__construct(false)
+ 4 APPPATH/Helpers/activity_logs_helper.php(286): get_change_logs_of_custom_fields('deadline', true)
+ 5 APPPATH/Controllers/Notification_processor.php(159): get_change_logs_array([...], 'task', 'updated', true)
+ 6 APPPATH/Controllers/Notification_processor.php(91): App\Controllers\Notification_processor->_clasified_task_modification('general_task_updated', [...], '75333')
+ 7 SYSTEMPATH/CodeIgniter.php(932): App\Controllers\Notification_processor->create_notification()
+ 8 SYSTEMPATH/CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Notification_processor))
+ 9 SYSTEMPATH/CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH/index.php(84): CodeIgniter\CodeIgniter->run()

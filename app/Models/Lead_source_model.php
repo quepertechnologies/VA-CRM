@@ -2,22 +2,29 @@
 
 namespace App\Models;
 
-class Lead_source_model extends Crud_model {
+class Lead_source_model extends Crud_model
+{
 
     protected $table = null;
 
-    function __construct() {
+    function __construct()
+    {
         $this->table = 'lead_source';
         parent::__construct($this->table);
     }
 
-    function get_details($options = array()) {
+    function get_details($options = array())
+    {
         $lead_source_table = $this->db->prefixTable('lead_source');
 
         $where = "";
         $id = $this->_get_clean_value($options, "id");
         if ($id) {
             $where = " AND $lead_source_table.id=$id";
+        }
+        $title = $this->_get_clean_value($options, "title");
+        if ($title) {
+            $where = " AND $lead_source_table.title='$title'";
         }
 
         $sql = "SELECT $lead_source_table.*
@@ -27,7 +34,8 @@ class Lead_source_model extends Crud_model {
         return $this->db->query($sql);
     }
 
-    function get_max_sort_value() {
+    function get_max_sort_value()
+    {
         $lead_source_table = $this->db->prefixTable('lead_source');
 
         $sql = "SELECT MAX($lead_source_table.sort) as sort
@@ -40,5 +48,4 @@ class Lead_source_model extends Crud_model {
             return 0;
         }
     }
-
 }

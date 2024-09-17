@@ -83,7 +83,7 @@
                 }
             }
         });
-        
+
         $("#assignee").select2({
             data: <?php echo $team_members_dropdown; ?>
         });
@@ -238,6 +238,34 @@
         $("#from-save-and-continue").click(function() {
             window.showAddNewModal = true;
             $(this).trigger("submit");
+        });
+
+        $("#email").on('keyup', function() {
+            if ($(':button[type="submit"]').is(":disabled")) {
+                // $(':button[type="submit"]').prop("disabled", false);
+                $("#email-alert-cont").addClass("d-none").html("");
+            }
+        });
+
+        $("#email").on('blur', function() {
+            $(':button[type="submit"]').prop('disabled', true);
+            $.ajax({
+                url: "<?php echo get_uri("clients/validate_email"); ?>",
+                data: {
+                    email: $(this).val()
+                },
+                cache: false,
+                type: 'POST',
+                dataType: "json",
+                success: function(response) {
+                    if (response && response.success) {
+                        $("#email-alert-cont").removeClass("d-none").html(response.message);
+                    } else if (response) {
+                        $(':button[type="submit"]').prop("disabled", false);
+                        $("#email-alert-cont").addClass("d-none");
+                    }
+                }
+            });
         });
     });
 </script>

@@ -41,4 +41,19 @@ class Office_model extends Crud_model
         ORDER BY $offices_table.id ASC";
         return $this->db->query($sql);
     }
+
+    function own_office_only_location_ids($user_id = 0)
+    {
+        $offices_table = $this->db->prefixTable('offices');
+
+        $sql = "SELECT $offices_table.location_id
+        FROM $offices_table
+        WHERE $offices_table.deleted=0 AND $offices_table.user_id=$user_id
+        ORDER BY $offices_table.id ASC";
+        $result = $this->db->query($sql)->getResult();
+
+        return array_map(function ($v) {
+            return $v->location_id;
+        }, $result);
+    }
 }

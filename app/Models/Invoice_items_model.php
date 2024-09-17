@@ -4,19 +4,22 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Invoice_items_model extends Crud_model {
+class Invoice_items_model extends Crud_model
+{
 
     protected $table = null;
     private $_Invoices_model = null;
 
-    function __construct() {
+    function __construct()
+    {
         $this->table = 'invoice_items';
         parent::__construct($this->table);
 
         $this->_Invoices_model = model("App\Models\Invoices_model");
     }
 
-    function get_details($options = array()) {
+    function get_details($options = array())
+    {
         $invoice_items_table = $this->db->prefixTable('invoice_items');
         $invoices_table = $this->db->prefixTable('invoices');
         $clients_table = $this->db->prefixTable('clients');
@@ -24,6 +27,10 @@ class Invoice_items_model extends Crud_model {
         $id = $this->_get_clean_value($options, "id");
         if ($id) {
             $where .= " AND $invoice_items_table.id=$id";
+        }
+        $income_type = $this->_get_clean_value($options, "income_type");
+        if ($income_type) {
+            $where .= " AND $invoice_items_table.income_type='$income_type'";
         }
         $invoice_id = $this->_get_clean_value($options, "invoice_id");
         if ($invoice_id) {
@@ -46,7 +53,8 @@ class Invoice_items_model extends Crud_model {
         return $this->db->query($sql);
     }
 
-    function get_item_suggestion($keyword = "", $user_type = "") {
+    function get_item_suggestion($keyword = "", $user_type = "")
+    {
         $items_table = $this->db->prefixTable('items');
 
         if ($keyword) {
@@ -66,7 +74,8 @@ class Invoice_items_model extends Crud_model {
         return $this->db->query($sql)->getResult();
     }
 
-    function get_item_info_suggestion($options = array()) {
+    function get_item_info_suggestion($options = array())
+    {
 
         $items_table = $this->db->prefixTable('items');
 
@@ -100,7 +109,8 @@ class Invoice_items_model extends Crud_model {
         }
     }
 
-    function save_item_and_update_invoice($data, $id, $invoice_id) {
+    function save_item_and_update_invoice($data, $id, $invoice_id)
+    {
         $result = $this->ci_save($data, $id);
 
         $invoices_model = model("App\Models\Invoices_model");
@@ -109,7 +119,8 @@ class Invoice_items_model extends Crud_model {
         return $result;
     }
 
-    function delete_item_and_update_invoice($id, $undo = false) {
+    function delete_item_and_update_invoice($id, $undo = false)
+    {
         $item_info = $this->get_one($id);
 
         $result = $this->delete($id, $undo);

@@ -1,4 +1,13 @@
 <div class="card rounded-bottom">
+    <small class="text-warn text-right" style="margin-right:20px; margin-top:15px;">
+        <?php foreach ($doc_location_breadcrumbs as $key => $location) {
+            if ($key) {
+                echo " > " . $location;
+            } else {
+                echo $location;
+            }
+        } ?>
+    </small>
     <div class="table-responsive">
         <table id="check-list-table" class="display" width="100%">
         </table>
@@ -17,7 +26,7 @@
                     title: '<?php echo app_lang("label") ?>'
                 },
                 {
-                    title: '<?php echo app_lang("no_of_uploaded_docs") ?>'
+                    title: '<?php echo app_lang("status") ?>'
                 },
                 {
                     title: '<i data-feather="menu" class="icon-16"></i>',

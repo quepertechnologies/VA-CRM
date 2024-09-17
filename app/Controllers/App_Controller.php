@@ -89,6 +89,7 @@ class App_Controller extends Controller
     public $Subscription_items_model;
     public $Timeline_model;
     public $Location_model;
+    public $Visa_model;
     public $Email_activity_model;
     public $Contract_activity_model;
     public $Check_in_model;
@@ -99,6 +100,8 @@ class App_Controller extends Controller
     public $Project_payment_schedule_setup_model;
     public $Temp_Product_model;
     public $Office_model;
+    public $Invoice_incomes_model;
+    public $Auto_save_user_notes_model;
 
     public function __construct()
     {
@@ -216,6 +219,7 @@ class App_Controller extends Controller
             'Languages_model',
             'Timeline_model',
             'Location_model',
+            'Visa_model',
             'Email_activity_model',
             'Contract_activity_model',
             'Check_in_model',
@@ -226,6 +230,8 @@ class App_Controller extends Controller
             'Project_payment_schedule_setup_model',
             'Temp_Product_model',
             'Office_model',
+            'Invoice_incomes_model',
+            'Auto_save_user_notes_model',
         );
     }
 
@@ -353,6 +359,17 @@ class App_Controller extends Controller
         } else {
             die(app_lang("no_such_file_or_directory_found"));
         }
+    }
+
+    //get currency dropdown list
+    protected function _get_sources_dropdown_select2_data()
+    {
+        $_sources = array(array("id" => "", "text" => "-"));
+        $sources = $this->Lead_source_model->get_details()->getResult();
+        foreach ($sources as $source) {
+            $_sources[] = array("id" => $source->id, "text" => $source->title);
+        }
+        return $_sources;
     }
 
     //get currency dropdown list

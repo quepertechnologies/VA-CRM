@@ -63,7 +63,7 @@
                 {
                     title: "<?php echo app_lang("name") ?>",
                     "class": "all",
-                    order_by: "company_name"
+                    order_by: "full_name"
                 },
                 {
                     title: "<?php echo app_lang("primary_contact") ?>",

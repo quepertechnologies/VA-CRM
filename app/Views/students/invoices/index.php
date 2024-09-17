@@ -30,7 +30,8 @@
 <?php } ?>
 <script type="text/javascript">
     $(document).ready(function() {
-        var currencySymbol = "<?php echo $client_info->currency_symbol; ?>";
+        var currencySymbol = "<?php echo $client_info->currency_symbol; ?>",
+            hideDueAmount = "<?php echo isset($hide_due_amount) && $hide_due_amount; ?>";
         $("#invoice-table").appTable({
             source: '<?php echo_uri("invoices/invoice_list_data_of_client/" . $client_id) ?>',
             order: [
@@ -104,7 +105,8 @@
                 },
                 {
                     title: "<?php echo app_lang("due") ?>",
-                    "class": "w10p text-right"
+                    "class": "w10p text-right",
+                    visible: hideDueAmount ? false : true
                 },
                 {
                     title: '<?php echo app_lang("status") ?>',

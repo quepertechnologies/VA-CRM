@@ -499,10 +499,13 @@ class Team_members extends Security_Controller
                 //admin can access all members attendance and leave
                 //none admin users can only access to his/her own information 
 
+                $view_data['show_clients'] = false;
+
                 if ($this->login_user->is_admin || $user_info->id === $this->login_user->id || get_array_value($this->login_user->permissions, "can_manage_user_role_and_permissions")) {
                     $show_attendance = true;
                     $show_leave = true;
                     $view_data['show_account_settings'] = true;
+                    $view_data['show_clients'] = true;
                 } else {
                     //none admin users but who has access to this team member's attendance and leave can access this info
                     $access_timecard = $this->get_access_info("attendance");
@@ -944,6 +947,24 @@ class Team_members extends Security_Controller
             $view_data['project_statuses'] = $this->Project_status_model->get_details()->getResult();
             return $this->template->view("team_members/projects_info", $view_data);
         }
+    }
+
+    function clients_info($user_id)
+    {
+        $view_data["custom_field_filters"] = $this->Custom_fields_model->get_custom_field_filters("clients", $this->login_user->is_admin, $this->login_user->user_type);
+
+        $access_info = $this->get_access_info("invoice");
+        $view_data["show_invoice_info"] = (get_setting("module_invoice") && $access_info->access_type == "all") ? true : false;
+        $view_data["custom_field_headers"] = $this->Custom_fields_model->get_custom_field_headers_for_table("clients", $this->login_user->is_admin, $this->login_user->user_type);
+
+        $view_data['groups_dropdown'] = json_encode($this->_get_groups_dropdown_select2_data(true));
+        $view_data['can_edit_clients'] = $this->can_edit_clients();
+        $view_data["team_members_dropdown"] = $this->get_team_members_dropdown(true);
+        $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
+        $view_data['phases_dropdown'] = json_encode($this->make_phases_dropdown());
+        $view_data['user_id'] = $user_id;
+
+        return $this->template->view("team_members/clients_info", $view_data);
     }
 
     //show attendance list of a team member

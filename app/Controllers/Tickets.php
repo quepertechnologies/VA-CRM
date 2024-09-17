@@ -129,7 +129,12 @@ class Tickets extends Security_Controller
 
         $view_data['model_info'] = $model_info;
         $view_data['client_id'] = $ticket_info->client_id;
-        $view_data['clients_dropdown'] = array("" => "-") + $this->Clients_model->get_dropdown_list(array("company_name", 'first_name', 'last_name'), "id", array("is_lead" => 0));
+
+        $clients = $this->Clients_model->get_details(array('only_account_types' => '1,2,4'))->getResult();
+        $view_data['clients_dropdown'] = array("" => "-");
+        foreach ($clients as $client) {
+            $view_data['clients_dropdown'][$client->id] = $this->get_client_full_name(0, $client);
+        }
         $view_data['show_project_reference'] = get_setting('project_reference_in_tickets');
 
         $view_data['project_id'] = $this->request->getPost('project_id');
@@ -430,6 +435,11 @@ class Tickets extends Security_Controller
         $ticket_status = "<span class='badge $ticket_status_class large'>" . app_lang($data->status) . "</span> ";
 
         $title = anchor(get_uri("tickets/view/" . $data->id), $data->title);
+        $ticket_id = anchor(get_uri("tickets/view/" . $data->id), get_ticket_id($data->id), array("class" => "js-ticket", "data-id" => $data->id, "title" => ""));
+        if (get_setting('fresh_desk_company_name') && $data->fresh_desk_ticket_id) {
+            $title = anchor_popup("https://" . get_setting('fresh_desk_company_name') . '.freshdesk.com/a/tickets/' . $data->fresh_desk_ticket_id, $data->title, array("class" => "js-ticket", "data-id" => $data->id, "title" => ""));
+            $ticket_id = anchor_popup("https://" . get_setting('fresh_desk_company_name') . '.freshdesk.com/a/tickets/' . $data->fresh_desk_ticket_id, get_ticket_id($data->id), array("class" => "js-ticket", "data-id" => $data->id, "title" => ""));
+        }
 
         //show labels fild to team members only
         $ticket_labels = make_labels_view_data($data->labels_list, true);
@@ -445,11 +455,13 @@ class Tickets extends Security_Controller
             $assigned_to = get_team_member_profile_link($data->assigned_to, $assigned_to_user);
         }
 
+        $client_full_name = $this->get_client_full_name($data->client_id);
+
         $row_data = array(
             $data->id,
-            anchor(get_uri("tickets/view/" . $data->id), get_ticket_id($data->id), array("class" => "js-ticket", "data-id" => $data->id, "title" => "")),
+            $ticket_id,
             $title,
-            $data->company_name ? anchor(get_uri("clients/view/" . $data->client_id), $data->company_name) : ($data->creator_name . " [" . app_lang("unknown_client") . "]"),
+            $client_full_name ? anchor(get_uri("clients/view/" . $data->client_id), $client_full_name) : ($data->creator_name . " [" . app_lang("unknown_client") . "]"),
             $data->project_title ? anchor(get_uri("projects/view/" . $data->project_id), $data->project_title) : "-",
             $data->ticket_type ? $data->ticket_type : "-",
             $assigned_to,
@@ -463,43 +475,42 @@ class Tickets extends Security_Controller
             $row_data[] = $this->template->view("custom_fields/output_" . $field->field_type, array("value" => $data->$cf_id));
         }
 
-        if ($this->login_user->user_type == "staff") {
-            $edit = '<li role="presentation">' . modal_anchor(get_uri("tickets/modal_form"), "<i data-feather='edit' class='icon-16'></i> " . app_lang('edit'), array("title" => app_lang('edit'), "data-post-view" => "details", "data-post-id" => $data->id, "class" => "dropdown-item")) . '</li>';
+        $row_data[] = '';
+        // if ($this->login_user->user_type == "staff") {
+        //     $edit = '<li role="presentation">' . modal_anchor(get_uri("tickets/modal_form"), "<i data-feather='edit' class='icon-16'></i> " . app_lang('edit'), array("title" => app_lang('edit'), "data-post-view" => "details", "data-post-id" => $data->id, "class" => "dropdown-item")) . '</li>';
 
-            //show option to close/open the tickets
-            $status = "";
-            if ($data->status === "closed") {
-                $status = '<li role="presentation">' . js_anchor("<i data-feather='check-circle' class='icon-16'></i> " . app_lang('mark_as_open'), array('title' => app_lang('mark_as_open'), "class" => "dropdown-item", "data-action-url" => get_uri("tickets/save_ticket_status/$data->id/open"), "data-action" => "update")) . '</li>';
-            } else {
-                $status = '<li role="presentation">' . js_anchor("<i data-feather='check-circle' class='icon-16'></i> " . app_lang('mark_as_closed'), array('title' => app_lang('mark_as_closed'), "class" => "dropdown-item", "data-action-url" => get_uri("tickets/save_ticket_status/$data->id/closed"), "data-action" => "update")) . '</li>';
-            }
+        //     //show option to close/open the tickets
+        //     $status = "";
+        //     if ($data->status === "closed") {
+        //         $status = '<li role="presentation">' . js_anchor("<i data-feather='check-circle' class='icon-16'></i> " . app_lang('mark_as_open'), array('title' => app_lang('mark_as_open'), "class" => "dropdown-item", "data-action-url" => get_uri("tickets/save_ticket_status/$data->id/open"), "data-action" => "update")) . '</li>';
+        //     } else {
+        //         $status = '<li role="presentation">' . js_anchor("<i data-feather='check-circle' class='icon-16'></i> " . app_lang('mark_as_closed'), array('title' => app_lang('mark_as_closed'), "class" => "dropdown-item", "data-action-url" => get_uri("tickets/save_ticket_status/$data->id/closed"), "data-action" => "update")) . '</li>';
+        //     }
 
-            $assigned_to = "";
-            if ($data->assigned_to === "0") {
-                $assigned_to = '<li role="presentation">' . js_anchor("<i data-feather='user' class='icon-16'></i> " . app_lang('assign_to_me'), array('title' => app_lang('assign_myself_in_this_ticket'), "data-action-url" => get_uri("tickets/assign_to_me/$data->id"), "data-action" => "update", "class" => "dropdown-item")) . '</li>';
-            }
-
-
-            //show the delete menu if user has access to delete the tickets
-            $delete_ticket = "";
-            if ($this->can_delete_tickets()) {
-                $delete_ticket = '<li role="presentation">' . js_anchor("<i data-feather='x' class='icon-16'></i>" . app_lang('delete'), array('title' => app_lang('delete'), "class" => "delete dropdown-item", "data-id" => $data->id, "data-action-url" => get_uri("tickets/delete"), "data-action" => "delete-confirmation")) . '</li>';
-            }
-
-            $actions = '
-                        <span class="dropdown inline-block">
-                            <button class="btn btn-default dropdown-toggle caret mt0 mb0" type="button" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
-                                <i data-feather="tool" class="icon-16"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-end" role="menu">' . $edit . $status . $assigned_to . $delete_ticket . '</ul>
-                        </span>';
-
-            $modal_view = modal_anchor(get_uri("tickets/view"), "<i data-feather='tablet' class='icon-16'></i>", array("class" => "action-option", "title" => app_lang('ticket_info') . " #$data->id", "data-post-id" => $data->id, "data-post-view_type" => "modal_view", "data-modal-fullscreen" => "1", "data-modal-custom-bg" => "1"));
-
-            $row_data[] = $modal_view . $actions;
-        }
+        //     $assigned_to = "";
+        //     if ($data->assigned_to === "0") {
+        //         $assigned_to = '<li role="presentation">' . js_anchor("<i data-feather='user' class='icon-16'></i> " . app_lang('assign_to_me'), array('title' => app_lang('assign_myself_in_this_ticket'), "data-action-url" => get_uri("tickets/assign_to_me/$data->id"), "data-action" => "update", "class" => "dropdown-item")) . '</li>';
+        //     }
 
 
+        //     //show the delete menu if user has access to delete the tickets
+        //     $delete_ticket = "";
+        //     if ($this->can_delete_tickets()) {
+        //         $delete_ticket = '<li role="presentation">' . js_anchor("<i data-feather='x' class='icon-16'></i>" . app_lang('delete'), array('title' => app_lang('delete'), "class" => "delete dropdown-item", "data-id" => $data->id, "data-action-url" => get_uri("tickets/delete"), "data-action" => "delete-confirmation")) . '</li>';
+        //     }
+
+        //     $actions = '
+        //                 <span class="dropdown inline-block">
+        //                     <button class="btn btn-default dropdown-toggle caret mt0 mb0" type="button" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
+        //                         <i data-feather="tool" class="icon-16"></i>
+        //                     </button>
+        //                     <ul class="dropdown-menu dropdown-menu-end" role="menu">' . $edit . $status . $assigned_to . $delete_ticket . '</ul>
+        //                 </span>';
+
+        //     $modal_view = modal_anchor(get_uri("tickets/view"), "<i data-feather='tablet' class='icon-16'></i>", array("class" => "action-option", "title" => app_lang('ticket_info') . " #$data->id", "data-post-id" => $data->id, "data-post-view_type" => "modal_view", "data-modal-fullscreen" => "1", "data-modal-custom-bg" => "1"));
+
+        //     $row_data[] = $modal_view . $actions;
+        // }
 
         return $row_data;
     }

@@ -149,6 +149,11 @@ if (isset($selected_priority_id) && $selected_priority_id) {
                     dataSource: '<?php echo_uri("tasks/get_milestones_for_filter") ?>'
                 }, //milestone is dependent on project
                 {
+                    name: "created_by",
+                    class: "w200",
+                    options: <?php echo json_encode($created_by_for_filters_dropdown); ?>
+                },
+                {
                     name: "specific_user_id",
                     class: "w200",
                     options: <?php echo $team_members_dropdown; ?>
@@ -222,7 +227,7 @@ if (isset($selected_priority_id) && $selected_priority_id) {
                 },
                 {
                     title: '<?php echo app_lang("title") ?>',
-                    "class": titleColumnClass,
+                    class: "w300",
                     order_by: "title"
                 },
                 {
@@ -252,9 +257,13 @@ if (isset($selected_priority_id) && $selected_priority_id) {
                 //     visible: showOption,
                 //     order_by: "milestone"
                 // },
+                // {
+                //     title: '<?php echo app_lang("related_to") ?>',
+                //     visible: showOption
+                // },
                 {
-                    title: '<?php echo app_lang("related_to") ?>',
-                    visible: showOption
+                    title: '<?php echo app_lang("created_by") ?>',
+                    visible: showOption,
                 },
                 {
                     title: '<?php echo app_lang("assigned_to") ?>',

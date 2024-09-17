@@ -1,3 +1,12 @@
+<?php
+$upload_max_filesize = ini_get("upload_max_filesize");
+preg_match('/([a-zA-Z])/', $upload_max_filesize, $result);
+preg_match('|\d+|', $upload_max_filesize, $max_size);
+
+$max_filesize = $max_size[0] . ' ' . strtoupper($result[0]) . 'B'; //convert MB to byte
+
+?>
+
 <script type="text/javascript">
     AppLanugage = {};
     AppLanugage.locale = "<?php echo app_lang('language_locale'); ?>";
@@ -53,6 +62,5 @@
 
     AppLanugage.undo = "<?php echo app_lang('undo'); ?>";
 
-    AppLanugage.fileSizeTooLong = "<?php echo app_lang('file_size_too_large'); ?>";
-
+    AppLanugage.fileSizeTooLong = "<?php echo app_lang('file_size_too_large') . ' Maximum allowed file size is ' . $max_filesize; ?>";
 </script>

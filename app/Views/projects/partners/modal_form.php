@@ -11,7 +11,8 @@
                     <div class="select-partner-field">
                         <div class="select-partner-form clearfix pb10">
                             <?php echo form_dropdown("partner_id[]", $partners_dropdown, array($model_info->partner_id), "class='partner_select2 col-md-12 p0' id='partner_id'"); ?>
-                            <?php echo form_input('commission[]', $model_info->commission, 'class="form-control col-md-4" placeholder="Commission"') ?>
+                            <?php echo form_input('commission[]', $model_info->commission, 'class="commission_rate form-control col-md-4" placeholder="Commission (%)" id="commission_rate" min="0" max="100"', 'number') ?>
+                            <small class="text-info" id='default-commission-msg'></small>
                             <?php echo js_anchor("<i data-feather='x' class='icon-16'></i> ", array("class" => "remove-partner delete ml20")); ?>
                         </div>
                     </div>
@@ -19,7 +20,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
@@ -66,6 +66,8 @@
         var $wrapper = $('.select-partner-field'),
             $field = $('.select-partner-form:first-child', $wrapper).clone(); //keep a clone for future use.
 
+        const knownReferrals = <?php echo json_encode($known_referrals); ?>
+
         $(".add-partner", $(this)).click(function(e) {
             var $newField = $field.clone();
 
@@ -76,6 +78,9 @@
 
             var $newObj = $newField.appendTo($wrapper);
             $newObj.find(".partner_select2").select2();
+            if (knownReferrals.includes($(this).val())) {
+                $newObj.find(".commission_rate").val('10').attr('disabled', 'true');
+            }
 
             $newObj.find('.remove-partner').click(function() {
                 $(this).parent('.select-partner-form').remove();
@@ -83,6 +88,20 @@
             });
 
             showHideAddMore($field);
+        });
+
+        $(document.body).on('change', '#partner_id', function() {
+            known_id = $(this).attr("id");
+            if (known_id == 'partner_id') {
+                var partner_id = $(this).val();
+                if (knownReferrals.includes(partner_id)) {
+                    $(this).parent().find('#commission_rate').val('10').attr("readonly", 'true');
+                    $(this).parent().find('#default-commission-msg').html("<small class='text-info' id='default-commission-msg'>For Referrals, only default commission rate 10% is allowed.</small>");
+                } else {
+                    $(this).parent().find('#commission_rate').val('').removeAttr("readonly");
+                    $(this).parent().find('#default-commission-msg').html('');
+                }
+            }
         });
 
         showHideAddMore($field);

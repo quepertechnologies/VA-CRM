@@ -206,13 +206,13 @@ class Courses extends Security_Controller
             $data["disable_online_payment"] = $this->request->getPost('disable_online_payment') ? $this->request->getPost('disable_online_payment') : 0;
 
             //check if the currency is editable
-            if ($client_id) {
-                $client_info = $this->Clients_model->get_one($client_id);
-                if ($client_info->currency !== $data["currency"] && !$this->Clients_model->is_currency_editable($client_id)) {
-                    echo json_encode(array("success" => false, 'message' => app_lang('client_currency_not_editable_message')));
-                    exit();
-                }
-            }
+            // if ($client_id) {
+            //     $client_info = $this->Clients_model->get_one($client_id);
+            //     if ($client_info->currency !== $data["currency"] && !$this->Clients_model->is_currency_editable($client_id)) {
+            //         echo json_encode(array("success" => false, 'message' => app_lang('client_currency_not_editable_message')));
+            //         exit();
+            //     }
+            // }
         }
 
         if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "client") === "all") {

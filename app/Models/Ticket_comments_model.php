@@ -2,16 +2,19 @@
 
 namespace App\Models;
 
-class Ticket_comments_model extends Crud_model {
+class Ticket_comments_model extends Crud_model
+{
 
     protected $table = null;
 
-    function __construct() {
+    function __construct()
+    {
         $this->table = 'ticket_comments';
         parent::__construct($this->table);
     }
 
-    function get_details($options = array()) {
+    function get_details($options = array())
+    {
         $tickets_table = $this->db->prefixTable('tickets');
         $ticket_comments_table = $this->db->prefixTable('ticket_comments');
         $users_table = $this->db->prefixTable('users');
@@ -26,6 +29,11 @@ class Ticket_comments_model extends Crud_model {
         $ticket_id = $this->_get_clean_value($options, "ticket_id");
         if ($ticket_id) {
             $where .= " AND $ticket_comments_table.ticket_id=$ticket_id";
+        }
+
+        $fresh_desk_comment_id = $this->_get_clean_value($options, "fresh_desk_comment_id");
+        if ($fresh_desk_comment_id) {
+            $where .= " AND $ticket_comments_table.fresh_desk_comment_id=$fresh_desk_comment_id";
         }
 
         $sort_decending = $this->_get_clean_value($options, "sort_as_decending");
@@ -47,5 +55,4 @@ class Ticket_comments_model extends Crud_model {
 
         return $this->db->query($sql);
     }
-
 }

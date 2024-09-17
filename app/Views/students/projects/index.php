@@ -145,7 +145,9 @@ if (!isset($project_labels_dropdown)) {
             columns: [{
                     title: '<?php echo app_lang("id") ?>',
                     "class": "all w10p",
-                    visible: true
+                    visible: true,
+                    order_by: "id",
+                    order_dir: "DESC"
                 },
                 {
                     title: '<?php echo app_lang("title") ?>',
@@ -153,7 +155,7 @@ if (!isset($project_labels_dropdown)) {
                     visible: true
                 },
                 {
-                    title: '<?php echo app_lang("start_date") ?>',
+                    title: '<?php echo app_lang("deadline") ?>',
                     "class": "w10p",
                     "iDataSort": 2,
                     visible: true
@@ -163,21 +165,21 @@ if (!isset($project_labels_dropdown)) {
                     "class": "w10p",
                     visible: true
                 },
-                {
-                    title: '<?php echo app_lang("phone") ?>',
-                    "class": "w10p",
-                    visible: true
-                },
+                // {
+                //     title: '<?php echo app_lang("phone") ?>',
+                //     "class": "w10p",
+                //     visible: true
+                // },
                 {
                     title: '<?php echo app_lang("application_assignees") ?>',
                     "class": "w10p",
                     visible: true
                 },
-                {
-                    title: '<?php echo app_lang("application_owner") ?>',
-                    "class": "w10p",
-                    visible: true
-                },
+                // {
+                //     title: '<?php echo app_lang("application_owner") ?>',
+                //     "class": "w10p",
+                //     visible: true
+                // },
                 {
                     title: '<?php echo app_lang("workflow") ?>',
                     "class": "w10p",
@@ -189,9 +191,8 @@ if (!isset($project_labels_dropdown)) {
                     visible: true
                 },
                 {
-                    title: '<?php echo app_lang("deadline") ?>',
+                    title: '<?php echo app_lang("partner") ?>',
                     "class": "w10p",
-                    "iDataSort": 9,
                     visible: true
                 },
                 {

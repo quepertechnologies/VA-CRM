@@ -92,10 +92,23 @@ class Students extends Security_Controller
         $view_data['groups_dropdown'] = $this->_get_groups_dropdown_select2_data();
 
         $view_data["team_members_dropdown"] = $this->get_team_members_dropdown();
+        $view_data["partners_members_dropdown"] = $this->get_partners_members_dropdown();
+        $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
         $view_data["account_types_dropdown"] = $this->get_account_types_dropdown_for_filter();
+        $view_data['sources_dropdown'] = json_encode($this->_get_sources_dropdown_select2_data());
 
         $view_data["countries_dropdown"] = $this->get_countries_dropdown([]);
         $view_data["languages_dropdown"] = $this->get_languages_dropdown([]);
+        $view_data["locations_dropdown"] = $this->get_locations_dropdown_for_filter("Location");
+
+        $organizations_dropdown = array(
+            array('id' => "", "text" => "-")
+        );
+        $organizations = $this->Clients_model->get_details(array('account_type' => 4))->getResult();
+        foreach ($organizations as $org) {
+            $organizations_dropdown[] = array("id" => $org->id, "text" => $this->get_client_full_name(0, $org));
+        }
+        $view_data['organizations_dropdown'] = $organizations_dropdown;
 
         //prepare label suggestions
         $view_data['label_suggestions'] = $this->make_labels_dropdown("client", $view_data['model_info']->labels);
@@ -118,17 +131,17 @@ class Students extends Security_Controller
             "first_name" => "required",
             "last_name" => "required"
         ));
-        if ($this->request->getPost('student_onshore') == null) {
+
+        if (!$this->request->getPost('student_onshore')) {
             $student_onshore = 0;
         } else {
             $student_onshore = 1;
         }
 
         $data = array(
-            "location_id" => get_ltm_opl_id(),
+            "location_id" => $this->request->getPost('location_id') ? $this->request->getPost('location_id') : get_ltm_opl_id(),
             "first_name" => $this->request->getPost('first_name'),
             "last_name" => $this->request->getPost('last_name'),
-            "unique_id" => $this->request->getPost('unique_id'),
             "type" => $this->request->getPost('type'),
             "account_type" => $this->request->getPost('consultancy_type') ? $this->request->getPost('consultancy_type') : 1,
             "email" => $this->request->getPost('email'),
@@ -169,20 +182,24 @@ class Students extends Security_Controller
             "timezone" => $this->request->getPost('timezone'),
             "assignee" => $this->request->getPost('assignee'),
             "assignee_manager" => $this->request->getPost('assignee_manager'),
+            "partner_id" => $this->request->getPost('partner_id'),
+            "parent_id" => $this->request->getPost('parent_id'),
             "source" => $this->request->getPost('source'),
+            "visa_type" => $this->request->getPost('visa_type'),
+            "visa_2" => $this->request->getPost('visa_2'),
+            "visa_expiry" => $this->request->getPost('visa_expiry'),
             "tag_name" => $this->request->getPost('tag_name')
         );
 
         if ($this->login_user->user_type === "staff") {
             $data["group_ids"] = $this->request->getPost('group_ids') ? $this->request->getPost('group_ids') : "";
-            $data["labels"] = $this->request->getPost('labels');
         }
-
 
         if (!$client_id) {
             $data["created_date"] = get_current_utc_time();
+            $data['created_by_location_id'] = get_ltm_opl_id();
+            $data["unique_id"] = _gen_va_uid($this->request->getPost('first_name') . ' ' . $this->request->getPost('last_name'));
         }
-
 
         if ($this->login_user->is_admin) {
             $data["currency_symbol"] = $this->request->getPost('currency_symbol') ? $this->request->getPost('currency_symbol') : "";
@@ -190,13 +207,13 @@ class Students extends Security_Controller
             $data["disable_online_payment"] = $this->request->getPost('disable_online_payment') ? $this->request->getPost('disable_online_payment') : 0;
 
             //check if the currency is editable
-            if ($client_id) {
-                $client_info = $this->Clients_model->get_one($client_id);
-                if ($client_info->currency !== $data["currency"] && !$this->Clients_model->is_currency_editable($client_id)) {
-                    echo json_encode(array("success" => false, 'message' => app_lang('client_currency_not_editable_message')));
-                    exit();
-                }
-            }
+            // if ($client_id) {
+            //     $client_info = $this->Clients_model->get_one($client_id);
+            //     if ($client_info->currency !== $data["currency"] && !$this->Clients_model->is_currency_editable($client_id)) {
+            //         echo json_encode(array("success" => false, 'message' => app_lang('client_currency_not_editable_message')));
+            //         exit();
+            //     }
+            // }
         }
 
         if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "client") === "all") {
@@ -342,6 +359,8 @@ class Students extends Security_Controller
             "client_groups" => $this->allowed_client_groups,
             "location_ids" => get_ltm_opl_id(false, ','),
             "label_id" => $this->request->getPost('label_id'),
+            "visa_type" => $this->request->getPost('visa_type'),
+            "expiry" => $this->request->getPost('expiry'),
             'type' => 'person',
             'account_type' => '1'
         );
@@ -393,15 +412,27 @@ class Students extends Security_Controller
     /**  prepare a row of client list table */
     private function _make_row($data, $custom_fields)
     {
-        // $client_labels = make_labels_view_data($data->labels_list, true);
+        $client_labels = make_labels_view_data($data->labels_list, true);
+        $now = get_my_local_time("Y-m-d");
+        if ($data->visa_expiry < $now) {
+            $expiry = '<font color="red">' . $data->visa_expiry . '</font>';
+        } else {
+            $expiry = $data->visa_expiry;
+        }
+
+        $visa = 'Subclass ' . $data->visa_type . '<br>' . $expiry;
+        if ($data->visa_type == '') {
+            $visa = 'N/A<br>' . $expiry;
+        } elseif ($data->visa_expiry == '') {
+            $visa = 'Subclass ' . $data->visa_type . '<br>N/A';
+        }
 
         $created_at = date_format(date_create($data->created_date), 'd M Y');
         $branch = $this->get_location_label($data->location_id);
-        $applin_data = array('client_id' => $data->id);
-        $applications = $this->Projects_model->get_details($applin_data)->getResult();
         $row_data = array(
-            count($applications) && is_dev_mode() ? "<strong class='text-danger'>" . $data->id . "</strong>" : $data->id,
-            get_client_contact_profile_link($data->id, $data->first_name . " " . $data->last_name, array(), array('caption' => $data->unique_id, 'account_type' => $data->account_type)),
+            $data->total_projects && is_dev_mode() ? "<strong class='text-danger'>" . $data->id . "</strong>" : $data->id,
+            get_client_contact_profile_link($data->id, $data->first_name . " " . $data->last_name, array(), array('caption' => $data->unique_id, 'account_type' => $data->account_type)) . '<br>' . $client_labels,
+            $visa,
             $created_at,
             $data->phone_code . $data->phone,
             $data->email,
@@ -427,12 +458,7 @@ class Students extends Security_Controller
         $this->_validate_client_view_access($client_id);
 
         if ($client_id) {
-            if (isset($_GET['Sub'])) {
-                $options = array("id" => $client_id, "is_sub_user" => 1);
-            } else {
-                $options = array("id" => $client_id);
-            }
-            $client_info = $this->Clients_model->get_details($options)->getRow();
+            $client_info = $this->Clients_model->get_one($client_id);
             if ($client_info && !$client_info->is_lead) {
 
                 $view_data = $this->make_access_permissions_view_data();
@@ -448,6 +474,11 @@ class Students extends Security_Controller
                 $view_data['client_tasks_count'] = count($this->Tasks_model->get_details($tasksOptions)->getResult());
                 $view_data['nationality'] = $client_info->nationality; // for account_type = Student
                 $view_data['student_onshore'] = $client_info->student_onshore;
+
+                if ($client_info->assignee) {
+                    $user_info = $this->Users_model->get_one($client_info->assignee);
+                    $view_data['assignee_full_name'] = $user_info->first_name . ' ' . $user_info->last_name;
+                }
 
                 $view_data["is_starred"] = strpos($client_info->starred_by, ":" . $this->login_user->id . ":") ? true : false;
 
@@ -548,6 +579,10 @@ class Students extends Security_Controller
 
             $view_data["custom_field_headers"] = $this->Custom_fields_model->get_custom_field_headers_for_table("invoices", $this->login_user->is_admin, $this->login_user->user_type);
             $view_data["custom_field_filters"] = $this->Custom_fields_model->get_custom_field_filters("invoices", $this->login_user->is_admin, $this->login_user->user_type);
+
+            if ($view_data["client_info"] && $view_data["client_info"]->account_type == 3) {
+                $view_data["hide_due_amount"] = true;
+            }
 
             $view_data["can_edit_invoices"] = $this->can_edit_invoices();
 
@@ -1262,14 +1297,28 @@ class Students extends Security_Controller
             $view_data['can_edit_clients'] = $this->can_edit_clients($client_id);
 
             $view_data["team_members_dropdown"] = $this->get_team_members_dropdown();
+            $view_data["partners_members_dropdown"] = $this->get_partners_members_dropdown();
+            $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
             $view_data["currency_dropdown"] = $this->_get_currency_dropdown_select2_data();
+            $view_data['sources_dropdown'] = json_encode($this->_get_sources_dropdown_select2_data());
             $view_data['label_suggestions'] = $this->make_labels_dropdown("client", $view_data['model_info']->labels);
 
             $view_data["timezone_dropdown"] = $this->_get_timezones_dropdown_select2_data();
             $view_data["account_types_dropdown"] = $this->get_account_types_dropdown_for_filter();
+            $view_data["locations_dropdown"] = $this->get_locations_dropdown_for_filter("Location");
 
             $view_data["countries_dropdown"] = $this->get_countries_dropdown([]);
             $view_data["languages_dropdown"] = $this->get_languages_dropdown([]);
+
+            $organizations_dropdown = array(
+                array('id' => "", "text" => "-")
+            );
+            $organizations = $this->Clients_model->get_details(array('account_type' => 4))->getResult();
+            foreach ($organizations as $org) {
+                $organizations_dropdown[] = array("id" => $org->id, "text" => $this->get_client_full_name(0, $org));
+            }
+            $view_data['organizations_dropdown'] = $organizations_dropdown;
+
             $view_data["is_overview"] = true;
 
             return $this->template->view('students/contacts/company_info_tab', $view_data);
@@ -2398,6 +2447,8 @@ class Students extends Security_Controller
         $view_data['groups_dropdown'] = json_encode($this->_get_groups_dropdown_select2_data(true));
         $view_data['can_edit_clients'] = $this->can_edit_clients();
         $view_data["team_members_dropdown"] = $this->get_team_members_dropdown(true);
+        $view_data["partners_members_dropdown"] = $this->get_partners_members_dropdown();
+        $view_data["visa_types"] = $this->get_visa_types_filter_dropdown();
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data['phases_dropdown'] = json_encode($this->make_phases_dropdown());
         $view_data['jump_to_page_dropdown'] = json_encode($this->make_jump_to_page_dropdown('students'));

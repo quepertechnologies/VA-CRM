@@ -177,6 +177,21 @@ if (!function_exists('announcements_alert_widget')) {
 }
 
 
+if (!function_exists('visa_expiring_clients_widget')) {
+
+    /**
+     * get visa expiry clients widget
+     * 
+     * @return html
+     */
+    function visa_expiring_clients_widget()
+    {
+        $view_data = array();
+        $template = new Template();
+        return $template->view("clients/widgets/visa_expiring_clients", $view_data);
+    }
+}
+
 /**
  * get tasks widget of loged in user
  * 
@@ -506,7 +521,6 @@ if (!function_exists('invoice_statistics_widget')) {
         return $template->view("invoices/invoice_statistics_widget/index", $view_data);
     }
 }
-
 
 /**
  * get projects statistics widget
@@ -871,6 +885,10 @@ if (!function_exists('open_projects_widget')) {
             );
         }
 
+        $options = array(
+            "location_ids" => get_ltm_opl_id(false, ',')
+        );
+
         $view_data["project_open"] = $ci->Projects_model->count_project_status($options)->open;
         $template = new Template();
         return $template->view("projects/widgets/open_projects_widget", $view_data);
@@ -961,6 +979,7 @@ if (!function_exists('my_open_projects_widget')) {
         } else {
             $options["user_id"] = $ci->login_user->id;
         }
+        $options["location_ids"] = get_ltm_opl_id(false, ',');
 
         $view_data["projects"] = $ci->Projects_model->get_details($options)->getResult();
         $template = new Template();
@@ -1231,7 +1250,6 @@ if (!function_exists('total_clients_widget')) {
 
     function total_clients_widget($show_own_clients_only_user_id = "", $allowed_client_groups = "", $other_options = array())
     {
-        $ci = new Security_Controller(false);
         $Clients_model = model("App\Models\Clients_model");
         $account_type = get_array_value($other_options, 'account_type');
         if ($account_type) {
@@ -1243,7 +1261,7 @@ if (!function_exists('total_clients_widget')) {
             "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
             "client_groups" => $allowed_client_groups,
             'account_type' => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0,
+            "location_id" => get_ltm_opl_id(),
             "is_lead" => 0
         );
 
@@ -1275,7 +1293,6 @@ if (!function_exists('total_clients_leads')) {
 
     function total_clients_leads($show_own_clients_only_user_id = "", $allowed_client_groups = "", $other_options = array())
     {
-        $ci = new Security_Controller(false);
 
         $Clients_model = model("App\Models\Clients_model");
 
@@ -1289,7 +1306,7 @@ if (!function_exists('total_clients_leads')) {
             "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
             "client_groups" => $allowed_client_groups,
             "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0,
+            "location_id" => get_ltm_opl_id(),
             "is_lead" => 1
         );
 
@@ -1321,8 +1338,6 @@ if (!function_exists('total_leads')) {
 
     function total_leads($show_own_clients_only_user_id = "", $allowed_client_groups = "", $other_options = array())
     {
-        $ci = new Security_Controller(false);
-
         $Clients_model = model("App\Models\Clients_model");
 
         $account_type = get_array_value($other_options, 'account_type');
@@ -1335,7 +1350,7 @@ if (!function_exists('total_leads')) {
             "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
             "client_groups" => $allowed_client_groups,
             "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0,
+            "location_id" => get_ltm_opl_id(),
             "is_lead" => 1,
             "lead_status_id" => 1
         );
@@ -1368,8 +1383,6 @@ if (!function_exists('total_clients_prospects')) {
 
     function total_clients_prospects($show_own_clients_only_user_id = "", $allowed_client_groups = "", $other_options = array())
     {
-        $ci = new Security_Controller(false);
-
         $Clients_model = model("App\Models\Clients_model");
 
         $account_type = get_array_value($other_options, 'account_type');
@@ -1382,7 +1395,7 @@ if (!function_exists('total_clients_prospects')) {
             "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
             "client_groups" => $allowed_client_groups,
             "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0,
+            "location_id" => get_ltm_opl_id(),
             "is_lead" => 1,
             "lead_status_id" => 2
         );
@@ -1686,7 +1699,6 @@ if (!function_exists('client_invoices_widget')) {
 
     function client_invoices_widget($widget_type = "", $show_own_clients_only_user_id = "", $allowed_client_groups = "", $return_as_data = false, $other_options = array())
     {
-        $ci = new Security_Controller(false);
         $Clients_model = model("App\Models\Clients_model");
 
         $account_type = get_array_value($other_options, 'account_type');
@@ -1701,7 +1713,7 @@ if (!function_exists('client_invoices_widget')) {
             "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
             "client_groups" => $allowed_client_groups,
             "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0,
+            "location_id" => get_ltm_opl_id(),
         );
         $view_data["total"] = $Clients_model->count_total_clients($options);
         $view_data["total_clients"] = $Clients_model->count_total_clients();
@@ -1721,7 +1733,6 @@ if (!function_exists('client_projects_widget')) {
 
     function client_projects_widget($show_own_clients_only_user_id = "", $allowed_client_groups = "", $return_as_data = false, $other_options = array())
     {
-        $ci = new Security_Controller(false);
         $Clients_model = model("App\Models\Clients_model");
 
         $account_type = get_array_value($other_options, 'account_type');
@@ -1732,20 +1743,32 @@ if (!function_exists('client_projects_widget')) {
         }
 
         $view_data["clients_has_open_projects"] = $Clients_model->count_total_clients(array(
-            "filter" => "has_open_projects", "show_own_clients_only_user_id" => $show_own_clients_only_user_id, "client_groups" => $allowed_client_groups, "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0
+            "filter" => "has_open_projects",
+            "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
+            "client_groups" => $allowed_client_groups,
+            "account_type" => $account_type,
+            "location_id" => get_ltm_opl_id(),
         ));
         $view_data["clients_has_completed_projects"] = $Clients_model->count_total_clients(array(
-            "filter" => "has_completed_projects", "show_own_clients_only_user_id" => $show_own_clients_only_user_id, "client_groups" => $allowed_client_groups, "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0
+            "filter" => "has_completed_projects",
+            "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
+            "client_groups" => $allowed_client_groups,
+            "account_type" => $account_type,
+            "location_id" => get_ltm_opl_id(),
         ));
         $view_data["clients_has_any_hold_projects"] = $Clients_model->count_total_clients(array(
-            "filter" => "has_any_hold_projects", "show_own_clients_only_user_id" => $show_own_clients_only_user_id, "client_groups" => $allowed_client_groups, "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0
+            "filter" => "has_any_hold_projects",
+            "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
+            "client_groups" => $allowed_client_groups,
+            "account_type" => $account_type,
+            "location_id" => get_ltm_opl_id(),
         ));
         $view_data["clients_has_canceled_projects"] = $Clients_model->count_total_clients(array(
-            "filter" => "has_canceled_projects", "show_own_clients_only_user_id" => $show_own_clients_only_user_id, "client_groups" => $allowed_client_groups, "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0
+            "filter" => "has_canceled_projects",
+            "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
+            "client_groups" => $allowed_client_groups,
+            "account_type" => $account_type,
+            "location_id" => get_ltm_opl_id(),
         ));
 
         $template = new Template();
@@ -1783,7 +1806,6 @@ if (!function_exists('clients_has_open_tickets_widget')) {
 
     function clients_has_open_tickets_widget($show_own_clients_only_user_id = "", $allowed_client_groups = "", $other_options = array())
     {
-        $ci = new Security_Controller(false);
         $Clients_model = model("App\Models\Clients_model");
 
         $account_type = get_array_value($other_options, 'account_type');
@@ -1798,7 +1820,7 @@ if (!function_exists('clients_has_open_tickets_widget')) {
             "filter" => "has_open_tickets",
             "client_groups" => $allowed_client_groups,
             "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0
+            "location_id" => get_ltm_opl_id(),
         );
 
         $view_data["clients_has_open_tickets"] = $Clients_model->count_total_clients($options);
@@ -1817,7 +1839,6 @@ if (!function_exists('clients_has_new_orders_widget')) {
 
     function clients_has_new_orders_widget($show_own_clients_only_user_id = "", $allowed_client_groups = "", $other_options = array())
     {
-        $ci = new Security_Controller(false);
         $Clients_model = model("App\Models\Clients_model");
 
         $account_type = get_array_value($other_options, 'account_type');
@@ -1832,7 +1853,7 @@ if (!function_exists('clients_has_new_orders_widget')) {
             "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
             "client_groups" => $allowed_client_groups,
             "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0
+            "location_id" => get_ltm_opl_id(),
         );
 
         $view_data["clients_has_new_orders"] = $Clients_model->count_total_clients($options);
@@ -1851,7 +1872,6 @@ if (!function_exists('client_proposals_widget')) {
 
     function client_proposals_widget($show_own_clients_only_user_id = "", $allowed_client_groups = "", $return_as_data = false, $other_options = array())
     {
-        $ci = new Security_Controller(false);
         $Clients_model = model("App\Models\Clients_model");
 
         $account_type = get_array_value($other_options, 'account_type');
@@ -1862,16 +1882,25 @@ if (!function_exists('client_proposals_widget')) {
         }
 
         $view_data["clients_has_open_proposals"] = $Clients_model->count_total_clients(array(
-            "filter" => "has_open_proposals", "show_own_clients_only_user_id" => $show_own_clients_only_user_id, "client_groups" => $allowed_client_groups, "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0
+            "filter" => "has_open_proposals",
+            "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
+            "client_groups" => $allowed_client_groups,
+            "account_type" => $account_type,
+            "location_id" => get_ltm_opl_id(),
         ));
         $view_data["clients_has_accepted_proposals"] = $Clients_model->count_total_clients(array(
-            "filter" => "has_accepted_proposals", "show_own_clients_only_user_id" => $show_own_clients_only_user_id, "client_groups" => $allowed_client_groups, "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0
+            "filter" => "has_accepted_proposals",
+            "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
+            "client_groups" => $allowed_client_groups,
+            "account_type" => $account_type,
+            "location_id" => get_ltm_opl_id(),
         ));
         $view_data["clients_has_rejected_proposals"] = $Clients_model->count_total_clients(array(
-            "filter" => "has_rejected_proposals", "show_own_clients_only_user_id" => $show_own_clients_only_user_id, "client_groups" => $allowed_client_groups, "account_type" => $account_type,
-            "location_id" => $ci->login_user->location_id ? $ci->login_user->location_id : 0
+            "filter" => "has_rejected_proposals",
+            "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
+            "client_groups" => $allowed_client_groups,
+            "account_type" => $account_type,
+            "location_id" => get_ltm_opl_id(),
         ));
 
         $template = new Template();
@@ -1927,6 +1956,8 @@ if (!function_exists('projects_overview_widget')) {
                 "user_id" => $ci->login_user->id
             );
         }
+
+        $options['location_ids'] = get_ltm_opl_id(false, ',');
 
         $status_text_info = get_project_status_text_info();
 
@@ -2241,9 +2272,11 @@ if (!function_exists('leads_overview_widget')) {
 
         $options['location_ids'] = get_ltm_opl_id(false, ',');
 
-        $view_data["lead_statuses"] = $ci->Clients_model->get_lead_statistics($options)->lead_statuses;
+        $lead_stats = $ci->Clients_model->get_lead_statistics($options);
+
+        $view_data["lead_statuses"] = $lead_stats->lead_statuses;
         $view_data["total_leads"] = $ci->Clients_model->count_total_leads($options);
-        $view_data["converted_to_client"] = $ci->Clients_model->get_lead_statistics($options)->converted_to_client;
+        $view_data["converted_to_client"] = $lead_stats->converted_to_client;
 
         $template = new Template();
         return $template->view("leads/leads_overview_widget", $view_data);

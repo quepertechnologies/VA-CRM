@@ -46,32 +46,25 @@
 
         <li class="list-group-item border-top d-flex justify-content-between">
             <strong><?php echo app_lang("project_fees") ?></strong>
-            <div class="d-flex align-items-center justify-content-end">
-                <?php echo isset($project_fees->partners) ? modal_anchor(get_uri('projects/project_partners_revenue_overview'), '<i data-feather="list" class="icon-16"></i> ' . app_lang("overview"), array("class" => "btn btn-default btn-sm mx-2", "title" => app_lang("overview"), "data-post-project_id" => $project_info->id)) : ''; ?>
+            <div class="d-flex align-items-center justify-content-center">
                 <?php if ($login_user->user_type === "staff") {
-                    echo modal_anchor(get_uri('projects/project_fees_modal_form'), '<i data-feather="edit" class="icon-16"></i> ' . app_lang("edit"), array("class" => "btn btn-default btn-sm", "title" => app_lang("project_fees"), "data-post-project_id" => $project_info->id));
+                    echo modal_anchor(get_uri('projects/project_fees_modal_form'), '<i data-feather="plus-circle" class="icon-16"></i> ' . app_lang("setup_payment_schedule"), array("class" => "btn btn-primary btn-sm", "title" => app_lang("setup_payment_schedule"), "data-post-project_id" => $project_info->id, 'data-modal-lg' => true));
                 } ?>
             </div>
         </li>
 
         <li class="d-flex justify-content-between" style="padding: 0px 15px;">
             <p><?php echo app_lang("total_fee") ?></p>
-            <strong><?php echo isset($project_fees) && $project_fees->total_fee ? to_currency($project_fees->total_fee) : to_currency(0) ?></strong>
+            <strong><?php echo isset($project_fees) && isset($project_fees->total_fees) ? to_currency($project_fees->total_fees) : to_currency(0) ?></strong>
         </li>
 
         <li class="d-flex justify-content-between" style="padding: 0px 15px;">
-            <p class="text-danger"><?php echo app_lang("discount") ?></p>
-            <strong class="text-danger"><?php echo isset($project_fees) && $project_fees->discount_total ? to_currency($project_fees->discount_total) : to_currency(0) ?></strong>
-        </li>
-
-        <li class="d-flex justify-content-between" style="padding: 0px 15px;">
-            <p class="text-info"><?php echo app_lang("net_fee") ?></p>
-            <strong class="text-info"><?php echo isset($project_fees) && $project_fees->net_total ? to_currency($project_fees->net_total) : to_currency(0) ?></strong>
+            <p><?php echo app_lang("claimable_fee") ?></p>
+            <strong><?php echo isset($project_fees) && isset($project_fees->total_claimable) ? to_currency($project_fees->total_claimable) : to_currency(0) ?></strong>
         </li>
 
         <li class="list-group-item border-top d-flex justify-content-between">
             <strong><?php echo app_lang("sales_forecast") ?></strong>
-            <?php echo isset($project_fees) ? modal_anchor(get_uri('projects/project_sales_forecast_modal_form'), '<i data-feather="edit" class="icon-16"></i> ' . app_lang("edit"), array("class" => "btn btn-default btn-sm", "title" => app_lang("sales_forecast"), "data-post-project_id" => $project_info->id)) : ''; ?>
         </li>
 
         <li class="d-flex justify-content-between" style="padding: 0px 15px;">
@@ -80,19 +73,24 @@
         </li>
 
         <li class="d-flex justify-content-between" style="padding: 0px 15px;">
+            <p><?php echo app_lang("subagent_revenue") ?> <span class="badge" style="background-color: #E67E22;"><?php echo app_lang('payable'); ?></span></p>
+            <strong><?php echo isset($project_fees) && $project_fees->subagent_revenue ? to_currency($project_fees->subagent_revenue) : to_currency(0) ?></strong>
+        </li>
+
+        <li class="d-flex justify-content-between" style="padding: 0px 15px;">
             <p><?php echo app_lang("referral_revenue") ?> <span class="badge" style="background-color: #E67E22;"><?php echo app_lang('payable'); ?></span></p>
             <strong><?php echo isset($project_fees) && $project_fees->referral_revenue ? to_currency($project_fees->referral_revenue) : to_currency(0) ?></strong>
         </li>
 
-        <!-- <li class="d-flex justify-content-between" style="padding: 0px 15px;">
-                <p><?php echo app_lang("total_revenue") ?></p>
-                <strong><?php echo isset($project_fees) && $project_fees->total_revenue ? to_currency($project_fees->total_revenue) : to_currency(0) ?></strong>
-            </li> -->
-
         <li class="d-flex justify-content-between border-top pt-2" style="padding: 0px 15px;">
             <p class="text-danger"><?php echo app_lang("discount") ?></p>
-            <strong class="text-danger"><?php echo isset($project_fees) && $project_fees->revenue_discount ? to_currency($project_fees->revenue_discount) : to_currency(0) ?></strong>
+            <strong class="text-danger"><?php echo isset($project_fees) && $project_fees->total_discount ? to_currency($project_fees->total_discount) : to_currency(0) ?></strong>
         </li>
+
+        <!-- <li class="d-flex justify-content-between" style="padding: 0px 15px;">
+            <p class="text-warning"><?php echo app_lang("net_income") ?></p>
+            <strong class="text-warning"><?php echo isset($project_fees) && isset($project_fees->net_income) ? to_currency($project_fees->net_income) : to_currency(0) ?></strong>
+        </li> -->
 
         <li class="d-flex justify-content-between" style="padding: 0px 15px;">
             <p class="text-info"><?php echo app_lang("net_revenue") ?></p>

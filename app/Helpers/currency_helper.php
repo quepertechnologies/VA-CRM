@@ -392,3 +392,17 @@ if (!function_exists('parse_float')) {
         // return floatval(preg_replace('#^([-]*[0-9\.,\' ]+?)((\.|,){1}([0-9-]{1,3}))*$#', "str_replace(array('.', ',', \"'\", ' '), '', '\\1') . '.\\4'", $str));
     }
 }
+
+/**
+ * get how much the app should consider to mark an invoice as paid. 
+ * 
+ * @param number $number
+ * @return number
+ */
+if (!function_exists('calc_per')) {
+
+    function calc_per($amount = 0, $per = 0)
+    {
+        return (float)$amount * ((float)$per / 100);
+    }
+}

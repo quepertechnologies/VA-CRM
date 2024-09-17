@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div> -->
-    <div class="form-group">
+    <div class="form-group hide">
         <div class="row">
             <label for="client_id" class="<?php echo $label_column; ?> client_id_section"><?php echo app_lang('client_id'); ?></label>
             <div class="<?php echo $field_column; ?>">
@@ -71,7 +71,7 @@
                 echo form_input(array(
                     "id" => "unique_id",
                     "name" => "unique_id",
-                    "value" => isset($model_info->unique_id) && !empty($model_info->unique_id) ? $model_info->unique_id : uniqid('VA' . date('-y-')),
+                    "value" => isset($model_info->unique_id) && !empty($model_info->unique_id) ? $model_info->unique_id : '',
                     "class" => "form-control company_name_input_section",
                     "placeholder" => app_lang('client_id'),
                     "autofocus" => true,
@@ -95,8 +95,11 @@
                     "placeholder" => app_lang('email'),
                     "autofocus" => true,
                     "type" => 'email',
+                    "data-rule-required" => true,
+                    "data-msg-required" => app_lang("field_required"),
                 ));
                 ?>
+                <p class="text-danger d-none" id="email-alert-cont"></p>
             </div>
         </div>
     </div>
@@ -639,6 +642,24 @@
         <?php } ?>
         <div class="form-group">
             <div class="row">
+                <label for="location_id" class="<?php echo $label_column; ?>"><?php echo app_lang('location'); ?></label>
+                <div class="<?php echo $field_column; ?>">
+                    <?php
+                    echo form_input(array(
+                        "id" => "location_id",
+                        "name" => "location_id",
+                        "value" => isset($model_info->location_id) ? $model_info->location_id : '',
+                        "class" => "form-control",
+                        "placeholder" => app_lang('location'),
+                        "data-rule-required" => true,
+                        "data-msg-required" => app_lang("field_required")
+                    ));
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
                 <label for="partner_type" class="<?php echo $label_column; ?> partner_type_section"><?php echo app_lang('type'); ?></label>
                 <div class="<?php echo $field_column; ?>">
                     <?php
@@ -702,36 +723,13 @@
                 <label for="source" class="<?php echo $label_column; ?> source_section"><?php echo app_lang('source'); ?></label>
                 <div class="<?php echo $field_column; ?>">
                     <?php
-                    $list = array(
-                        'Search Engine (e.g., Google, Bing)',
-                        'Facebook',
-                        'Instagram',
-                        'X (Twitter)',
-                        'LinkedIn',
-                        'Pinterest',
-                        'Snapchat',
-                        'TikTok',
-                        'YouTube',
-                        'Reddit',
-                        'WhatsApp',
-                        'Quora',
-                        'WeChat',
-                        'Telegram',
-                        'Referral from a Friend or Family Member',
-                        'Online Advertisement',
-                        'Printed Advertisement (Magazine, Newspaper, Brochure)',
-                        'Event or Conference',
-                        'Educational Institution',
-                        'Employment Agency',
-                        'News Article or Blog'
-                    );
-                    asort($list);
-                    echo form_datalist(
-                        'source',
-                        isset($model_info->source) ? $model_info->source : '',
-                        $list,
-                        "class='form-control company_name_input_section' placeholder='" . app_lang('source') . "'"
-                    );
+                    echo form_input(array(
+                        "id" => "source",
+                        "name" => "source",
+                        "value" => isset($model_info->source) ? $model_info->source : '',
+                        "class" => "form-control",
+                        "placeholder" => app_lang('source'),
+                    ));
                     ?>
                 </div>
             </div>
@@ -742,7 +740,7 @@
                 <div class="<?php echo $field_column; ?>">
                     <?php
                     echo form_input(array(
-                        "id" => "tag_name",
+                        "id" => "client_labels",
                         "name" => "tag_name",
                         "value" => isset($model_info->tag_name) ? $model_info->tag_name : '',
                         "class" => "form-control company_name_input_section",
@@ -796,7 +794,14 @@
                 multiple: true,
                 data: <?php echo json_encode($label_suggestions); ?>
             });
+            $('#source').select2({
+                data: <?php echo $sources_dropdown; ?>
+            });
+            $('#location_id').select2({
+                data: <?php echo json_encode($locations_dropdown); ?>
+            });
         <?php } ?>
+
 
         $("#consultancy_type").select2({
             data: <?php echo json_encode($account_types_dropdown); ?>

@@ -4,8 +4,8 @@
         <input type="hidden" name="id" value="<?php echo $model_info->id; ?>" />
         <input type="hidden" name="estimate_id" value="<?php echo $model_info->estimate_id; ?>" />
         <input type="hidden" name="order_id" value="<?php echo $model_info->order_id; ?>" />
-        <input type="hidden" id="title_id" name="title_id" value="" />
-        <input type="hidden" id="title_text" name="title_text" value="" />
+        <input type="hidden" id="title_id" name="title_id" value="<?php echo $model_info->title_id; ?>" />
+        <input type="hidden" id="title_text" name="title_text" value="<?php echo $model_info->title; ?>" />
         <input type="hidden" name="add_new_title_to_library" value="" id="add_new_title_to_library" />
 
         <div class="form-group">
@@ -35,12 +35,61 @@
                 <label for="partner_ids" class=" col-md-3"><?php echo app_lang('select_partners'); ?></label>
                 <div class=" col-md-9">
                     <?php
+                    $partner_ids = array();
+                    if ($project_partners) {
+                        foreach ($project_partners as $partner) {
+                            $partner_ids[] = $partner->partner_id;
+                        }
+                    }
                     if (is_dev_mode()) {
-                        echo form_multiselect("partner_ids", $partners_dropdown, isset($model_info->partner_ids) ? explode(',', $model_info->partner_ids) : array(''), "class='select2' id='partner-ids-dropdown'");
+                        echo form_multiselect("partner_ids", $partners_dropdown, $partner_ids, "class='select2' id='partner-ids-dropdown'");
                     } else {
-                        echo form_multiselect("partner_ids", $partners_dropdown, isset($model_info->partner_ids) ? explode(',', $model_info->partner_ids) : array(''), "class='select2 validate-hidden' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "' id='partner-ids-dropdown'");
+                        echo form_multiselect("partner_ids", $partners_dropdown, $partner_ids, "class='select2 validate-hidden' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "' id='partner-ids-dropdown'");
                     }
                     ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <label for="partner_client_id" class=" col-md-3"><?php echo app_lang('partner_client_id') . " (Optional)"; ?></label>
+                <div class=" col-md-9">
+                    <?php
+                    echo form_input(array(
+                        "id" => "partner_client_id",
+                        "name" => "partner_client_id",
+                        "value" => $model_info->partner_client_id ? $model_info->partner_client_id : '',
+                        "class" => "form-control",
+                        "placeholder" => app_lang('partner_client_id'),
+                        "autofocus" => true,
+                    ));
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <?php if (isset($subagent) && $subagent_full_name) { ?>
+            <div class="form-group">
+                <div class="row">
+                    <label for="subagent_id" class=" col-md-3"><?php echo app_lang('subagent'); ?></label>
+                    <div class=" col-md-9">
+                        <?php
+                        echo form_input('subagent_name', $subagent_full_name, "class='form-control' readonly='readonly' disabled='disabled'");
+                        ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
+        <div class="form-group">
+            <div class="row">
+                <label for="referral_id" class=" col-md-3"><?php echo app_lang('referral'); ?></label>
+                <div class=" col-md-9">
+                    <?php
+                    echo form_dropdown('referral_id', $referrals_dropdown,  $referral_info ? $referral_info->partner_id : '', "class='form-control select2'");
+                    ?>
+                    <small class="text-info">Default commission rate 10% will be deducted from your income for the selected referral.</small>
                 </div>
             </div>
         </div>
@@ -53,7 +102,7 @@
                     echo form_input(array(
                         "id" => "title",
                         "name" => "title",
-                        "value" => $model_info->title_id,
+                        "value" => $model_info->title_id ? $model_info->title_id : '',
                         "class" => "form-control",
                         "placeholder" => app_lang('title'),
                         "autofocus" => true,
@@ -283,6 +332,29 @@
             <div class="row" id="commission-container"></div>
         </div>
 
+        <?php if (isset($subagent) && $subagent_full_name) { ?>
+            <input type="hidden" name='subagent_id' value="<?php echo $subagent->id; ?>">
+            <input type="hidden" name='subagent_default_commission' value="<?php echo $subagent->com_percentage; ?>">
+            <div class="form-group">
+                <div class="row">
+                    <label for="subagent-commission" class=" col-md-3"><?php echo app_lang('subagent_commission'); ?></label>
+                    <div class=" col-md-9">
+                        <?php
+                        echo form_input(array(
+                            "id" => "subagent-commission",
+                            "name" => "subagent_commission",
+                            "value" => isset($subagent_commission) && $subagent_commission ? $subagent_commission : '',
+                            "class" => "form-control",
+                            "placeholder" => app_lang('subagent_commission'),
+                            'type' => 'number'
+                        ));
+                        ?>
+                        <small><?php echo "Define commission percentage for the subagent <b>" . $subagent_full_name . '</b>. Leave the above field empty to have the default <b>' . ($subagent->com_percentage ? $subagent->com_percentage : 0) . '%</b> commission applied.'; ?></small>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
         <?php echo view("custom_fields/form/prepare_context_fields", array("custom_fields" => $custom_fields, "label_column" => "col-md-3", "field_column" => " col-md-9")); ?>
 
     </div>
@@ -406,7 +478,7 @@
                     const partner = selected_partners[i];
                     items += `<div class="form-group">
                                 <div class="row">
-                                    <label for="${partner.id}_com_percentage" class=" col-md-3">${partner.full_name}'s commission (percentage)</label>
+                                    <label for="${partner.id}_com_percentage" class=" col-md-3">${partner.full_name}'s commission (%)</label>
                                     <div class=" col-md-9">
                                     <input type='number' id='${partner.id}' name="com_percentage_${partner.id}" value='${partner.commission}' class='form-control' placeholder='<?php echo app_lang('commission_percentage'); ?>' data-rule-required="1" data-msg-required="<?php echo app_lang("field_required"); ?>" >
                                     </div>
@@ -425,7 +497,7 @@
                     const partner = selected_partners[i];
                     items += `<div class="form-group">
                                 <div class="row">
-                                    <label for="${partner.id}_com_percentage" class=" col-md-3">${partner.text}'s commission (percentage)</label>
+                                    <label for="${partner.id}_com_percentage" class=" col-md-3">${partner.text}'s commission (%)</label>
                                     <div class=" col-md-9">
                                     <input type='number' id='${partner.id}' name="com_percentage_${partner.id}" value='' class='form-control' placeholder='<?php echo app_lang('commission_percentage'); ?>' data-rule-required="1" data-msg-required="<?php echo app_lang("field_required"); ?>" >
                                     </div>
@@ -483,5 +555,10 @@
             }
 
         });
+
+        $('#title').select2('data', {
+            id: '<?php echo $model_info->title_id; ?>',
+            text: '<?php echo $model_info->title; ?>'
+        })
     }
 </script>

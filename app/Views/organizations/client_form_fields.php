@@ -13,7 +13,7 @@
     <?php } ?>
 
     <h3 class="mb-5"><?php echo app_lang('organization_info'); ?></h3>
-    <div class="form-group">
+    <div class="form-group hide">
         <div class="row">
             <label for="client_id" class="<?php echo $label_column; ?> client_id_section"><?php echo app_lang('client_id'); ?></label>
             <div class="<?php echo $field_column; ?>">
@@ -21,7 +21,7 @@
                 echo form_input(array(
                     "id" => "unique_id",
                     "name" => "unique_id",
-                    "value" => isset($model_info->unique_id) && !empty($model_info->unique_id) ? $model_info->unique_id : uniqid('VA' . date('-y-')),
+                    "value" => isset($model_info->unique_id) && !empty($model_info->unique_id) ? $model_info->unique_id : '',
                     "class" => "form-control company_name_input_section",
                     "placeholder" => app_lang('client_id'),
                     "autofocus" => true,
@@ -39,24 +39,13 @@
                 <?php
                 $list = array(
                     '' => '-',
-                    'Sole Proprietorship' => 'Sole Proprietorship',
+                    'Sole Proprietor / Sole Trader' => 'Sole Proprietor / Sole Trader',
+                    'Government Department' => 'Government Department',
+                    'Unincorporated Body' => 'Unincorporated Body',
+                    'Incorporated Association' => 'Incorporated Association',
                     'Partnership' => 'Partnership',
-                    'Limited Liability Company (LLC)' => 'Limited Liability Company (LLC)',
-                    'Corporation' => 'Corporation',
-                    'Nonprofit Corporation' => 'Nonprofit Corporation',
-                    'Cooperative' => 'Cooperative',
-                    'Joint Venture' => 'Joint Venture',
-                    'Limited Partnership (LP)' => 'Limited Partnership (LP)',
-                    'Professional Corporation (PC) or Professional Limited Liability Company (PLLC)' => 'Professional Corporation (PC) or Professional Limited Liability Company (PLLC)',
-                    'Benefit Corporation (B Corp)' => 'Benefit Corporation (B Corp)',
-                    'Franchise' => 'Franchise',
-                    'Trust' => 'Trust',
-                    'S Corporation' => 'S Corporation',
-                    'Holding Company' => 'Holding Company',
-                    'C Corporation' => 'C Corporation',
-                    'Municipal Corporation' => 'Municipal Corporation',
-                    'Special Purpose Vehicle (SPV)' => 'Special Purpose Vehicle (SPV)',
-                    'Family Limited Partnership (FLP) or Family Limited Liability Company (LLC)' => 'Family Limited Partnership (FLP) or Family Limited Liability Company (LLC)'
+                    'Proprietary Company' => 'Proprietary Company',
+                    'Public Company' => 'Public Company',
                 );
                 asort($list);
                 echo form_dropdown(
@@ -344,6 +333,36 @@
             </div>
         </div>
     </div>
+    <div class="form-group">
+        <div class="row">
+            <label for="visa_type" class="<?php echo $label_column; ?> visa_type_section"><?php echo app_lang('visa_sponsorship_type'); ?></label>
+            <div class="<?php echo $field_column; ?>">
+                <?php
+                echo form_input(
+                    'visa_type',
+                    isset($model_info->visa_type) ? $model_info->visa_type : '',
+                    "class='form-control company_name_input_section validate-hidden' id='visa_type' placeholder='" . app_lang('visa_sponsorship_type') . "'"
+                );
+                ?>
+            </div>
+        </div>
+    </div>
+    <div class="form-group" id="visa_expiry_container">
+        <div class="row">
+            <label for="visa_expiry" class="<?php echo $label_column; ?> visa_expiry_section"><?php echo "SBS " . app_lang('expiry'); ?></label>
+            <div class="<?php echo $field_column; ?>">
+                <?php
+                echo form_input(array(
+                    "id" => "visa_expiry",
+                    "name" => "visa_expiry",
+                    "value" => isset($model_info->visa_expiry) ? $model_info->visa_expiry : '',
+                    "class" => "form-control company_name_input_section",
+                    "placeholder" => "SBS " . app_lang('expiry'),
+                ));
+                ?>
+            </div>
+        </div>
+    </div>
     <div <?php if (!isset($is_overview)) {
                 echo 'role="tabpanel" class="tab-pane active"';
             } ?> id="student-profile-tab">
@@ -403,6 +422,7 @@
                         "data-msg-required" => app_lang("field_required"),
                     ));
                     ?>
+                    <p class="text-danger d-none" id="email-alert-cont"></p>
                 </div>
             </div>
         </div>
@@ -552,115 +572,115 @@
         </div>
         <?php echo '</div>' ?>
 
-        <?php if (isset($is_overview)) { ?>
+        <!-- <?php if (isset($is_overview)) { ?>
             <?php echo '<div id="financial-standing-tab">' ?>
         <?php } else { ?>
             <?php echo '<div role="tabpanel" class="tab-pane" id="financial-standing-tab">' ?>
         <?php } ?>
 
-        <h3 class="mb-5"><?php echo app_lang('financial_and_human_resource_overview'); ?></h3>
-        <div class="form-group">
-            <div class="row">
-                <label for="annual_rev" class="<?php echo $label_column; ?> email_section"><?php echo app_lang('annual_revenue'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_input(array(
-                        "id" => "annual_rev",
-                        "name" => "annual_rev",
-                        "value" => isset($model_info->annual_rev) ? $model_info->annual_rev : '',
-                        "class" => "form-control company_name_input_section",
-                        "placeholder" => app_lang('annual_revenue'),
+            <h3 class="mb-5"><?php echo app_lang('financial_and_human_resource_overview'); ?></h3>
+            <div class="form-group">
+                <div class="row">
+                    <label for="annual_rev" class="<?php echo $label_column; ?> email_section"><?php echo app_lang('annual_revenue'); ?></label>
+                    <div class="<?php echo $field_column; ?>">
+                        <?php
+                        echo form_input(array(
+                            "id" => "annual_rev",
+                            "name" => "annual_rev",
+                            "value" => isset($model_info->annual_rev) ? $model_info->annual_rev : '',
+                            "class" => "form-control company_name_input_section",
+                            "placeholder" => app_lang('annual_revenue'),
 
-                    ));
-                    ?>
+                        ));
+                        ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="profitability" class="<?php echo $label_column; ?>"><?php echo app_lang('profitability'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    $list = array(
-                        '' => '-',
-                        'Profitable' => 'Profitable',
-                        'Break-even' => 'Break-even',
-                        'Loss-Making (Unprofitable)' => 'Loss-Making (Unprofitable)',
-                        'Operating at Capacity' => 'Operating at Capacity',
-                        'Seasonal Profitability' => 'Seasonal Profitability',
-                        'Growth Profitability' => 'Growth Profitability',
-                        'Stable Profitability' => 'Stable Profitability',
-                        'Improving Profitability' => 'Improving Profitability',
-                        'Declining Profitability' => 'Declining Profitability'
-                    );
-                    asort($list);
-                    echo form_dropdown(
-                        "profitability",
-                        $list,
-                        isset($model_info->profitability) ? $model_info->profitability : '',
-                        "class='select2'"
-                    );
-                    ?>
+            <div class="form-group">
+                <div class="row">
+                    <label for="profitability" class="<?php echo $label_column; ?>"><?php echo app_lang('profitability'); ?></label>
+                    <div class="<?php echo $field_column; ?>">
+                        <?php
+                        $list = array(
+                            '' => '-',
+                            'Profitable' => 'Profitable',
+                            'Break-even' => 'Break-even',
+                            'Loss-Making (Unprofitable)' => 'Loss-Making (Unprofitable)',
+                            'Operating at Capacity' => 'Operating at Capacity',
+                            'Seasonal Profitability' => 'Seasonal Profitability',
+                            'Growth Profitability' => 'Growth Profitability',
+                            'Stable Profitability' => 'Stable Profitability',
+                            'Improving Profitability' => 'Improving Profitability',
+                            'Declining Profitability' => 'Declining Profitability'
+                        );
+                        asort($list);
+                        echo form_dropdown(
+                            "profitability",
+                            $list,
+                            isset($model_info->profitability) ? $model_info->profitability : '',
+                            "class='select2'"
+                        );
+                        ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="avg_emp_salary" class="<?php echo $label_column; ?> email_section"><?php echo app_lang('avg_emp_salary'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_input(array(
-                        "id" => "avg_emp_salary",
-                        "name" => "avg_emp_salary",
-                        "value" => isset($model_info->avg_emp_salary) ? $model_info->avg_emp_salary : '',
-                        "class" => "form-control company_name_input_section",
-                        "placeholder" => app_lang('avg_emp_salary'),
+            <div class="form-group">
+                <div class="row">
+                    <label for="avg_emp_salary" class="<?php echo $label_column; ?> email_section"><?php echo app_lang('avg_emp_salary'); ?></label>
+                    <div class="<?php echo $field_column; ?>">
+                        <?php
+                        echo form_input(array(
+                            "id" => "avg_emp_salary",
+                            "name" => "avg_emp_salary",
+                            "value" => isset($model_info->avg_emp_salary) ? $model_info->avg_emp_salary : '',
+                            "class" => "form-control company_name_input_section",
+                            "placeholder" => app_lang('avg_emp_salary'),
 
-                    ));
-                    ?>
+                        ));
+                        ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="emp_benefits_offered" class="<?php echo $label_column; ?>"><?php echo app_lang('emp_benefits_offered'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    $list = array(
-                        'Health Insurance' => 'Health Insurance',
-                        'Disability Insurance' => 'Disability Insurance',
-                        'Flexible Spending Accounts (FSAs) or Health Savings Accounts (HSAs)' => 'Flexible Spending Accounts (FSAs) or Health Savings Accounts (HSAs)',
-                        'Employee Assistance Programs (EAPs)' => 'Employee Assistance Programs (EAPs)',
-                        'Professional Development' => 'Professional Development',
-                        'Flexible Work Arrangements' => 'Flexible Work Arrangements',
-                        'Wellness Programs' => 'Wellness Programs',
-                        'Transportation Benefits' => 'Transportation Benefits',
-                        'Stock Options or Equity Grants' => 'Stock Options or Equity Grants',
-                        'Family and Parental Leave' => 'Family and Parental Leave',
-                        'Legal Assistance' => 'Legal Assistance',
-                        'Employee Discounts' => 'Employee Discounts',
-                        'Social Activities' => 'Social Activities',
-                        'Recognition and Awards' => 'Recognition and Awards',
-                        'Sabbaticals' => 'Sabbaticals',
-                        'Profit-Sharing' => 'Profit-Sharing',
-                        'Bonuses' => 'Bonuses',
-                        'Paid Leave' => 'Paid Leave',
-                        'Retirement Plan' => 'Retirement Plan',
-                    );
-                    asort($list);
-                    echo form_multiselect(
-                        "emp_benefits_offered",
-                        $list,
-                        isset($model_info->avg_emp_salary) ? explode(',', $model_info->avg_emp_salary) : [],
-                        "class='select2' placeholder='" . app_lang('emp_benefits_offered') . "'"
-                    );
-                    ?>
+            <div class="form-group">
+                <div class="row">
+                    <label for="emp_benefits_offered" class="<?php echo $label_column; ?>"><?php echo app_lang('emp_benefits_offered'); ?></label>
+                    <div class="<?php echo $field_column; ?>">
+                        <?php
+                        $list = array(
+                            'Health Insurance' => 'Health Insurance',
+                            'Disability Insurance' => 'Disability Insurance',
+                            'Flexible Spending Accounts (FSAs) or Health Savings Accounts (HSAs)' => 'Flexible Spending Accounts (FSAs) or Health Savings Accounts (HSAs)',
+                            'Employee Assistance Programs (EAPs)' => 'Employee Assistance Programs (EAPs)',
+                            'Professional Development' => 'Professional Development',
+                            'Flexible Work Arrangements' => 'Flexible Work Arrangements',
+                            'Wellness Programs' => 'Wellness Programs',
+                            'Transportation Benefits' => 'Transportation Benefits',
+                            'Stock Options or Equity Grants' => 'Stock Options or Equity Grants',
+                            'Family and Parental Leave' => 'Family and Parental Leave',
+                            'Legal Assistance' => 'Legal Assistance',
+                            'Employee Discounts' => 'Employee Discounts',
+                            'Social Activities' => 'Social Activities',
+                            'Recognition and Awards' => 'Recognition and Awards',
+                            'Sabbaticals' => 'Sabbaticals',
+                            'Profit-Sharing' => 'Profit-Sharing',
+                            'Bonuses' => 'Bonuses',
+                            'Paid Leave' => 'Paid Leave',
+                            'Retirement Plan' => 'Retirement Plan',
+                        );
+                        asort($list);
+                        echo form_multiselect(
+                            "emp_benefits_offered",
+                            $list,
+                            isset($model_info->avg_emp_salary) ? explode(',', $model_info->avg_emp_salary) : [],
+                            "class='select2' placeholder='" . app_lang('emp_benefits_offered') . "'"
+                        );
+                        ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        <?php echo '</div>' ?>
+        <?php echo '</div>' ?> -->
 
-
+        <!-- 
         <?php if (isset($is_overview)) { ?>
             <?php echo '<div id="visa-requirements-tab">' ?>
         <?php } else { ?>
@@ -724,7 +744,6 @@
                         "value" => isset($model_info->main_applin_pass_exp_date) ? $model_info->main_applin_pass_exp_date : '',
                         "class" => "form-control company_name_input_section",
                         "placeholder" => app_lang('main_applin_pass_exp_date'),
-                        "type" => 'date',
 
                     ));
                     ?>
@@ -736,34 +755,10 @@
                 <label for="visa_type" class="<?php echo $label_column; ?> visa_type_section"><?php echo app_lang('visa_type'); ?></label>
                 <div class="<?php echo $field_column; ?>">
                     <?php
-                    $list = array(
-                        'Tourist Visa (Visitor Visa)',
-                        'Business Visa',
-                        'Student Visa',
-                        'Work Visa (Employment Visa)',
-                        'Temporary Resident Visa',
-                        'Permanent Resident Visa',
-                        'Family Reunification Visa',
-                        'Diplomatic Visa',
-                        'Official Visa',
-                        'Transit Visa',
-                        'Refugee Visa (Asylum Visa)',
-                        'Humanitarian Visa',
-                        'Journalist Visa',
-                        'Crew Visa',
-                        'Volunteer Visa',
-                        'Investor Visa (Business Investor Visa)',
-                        'Artist or Entertainer Visa',
-                        'Pilgrimage Visa',
-                        'Retirement Visa',
-                        'Special Program Visas'
-                    );
-                    asort($list);
-                    echo form_datalist(
+                    echo form_input(
                         'visa_type',
                         isset($model_info->visa_type) ? $model_info->visa_type : '',
-                        $list,
-                        "class='form-control company_name_input_section' placeholder='" . app_lang('visa_type') . "'"
+                        "class='form-control company_name_input_section validate-hidden' id='visa_type' placeholder='" . app_lang('visa_type') . "'"
                     );
                     ?>
                 </div>
@@ -779,7 +774,6 @@
                         "name" => "visa_expiry",
                         "value" => isset($model_info->visa_expiry) ? $model_info->visa_expiry : '',
                         "class" => "form-control company_name_input_section",
-                        "type" => 'date',
                         "placeholder" => app_lang('visa_expiry'),
 
                     ));
@@ -822,7 +816,7 @@
                 </div>
             </div>
         </div>
-        <?php echo '</div>' ?>
+        <?php echo '</div>' ?> -->
 
 
         <?php if (isset($is_overview)) { ?>
@@ -915,6 +909,24 @@
         <?php } ?>
         <div class="form-group">
             <div class="row">
+                <label for="location_id" class="<?php echo $label_column; ?>"><?php echo app_lang('location'); ?></label>
+                <div class="<?php echo $field_column; ?>">
+                    <?php
+                    echo form_input(array(
+                        "id" => "location_id",
+                        "name" => "location_id",
+                        "value" => isset($model_info->location_id) ? $model_info->location_id : '',
+                        "class" => "form-control",
+                        "placeholder" => app_lang('location'),
+                        "data-rule-required" => true,
+                        "data-msg-required" => app_lang("field_required")
+                    ));
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
                 <label for="assignee" class="<?php echo $label_column; ?>"><?php echo app_lang('assignee'); ?>
                     <span class="help" data-container="body" data-bs-toggle="tooltip" title="<?php echo app_lang('the_person_who_will_manage_this_client') ?>"><i data-feather="help-circle" class="icon-16"></i></span>
                 </label>
@@ -933,9 +945,9 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <div class="row">
-                <label for="assignee-manager" class="<?php echo $label_column; ?> assignee_manager_section"><?php echo app_lang('assignee_manager'); ?></label>
+                <label for="assignee-manager" class="<?php echo $label_column; ?> assignee_manager_section"><?php echo app_lang('assignee'); ?></label>
                 <div class="<?php echo $field_column; ?>">
                     <?php
                     echo form_input(array(
@@ -943,20 +955,20 @@
                         "name" => "assignee_manager",
                         "value" => isset($model_info->assignee_manager) ? $model_info->assignee_manager : '',
                         "class" => "form-control company_name_input_section",
-                        "placeholder" => app_lang('assignee_manager'),
+                        "placeholder" => app_lang('assignee'),
 
                     ));
                     ?>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="form-group">
             <div class="row">
-                <label for="tag_name" class="<?php echo $label_column; ?> tag_name_section"><?php echo app_lang('tag_name'); ?></label>
+                <label for="client_labels" class="<?php echo $label_column; ?> tag_name_section"><?php echo app_lang('tag_name'); ?></label>
                 <div class="<?php echo $field_column; ?>">
                     <?php
                     echo form_input(array(
-                        "id" => "tag_name",
+                        "id" => "client_labels",
                         "name" => "tag_name",
                         "value" => isset($model_info->tag_name) ? $model_info->tag_name : '',
                         "class" => "form-control company_name_input_section",
@@ -972,36 +984,13 @@
                 <label for="source" class="<?php echo $label_column; ?> source_section"><?php echo app_lang('source'); ?></label>
                 <div class="<?php echo $field_column; ?>">
                     <?php
-                    $list = array(
-                        'Search Engine (e.g., Google, Bing)',
-                        'Facebook',
-                        'Instagram',
-                        'X (Twitter)',
-                        'LinkedIn',
-                        'Pinterest',
-                        'Snapchat',
-                        'TikTok',
-                        'YouTube',
-                        'Reddit',
-                        'WhatsApp',
-                        'Quora',
-                        'WeChat',
-                        'Telegram',
-                        'Referral from a Friend or Family Member',
-                        'Online Advertisement',
-                        'Printed Advertisement (Magazine, Newspaper, Brochure)',
-                        'Event or Conference',
-                        'Educational Institution',
-                        'Employment Agency',
-                        'News Article or Blog'
-                    );
-                    asort($list);
-                    echo form_datalist(
-                        'source',
-                        isset($model_info->source) ? $model_info->source : '',
-                        $list,
-                        "class='form-control company_name_input_section' placeholder='" . app_lang('source') . "'"
-                    );
+                    echo form_input(array(
+                        "id" => "source",
+                        "name" => "source",
+                        "value" => isset($model_info->source) ? $model_info->source : '',
+                        "class" => "form-control",
+                        "placeholder" => app_lang('source'),
+                    ));
                     ?>
                 </div>
             </div>
@@ -1012,7 +1001,25 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $("#visa_expiry_container").hide();
+            if ($('#visa_type').val()) {
+                $("#visa_expiry_container").show();
+            }
+
             $('[data-bs-toggle="tooltip"]').tooltip();
+
+            setDatePicker("#visa_expiry");
+
+            $('#visa_type').select2({
+                data: <?php echo $visa_type_dropdown; ?>
+            }).on('change', function() {
+                value = $(this).val();
+                if (value == 'Standard Business Sponsorship') {
+                    $("#visa_expiry_container").show();
+                } else {
+                    $("#visa_expiry_container").hide();
+                }
+            });
 
             <?php if (isset($currency_dropdown)) { ?>
                 if ($('#currency').length) {
@@ -1048,6 +1055,12 @@
                 $("#client_labels").select2({
                     multiple: true,
                     data: <?php echo json_encode($label_suggestions); ?>
+                });
+                $('#source').select2({
+                    data: <?php echo $sources_dropdown; ?>
+                });
+                $('#location_id').select2({
+                    data: <?php echo json_encode($locations_dropdown); ?>
                 });
             <?php } ?>
 

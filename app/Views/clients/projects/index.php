@@ -32,7 +32,7 @@
         <?php } ?>
 
         <div class="table-responsive" id="client-projects-list">
-            <table id="project-table" class="display" width="100%">            
+            <table id="project-table" class="display" width="100%">
             </table>
         </div>
     </div>
@@ -48,12 +48,12 @@ if (!isset($project_labels_dropdown)) {
 ?>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         var hideTools = "<?php
-if (isset($page_type) && $page_type === 'dashboard') {
-    echo 1;
-}
-?>" || 0;
+                            if (isset($page_type) && $page_type === 'dashboard') {
+                                echo 1;
+                            }
+                            ?>" || 0;
 
 
         var filters = [];
@@ -63,7 +63,11 @@ if (isset($page_type) && $page_type === 'dashboard') {
             filters = false;
         } else {
             if (<?php echo $project_labels_dropdown; ?>) {
-                var filters = [{name: "project_label", class: "w200", options: <?php echo $project_labels_dropdown; ?>}, <?php echo $custom_field_filters; ?>];
+                var filters = [{
+                    name: "project_label",
+                    class: "w200",
+                    options: <?php echo $project_labels_dropdown; ?>
+                }, <?php echo $custom_field_filters; ?>];
             } else {
                 //$project_labels_dropdown is empty
                 var filters = [<?php echo $custom_field_filters; ?>];
@@ -78,29 +82,99 @@ if (isset($page_type) && $page_type === 'dashboard') {
 
         $("#project-table").appTable({
             source: '<?php echo_uri("projects/projects_list_data_of_client/" . $client_id) ?>',
-            order: [[0, "desc"]],
-            hideTools: hideTools,
-            multiSelect: [
-                {
-                    name: "status_id",
-                    text: "<?php echo app_lang('status'); ?>",
-                    options: <?php echo view("project_status/project_status_dropdown", array("project_statuses" => $project_statuses, "selected_status_key" => "open")); ?>
-                }
+            order: [
+                [0, "desc"]
             ],
+            hideTools: hideTools,
+            multiSelect: [{
+                name: "status_id",
+                text: "<?php echo app_lang('status'); ?>",
+                options: <?php echo view("project_status/project_status_dropdown", array("project_statuses" => $project_statuses, "selected_status_key" => "open")); ?>
+            }],
             filterDropdown: filters,
-            columns: [
-                {title: '<?php echo app_lang("id") ?>', "class": "w50"},
-                {title: '<?php echo app_lang("title") ?>'},
-                {targets: [2], visible: false, searchable: false},
-                {title: '<?php echo app_lang("price") ?>', "class": "w10p"},
-                {visible: false, searchable: false},
-                {title: '<?php echo app_lang("start_date") ?>', "class": "w10p", "iDataSort": 4},
-                {visible: false, searchable: false},
-                {title: '<?php echo app_lang("deadline") ?>', "class": "w10p", "iDataSort": 6},
-                {title: '<?php echo app_lang("progress") ?>', "class": "w15p"},
-                {title: '<?php echo app_lang("status") ?>', "class": "w10p"}
-<?php echo $custom_field_headers; ?>,
-                {visible: optionVisibility, title: '<i data-feather="menu" class="icon-16"></i>', "class": "text-center option w100"}
+            //             columns: [
+            //                 {title: '<?php echo app_lang("id") ?>', "class": "w50"}, 
+            //                 {title: '<?php echo app_lang("title") ?>'},
+            //                 {targets: [2], visible: false, searchable: false},
+            //                 {title: '<?php echo app_lang("price") ?>', "class": "w10p"},
+            //                 {visible: false, searchable: false},
+            //                 {title: '<?php echo app_lang("start_date") ?>', "class": "w10p", "iDataSort": 4},
+            //                 {visible: false, searchable: false},
+            //                 {title: '<?php echo app_lang("deadline") ?>', "class": "w10p", "iDataSort": 6},
+            //                 {title: '<?php echo app_lang("progress") ?>', "class": "w15p"},
+            //                 {title: '<?php echo app_lang("status") ?>', "class": "w10p"}
+            // <?php echo $custom_field_headers; ?>,
+            //                 {visible: optionVisibility, title: '<i data-feather="menu" class="icon-16"></i>', "class": "text-center option w100"}
+            //             ],
+            columns: [{
+                    title: '<?php echo app_lang("id") ?>',
+                    "class": "all w10p",
+                    visible: true,
+                    order_by: "id",
+                    order_dir: "DESC"
+                },
+                {
+                    title: '<?php echo app_lang("title") ?>',
+                    "class": "all",
+                    visible: true
+                },
+                {
+                    title: '<?php echo app_lang("deadline") ?>',
+                    "class": "w10p",
+                    "iDataSort": 2,
+                    visible: true
+                },
+                {
+                    title: '<?php echo app_lang("client") ?>',
+                    "class": "w10p",
+                    visible: true
+                },
+                // {
+                //     title: '<?php echo app_lang("phone") ?>',
+                //     "class": "w10p",
+                //     visible: true
+                // },
+                {
+                    title: '<?php echo app_lang("application_assignees") ?>',
+                    "class": "w10p",
+                    visible: true
+                },
+                // {
+                //     title: '<?php echo app_lang("application_owner") ?>',
+                //     "class": "w10p",
+                //     visible: true
+                // },
+                {
+                    title: '<?php echo app_lang("workflow") ?>',
+                    "class": "w10p",
+                    visible: true
+                },
+                {
+                    title: '<?php echo app_lang("current_stage") ?>',
+                    "class": "w10p",
+                    visible: true
+                },
+                {
+                    title: '<?php echo app_lang("partner") ?>',
+                    "class": "w10p",
+                    visible: true
+                },
+                {
+                    title: '<?php echo app_lang("status") ?>',
+                    "class": "w10p",
+                    visible: true
+                },
+                {
+                    title: '<?php echo app_lang("progress") ?>',
+                    "class": "w10p",
+                    visible: true
+                },
+                // <?php echo $custom_field_headers; ?>,
+                {
+                    title: '<i data-feather="menu" class="icon-16"></i>',
+                    "class": "text-center option w100",
+                    visible: optionVisibility
+                }
             ],
             printColumns: combineCustomFieldsColumns([0, 1, 3, 5, 7, 9], '<?php echo $custom_field_headers; ?>'),
             xlsColumns: combineCustomFieldsColumns([0, 1, 3, 5, 7, 9], '<?php echo $custom_field_headers; ?>')

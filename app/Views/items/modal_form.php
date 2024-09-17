@@ -28,6 +28,7 @@
                             "data-msg-required" => app_lang("field_required"),
                         ));
                         ?>
+                        <small class="text-danger" id="title_error"></small>
                     </div>
                 </div>
             </div>
@@ -100,18 +101,19 @@
                         <div class=" col-md-9 col-xs-7 col-sm-8">
                             <?php
                             echo form_checkbox("show_in_client_portal", "1", $model_info->show_in_client_portal ? true : false, "id='show_in_client_portal' class='form-check-input'");
-                            ?>                       
+                            ?>
                         </div>
                     </div>
                 </div>
             <?php } ?>
 
-<!--            <div class="form-group">
+            <!--            <div class="form-group">
                 <div class="row">
-                    <label for="taxable" class=" col-md-3 col-xs-5 col-sm-4"><?php //echo app_lang('taxable'); ?></label>
+                    <label for="taxable" class=" col-md-3 col-xs-5 col-sm-4"><?php //echo app_lang('taxable'); 
+                                                                                ?></label>
                     <div class=" col-md-9 col-xs-7 col-sm-8">
                         <?php
-                       // echo form_checkbox("taxable", "1", $model_info->taxable ? true : false, "id='taxable' class='form-check-input'");
+                        // echo form_checkbox("taxable", "1", $model_info->taxable ? true : false, "id='taxable' class='form-check-input'");
                         ?>                       
                     </div>
                 </div>
@@ -141,19 +143,31 @@
 <?php echo form_close(); ?>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         var uploadUrl = "<?php echo get_uri("items/upload_file"); ?>";
         var validationUri = "<?php echo get_uri("items/validate_items_file"); ?>";
 
         var dropzone = attachDropzoneWithForm("#items-dropzone", uploadUrl, validationUri);
 
+        $("#title").on('keyup', function() {
+            if (String($(this).val()).length > 50) {
+                $(this).val(String($(this).val()).substr(0, 50));
+                $("#title_error").html("The title cannot be greater than 50 characters");
+            } else {
+                $("#title_error").html("");
+            }
+        });
+
         $("#item-form").appForm({
-            onSuccess: function (result) {
+            onSuccess: function(result) {
                 if (window.refreshAfterUpdate) {
                     window.refreshAfterUpdate = false;
                     location.reload();
                 } else {
-                    $("#item-table").appTable({newData: result.data, dataId: result.id});
+                    $("#item-table").appTable({
+                        newData: result.data,
+                        dataId: result.id
+                    });
                 }
             }
         });

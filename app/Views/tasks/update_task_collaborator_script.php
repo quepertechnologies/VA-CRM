@@ -22,6 +22,18 @@
                 };
             }
 
+            if (type === "assigned_to") {
+                e.stopPropagation();
+                e.preventDefault();
+
+                showbuttons = false;
+                source = <?php echo json_encode($assign_to_dropdown); ?>;
+                select2Option = {
+                    data: source,
+                    multiple: false
+                };
+            }
+
             $(this).appModifier({
                 actionType: editableType,
                 value: $(this).attr('data-value'),

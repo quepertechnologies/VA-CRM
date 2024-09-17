@@ -56,7 +56,7 @@
                 <?php echo $custom_field_headers; ?>,
                 {
                     title: '<i data-feather="menu" class="icon-16"></i>',
-                    "class": "text-center option w100"
+                    "class": "text-center w100"
                 }
             ],
             filterDropdown: [

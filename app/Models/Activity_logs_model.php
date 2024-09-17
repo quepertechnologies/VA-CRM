@@ -27,19 +27,19 @@ class Activity_logs_model extends Model
             }
         }
 
-        if (!is_dev_mode()) {
-            if (!isset($data["created_at"])) {
-                $data["created_at"] = get_current_utc_time();
-            }
-
-            $created_by = 0;
-            if (!$activity_log_created_by_app) {
-                $users_model = model("App\Models\Users_model", false);
-                $created_by = $users_model->login_user_id();
-            }
-
-            $data["created_by"] = $created_by;
+        // if (!is_dev_mode()) {
+        // }
+        if (!isset($data["created_at"])) {
+            $data["created_at"] = get_current_utc_time();
         }
+
+        $created_by = 0;
+        if (!$activity_log_created_by_app) {
+            $users_model = model("App\Models\Users_model", false);
+            $created_by = $users_model->login_user_id();
+        }
+
+        $data["created_by"] = $created_by;
         $this->db_builder->insert($data);
         return $this->db->insertID();
     }

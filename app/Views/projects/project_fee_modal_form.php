@@ -2,10 +2,10 @@
 <div class="modal-body clearfix">
     <div class="container-fluid">
         <input type="hidden" name="project_id" value="<?php echo $project_id; ?>" />
-        <input type="hidden" name="rows_count" value="<?php echo isset($modal_info->rows_count) ? $modal_info->rows_count : 1; ?>" />
-        <input type="hidden" name="amount_title" value="<?php echo isset($modal_info->amount_title) ? $modal_info->amount_title : app_lang("installment_amount"); ?>" />
-        <input type="hidden" name="installments_title" value="<?php echo isset($modal_info->installments_title) ? $modal_info->installments_title : app_lang("installments"); ?>" />
-        <input type="hidden" name="claimable_title" value="<?php echo isset($modal_info->claimable_title) ? $modal_info->claimable_title : app_lang("claimable_installments"); ?>" />
+        <input type="hidden" name="rows_count" value="1" />
+        <input type="hidden" name="amount_title" value="<?php echo app_lang("installment_amount"); ?>" />
+        <input type="hidden" name="installments_title" value="<?php echo app_lang("installments"); ?>" />
+        <input type="hidden" name="claimable_title" value="<?php echo app_lang("claimable_installments"); ?>" />
 
         <div class="row">
             <div class="form-group col-md-6">
@@ -15,7 +15,7 @@
                         <?php
                         echo form_input(
                             "fee_option_name",
-                            isset($modal_info->fee_option_name) ? $modal_info->fee_option_name : 'Default Fee',
+                            'Default Fee',
                             "class='form-control' readonly='readonly' style='cursor: not-allowed;' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "' id='fee-option-name'",
                         );
                         ?>
@@ -29,7 +29,7 @@
                         <?php
                         echo form_input(
                             "country_of_residency",
-                            isset($modal_info->country_of_residency) ? $modal_info->country_of_residency : 'All Countries',
+                            'All Countries',
                             "class='form-control' readonly='readonly' style='cursor: not-allowed;' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "' id='country-of-residency'",
                         );
                         ?>
@@ -56,46 +56,14 @@
                         echo form_dropdown(
                             'installment_type',
                             $list,
-                            isset($modal_info->installment_type) ? array($modal_info->installment_type) : '',
+                            '',
                             "class='form-control select2 validate-hidden' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "' id='installment-type'"
                         );
                         ?>
                     </div>
                 </div>
             </div>
-            <!-- <div class="form-group col-md-6">
-                <div class="row">
-                    <label for="installment_start_date" class=" col-md-3"><?php echo app_lang('installment_start_date'); ?></label>
-                    <div class=" col-md-9">
-                        <?php
-                        echo form_input(
-                            "installment_start_date",
-                            isset($modal_info->installment_start_date) ? $modal_info->installment_start_date : '',
-                            "class='form-control' id='installment-start-date'" . ($is_payment_invoiced || $is_auto_payment ? "style='cursor: not-allowed;' disabled='disabled'" : "") . "",
-                            'date'
-                        );
-                        ?>
-                    </div>
-                </div>
-            </div> -->
-            <h4 class="border-top pt-3"><?php echo app_lang('payment_schedule_setup'); ?></h4>
-            <?php if ($is_payment_invoiced) { ?>
-
-                <small class="text-danger"><span data-feather="slash" class="icon-16"></span> Payment schedule setup cannot be changed once a payment is invoiced.</small>
-
-            <?php } elseif ($is_auto_payment) { ?>
-
-                <small class="text-danger"><span data-feather="slash" class="icon-16"></span> Payment schedule setup cannot be changed once the auto invoicing schedule is created.</small>
-
-            <?php } elseif ($is_payment_schedule) { ?>
-
-                <small class="text-warning"><span data-feather="info" class="icon-16"></span> You've already created a payment schedule manually. You can create a auto payment schedule by defining the first invoice date but the scheduled payments amount may exceed the application fees. Please manually reconcile your payment schedules once the payments are scheduled.</small>
-
-            <?php } else { ?>
-
-                <small class="text-info"><span data-feather="info" class="icon-16"></span> Auto Schedule your Invoices by selecting an Invoice date for the first installment.</small>
-
-            <?php } ?>
+            <!-- <h4 class="border-top pt-3"><?php echo app_lang('payment_schedule_setup'); ?></h4> -->
 
             <div class="form-group mt-4">
                 <div class="row">
@@ -104,19 +72,22 @@
                         <?php
                         echo form_input(
                             "first_invoice_date",
-                            isset($modal_info->first_invoice_date) ? $modal_info->first_invoice_date : '',
-                            "class='form-control' id='first-invoice-date' " . ($is_payment_invoiced || $is_auto_payment ? "style='cursor: not-allowed;' disabled='disabled'" : "") . "",
+                            '',
+                            "class='form-control' id='first-invoice-date' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "'",
                         );
-                        ?></div>
+                        ?>
+                        <small class="text-info"><span data-feather="info" class="icon-16"></span> Auto Schedule your Invoices by selecting an Invoice date for the first installment.</small>
+                    </div>
                 </div>
             </div>
         </div>
         <div class='row col-md-12 border-top py-3'>
             <div class="col-md-3"><strong><?php echo app_lang("fee_type"); ?></strong></div>
-            <div class="col-md-2"><strong id='amount-title'><?php echo isset($modal_info->amount_title) ? $modal_info->amount_title : app_lang("installment_amount"); ?></strong></div>
-            <div class="col-md-2"><strong id='installments-title'><?php echo isset($modal_info->installments_title) ? $modal_info->installments_title : app_lang("installments"); ?></strong></div>
-            <div class="col-md-2 text-right"><strong id='total-title'><?php echo app_lang("total_fee"); ?></strong></div>
-            <div class="col-md-2"><strong id='claimable-title'><?php echo isset($modal_info->claimable_title) ? $modal_info->claimable_title : app_lang("claimable_installments"); ?></strong></div>
+            <div class="col-md-2"><strong id='amount-title'><?php echo app_lang("installment_amount"); ?></strong></div>
+            <div class="col-md-2"><strong id='installments-title'><?php echo app_lang("installments"); ?></strong></div>
+            <div class="col-md-2"><strong id='claimable-title'><?php echo app_lang("claimable_installments"); ?></strong></div>
+            <div class="col-md-1"><strong><?php echo app_lang("taxable"); ?></strong></div>
+            <div class="col-md-1 text-right"><strong id='total-title'><?php echo app_lang("total_fee"); ?></strong></div>
         </div>
         <div class="border-top pb-3" id='fee-row-container'>
             <div class='row col-md-12 pt-3' id='fee-row'>
@@ -439,7 +410,6 @@
                     );
                     ?>
                 </div>
-                <div class="col-md-2 d-flex align-items-center justify-content-end"><span id='row-total'>0.00</span></div>
                 <div class="col-md-2">
                     <?php
                     echo form_input(
@@ -450,6 +420,23 @@
                     );
                     ?>
                 </div>
+                <div class="col-md-1">
+                    <?php
+                    $list = array(
+                        0 => 'No',
+                        1 => 'Yes'
+                    );
+                    ksort($list);
+
+                    echo form_dropdown(
+                        'taxable',
+                        $list,
+                        ['no'],
+                        "class='form-control' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "' id='taxable' placeholder='" . app_lang("taxable") . "'",
+                    );
+                    ?>
+                </div>
+                <div class="col-md-1 d-flex align-items-center justify-content-end"><span id='row-total'>0.00</span></div>
                 <div class="col-md-1 d-none" id='remove-btn-container'>
                     <button type='button' class="btn btn-danger" id='remove-btn'>
                         <span data-feather="trash-2" class="icon-16"></span>
@@ -469,7 +456,7 @@
                 <?php
                 echo form_input(
                     'discount',
-                    isset($modal_info->discount) ? $modal_info->discount : '0.00',
+                    '0.00',
                     "class='form-control' min='0' step='0.01' onkeypress='javascript: return validateNum(this,event);' id='discount' placeholder='" . app_lang("discount") . "'",
                 );
                 ?>
@@ -478,21 +465,21 @@
                 <?php
                 echo form_input(
                     'discount_installments',
-                    isset($modal_info->discount_installments) ? $modal_info->discount_installments : '1',
+                    '1',
                     "class='form-control' min='1' max='99' onkeydown='javascript: return event.keyCode == 69 ? false : true' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "' id='discount-installments' placeholder='" . app_lang("installments") . "'",
                     'number'
                 );
                 ?>
             </div>
 
-            <input type="hidden" name="discount_total" id="discount-total-field" value="<?php echo isset($modal_info->discount_total) ? $modal_info->discount_total : '0'; ?>" />
-            <div class="col-md-2 d-flex align-items-center justify-content-end"><span class="text-danger" id="discount-total"><?php echo isset($modal_info->discount_total) ?  number_format((float)$modal_info->discount_total, 2, '.', '') : '0.00'; ?></span></div>
+            <input type="hidden" name="discount_total" id="discount-total-field" value="0.00" />
+            <div class="col-md-4 d-flex align-items-center justify-content-end"><span class="text-danger" id="discount-total"><?php echo '0.00'; ?></span></div>
         </div>
         <div class='row col-md-12 border-top py-3'>
             <div class="col-md-3">
                 <button id='add-new-row' type="button" class="btn btn-success"><span data-feather="plus-circle" class="icon-16"></span> <?php echo app_lang("add_fee") ?></button>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="d-flex align-items-center justify-content-end">
                     <strong><?php echo app_lang('net_total') ?></strong>
                 </div>
@@ -501,8 +488,8 @@
                 </div>
             </div>
 
-            <input type="hidden" name="net_total" id="net-total-field" value="<?php echo isset($modal_info->net_total) ? $modal_info->net_total : '0'; ?>" />
-            <div class="col-md-2 d-flex justify-content-end"><span class="text-info" id="net-total"><?php echo isset($modal_info->net_total) ? number_format((float)$modal_info->net_total, 2, '.', '') : '0.00'; ?></span></div>
+            <input type="hidden" name="net_total" id="net-total-field" value="<?php echo '0.00'; ?>" />
+            <div class="col-md-2 d-flex justify-content-end"><span class="text-info" id="net-total"><?php echo '0.00'; ?></span></div>
         </div>
     </div>
 
@@ -535,7 +522,7 @@
                 }
             });
 
-            var rowSerial = +'<?php echo isset($modal_info->rows_count) ? $modal_info->rows_count : 0 ?>';
+            var rowSerial = 0;
 
             var rowNode = $('#fee-row'),
                 defaultNode = rowNode.clone(); //? create a clone of the original node for safe keeping
@@ -544,13 +531,7 @@
 
             rowNode.parent().html(''); //? remove the original node
 
-            const fees = <?php echo isset($modal_info->fees) && count($modal_info->fees) ? json_encode($modal_info->fees) : json_encode(array()); ?>;
-
-            if (fees && fees.length) {
-                fees.forEach((fee) => addNewRow(fee));
-            } else {
-                addNewRow();
-            }
+            addNewRow();
 
             $('#installment-type').select2().on("change", function() {
                 var selectedVal = $(this).val();
@@ -621,47 +602,27 @@
             }
 
             function addNewRow(fee) {
-                if (fee) {
-                    var newNode = defaultNode.clone(),
-                        rowId = 'fee-row-' + fee.key;
+                rowSerial++;
+                var newNode = defaultNode.clone(),
+                    rowId = 'fee-row-' + rowSerial;
 
-                    newNode.attr('id', rowId);
+                newNode.attr('id', rowId);
 
-                    newNode.find('#fee-type').attr('name', 'fee_type_' + fee.key).attr('list', 'fee_type_' + fee.key + '_list').val(fee.fee_type);
-                    newNode.find('#fee_type_list').attr('id', 'fee_type_' + fee.key + '_list');
-                    newNode.find('#amount').attr('name', 'amount_' + fee.key).val(fee.amount);
-                    newNode.find('#row-total').attr('id', 'row-total-' + fee.key).html(Number(fee.row_total).toFixed(2));
-                    newNode.find('#installments').attr('name', 'installments_' + fee.key).val(fee.installments);
-                    newNode.find('#claimable-installments').attr('name', 'claimable_installments_' + fee.key).val(fee.claimable_installments);
+                newNode.find('#fee-type').attr('name', 'fee_type_' + rowSerial).attr('list', 'fee_type_' + rowSerial + '_list');
+                newNode.find('#fee_type_list').attr('id', 'fee_type_' + rowSerial + '_list');
+                newNode.find('#amount').attr('name', 'amount_' + rowSerial);
+                newNode.find('#row-total').attr('id', 'row-total-' + rowSerial);
+                newNode.find('#installments').attr('name', 'installments_' + rowSerial);
+                newNode.find('#claimable-installments').attr('name', 'claimable_installments_' + rowSerial);
+                newNode.find('#taxable').attr('name', 'taxable_' + rowSerial);
 
-                    if (fee.key > 1) { // show remove btn if not first row
-                        newNode.find('#remove-btn-container').removeClass("d-none");
-                        newNode.find('#remove-btn').attr('data-row-id', rowId);
-                    }
-
-                    $('#fee-row-container').append(newNode);
-                } else {
-                    rowSerial++;
-                    var newNode = defaultNode.clone(),
-                        rowId = 'fee-row-' + rowSerial;
-
-                    newNode.attr('id', rowId);
-
-                    newNode.find('#fee-type').attr('name', 'fee_type_' + rowSerial).attr('list', 'fee_type_' + rowSerial + '_list');
-                    newNode.find('#fee_type_list').attr('id', 'fee_type_' + rowSerial + '_list');
-                    newNode.find('#amount').attr('name', 'amount_' + rowSerial);
-                    newNode.find('#row-total').attr('id', 'row-total-' + rowSerial);
-                    newNode.find('#installments').attr('name', 'installments_' + rowSerial);
-                    newNode.find('#claimable-installments').attr('name', 'claimable_installments_' + rowSerial);
-
-                    if (rowSerial > 1) { // show remove btn if not first row
-                        newNode.find('#remove-btn-container').removeClass("d-none");
-                        newNode.find('#remove-btn').attr('data-row-id', rowId);
-                    }
-
-                    $('#fee-row-container').append(newNode);
-                    $("input[name='rows_count']").val(rowSerial);
+                if (rowSerial > 1) { // show remove btn if not first row
+                    newNode.find('#remove-btn-container').removeClass("d-none");
+                    newNode.find('#remove-btn').attr('data-row-id', rowId);
                 }
+
+                $('#fee-row-container').append(newNode);
+                $("input[name='rows_count']").val(rowSerial);
             }
 
             function handleRemoveRow(rowId = '') {

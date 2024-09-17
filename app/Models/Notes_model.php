@@ -69,6 +69,13 @@ class Notes_model extends Crud_model
         return $this->db->query($sql);
     }
 
+    function count_client_notes($client_id = 0)
+    {
+        $notes_table = $this->db->prefixTable('notes');
+        $sql = "SELECT COUNT($notes_table.id) AS total_notes_count FROM $notes_table WHERE $notes_table.deleted=0 AND $notes_table.client_id=$client_id";
+        return $this->db->query($sql)->getRow()->total_notes_count;
+    }
+
     function get_label_suggestions($user_id)
     {
         $notes_table = $this->db->prefixTable('notes');

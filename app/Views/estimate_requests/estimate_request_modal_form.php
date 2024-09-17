@@ -2,6 +2,7 @@
 <div class="modal-body clearfix">
     <div class="container-fluid">
         <input type="hidden" name="id" value="<?php echo $model_info->id; ?>" />
+        <input type="hidden" name="is_clone" value="<?php echo $is_clone; ?>" />
 
         <div class="form-group">
             <div class="row">
@@ -96,14 +97,17 @@
 <?php echo form_close(); ?>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
 
         $("#estimate-form").appForm({
-            onSuccess: function (result) {
+            onSuccess: function(result) {
                 if (result.newData) {
                     window.location = "<?php echo site_url('estimate_requests/edit_estimate_form'); ?>/" + result.id;
                 } else {
-                    $("#estimate-form-main-table").appTable({newData: result.data, dataId: result.id});
+                    $("#estimate-form-main-table").appTable({
+                        newData: result.data,
+                        dataId: result.id
+                    });
                 }
             }
         });
@@ -111,5 +115,4 @@
         $("#estimate-form .select2").select2();
 
     });
-
 </script>

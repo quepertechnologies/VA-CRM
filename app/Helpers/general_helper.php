@@ -759,10 +759,13 @@ if (!function_exists('get_team_member_profile_link')) {
     function get_team_member_profile_link($id = 0, $name = "", $attributes = array())
     {
         $ci = new Security_Controller(false);
-        if ($ci->login_user->user_type === "staff") {
+        if ($ci->login_user->user_type === "staff" && $id) {
             return anchor("team_members/view/" . $id, $name ? $name : "", $attributes);
         } else {
-            return js_anchor($name, $attributes);
+            if ($name) {
+                return js_anchor($name, $attributes);
+            }
+            return js_anchor("Visa Alliance " . timeline_label('bot'), $attributes);
         }
     }
 }
@@ -787,37 +790,86 @@ if (!function_exists('get_login_team_member_profile_link')) {
 
 if (!function_exists('timeline_label')) {
 
-    function timeline_label($type)
+    function timeline_label($type, $style = '')
     {
         $label = "";
         switch ($type) {
             case 'created':
-                $label = "<span class='badge large' style='background-color:#27AE60;' title=" . app_lang("created") . ">" . app_lang("created") . "</span> ";
+                $label = "<span class='badge large' style='background-color:#27AE60; " . $style . "' title='" . app_lang("created") . "'>" . app_lang("created") . "</span> ";
                 break;
             case 'changed':
-                $label = "<span class='badge large' style='background-color:#F39C12;' title=" . app_lang("changed") . ">" . app_lang("changed") . "</span> ";
+                $label = "<span class='badge large' style='background-color:#F39C12; " . $style . "' title='" . app_lang("changed") . "'>" . app_lang("changed") . "</span> ";
                 break;
             case 'updated':
-                $label = "<span class='badge large' style='background-color:#3498DB;' title=" . app_lang("updated") . ">" . app_lang("updated") . "</span> ";
+                $label = "<span class='badge large' style='background-color:#3498DB; " . $style . "' title='" . app_lang("updated") . "'>" . app_lang("updated") . "</span> ";
                 break;
             case 'deleted':
-                $label = "<span class='badge large' style='background-color:#E74C3C;' title=" . app_lang("deleted") . ">" . app_lang("deleted") . "</span> ";
+                $label = "<span class='badge large' style='background-color:#E74C3C; " . $style . "' title='" . app_lang("deleted") . "'>" . app_lang("deleted") . "</span> ";
                 break;
             case 'send':
-                $label = "<span class='badge large' style='background-color:#8E44AD;' title=" . app_lang("send") . ">" . app_lang("send") . "</span> ";
+                $label = "<span class='badge large' style='background-color:#8E44AD; " . $style . "' title='" . app_lang("send") . "'>" . app_lang("send") . "</span> ";
                 break;
             case 'to':
-                $label = "<span class='badge large' style='background-color:#7D3C98;' title=" . app_lang("to") . ">" . app_lang("to") . "</span> ";
+                $label = "<span class='badge large' style='background-color:#7D3C98; " . $style . "' title='" . app_lang("to") . "'>" . app_lang("to") . "</span> ";
                 break;
             case 'from':
-                $label = "<span class='badge large' style='background-color:#7D3C98;' title=" . app_lang("from") . ">" . app_lang("from") . "</span> ";
+                $label = "<span class='badge large' style='background-color:#7D3C98; " . $style . "' title='" . app_lang("from") . "'>" . app_lang("from") . "</span> ";
+                break;
+            case 'student':
+                $label = "<span class='badge large' style='background-color:#C0392B; " . $style . "' title='" . app_lang("student") . "'>" . app_lang("student") . "</span> ";
+                break;
+            case 'migration_client':
+                $label = "<span class='badge large' style='background-color:#8E44AD; " . $style . "' title='" . app_lang("migration_client") . "'>" . app_lang("migration_client") . "</span> ";
+                break;
+            case 'organization':
+                $label = "<span class='badge large' style='background-color:#27AE60; " . $style . "' title='" . app_lang("organization") . "'>" . app_lang("organization") . "</span> ";
+                break;
+            case 'partner':
+                $label = "<span class='badge large' style='background-color:#34495E; " . $style . "' title='" . app_lang("partner") . "'>" . app_lang("partner") . "</span> ";
+                break;
+            case 'institute':
+                $label = "<span class='badge large' style='background-color:#34495E; " . $style . "' title='" . app_lang("institute") . "'>" . app_lang("institute") . "</span> ";
+                break;
+            case 'referral':
+                $label = "<span class='badge large' style='background-color:#34495E; " . $style . "' title='" . app_lang("referral") . "'>" . app_lang("referral") . "</span> ";
+                break;
+            case 'subagent':
+                $label = "<span class='badge large' style='background-color:#34495E; " . $style . "' title='" . app_lang("subagent") . "'>" . app_lang("subagent") . "</span> ";
+                break;
+            case 'superagent':
+                $label = "<span class='badge large' style='background-color:#34495E; " . $style . "' title='" . app_lang("superagent") . "'>" . app_lang("superagent") . "</span> ";
+                break;
+            case 'lost':
+                $label = "<span class='badge large' style='background-color:#34495E; " . $style . "' title='" . app_lang("client_is_lost") . "'>" . app_lang("lost") . "</span> ";
+                break;
+            case 'bot':
+                $label = "<span class='badge large' style='background-color:#34495E; " . $style . "' title='" . app_lang("visa_alliance_bot") . "'>" . app_lang("bot") . "</span> ";
+                break;
+            case 'lead':
+                $label = "<span class='badge large' style='background-color:#2ECC71; " . $style . "' title='" . app_lang("lead") . "'>" . app_lang("lead") . "</span> ";
+                break;
+            case 'prospect':
+                $label = "<span class='badge large' style='background-color:#E67E22; " . $style . "' title='" . app_lang("prospect") . "'>" . app_lang("prospect") . "</span> ";
+                break;
+            case 'cold_lead':
+                $label = "<span class='badge large' style='background-color:#7F8C8D; " . $style . "' title='" . app_lang("cold_lead") . "'>" . app_lang("cold_lead") . "</span> ";
+                break;
+            case 'not_initiated':
+                $label = "<span class='badge large' style='background-color:#2C3E50; " . $style . "' title='" . app_lang("non_claimable") . "'>" . app_lang("non_claimable") . "</span> ";
+                break;
+            case 'initiated':
+                $label = "<span class='badge large' style='background-color:#2C3E50; " . $style . "' title='" . app_lang("claimable") . "'>" . app_lang("claimable") . "</span> ";
+                break;
+            case 'claimed':
+                $label = "<span class='badge large' style='background-color:#3498DB; " . $style . "' title='" . app_lang("claimed") . "'>" . app_lang("claimed") . "</span> ";
+                break;
+            case 'paid':
+                $label = "<span class='badge large' style='background-color:#27AE60; " . $style . "' title='" . app_lang("paid") . "'>" . app_lang("paid") . "</span> ";
                 break;
         }
         return $label;
     }
 }
-
-
 
 /**
  * checks if the current host is a localhost
@@ -849,6 +901,22 @@ if (!function_exists('is_dev_mode')) {
             return true;
         } else {
             return false;
+        }
+    }
+}
+
+if (!function_exists('html_decode')) {
+    /**
+     * convert the static html to plain text
+     * 
+     * @return string
+     */
+    function html_decode($str = "")
+    {
+        if ($str) {
+            return preg_replace("/\n\s+/", "\n", rtrim(html_entity_decode(strip_tags($str))));
+        } else {
+            return "";
         }
     }
 }
@@ -911,7 +979,7 @@ if (!function_exists('get_client_contact_profile_link')) {
         }
 
         if ($partner_type && $account_type == 3) {
-            $name .= ' ' . "<span class='mt0 badge' style='background-color:#2C3E50;' title=" . app_lang($partner_type) . ">" . app_lang($partner_type) . "</span>";
+            $name .= ' ' . timeline_label($partner_type);
         }
 
         $only_url = array_key_exists('only_url', $options);
@@ -959,8 +1027,11 @@ if (!function_exists('get_invoice_status_label')) {
 
         $tolarance = get_paid_status_tolarance();
 
+        $ci = new App_Controller();
+        $invoice_meta = $ci->Invoices_model->get_invoice_total_meta($invoice_info->id);
+
         //ignore the hidden value. check only 2 decimal place.
-        $invoice_info->invoice_value = floor($invoice_info->invoice_value * 100) / 100;
+        $invoice_info->invoice_value = floor(($invoice_info->invoice_type == 'net_claim' ? $invoice_meta->invoice_subtotal - $invoice_meta->discount_total : $invoice_meta->invoice_total) * 100) / 100;
 
         if ($invoice_info->status == "cancelled") {
             $invoice_status_class = "bg-danger";
@@ -1010,13 +1081,131 @@ if (!function_exists('get_invoice_making_data')) {
         if ($invoice_info) {
             $data['invoice_info'] = $invoice_info;
             $data['client_info'] = $ci->Clients_model->get_one($data['invoice_info']->client_id);
+            $data['assignee_info'] = $ci->Users_model->get_one($data['client_info']->assignee);
             $data['invoice_items'] = $ci->Invoice_items_model->get_details(array("invoice_id" => $invoice_id))->getResult();
             $data['invoice_status_label'] = get_invoice_status_label($invoice_info);
             $data["invoice_total_summary"] = $ci->Invoices_model->get_invoice_total_summary($invoice_id);
             $data['invoice_info']->custom_fields = $ci->Custom_field_values_model->get_details(array("related_to_type" => "invoices", "show_in_invoice" => true, "related_to_id" => $invoice_id))->getResult();
             $data['client_info']->custom_fields = $ci->Custom_field_values_model->get_details(array("related_to_type" => "clients", "show_in_invoice" => true, "related_to_id" => $data['invoice_info']->client_id))->getResult();
+
+            $data['invoice_total_meta'] = $ci->Invoices_model->get_invoice_total_meta($invoice_id);
+            $data['client_full_name'] = _get_client_full_name(0, $data['client_info']);
+            $data['client_location_label'] = _get_location_label(get_array_value($data['client_info'], 'location_id'));
+
+            if ($data['invoice_info']->project_id) {
+                $data['project_info'] = $ci->Projects_model->get_one($data['invoice_info']->project_id);
+                // $partners_options = array(
+                //     'project_id' => $data['invoice_info']->project_id
+                // );
+                $other_partners_options = array(
+                    'invoice_id' => $invoice_id
+                );
+                if ($data['invoice_info']->partner_id) {
+                    $institute_options = array(
+                        'project_id' => $data['invoice_info']->project_id,
+                        'partner_id' => $data['invoice_info']->partner_id,
+                    );
+                } else {
+                    $institute_options = array(
+                        'project_id' => $data['invoice_info']->project_id,
+                        'partner_type' => 'institute'
+                    );
+                }
+                // $data['partners'] = $ci->Project_partners_model->get_details($partners_options)->getResult();
+                $data['income_sharing_partners'] = $ci->Invoice_incomes_model->get_details($other_partners_options)->getResult();
+                $project_institute = $ci->Project_partners_model->get_details($institute_options)->getRow();
+                if ($project_institute) {
+                    $data['institute'] = $ci->Clients_model->get_one($project_institute->partner_id);
+                }
+
+                $data['project_workflow'] = $ci->General_files_model->get_details(array("id" => $data['project_info']->workflow_id))->getRow();
+            } else {
+                // $partners_options = array(
+                //     'project_id' => 0
+                // );
+                $subagent_options = array(
+                    'project_id' => 0,
+                    'partner_type' => 'subagent'
+                );
+                $institute_options = array(
+                    'project_id' => 0,
+                    'partner_type' => 'institute'
+                );
+                // $data['partners'] = $ci->Project_partners_model->get_details($partners_options)->getResult();
+                $data['subagent'] = $ci->Project_partners_model->get_details($subagent_options)->getRow();
+                $project_institute = $ci->Project_partners_model->get_details($institute_options)->getRow();
+                $data['institute'] = $ci->Clients_model->get_one($project_institute->partner_id);
+            }
+
             return $data;
         }
+    }
+}
+
+/**
+ * get all data to make an invoice
+ * 
+ * @param Int $invoice_id
+ * @return array
+ */
+if (!function_exists('get_location_label')) {
+
+    function _get_location_label($location_id = 0)
+    {
+        $ci = new App_Controller();
+        $label = "-";
+        $location = $ci->Location_model->get_one($location_id);
+        if ($location) {
+            $label = $location->title;
+        }
+
+        return $label;
+    }
+}
+
+/**
+ * get all data to make an invoice
+ * 
+ * @param Int $invoice_id
+ * @return array
+ */
+if (!function_exists('get_client_full_name')) {
+
+    function _get_client_full_name($client_id = 0, $client = null, $spacer = " ")
+    {
+        $ci = new App_Controller();
+        $full_name = "";
+        if (!$client) {
+            $client = $ci->Clients_model->get_one($client_id);
+        }
+        if ($client) {
+            switch ($client->account_type) {
+                case '1':
+                    $first_name = $client->first_name ?? "";
+                    $last_name = $client->last_name ?? "";
+                    $full_name = $first_name . $spacer . $last_name;
+                    break;
+                case '2':
+                    $first_name = $client->first_name ?? "";
+                    $last_name = $client->last_name ?? "";
+                    $full_name = $first_name . $spacer . $last_name;
+                    break;
+                case '3':
+                    $first_name = $client->first_name ?? "";
+                    $last_name = $client->last_name ?? "";
+                    $full_name = $first_name . $spacer . $last_name;
+                    break;
+                case '4':
+                    $full_name = $client->company_name ?? "";
+                    break;
+
+                default:
+                    $full_name = "";
+                    break;
+            }
+        }
+
+        return $full_name;
     }
 }
 
@@ -1830,7 +2019,7 @@ if (!function_exists("get_update_task_info_anchor_data")) {
             }
 
             $collaborators = "<span class='text-off'>" . app_lang("add") . " " . app_lang("collaborators") . "<span>";
-            if ($model_info->collaborators) {
+            if ($model_info->collaborators && $extra_data) {
                 $collaborators = $extra_data;
             }
 
@@ -1839,16 +2028,19 @@ if (!function_exists("get_update_task_info_anchor_data")) {
                 return $can_edit_tasks ? js_anchor($model_info->status_key_name ? app_lang($model_info->status_key_name) : $model_info->status_title, array('title' => "", "class" => "white-link", "data-id" => $model_info->id, "data-value" => $model_info->status_id, "data-act" => "update-task-info", "data-act-type" => "status_id")) : ($model_info->status_key_name ? app_lang($model_info->status_key_name) : $model_info->status_title);
             } else if ($type == "milestone") {
 
-                return $can_edit_tasks ? js_anchor($model_info->milestone_title ? $model_info->milestone_title : "<span class='text-off'>" . app_lang("add") . " " . app_lang("milestone") . "<span>", array('title' => "", "class" => "", "data-id" => $model_info->id, "data-value" => $model_info->milestone_id, "data-act" => "update-task-info", "data-act-type" => "milestone_id")) : $model_info->milestone_title;
+                return $can_edit_tasks ? js_anchor($model_info->milestone_title ? $model_info->milestone_title : "<span class='text-off'>" . app_lang("add") . " " . app_lang("milestone") . "<span>", array('title' => "", "class" => "", "data-id" => $model_info->id, "data-value" => $model_info->milestone_id, "data-act" => "update-task-info", "data-act-type" => "milestone_id")) : ($extra_data ? $extra_data : $model_info->milestone_title);
             } else if ($type == "user") {
 
-                return ($can_edit_tasks && $extra_condition) ? js_anchor($model_info->assigned_to_user ? $model_info->assigned_to_user : "<span class='text-off'>" . app_lang("add") . " " . app_lang("assignee") . "<span>", array('title' => "", "class" => "", "data-id" => $model_info->id, "data-value" => $model_info->assigned_to, "data-act" => "update-task-info", "data-act-type" => "assigned_to")) : $model_info->assigned_to_user;
+                return ($can_edit_tasks && $extra_condition) ? js_anchor($model_info->assigned_to_user ? $model_info->assigned_to_user : "<span class='text-off'>" . app_lang("add") . " " . app_lang("assignee") . "<span>", array('title' => "", "class" => "", "data-id" => $model_info->id, "data-value" => $model_info->assigned_to, "data-act" => $data_act, "data-act-type" => "assigned_to")) : $model_info->assigned_to_user;
             } else if ($type == "labels") {
 
                 return $can_edit_tasks ? js_anchor($labels, array('title' => "", "class" => "", "data-id" => $model_info->id, "data-value" => $model_info->labels, "data-act" => "update-task-info", "data-act-type" => "labels")) : $extra_data;
             } else if ($type == "points") {
 
                 return $can_edit_tasks ? js_anchor($model_info->points, array('title' => "", "class" => "", "data-id" => $model_info->id, "data-value" => $model_info->points, "data-act" => "update-task-info", "data-act-type" => "points")) : $model_info->points;
+            } else if ($type == "created_by") {
+
+                return $can_edit_tasks ? js_anchor($collaborators, array('title' => "", "class" => "", "data-id" => $model_info->id, "data-value" => $model_info->created_by, "data-act" => $data_act, "data-act-type" => "created_by")) : $extra_data;
             } else if ($type == "collaborators") {
 
                 return $can_edit_tasks ? js_anchor($collaborators, array('title' => "", "class" => "", "data-id" => $model_info->id, "data-value" => $model_info->collaborators, "data-act" => $data_act, "data-act-type" => "collaborators")) : $extra_data;
@@ -3172,6 +3364,8 @@ if (!function_exists('get_ltm_opl_id')) {
 
             if ($office) {
                 return $office->location_id;
+            } else {
+                return 2;
             }
         } else {
             $offices = $ci->Office_model->get_details($options)->getResult();
@@ -3209,7 +3403,7 @@ if (!function_exists('get_tm_ol_id')) {
      */
     function get_tm_ol_id($user_id = 0, $only_primary_location = false)
     {
-        $ci = new Security_Controller(false);
+        $ci = new App_Controller();
 
         if ($user_id) {
             $options = array('user_id' => $user_id);
@@ -3230,9 +3424,88 @@ if (!function_exists('get_tm_ol_id')) {
                 }
                 return $location_ids;
             }
-        } else {
-            return 0;
         }
-        return 0;
+
+        return 2;
+    }
+}
+
+if (!function_exists('client_source')) {
+
+    /**
+     * get/convert client source id
+     * 
+     * @return string
+     */
+    function client_source($str = '')
+    {
+        $ci = new App_Controller(false);
+
+        $options = array('title' => ucwords($str));
+        $source = $ci->Lead_source_model->get_details($options)->getRow();
+
+        if ($source) {
+            return $source->id;
+        } else {
+            $data = array(
+                'title' => ucwords($str),
+                'sort' => $ci->Lead_source_model->get_max_sort_value() + 1
+            );
+            $success = $ci->Lead_source_model->ci_save($data);
+            return $success;
+        }
+    }
+}
+
+if (!function_exists('ticket_type')) {
+
+    /**
+     * generates the ticket type id for the provided string
+     * 
+     * @return string
+     */
+    function ticket_type($str = '')
+    {
+        $ci = new App_Controller(false);
+
+        $options = array('title' => ucwords($str));
+        $ticket_type = $ci->Ticket_types_model->get_details($options)->getRow();
+
+        if ($ticket_type) {
+            return $ticket_type->id;
+        } else {
+            $data = array(
+                'title' => ucwords($str)
+            );
+            $success = $ci->Ticket_types_model->ci_save($data);
+            return $success;
+        }
+    }
+}
+
+if (!function_exists('context_label')) {
+
+    /**
+     * generates the label id for the provided context
+     * 
+     * @return string
+     */
+    function context_label($str = '', $context = "")
+    {
+        $ci = new App_Controller(false);
+
+        $options = array('title' => ucwords(trim($str)), 'context' => $context);
+        $label = $ci->Labels_model->get_details($options)->getRow();
+        if ($label) {
+            return $label->id;
+        } else {
+            $data = array(
+                'title' => ucwords(trim($str)),
+                'color' => '#' . str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT),
+                'context' => $context
+            );
+            $success = $ci->Labels_model->ci_save($data);
+            return $success;
+        }
     }
 }
