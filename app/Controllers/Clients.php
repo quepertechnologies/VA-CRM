@@ -309,6 +309,7 @@ class Clients extends Security_Controller
         $custom_fields = $this->Custom_fields_model->get_available_fields_for_table("clients", $this->login_user->is_admin, $this->login_user->user_type);
         $options = array(
             "custom_fields" => $custom_fields,
+            "assignee" => $user_id,
             "custom_field_filter" => $this->prepare_custom_field_filter_values("clients", $this->login_user->is_admin, $this->login_user->user_type),
             "group_id" => $this->request->getPost("group_id"),
             "show_own_clients_only_user_id" => $this->show_own_clients_only_user_id(),
@@ -522,13 +523,18 @@ class Clients extends Security_Controller
         $full_name = $this->get_client_full_name(0, $data);
         $account_type = $this->get_account_label($data->account_type);
 
+        $assignee = '-';
+        if ($data && $data->assignee) {
+            $assignee_data = $this->Users_model->get_one($data->assignee);
+            $assignee = get_team_member_profile_link($data->assignee, $assignee_data->first_name . ' ' . $assignee_data->last_name);
+        }
+
         $row_data = array(
             $data->total_projects && is_dev_mode() ? "<strong class='text-danger'>" . $data->id . "</strong>" : $data->id,
             get_client_contact_profile_link($data->id, $full_name, array(), array('caption' => $data->unique_id, 'account_type' => $data->account_type)) . '<br>' . timeline_label(strtolower(str_replace(' ', '_', $account_type))) . '<br>' . $client_labels,
             $visa,
             $created_at,
-            $data->phone_code . $data->phone,
-            $data->email,
+            $data->phone_code . $data->phone.'<br>'.$data->email,
             $branch,
             to_decimal_format($data->total_projects),
         );

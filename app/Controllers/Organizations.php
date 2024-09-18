@@ -632,12 +632,16 @@ class Organizations extends Security_Controller
 
         $created_at = date_format(date_create($data->created_date), 'd M Y');
         $branch = $this->get_location_label($data->location_id);
+        $assignee = '-';
+        if ($data && $data->assignee) {
+            $assignee_data = $this->Users_model->get_one($data->assignee);
+            $assignee = get_team_member_profile_link($data->assignee, $assignee_data->first_name . ' ' . $assignee_data->last_name);
+        }
         $row_data = array(
             $data->id,
             get_client_contact_profile_link($data->id, $data->company_name, array(), array('caption' => $data->unique_id, 'account_type' => $data->account_type)) . '<br>' . $client_labels,
-            $created_at,
+            $assignee,
             $data->first_name . ' ' . $data->last_name . '<br><small>' . $data->email . '<br>' . $data->phone_code . $data->phone . '</small>',
-            $data->website ? anchor($data->website, $data->website, array('target' => '_blank')) : '-',
             $branch,
             to_decimal_format($data->total_projects),
         );

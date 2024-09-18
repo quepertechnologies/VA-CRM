@@ -404,15 +404,20 @@ class Migration_clients extends Security_Controller
             $visa = 'Subclass ' . $data->visa_type . '<br>N/A';
         }
 
+        $assignee = '-';
+        if ($data && $data->assignee) {
+            $assignee_data = $this->Users_model->get_one($data->assignee);
+            $assignee = get_team_member_profile_link($data->assignee, $assignee_data->first_name . ' ' . $assignee_data->last_name);
+        }
+
         $created_at = date_format(date_create($data->created_date), 'd M Y');
         $branch = $this->get_location_label($data->location_id);
         $row_data = array(
             $data->id,
             get_client_contact_profile_link($data->id, $data->first_name . " " . $data->last_name, array(), array('caption' => $data->unique_id, 'account_type' => $data->account_type)) . '<br>' . $client_labels,
             $visa,
-            $created_at,
-            $data->phone,
-            $data->email,
+            $assignee,
+            $data->phone.'<br>'.$data->email,
             $branch,
             to_decimal_format($data->total_projects),
         );

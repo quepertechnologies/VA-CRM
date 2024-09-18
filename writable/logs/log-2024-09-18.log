@@ -1,0 +1,118 @@
+ERROR - 2024-09-18 01:45:10 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AND rise_project_members.deleted=0 GROUP BY rise_project_members.project_id) ...' at line 7 in C:\xampp\htdocs\VA-CRM\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\VA-CRM\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SQL_CALC...', 0)
+#1 C:\xampp\htdocs\VA-CRM\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SQL_CALC...')
+#2 C:\xampp\htdocs\VA-CRM\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SQL_CALC...')
+#3 C:\xampp\htdocs\VA-CRM\app\Models\Projects_model.php(196): CodeIgniter\Database\BaseConnection->query('SELECT SQL_CALC...')
+#4 C:\xampp\htdocs\VA-CRM\app\Controllers\Projects.php(1537): App\Models\Projects_model->get_details(Array)
+#5 C:\xampp\htdocs\VA-CRM\system\CodeIgniter.php(932): App\Controllers\Projects->projects_list_data_of_team_member('3190')
+#6 C:\xampp\htdocs\VA-CRM\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#7 C:\xampp\htdocs\VA-CRM\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\VA-CRM\index.php(84): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-09-18 01:45:10 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AND rise_project_members.deleted=0 GROUP BY rise_project_members.project_id) ...' at line 7
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SQL_CALC_FOUND_ROWS rise_projects.*, rise_clients.company_name, rise_clients.first_name, rise_clients.last_name, rise_clients.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, rise_project_status.key_name AS status_key_name, rise_project_status.title_language_key, rise_project_status.title AS status_title,  rise_project_status.icon AS status_icon, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_projects.labels)) AS labels_list 
+        FROM rise_projects
+        LEFT JOIN rise_clients ON rise_clients.id= rise_projects.client_id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS total_points FROM rise_milestones WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= rise_projects.id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS completed_points FROM rise_milestones WHERE deleted=0 AND is_current=2 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= rise_projects.id
+        LEFT JOIN rise_project_status ON rise_projects.status_id = rise_project_status.id 
+         LEFT JOIN (SELECT rise_project_members.user_id, rise_project_members.project_id FROM rise_project_members WHERE rise_project_members.user_id= AND rise_project_members.deleted=0 GROUP BY rise_project_members.project_id) AS project_members_table ON project_members_table.project_id= rise_projects.id    
+            
+        WHERE rise_projects.deleted=0  AND (FIND_IN_SET(rise_projects.status_id, \'1\'))   AND project_members_table.user_id= 
+         ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SQL_CALC_FOUND_ROWS rise_projects.*, rise_clients.company_name, rise_clients.first_name, rise_clients.last_name, rise_clients.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, rise_project_status.key_name AS status_key_name, rise_project_status.title_language_key, rise_project_status.title AS status_title,  rise_project_status.icon AS status_icon, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_projects.labels)) AS labels_list 
+        FROM rise_projects
+        LEFT JOIN rise_clients ON rise_clients.id= rise_projects.client_id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS total_points FROM rise_milestones WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= rise_projects.id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS completed_points FROM rise_milestones WHERE deleted=0 AND is_current=2 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= rise_projects.id
+        LEFT JOIN rise_project_status ON rise_projects.status_id = rise_project_status.id 
+         LEFT JOIN (SELECT rise_project_members.user_id, rise_project_members.project_id FROM rise_project_members WHERE rise_project_members.user_id= AND rise_project_members.deleted=0 GROUP BY rise_project_members.project_id) AS project_members_table ON project_members_table.project_id= rise_projects.id    
+            
+        WHERE rise_projects.deleted=0  AND (FIND_IN_SET(rise_projects.status_id, \'1\'))   AND project_members_table.user_id= 
+         ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SQL_CALC_FOUND_ROWS rise_projects.*, rise_clients.company_name, rise_clients.first_name, rise_clients.last_name, rise_clients.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, rise_project_status.key_name AS status_key_name, rise_project_status.title_language_key, rise_project_status.title AS status_title,  rise_project_status.icon AS status_icon, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_projects.labels)) AS labels_list 
+        FROM rise_projects
+        LEFT JOIN rise_clients ON rise_clients.id= rise_projects.client_id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS total_points FROM rise_milestones WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= rise_projects.id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS completed_points FROM rise_milestones WHERE deleted=0 AND is_current=2 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= rise_projects.id
+        LEFT JOIN rise_project_status ON rise_projects.status_id = rise_project_status.id 
+         LEFT JOIN (SELECT rise_project_members.user_id, rise_project_members.project_id FROM rise_project_members WHERE rise_project_members.user_id= AND rise_project_members.deleted=0 GROUP BY rise_project_members.project_id) AS project_members_table ON project_members_table.project_id= rise_projects.id    
+            
+        WHERE rise_projects.deleted=0  AND (FIND_IN_SET(rise_projects.status_id, \'1\'))   AND project_members_table.user_id= 
+         ')
+ 4 APPPATH\Models\Projects_model.php(196): CodeIgniter\Database\BaseConnection->query('SELECT SQL_CALC_FOUND_ROWS rise_projects.*, rise_clients.company_name, rise_clients.first_name, rise_clients.last_name, rise_clients.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, rise_project_status.key_name AS status_key_name, rise_project_status.title_language_key, rise_project_status.title AS status_title,  rise_project_status.icon AS status_icon, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_projects.labels)) AS labels_list 
+        FROM rise_projects
+        LEFT JOIN rise_clients ON rise_clients.id= rise_projects.client_id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS total_points FROM rise_milestones WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= rise_projects.id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS completed_points FROM rise_milestones WHERE deleted=0 AND is_current=2 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= rise_projects.id
+        LEFT JOIN rise_project_status ON rise_projects.status_id = rise_project_status.id 
+         LEFT JOIN (SELECT rise_project_members.user_id, rise_project_members.project_id FROM rise_project_members WHERE rise_project_members.user_id= AND rise_project_members.deleted=0 GROUP BY rise_project_members.project_id) AS project_members_table ON project_members_table.project_id= rise_projects.id    
+            
+        WHERE rise_projects.deleted=0  AND (FIND_IN_SET(rise_projects.status_id, \'1\'))   AND project_members_table.user_id= 
+         ')
+ 5 APPPATH\Controllers\Projects.php(1537): App\Models\Projects_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->projects_list_data_of_team_member('3190')
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()
+ERROR - 2024-09-18 01:45:22 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AND rise_project_members.deleted=0 GROUP BY rise_project_members.project_id) ...' at line 7 in C:\xampp\htdocs\VA-CRM\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\xampp\htdocs\VA-CRM\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SQL_CALC...', 0)
+#1 C:\xampp\htdocs\VA-CRM\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SQL_CALC...')
+#2 C:\xampp\htdocs\VA-CRM\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SQL_CALC...')
+#3 C:\xampp\htdocs\VA-CRM\app\Models\Projects_model.php(196): CodeIgniter\Database\BaseConnection->query('SELECT SQL_CALC...')
+#4 C:\xampp\htdocs\VA-CRM\app\Controllers\Projects.php(1537): App\Models\Projects_model->get_details(Array)
+#5 C:\xampp\htdocs\VA-CRM\system\CodeIgniter.php(932): App\Controllers\Projects->projects_list_data_of_team_member('3190')
+#6 C:\xampp\htdocs\VA-CRM\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+#7 C:\xampp\htdocs\VA-CRM\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\VA-CRM\index.php(84): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2024-09-18 01:45:22 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'AND rise_project_members.deleted=0 GROUP BY rise_project_members.project_id) ...' at line 7
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT SQL_CALC_FOUND_ROWS rise_projects.*, rise_clients.company_name, rise_clients.first_name, rise_clients.last_name, rise_clients.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, rise_project_status.key_name AS status_key_name, rise_project_status.title_language_key, rise_project_status.title AS status_title,  rise_project_status.icon AS status_icon, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_projects.labels)) AS labels_list 
+        FROM rise_projects
+        LEFT JOIN rise_clients ON rise_clients.id= rise_projects.client_id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS total_points FROM rise_milestones WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= rise_projects.id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS completed_points FROM rise_milestones WHERE deleted=0 AND is_current=2 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= rise_projects.id
+        LEFT JOIN rise_project_status ON rise_projects.status_id = rise_project_status.id 
+         LEFT JOIN (SELECT rise_project_members.user_id, rise_project_members.project_id FROM rise_project_members WHERE rise_project_members.user_id= AND rise_project_members.deleted=0 GROUP BY rise_project_members.project_id) AS project_members_table ON project_members_table.project_id= rise_projects.id    
+            
+        WHERE rise_projects.deleted=0  AND (FIND_IN_SET(rise_projects.status_id, \'1\'))   AND project_members_table.user_id= 
+         ', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT SQL_CALC_FOUND_ROWS rise_projects.*, rise_clients.company_name, rise_clients.first_name, rise_clients.last_name, rise_clients.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, rise_project_status.key_name AS status_key_name, rise_project_status.title_language_key, rise_project_status.title AS status_title,  rise_project_status.icon AS status_icon, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_projects.labels)) AS labels_list 
+        FROM rise_projects
+        LEFT JOIN rise_clients ON rise_clients.id= rise_projects.client_id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS total_points FROM rise_milestones WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= rise_projects.id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS completed_points FROM rise_milestones WHERE deleted=0 AND is_current=2 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= rise_projects.id
+        LEFT JOIN rise_project_status ON rise_projects.status_id = rise_project_status.id 
+         LEFT JOIN (SELECT rise_project_members.user_id, rise_project_members.project_id FROM rise_project_members WHERE rise_project_members.user_id= AND rise_project_members.deleted=0 GROUP BY rise_project_members.project_id) AS project_members_table ON project_members_table.project_id= rise_projects.id    
+            
+        WHERE rise_projects.deleted=0  AND (FIND_IN_SET(rise_projects.status_id, \'1\'))   AND project_members_table.user_id= 
+         ')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT SQL_CALC_FOUND_ROWS rise_projects.*, rise_clients.company_name, rise_clients.first_name, rise_clients.last_name, rise_clients.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, rise_project_status.key_name AS status_key_name, rise_project_status.title_language_key, rise_project_status.title AS status_title,  rise_project_status.icon AS status_icon, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_projects.labels)) AS labels_list 
+        FROM rise_projects
+        LEFT JOIN rise_clients ON rise_clients.id= rise_projects.client_id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS total_points FROM rise_milestones WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= rise_projects.id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS completed_points FROM rise_milestones WHERE deleted=0 AND is_current=2 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= rise_projects.id
+        LEFT JOIN rise_project_status ON rise_projects.status_id = rise_project_status.id 
+         LEFT JOIN (SELECT rise_project_members.user_id, rise_project_members.project_id FROM rise_project_members WHERE rise_project_members.user_id= AND rise_project_members.deleted=0 GROUP BY rise_project_members.project_id) AS project_members_table ON project_members_table.project_id= rise_projects.id    
+            
+        WHERE rise_projects.deleted=0  AND (FIND_IN_SET(rise_projects.status_id, \'1\'))   AND project_members_table.user_id= 
+         ')
+ 4 APPPATH\Models\Projects_model.php(196): CodeIgniter\Database\BaseConnection->query('SELECT SQL_CALC_FOUND_ROWS rise_projects.*, rise_clients.company_name, rise_clients.first_name, rise_clients.last_name, rise_clients.currency_symbol,  total_points_table.total_points, completed_points_table.completed_points, rise_project_status.key_name AS status_key_name, rise_project_status.title_language_key, rise_project_status.title AS status_title,  rise_project_status.icon AS status_icon, (SELECT GROUP_CONCAT(rise_labels.id, \'--::--\', rise_labels.title, \'--::--\', rise_labels.color, \':--::--:\') FROM rise_labels WHERE FIND_IN_SET(rise_labels.id, rise_projects.labels)) AS labels_list 
+        FROM rise_projects
+        LEFT JOIN rise_clients ON rise_clients.id= rise_projects.client_id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS total_points FROM rise_milestones WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= rise_projects.id
+        LEFT JOIN (SELECT project_id, COUNT(id) AS completed_points FROM rise_milestones WHERE deleted=0 AND is_current=2 GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= rise_projects.id
+        LEFT JOIN rise_project_status ON rise_projects.status_id = rise_project_status.id 
+         LEFT JOIN (SELECT rise_project_members.user_id, rise_project_members.project_id FROM rise_project_members WHERE rise_project_members.user_id= AND rise_project_members.deleted=0 GROUP BY rise_project_members.project_id) AS project_members_table ON project_members_table.project_id= rise_projects.id    
+            
+        WHERE rise_projects.deleted=0  AND (FIND_IN_SET(rise_projects.status_id, \'1\'))   AND project_members_table.user_id= 
+         ')
+ 5 APPPATH\Controllers\Projects.php(1537): App\Models\Projects_model->get_details([...])
+ 6 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\Projects->projects_list_data_of_team_member('3190')
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Projects))
+ 8 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(84): CodeIgniter\CodeIgniter->run()

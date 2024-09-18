@@ -1106,7 +1106,7 @@ class Security_Controller extends App_Controller
 
         $team_members_dropdown = array();
         if ($is_filter) {
-            $team_members_dropdown = array(array("id" => "", "text" => "- " . app_lang("owner") . " -"));
+            $team_members_dropdown = array(array("id" => "", "text" => "--"));
         }
 
         if ($optional_label) {

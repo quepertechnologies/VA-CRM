@@ -110,8 +110,14 @@ class Projects_model extends Crud_model
         if ($starred_projects) {
             $where .= " AND FIND_IN_SET(':$user_id:',$projects_table.starred_by) ";
         }
+        
+        $custom_application_filter = $this->_get_clean_value($options, "custom_application_filter"); 
+        if ($custom_application_filter) {
+            $extra_join .= " LEFT JOIN (SELECT $project_members_table.user_id, $project_members_table.project_id FROM $project_members_table WHERE $project_members_table.user_id=$custom_application_filter AND $project_members_table.deleted=0 GROUP BY $project_members_table.project_id) AS project_members_table ON project_members_table.project_id= $projects_table.id ";
+            $extra_where .= " AND project_members_table.user_id=$custom_application_filter";
+        }
 
-        if (!$client_id && $user_id && !$starred_projects) {
+         if (!$client_id && $user_id && !$starred_projects) {
             $extra_join .= " LEFT JOIN (SELECT $project_members_table.user_id, $project_members_table.project_id FROM $project_members_table WHERE $project_members_table.user_id=$user_id AND $project_members_table.deleted=0 GROUP BY $project_members_table.project_id) AS project_members_table ON project_members_table.project_id= $projects_table.id ";
             $extra_where .= " AND project_members_table.user_id=$user_id";
         }

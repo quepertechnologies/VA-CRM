@@ -51,7 +51,7 @@ class Leads extends Security_Controller
         $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data['locations_filter_dropdown'] = $this->get_locations_dropdown_for_filter();
-
+        $view_data['team_members_dropdown'] = $this->get_team_members_dropdown();
         return $this->template->rander("leads/index", $view_data);
     }
 
@@ -63,6 +63,7 @@ class Leads extends Security_Controller
         $view_data['account_types_filter_dropdown'] = $this->make_type_dropdown();
         $view_data["countries_dropdown"] = $this->get_countries_dropdown([]);
         $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
+        $view_data["team_members_dropdown"] = $this->get_team_members_dropdown();
         return $this->template->view('leads/modal_form', $view_data);
     }
 
@@ -229,6 +230,7 @@ class Leads extends Security_Controller
         $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data['locations_filter_dropdown'] = $this->get_locations_dropdown_for_filter();
+        $view_data['team_members_dropdown'] = $this->get_team_members_dropdown();
         //$view_data['team_members_dropdown'] = json_encode($this->_get_members_dropdown_list_for_filter());
         return $this->template->view("leads/prospects_list", $view_data);
     }
@@ -247,6 +249,7 @@ class Leads extends Security_Controller
         $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data['locations_filter_dropdown'] = $this->get_locations_dropdown_for_filter();
+        $view_data['team_members_dropdown'] = $this->get_team_members_dropdown();
         //$view_data['team_members_dropdown'] = json_encode($this->_get_members_dropdown_list_for_filter());
         return $this->template->view("leads/all_leads", $view_data);
     }
@@ -267,6 +270,7 @@ class Leads extends Security_Controller
         $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data['locations_filter_dropdown'] = $this->get_locations_dropdown_for_filter();
+        $view_data['team_members_dropdown'] = $this->get_team_members_dropdown();
 
         return $this->template->view("leads/cold_leads", $view_data);
     }
@@ -826,6 +830,7 @@ class Leads extends Security_Controller
             $view_data['label_suggestions'] = $this->make_labels_dropdown("client", $view_data['model_info']->labels);
             $view_data['account_types_filter_dropdown'] = $this->make_type_dropdown();
             $view_data["countries_dropdown"] = $this->get_countries_dropdown([]);
+            $view_data["team_members_dropdown"] = $this->get_team_members_dropdown();
 
             return $this->template->view('leads/contacts/company_info_tab', $view_data);
         }
@@ -1135,6 +1140,7 @@ class Leads extends Security_Controller
         $view_data['lead_sources'] = $this->Lead_source_model->get_details()->getResult();
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data["custom_field_filters"] = $this->Custom_fields_model->get_custom_field_filters("leads", $this->login_user->is_admin, $this->login_user->user_type);
+        $view_data["team_members_dropdown"] = $this->get_team_members_dropdown();
 
         return $this->template->rander("leads/kanban/all_leads", $view_data);
     }
@@ -1593,6 +1599,7 @@ class Leads extends Security_Controller
         $view_data['sources_dropdown'] = json_encode($this->_get_sources_dropdown());
         $view_data['owners_dropdown'] = json_encode($this->_get_owners_dropdown("filter"));
         $view_data["visa_type_dropdown"] = $this->get_visa_type_dropdown();
+        $view_data["team_members_dropdown"] = $this->get_team_members_dropdown();
 
         return $this->template->rander("leads/reports/converted_to_client", $view_data);
     }

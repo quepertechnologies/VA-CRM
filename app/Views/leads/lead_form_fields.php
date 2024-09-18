@@ -276,6 +276,25 @@
     </div>
 </div>
 <div class="form-group">
+                <div class="row">
+                    <label for="assignee" class="<?php echo $label_column; ?>"><?php echo app_lang('assignee'); ?>
+                    </label>
+                    <div class="<?php echo $field_column; ?>">
+                        <?php
+                        echo form_input(array(
+                            "id" => "created_by",
+                            "name" => "assignee",
+                            "value" => isset($model_info->assignee) ? $model_info->assignee : '',
+                            "class" => "form-control select2",
+                            "placeholder" => app_lang('assignee'),
+                            "data-rule-required" => true,
+                            "data-msg-required" => app_lang("field_required")
+                        ));
+                        ?>
+                    </div>
+                </div>
+            </div>
+<div class="form-group">
     <div class="row">
         <label for="lead-source-id" class="<?php echo $label_column; ?>"><?php echo app_lang('source'); ?></label>
         <div class="<?php echo $field_column; ?>">
@@ -575,7 +594,13 @@
             multiple: true,
             data: <?php echo json_encode($label_suggestions); ?>
         });
-
+         
+          <?php if ($login_user->is_admin || get_array_value($login_user->permissions, "client") === "all") { ?>
+                $('#created_by').select2({
+                    data: <?php echo $team_members_dropdown; ?>
+                });
+            <?php } ?>      
+            
         $('#account_type').select2().on('change', function() {
             value = this.value;
             if (value == 4) {

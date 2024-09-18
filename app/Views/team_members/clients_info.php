@@ -76,10 +76,7 @@
                     order_by: "created_at"
                 },
                 {
-                    title: "<?php echo app_lang("phone") ?>",
-                },
-                {
-                    title: "<?php echo app_lang("email") ?>",
+                    title: "<?php echo app_lang("client_info") ?>",
                 },
                 {
                     title: "<?php echo app_lang("location") ?>",

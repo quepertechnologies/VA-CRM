@@ -1532,7 +1532,7 @@ class Projects extends Security_Controller
             app_redirect("forbidden");
         }
 
-        $options["client_assignee"] = $team_member_id;
+        $options["custom_application_filter"] = $team_member_id;
 
         $list_data = $this->Projects_model->get_details($options)->getResult();
         $result = array();
@@ -1676,6 +1676,17 @@ class Projects extends Security_Controller
                 $current_stage = $milestone_data->title;
             }
         }
+        
+        $lead_member = '-';
+        $options = array("project_id" => $data->id);
+        $lead_member = $this->Project_members_model->get_details($options)->getResult();
+        $lead_member_link = '';
+        foreach($lead_member as $lead_member_key)
+        {
+            if ($lead_member_key) {
+                $lead_member_link .= get_team_member_profile_link($lead_member_key->user_id,$lead_member_key->member_name).'<br>';
+            }
+        }
 
         $partner = '-';
         $partner_info = $this->Project_partners_model->get_details(array('project_id' => $data->id, 'partner_type' => 'institute'))->getRow();
@@ -1688,14 +1699,14 @@ class Projects extends Security_Controller
         $row_data = array(
             anchor(get_uri("projects/view/" . $data->id), $data->id),
             $title,
-            '<small>Starts: ' . $start_date . '</small><br>' . $dateline,
+            //'<small>Starts: ' . $start_date . '</small><br>' . $dateline,
             $client_name . '<br><small>' . $phone . '</small>',
-            $assignee,
+            $lead_member_link,
             // $assignee,
             $workflow,
             $current_stage,
             $partner,
-            $status,
+            //$status,
             $progress_bar
         );
 
