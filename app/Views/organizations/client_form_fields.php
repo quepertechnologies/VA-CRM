@@ -1001,7 +1001,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#visa_expiry_container").hide();
+            $("#visa_expiry_container").show();
             if ($('#visa_type').val()) {
                 $("#visa_expiry_container").show();
             }
@@ -1015,9 +1015,9 @@
             }).on('change', function() {
                 value = $(this).val();
                 if (value == 'Standard Business Sponsorship') {
-                    $("#visa_expiry_container").show();
+                    //$("#visa_expiry_container").show();
                 } else {
-                    $("#visa_expiry_container").hide();
+                    //$("#visa_expiry_container").hide();
                 }
             });
 
