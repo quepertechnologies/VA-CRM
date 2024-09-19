@@ -378,11 +378,11 @@ $lang["partner"] = "Partner";
 $lang["partners"] = "Partners";
 
 /* announcement */
-$lang["add_announcement"] = "Add announcement";
-$lang["edit_announcement"] = "Edit announcement";
-$lang["delete_announcement"] = "Delete announcement";
-$lang["announcement"] = "Announcement";
-$lang["announcements"] = "Announcements";
+$lang["add_announcement"] = "Add System Log";
+$lang["edit_announcement"] = "Edit System Log";
+$lang["delete_announcement"] = "Delete System Log";
+$lang["announcement"] = "System Log";
+$lang["announcements"] = "System Logs";
 $lang["all_team_members"] = "All team members";
 $lang["all_team_clients"] = "All Clients";
 
@@ -916,7 +916,7 @@ $lang["can_access_invoices"] = "Can access invoices?";
 $lang["can_access_expenses"] = "Can access expenses?";
 $lang["can_access_clients_information"] = "Can access client's information?";
 $lang["can_access_tickets"] = "Can access tickets?";
-$lang["can_manage_announcements"] = "Can manage announcements?";
+$lang["can_manage_announcements"] = "Can manage System Logs?";
 
 /* timeline */
 $lang["post_placeholder_text"] = "Share an idea or documents...";
@@ -1428,8 +1428,8 @@ $lang["project_reference_in_tickets"] = "Enable application reference";
 $lang["hide_menus_from_client_portal"] = "Hide menus from client portal";
 $lang["hidden_menus"] = "Hidden menus";
 
-$lang["new_announcement_created"] = "New announcement created";
-$lang["notification_new_announcement_created"] = "Created an announcement.";
+$lang["new_announcement_created"] = "New System Log created";
+$lang["notification_new_announcement_created"] = "Created an System Log.";
 
 $lang["month"] = "Month";
 $lang["profit"] = "Profit";
@@ -2683,8 +2683,8 @@ $lang["type"] = "Type";
 $lang["organization"] = "Organization";
 $lang["person"] = "Person";
 
-$lang["last_announcement"] = "Last announcement";
-$lang["no_announcement_yet"] = "No announcement yet!";
+$lang["last_announcement"] = "Last System Log";
+$lang["no_announcement_yet"] = "No System Log yet!";
 
 $lang["team_members_overview"] = "Team Members Overview";
 $lang["on_leave_today"] = "On leave today";
@@ -2820,7 +2820,7 @@ $lang["first_billing_date_cant_be_past_message"] = "First billing date can’t b
 
 $lang["gst_number"] = "GST Number";
 
-$lang["announcement_created"] = "Announcement created";
+$lang["announcement_created"] = "System Log created";
 
 $lang["company_logo"] = "Company Logo";
 
