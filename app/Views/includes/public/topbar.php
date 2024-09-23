@@ -21,17 +21,17 @@
                         echo " <li class='nav-item'>" . anchor("store", app_lang("store"), array("class" => "nav-link")) . " </li>";
                     }
 
-                    if (get_setting("module_knowledge_base")) {
-                        echo " <li class='nav-item'>" . anchor("knowledge_base", app_lang("knowledge_base"), array("class" => "nav-link")) . " </li>";
-                    }
+                    // if (get_setting("module_knowledge_base")) {
+                    //     echo " <li class='nav-item'>" . anchor("knowledge_base", app_lang("knowledge_base"), array("class" => "nav-link")) . " </li>";
+                    // }
 
                     if (!get_setting("disable_client_login")) {
                         echo " <li class='nav-item'>" . anchor("signin", app_lang("signin"), array("class" => "nav-link")) . " </li>";
                     }
 
-                    if (!get_setting("disable_client_signup")) {
-                        echo " <li class='nav-item'>" . anchor("signup", app_lang("signup"), array("class" => "nav-link")) . " </li>";
-                    }
+                    // if (!get_setting("disable_client_signup")) {
+                    //     echo " <li class='nav-item'>" . anchor("signup", app_lang("signup"), array("class" => "nav-link")) . " </li>";
+                    // }
                 }
                 ?>
             </ul>

@@ -234,7 +234,7 @@
                     </div>
 
                 </div>
-
+                <hr>
                 <!-- <div class="table-responsive general-form ">
                         <table id="estimate-form-table" class="display b-t no-thead b-b-only no-hover" cellspacing="0" width="100%">
                         </table>
@@ -248,10 +248,10 @@
             <?php } ?>
             <div class="p15">
                 <?php if ($model_info->enable_attachment) { ?>
-                    <button class="btn btn-default upload-file-button round" type="button" style="color:#7988a2"><i data-feather='camera' class='icon-16'></i> <?php echo app_lang("upload_updated_cv_resume"); ?></button>
+                    <button class="btn btn-default upload-file-button round" type="button" style="color:#7988a2"><i data-feather='camera' class='icon-16'></i> <?php echo app_lang("upload_updated_cv_resume"); ?></button>&nbsp;&nbsp;<i data-feather="info" class="text-info icon-16"></i> <small class="text-info mr15">Accepted file type: <b>PDF</b></small>
                 <?php } ?>
-                <button type="submit" class="btn btn-primary"><i data-feather="send" class="icon-16"></i> <?php echo app_lang('request_an_estimate'); ?></button>
-                <br /><i data-feather="info" class="text-info icon-16"></i> <small class="text-info mr15">Accepted file type: <b>PDF</b></small>
+                <button type="submit" class="btn btn-primary" style="float: right;"><i data-feather="send" class="icon-16"></i> <?php echo app_lang('request_an_estimate'); ?></button>
+                
             </div>
         </div>
 
