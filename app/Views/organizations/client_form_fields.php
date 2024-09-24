@@ -13,28 +13,41 @@
     <?php } ?>
 
     <h3 class="mb-5"><?php echo app_lang('organization_info'); ?></h3>
-    <div class="form-group hide">
-        <div class="row">
-            <label for="client_id" class="<?php echo $label_column; ?> client_id_section"><?php echo app_lang('client_id'); ?></label>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">    <div class="form-group">
+            
+            <label for="organization_name" class="strong"><?php echo app_lang('organization_name'); ?></label>
             <div class="<?php echo $field_column; ?>">
                 <?php
                 echo form_input(array(
-                    "id" => "unique_id",
-                    "name" => "unique_id",
-                    "value" => isset($model_info->unique_id) && !empty($model_info->unique_id) ? $model_info->unique_id : '',
+                    "id" => "organization_name",
+                    "name" => "company_name",
+                    "value" => isset($model_info->company_name) ? $model_info->company_name : '',
                     "class" => "form-control company_name_input_section",
-                    "placeholder" => app_lang('client_id'),
-                    "autofocus" => true,
-                    'disabled' => true,
-                    'style' => "cursor: not-allowed"
+
+                    "data-rule-required" => true,
+                    "data-msg-required" => app_lang("field_required"),
                 ));
                 ?>
             </div>
         </div>
     </div>
-    <div class="form-group">
-        <div class="row">
-            <label for="legal_structure" class="<?php echo $label_column; ?>"><?php echo app_lang('legal_structure'); ?></label>
+    <?php
+    echo form_input(array(
+        "id" => "unique_id",
+        "name" => "unique_id",
+        "value" => isset($model_info->unique_id) && !empty($model_info->unique_id) ? $model_info->unique_id : '',
+        "class" => "",
+        "autofocus" => true,
+        'disabled' => true,
+        'style' => "cursor: not-allowed",
+        'hidden' => true
+    ));
+    ?>
+    <div class="col-md-6">    
+        <div class="form-group">
+            <label for="legal_structure" class="strong"><?php echo app_lang('legal_structure'); ?></label>
             <div class="<?php echo $field_column; ?>">
                 <?php
                 $list = array(
@@ -56,11 +69,9 @@
                 );
                 ?>
             </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="row">
-            <label for="tax_id_number" class="<?php echo $label_column; ?>"><?php echo app_lang('tax_id_number'); ?></label>
+        </div></div>
+        <div class="col-md-6">    <div class="form-group">
+            <label for="tax_id_number" class="strong"><?php echo app_lang('tax_id_number'); ?></label>
             <div class="<?php echo $field_column; ?>">
                 <?php
                 echo form_input(array(
@@ -68,202 +79,17 @@
                     "name" => "tax_id_num",
                     "value" => isset($model_info->tax_id_num) ? $model_info->tax_id_num : '',
                     "class" => "form-control company_name_input_section",
-                    "placeholder" => app_lang('tax_id_number'),
 
                     "data-rule-required" => true,
                     "data-msg-required" => app_lang("field_required"),
                 ));
                 ?>
             </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="row">
-            <label for="organization_name" class="<?php echo $label_column; ?>"><?php echo app_lang('organization_name'); ?></label>
-            <div class="<?php echo $field_column; ?>">
-                <?php
-                echo form_input(array(
-                    "id" => "organization_name",
-                    "name" => "company_name",
-                    "value" => isset($model_info->company_name) ? $model_info->company_name : '',
-                    "class" => "form-control company_name_input_section",
-                    "placeholder" => app_lang('organization_name'),
+        </div></div>
 
-                    "data-rule-required" => true,
-                    "data-msg-required" => app_lang("field_required"),
-                ));
-                ?>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="row">
-            <label for="registration_number" class="<?php echo $label_column; ?>"><?php echo app_lang('registration_number'); ?></label>
-            <div class="<?php echo $field_column; ?>">
-                <?php
-                echo form_input(array(
-                    "id" => "registration_number",
-                    "name" => "reg_no",
-                    "value" => isset($model_info->reg_no) ? $model_info->reg_no : '',
-                    "class" => "form-control company_name_input_section",
-                    "placeholder" => app_lang('registration_number'),
-
-                    "data-rule-required" => true,
-                    "data-msg-required" => app_lang("field_required"),
-                ));
-                ?>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="row">
-            <label for="industry" class="<?php echo $label_column; ?>"><?php echo app_lang('industry'); ?></label>
-            <div class="<?php echo $field_column; ?>">
-                <?php
-                $list =
-                    array(
-                        '' => '-',
-                        "Technology" => array(
-                            'Software Development' => 'Software Development',
-                            'Hardware Manufacturing' => 'Hardware Manufacturing',
-                            'Information Technology Services' => 'Information Technology Services'
-                        ),
-                        "Healthcare" => array(
-                            'Hospitals' => 'Hospitals',
-                            'Pharmaceuticals' => 'Pharmaceuticals',
-                            'Medical Devices' => 'Medical Devices'
-                        ),
-                        "Finance" => array(
-                            'Banking' => 'Banking',
-                            'Insurance' => 'Insurance',
-                            'Investment' => 'Investment'
-                        ),
-                        "Manufacturing" => array(
-                            'Automotive' => 'Automotive',
-                            'Consumer Goods' => 'Consumer Goods',
-                            'Industrial Equipment' => 'Industrial Equipment'
-                        ),
-                        "Retail" => array(
-                            'Department Stores' => 'Department Stores',
-                            'Specialty Retailers' => 'Specialty Retailers',
-                            'E-commerce' => 'E-commerce'
-                        ),
-                        "Telecommunications" => array(
-                            'Mobile Network Operators' => 'Mobile Network Operators',
-                            'Internet Service Providers' => 'Internet Service Providers'
-                        ),
-                        "Energy" => array(
-                            'Oil and Gas' => 'Oil and Gas',
-                            'Renewable Energy' => 'Renewable Energy',
-                            'Utilities' => 'Utilities'
-                        ),
-                        "Agriculture" => array(
-                            'Farming' => 'Farming',
-                            'Agribusiness' => 'Agribusiness'
-                        ),
-                        "Transportation" => array(
-                            'Airlines' => 'Airlines',
-                            'Shipping' => 'Shipping',
-                            'Logistics' => 'Logistics'
-                        ),
-                        "Entertainment and Media" => array(
-                            'Film and Television' => 'Film and Television',
-                            'Publishing' => 'Publishing',
-                            'Broadcasting' => 'Broadcasting'
-                        ),
-                        "Hospitality" => array(
-                            'Hotels and Resorts' => 'Hotels and Resorts',
-                            'Restaurants' => 'Restaurants',
-                            'Travel and Tourism' => 'Travel and Tourism'
-                        ),
-                        "Real Estate" => array(
-                            'Property Development' => 'Property Development',
-                            'Property Management' => 'Property Management'
-                        ),
-                        "Education" => array(
-                            'Schools' => 'Schools',
-                            'Colleges' => 'Colleges',
-                            'Universities' => 'Universities'
-                        ),
-                        "Professional Services" => array(
-                            'Legal Services' => 'Legal Services',
-                            'Consulting' => 'Consulting',
-                            'Accounting' => 'Accounting'
-                        ),
-                        "Health and Fitness" => array(
-                            'Gyms and Fitness Centers' => 'Gyms and Fitness Centers',
-                            'Health and Wellness Services' => 'Health and Wellness Services'
-                        ),
-                        "Nonprofit and Social Services" => array(
-                            'Charities' => 'Charities',
-                            'NGOs' => 'NGOs',
-                            'Advocacy Organizations' => 'Advocacy Organizations'
-                        ),
-                        "Government" => array(
-                            'Federal, State, and Local Government Agencies' => 'Federal, State, and Local Government Agencies',
-                        ),
-                        "Construction" => array(
-                            'Residential Construction' => 'Residential Construction',
-                            'Commercial Construction' => 'Commercial Construction'
-                        ),
-                        "Biotechnology and Pharmaceuticals" => array(
-                            'Biotech Research and Development' => 'Biotech Research and Development',
-                            'Pharmaceutical Manufacturing' => 'Pharmaceutical Manufacturing'
-                        ),
-                        "Environmental" => array(
-                            'Conservation Organizations' => 'Conservation Organizations',
-                            'Environmental Consulting' => 'Environmental Consulting'
-                        ),
-                    );
-                asort($list);
-                echo form_dropdown(
-                    "industry",
-                    $list,
-                    isset($model_info->industry) ? $model_info->industry : '',
-                    "class='select2'"
-                );
-                ?>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="row">
-            <label for="website" class="<?php echo $label_column; ?>"><?php echo app_lang('website'); ?></label>
-            <div class="<?php echo $field_column; ?>">
-                <?php
-                echo form_input(array(
-                    "id" => "website",
-                    "name" => "website",
-                    "value" => isset($model_info->website) ? $model_info->website : '',
-                    "class" => "form-control company_name_input_section",
-                    "placeholder" => app_lang('website'),
-
-                ));
-                ?>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="row">
-            <label for="num_emp" class="<?php echo $label_column; ?>"><?php echo app_lang('number_of_employees'); ?></label>
-            <div class="<?php echo $field_column; ?>">
-                <?php
-                echo form_input(array(
-                    "id" => "num_emp",
-                    "name" => "num_emp",
-                    "value" => isset($model_info->num_emp) ? $model_info->num_emp : '',
-                    "class" => "form-control company_name_input_section",
-                    "placeholder" => app_lang('number_of_employees'),
-
-                    "type" => 'number'
-                ));
-                ?>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="row">
-            <label for="nature_of_business" class="<?php echo $label_column; ?>"><?php echo app_lang('nature_of_business'); ?></label>
+        
+        <div class="col-md-6"><div class="form-group">
+            <label for="nature_of_business" class="strong"><?php echo app_lang('nature_of_business'); ?></label>
             <div class="<?php echo $field_column; ?>">
                 <?php
                 $list = array(
@@ -327,250 +153,396 @@
                     'nature_of_business',
                     isset($model_info->nature_of_business) ? $model_info->nature_of_business : '',
                     $list,
-                    "class='form-control company_name_input_section' placeholder='" . app_lang('nature_of_business') . "'"
+                    "class='form-control company_name_input_section'"
                 );
                 ?>
             </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="row">
-            <label for="visa_type" class="<?php echo $label_column; ?> visa_type_section"><?php echo app_lang('visa_sponsorship_type'); ?></label>
-            <div class="<?php echo $field_column; ?>">
-                <?php
-                echo form_input(
-                    'visa_type',
-                    isset($model_info->visa_type) ? $model_info->visa_type : '',
-                    "class='form-control company_name_input_section validate-hidden' id='visa_type' placeholder='" . app_lang('visa_sponsorship_type') . "'"
-                );
-                ?>
-            </div>
-        </div>
-    </div>
-    <div class="form-group" id="visa_expiry_container">
-        <div class="row">
-            <label for="visa_expiry" class="<?php echo $label_column; ?> visa_expiry_section"><?php echo "SBS " . app_lang('expiry'); ?></label>
+        </div></div>
+        <div class="col-md-6">    <div class="form-group">
+            <label for="registration_number" class="strong"><?php echo app_lang('registration_number'); ?></label>
             <div class="<?php echo $field_column; ?>">
                 <?php
                 echo form_input(array(
-                    "id" => "visa_expiry",
-                    "name" => "visa_expiry",
-                    "value" => isset($model_info->visa_expiry) ? $model_info->visa_expiry : '',
+                    "id" => "registration_number",
+                    "name" => "reg_no",
+                    "value" => isset($model_info->reg_no) ? $model_info->reg_no : '',
                     "class" => "form-control company_name_input_section",
-                    "placeholder" => "SBS " . app_lang('expiry'),
+
+                    "data-rule-required" => true,
+                    "data-msg-required" => app_lang("field_required"),
                 ));
                 ?>
             </div>
+        </div></div>
+        <div class="col-md-6"><div class="form-group">
+            <label for="industry" class="strong"><?php echo app_lang('industry'); ?></label>
+            <div class="<?php echo $field_column; ?>">
+                <?php
+                $list =
+                array(
+                    '' => '-',
+                    "Technology" => array(
+                        'Software Development' => 'Software Development',
+                        'Hardware Manufacturing' => 'Hardware Manufacturing',
+                        'Information Technology Services' => 'Information Technology Services'
+                    ),
+                    "Healthcare" => array(
+                        'Hospitals' => 'Hospitals',
+                        'Pharmaceuticals' => 'Pharmaceuticals',
+                        'Medical Devices' => 'Medical Devices'
+                    ),
+                    "Finance" => array(
+                        'Banking' => 'Banking',
+                        'Insurance' => 'Insurance',
+                        'Investment' => 'Investment'
+                    ),
+                    "Manufacturing" => array(
+                        'Automotive' => 'Automotive',
+                        'Consumer Goods' => 'Consumer Goods',
+                        'Industrial Equipment' => 'Industrial Equipment'
+                    ),
+                    "Retail" => array(
+                        'Department Stores' => 'Department Stores',
+                        'Specialty Retailers' => 'Specialty Retailers',
+                        'E-commerce' => 'E-commerce'
+                    ),
+                    "Telecommunications" => array(
+                        'Mobile Network Operators' => 'Mobile Network Operators',
+                        'Internet Service Providers' => 'Internet Service Providers'
+                    ),
+                    "Energy" => array(
+                        'Oil and Gas' => 'Oil and Gas',
+                        'Renewable Energy' => 'Renewable Energy',
+                        'Utilities' => 'Utilities'
+                    ),
+                    "Agriculture" => array(
+                        'Farming' => 'Farming',
+                        'Agribusiness' => 'Agribusiness'
+                    ),
+                    "Transportation" => array(
+                        'Airlines' => 'Airlines',
+                        'Shipping' => 'Shipping',
+                        'Logistics' => 'Logistics'
+                    ),
+                    "Entertainment and Media" => array(
+                        'Film and Television' => 'Film and Television',
+                        'Publishing' => 'Publishing',
+                        'Broadcasting' => 'Broadcasting'
+                    ),
+                    "Hospitality" => array(
+                        'Hotels and Resorts' => 'Hotels and Resorts',
+                        'Restaurants' => 'Restaurants',
+                        'Travel and Tourism' => 'Travel and Tourism'
+                    ),
+                    "Real Estate" => array(
+                        'Property Development' => 'Property Development',
+                        'Property Management' => 'Property Management'
+                    ),
+                    "Education" => array(
+                        'Schools' => 'Schools',
+                        'Colleges' => 'Colleges',
+                        'Universities' => 'Universities'
+                    ),
+                    "Professional Services" => array(
+                        'Legal Services' => 'Legal Services',
+                        'Consulting' => 'Consulting',
+                        'Accounting' => 'Accounting'
+                    ),
+                    "Health and Fitness" => array(
+                        'Gyms and Fitness Centers' => 'Gyms and Fitness Centers',
+                        'Health and Wellness Services' => 'Health and Wellness Services'
+                    ),
+                    "Nonprofit and Social Services" => array(
+                        'Charities' => 'Charities',
+                        'NGOs' => 'NGOs',
+                        'Advocacy Organizations' => 'Advocacy Organizations'
+                    ),
+                    "Government" => array(
+                        'Federal, State, and Local Government Agencies' => 'Federal, State, and Local Government Agencies',
+                    ),
+                    "Construction" => array(
+                        'Residential Construction' => 'Residential Construction',
+                        'Commercial Construction' => 'Commercial Construction'
+                    ),
+                    "Biotechnology and Pharmaceuticals" => array(
+                        'Biotech Research and Development' => 'Biotech Research and Development',
+                        'Pharmaceutical Manufacturing' => 'Pharmaceutical Manufacturing'
+                    ),
+                    "Environmental" => array(
+                        'Conservation Organizations' => 'Conservation Organizations',
+                        'Environmental Consulting' => 'Environmental Consulting'
+                    ),
+                );
+asort($list);
+echo form_dropdown(
+    "industry",
+    $list,
+    isset($model_info->industry) ? $model_info->industry : '',
+    "class='select2'"
+);
+?>
+</div>
+</div></div>
+
+
+<div class="col-md-6">    <div class="form-group">
+  
+    <label for="website" class="strong"><?php echo app_lang('website'); ?></label>
+    <div class="<?php echo $field_column; ?>">
+        <?php
+        echo form_input(array(
+            "id" => "website",
+            "name" => "website",
+            "value" => isset($model_info->website) ? $model_info->website : '',
+            "class" => "form-control company_name_input_section",
+
+        ));
+        ?>
+    </div>
+</div></div>
+<div class="col-md-6">    <div class="form-group">
+    <label for="num_emp" class="strong"><?php echo app_lang('number_of_employees'); ?></label>
+    <div class="<?php echo $field_column; ?>">
+        <?php
+        echo form_input(array(
+            "id" => "num_emp",
+            "name" => "num_emp",
+            "value" => isset($model_info->num_emp) ? $model_info->num_emp : '',
+            "class" => "form-control company_name_input_section",
+
+            "type" => 'number'
+        ));
+        ?>
+    </div>
+</div></div>
+
+<div class="col-md-6">    <div class="form-group">
+    <label for="visa_type" class="strong visa_type_section"><?php echo app_lang('visa_sponsorship_type'); ?></label>
+    <div class="<?php echo $field_column; ?>">
+        <?php
+        echo form_input(
+            'visa_type',
+            isset($model_info->visa_type) ? $model_info->visa_type : '',
+            "class='form-control company_name_input_section validate-hidden' id='visa_type'"
+        );
+        ?>
+    </div>
+</div></div>
+<div class="col-md-6">    <div class="form-group" id="visa_expiry_container">
+    <label for="visa_expiry" class="strong visa_expiry_section"><?php echo "SBS " . app_lang('expiry'); ?></label>
+    <div class="<?php echo $field_column; ?>">
+        <?php
+        echo form_input(array(
+            "id" => "visa_expiry",
+            "name" => "visa_expiry",
+            "value" => isset($model_info->visa_expiry) ? $model_info->visa_expiry : '',
+            "class" => "form-control company_name_input_section",
+        ));
+        ?>
+    </div>
+</div></div></div>
+</div>
+
+
+<div <?php if (!isset($is_overview)) {
+    echo 'role="tabpanel" class="tab-pane active"';
+} ?> id="student-profile-tab">
+<h3 class="mb-5"><?php echo app_lang('contact_person'); ?></h3>
+<hr>
+<div class="row">
+    <div class="col-md-6">        <div class="form-group">
+        <label for="first_name" class="strong first_name_section"><?php echo app_lang('first_name'); ?></label>
+        <div class="<?php echo $field_column; ?>">
+            <?php
+            echo form_input(array(
+                "id" => "first_name",
+                "name" => "first_name",
+                "value" => isset($model_info->first_name) ? $model_info->first_name : '',
+                "class" => "form-control company_name_input_section",
+
+                "data-rule-required" => true,
+                "data-msg-required" => app_lang("field_required"),
+            ));
+            ?>
+        </div>
+    </div></div>
+    <div class="col-md-6">        <div class="form-group">
+        <label for="last_name" class="strong last_name_section"><?php echo app_lang('last_name'); ?></label>
+        <div class="<?php echo $field_column; ?>">
+            <?php
+            echo form_input(array(
+                "id" => "last_name",
+                "name" => "last_name",
+                "value" => isset($model_info->last_name) ? $model_info->last_name : '',
+                "class" => "form-control company_name_input_section",
+
+                "data-rule-required" => true,
+                "data-msg-required" => app_lang("field_required"),
+            ));
+            ?>
+        </div>
+    </div></div>
+    <div class="col-md-6">        <div class="form-group">
+        <label for="email" class="strong email_section"><?php echo app_lang('email'); ?></label>
+        <div class="<?php echo $field_column; ?>">
+            <?php
+            echo form_input(array(
+                "id" => "email",
+                "name" => "email",
+                "value" => isset($model_info->email) ? $model_info->email : '',
+                "class" => "form-control company_name_input_section",
+
+                "type" => 'email',
+                "data-rule-required" => true,
+                "data-msg-required" => app_lang("field_required"),
+            ));
+            ?>
+            <p class="text-danger d-none" id="email-alert-cont"></p>
+        </div>
+    </div></div>
+
+    
+    <div class="col-md-6">        <div class="form-group">
+        <label for="phone" class="strong phone_section"><?php echo app_lang('contact_number'); ?></label>
+        <div class="<?php echo $field_column; ?>">
+            <div class="input-group-prepend">
+                <?php
+                $countries = isset($countries_dropdown) ? $countries_dropdown : '';
+                if (empty($countries)) {
+                    $countries = [];
+                } else {
+                    $countries = json_decode($countries);
+                }
+                $list = [];
+
+                foreach ($countries as $country) {
+                    $list['+' . $country->phonecode] = $country->nicename . ' +' . $country->phonecode;
+                }
+
+                $list[''] = '-';
+                ksort($list);
+                echo form_dropdown(
+                    'phone_code',
+                    $list,
+                    isset($model_info->phone_code) && !empty($model_info->phone_code) ? $model_info->phone_code : '',
+                    "class='form-control select2' id='select-phone-code'"
+                );
+                ?>
+            </div>
+            <?php
+            echo form_input(array(
+                "id" => "phone",
+                "name" => "phone",
+                "value" => isset($model_info->phone) ? $model_info->phone : '',
+                "class" => "form-control company_name_input_section",
+
+                "type" => 'number',
+            ));
+            ?>
+        </div>
+    </div></div>
+    <div class="col-md-6"></div>
+    <div class="col-md-6"></div>
+</div>
+
+
+<?php if (isset($is_overview)) { ?>
+    <?php echo '<div id="address-tab">' ?>
+<?php } else { ?>
+    <?php echo '<div role="tabpanel" class="tab-pane" id="address-tab">' ?>
+<?php } ?>
+<h3 class="mb-5"><?php echo app_lang('address'); ?></h3>
+<hr>
+<div class="row">
+    <div class="col-md-6">        <div class="form-group">
+        <label for="address" class="strong"><?php echo app_lang('address'); ?></label>
+        <div class="<?php echo $field_column; ?>">
+            <?php
+            echo form_input(array(
+                "id" => "address",
+                "name" => "address",
+                "value" => $model_info->address ? $model_info->address : "",
+                "class" => "form-control",
+            ));
+            ?>
+
+        </div>
+    </div></div>
+    <div class="col-md-6">        <div class="form-group">
+        <label for="city" class="strong"><?php echo app_lang('city'); ?></label>
+        <div class="<?php echo $field_column; ?>">
+            <?php
+            echo form_input(array(
+                "id" => "city",
+                "name" => "city",
+                "value" => $model_info->city,
+                "class" => "form-control",
+            ));
+            ?>
+        </div>
+    </div></div>
+    <div class="col-md-6">        <div class="form-group">
+        <label for="state" class="strong"><?php echo app_lang('state'); ?></label>
+        <div class="<?php echo $field_column; ?>">
+            <?php
+            echo form_input(array(
+                "id" => "state",
+                "name" => "state",
+                "value" => $model_info->state,
+                "class" => "form-control",
+            ));
+            ?>
+        </div>
+    </div></div>
+
+
+    
+    <div class="col-md-6">        <div class="form-group">
+        <label for="zip" class="strong"><?php echo app_lang('zip'); ?></label>
+        <div class="<?php echo $field_column; ?>">
+            <?php
+            echo form_input(array(
+                "id" => "zip",
+                "name" => "zip",
+                "value" => $model_info->zip,
+                "class" => "form-control",
+            ));
+            ?>
+        </div>
+    </div></div>
+    <div class="col-md-6">        <div class="form-group">
+        <label for="country" class="strong"><?php echo app_lang('country'); ?></label>
+        <div class="<?php echo $field_column; ?>">
+            <?php
+            $countries = isset($countries_dropdown) ? $countries_dropdown : '';
+            if (empty($countries)) {
+                $countries = [];
+            } else {
+                $countries = json_decode($countries);
+            }
+            $country_codes = [];
+
+            foreach ($countries as $country) {
+                $country_codes[$country->nicename] = $country->nicename;
+            }
+            $country_codes[''] = '-';
+
+            asort($country_codes);
+
+            echo form_dropdown(
+                'country',
+                $country_codes,
+                isset($model_info->country) && !empty($model_info->country) ? $model_info->country : '',
+                "class='form-control select2' id='select-country-code'"
+            );
+            ?>
         </div>
     </div>
-    <div <?php if (!isset($is_overview)) {
-                echo 'role="tabpanel" class="tab-pane active"';
-            } ?> id="student-profile-tab">
-        <h3 class="mb-5"><?php echo app_lang('contact_person'); ?></h3>
-        <div class="form-group">
-            <div class="row">
-                <label for="first_name" class="<?php echo $label_column; ?> first_name_section"><?php echo app_lang('first_name'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_input(array(
-                        "id" => "first_name",
-                        "name" => "first_name",
-                        "value" => isset($model_info->first_name) ? $model_info->first_name : '',
-                        "class" => "form-control company_name_input_section",
-                        "placeholder" => app_lang('first_name'),
+    <?php echo '</div>' ?></div>
+    <div class="col-md-6"></div>
 
-                        "data-rule-required" => true,
-                        "data-msg-required" => app_lang("field_required"),
-                    ));
-                    ?>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="last_name" class="<?php echo $label_column; ?> last_name_section"><?php echo app_lang('last_name'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_input(array(
-                        "id" => "last_name",
-                        "name" => "last_name",
-                        "value" => isset($model_info->last_name) ? $model_info->last_name : '',
-                        "class" => "form-control company_name_input_section",
-                        "placeholder" => app_lang('last_name'),
+</div>
 
-                        "data-rule-required" => true,
-                        "data-msg-required" => app_lang("field_required"),
-                    ));
-                    ?>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="email" class="<?php echo $label_column; ?> email_section"><?php echo app_lang('email'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_input(array(
-                        "id" => "email",
-                        "name" => "email",
-                        "value" => isset($model_info->email) ? $model_info->email : '',
-                        "class" => "form-control company_name_input_section",
-                        "placeholder" => app_lang('email'),
-
-                        "type" => 'email',
-                        "data-rule-required" => true,
-                        "data-msg-required" => app_lang("field_required"),
-                    ));
-                    ?>
-                    <p class="text-danger d-none" id="email-alert-cont"></p>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="phone" class="<?php echo $label_column; ?> phone_section"><?php echo app_lang('contact_number'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <div class="input-group-prepend">
-                        <?php
-                        $countries = isset($countries_dropdown) ? $countries_dropdown : '';
-                        if (empty($countries)) {
-                            $countries = [];
-                        } else {
-                            $countries = json_decode($countries);
-                        }
-                        $list = [];
-
-                        foreach ($countries as $country) {
-                            $list['+' . $country->phonecode] = $country->nicename . ' +' . $country->phonecode;
-                        }
-
-                        $list[''] = '-';
-                        ksort($list);
-                        echo form_dropdown(
-                            'phone_code',
-                            $list,
-                            isset($model_info->phone_code) && !empty($model_info->phone_code) ? $model_info->phone_code : '',
-                            "class='form-control select2' id='select-phone-code'"
-                        );
-                        ?>
-                    </div>
-                    <?php
-                    echo form_input(array(
-                        "id" => "phone",
-                        "name" => "phone",
-                        "value" => isset($model_info->phone) ? $model_info->phone : '',
-                        "class" => "form-control company_name_input_section",
-                        "placeholder" => app_lang('contact_number'),
-
-                        "type" => 'number',
-                    ));
-                    ?>
-                </div>
-            </div>
-        </div>
-
-        <?php if (isset($is_overview)) { ?>
-            <?php echo '<div id="address-tab">' ?>
-        <?php } else { ?>
-            <?php echo '<div role="tabpanel" class="tab-pane" id="address-tab">' ?>
-        <?php } ?>
-        <h3 class="mb-5"><?php echo app_lang('address'); ?></h3>
-        <div class="form-group">
-            <div class="row">
-                <label for="address" class="<?php echo $label_column; ?>"><?php echo app_lang('address'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_textarea(array(
-                        "id" => "address",
-                        "name" => "address",
-                        "value" => $model_info->address ? $model_info->address : "",
-                        "class" => "form-control",
-                        "placeholder" => app_lang('address')
-                    ));
-                    ?>
-
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="city" class="<?php echo $label_column; ?>"><?php echo app_lang('city'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_input(array(
-                        "id" => "city",
-                        "name" => "city",
-                        "value" => $model_info->city,
-                        "class" => "form-control",
-                        "placeholder" => app_lang('city')
-                    ));
-                    ?>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="state" class="<?php echo $label_column; ?>"><?php echo app_lang('state'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_input(array(
-                        "id" => "state",
-                        "name" => "state",
-                        "value" => $model_info->state,
-                        "class" => "form-control",
-                        "placeholder" => app_lang('state')
-                    ));
-                    ?>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="zip" class="<?php echo $label_column; ?>"><?php echo app_lang('zip'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_input(array(
-                        "id" => "zip",
-                        "name" => "zip",
-                        "value" => $model_info->zip,
-                        "class" => "form-control",
-                        "placeholder" => app_lang('zip')
-                    ));
-                    ?>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="country" class="<?php echo $label_column; ?>"><?php echo app_lang('country'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    $countries = isset($countries_dropdown) ? $countries_dropdown : '';
-                    if (empty($countries)) {
-                        $countries = [];
-                    } else {
-                        $countries = json_decode($countries);
-                    }
-                    $country_codes = [];
-
-                    foreach ($countries as $country) {
-                        $country_codes[$country->nicename] = $country->nicename;
-                    }
-                    $country_codes[''] = '-';
-
-                    asort($country_codes);
-
-                    echo form_dropdown(
-                        'country',
-                        $country_codes,
-                        isset($model_info->country) && !empty($model_info->country) ? $model_info->country : '',
-                        "class='form-control select2' id='select-country-code'"
-                    );
-                    ?>
-                </div>
-            </div>
-        </div>
-        <?php echo '</div>' ?>
 
         <!-- <?php if (isset($is_overview)) { ?>
             <?php echo '<div id="financial-standing-tab">' ?>
@@ -678,7 +650,7 @@
                     </div>
                 </div>
             </div>
-        <?php echo '</div>' ?> -->
+            <?php echo '</div>' ?> -->
 
         <!-- 
         <?php if (isset($is_overview)) { ?>
@@ -825,9 +797,11 @@
             <?php echo '<div role="tabpanel" class="tab-pane" id="additional-information-tab">' ?>
         <?php } ?>
         <h3 class="mb-5"><?php echo app_lang('additional_information'); ?></h3>
-        <div class="form-group">
-            <div class="row">
-                <label for="expected_timeline" class="<?php echo $label_column; ?>"><?php echo app_lang('expected_timeline'); ?></label>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">        <div class="form-group">
+              
+                <label for="expected_timeline" class="strong"><?php echo app_lang('expected_timeline'); ?></label>
                 <div class="<?php echo $field_column; ?>">
                     <?php
                     echo form_input(array(
@@ -835,99 +809,93 @@
                         "name" => "expected_timeline",
                         "value" => isset($model_info->expected_timeline) ? $model_info->expected_timeline : '',
                         "class" => "form-control company_name_input_section",
-                        "placeholder" => app_lang('expected_timeline'),
 
                     ));
                     ?>
                 </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="qualification_required" class="<?php echo $label_column; ?>"><?php echo app_lang('qualification_required'); ?></label>
+            </div></div>
+            <div class="col-md-6">        <div class="form-group">
+                <label for="qualification_required" class="strong"><?php echo app_lang('qualification_required'); ?></label>
                 <div class="<?php echo $field_column; ?>">
                     <?php
-                    echo form_textarea(array(
+                    echo form_input(array(
                         "id" => "qualification_required",
                         "name" => "qualification_required",
                         "value" => isset($model_info->qualification_required) ? $model_info->qualification_required : '',
                         "class" => "form-control company_name_input_section",
-                        "placeholder" => app_lang('qualification_required'),
 
                     ));
                     ?>
                 </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="additional_info" class="<?php echo $label_column; ?>"><?php echo app_lang('additional_info'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_textarea(array(
-                        "id" => "additional_info",
-                        "name" => "additional_info",
-                        "value" => isset($model_info->additional_info) ? $model_info->additional_info : '',
-                        "class" => "form-control company_name_input_section",
-                        "placeholder" => app_lang('additional_info'),
-
-                    ));
-                    ?>
-                </div>
-            </div>
-        </div>
-        <?php echo '</div>' ?>
-
-
-        <?php if (isset($is_overview)) { ?>
-            <?php echo '<div id="internal-tab">' ?>
-        <?php } else { ?>
-            <?php echo '<div role="tabpanel" class="tab-pane" id="internal-tab">' ?>
-        <?php } ?>
-        <h3 class="mb-5"><?php echo app_lang('internal'); ?></h3>
-        <?php if ($model_info->id) { ?>
-            <div class="form-group">
-                <div class="row">
-                    <label for="consultancy_type" class="<?php echo $label_column; ?>"><?php echo app_lang('consultancy_type'); ?>
-                        <span class="help" data-container="body" data-bs-toggle="tooltip" title="Change the consultancy type of the client"><i data-feather="help-circle" class="icon-16"></i></span>
-                    </label>
+            </div></div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="additional_info" class="strong"><?php echo app_lang('additional_info'); ?></label>
                     <div class="<?php echo $field_column; ?>">
                         <?php
                         echo form_input(array(
-                            "id" => "consultancy_type",
-                            "name" => "consultancy_type",
-                            "value" => isset($model_info->account_type) ? $model_info->account_type : '',
+                            "id" => "additional_info",
+                            "name" => "additional_info",
+                            "value" => isset($model_info->additional_info) ? $model_info->additional_info : '',
+                            "class" => "form-control company_name_input_section",
+
+                        ));
+                        ?>
+                    </div>
+                </div>
+                <?php echo '</div>' ?></div>
+                
+
+            </div>
+
+
+
+            <?php if (isset($is_overview)) { ?>
+                <?php echo '<div id="internal-tab">' ?>
+            <?php } else { ?>
+                <?php echo '<div role="tabpanel" class="tab-pane" id="internal-tab">' ?>
+            <?php } ?>
+            <h3 class="mb-5"><?php echo app_lang('internal'); ?></h3>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">            <div class="form-group">
+                 
+                    <label for="consultancy_type" class="strong"><?php echo app_lang('consultancy_type'); ?>
+                    <span class="help" data-container="body" data-bs-toggle="tooltip" title="Change the consultancy type of the client"><i data-feather="help-circle" class="icon-16"></i></span>
+                </label>
+                <div class="<?php echo $field_column; ?>">
+                    <?php
+                    echo form_input(array(
+                        "id" => "consultancy_type",
+                        "name" => "consultancy_type",
+                        "value" => isset($model_info->account_type) ? $model_info->account_type : '',
+                        "class" => "form-control",
+                        "data-rule-required" => true,
+                        "data-msg-required" => app_lang("field_required")
+                    ));
+                    ?>
+                </div>
+            </div></div>
+            <div class="col-md-6">        <div class="form-group">
+                <div class="row">
+                    <label for="location_id" class="strong"><?php echo app_lang('location'); ?></label>
+                    <div class="<?php echo $field_column; ?>">
+                        <?php
+                        echo form_input(array(
+                            "id" => "location_id",
+                            "name" => "location_id",
+                            "value" => isset($model_info->location_id) ? $model_info->location_id : '',
                             "class" => "form-control",
-                            "placeholder" => app_lang('consultancy_type'),
                             "data-rule-required" => true,
                             "data-msg-required" => app_lang("field_required")
                         ));
                         ?>
                     </div>
                 </div>
-            </div>
-        <?php } ?>
-        <div class="form-group">
-            <div class="row">
-                <label for="location_id" class="<?php echo $label_column; ?>"><?php echo app_lang('location'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_input(array(
-                        "id" => "location_id",
-                        "name" => "location_id",
-                        "value" => isset($model_info->location_id) ? $model_info->location_id : '',
-                        "class" => "form-control",
-                        "placeholder" => app_lang('location'),
-                        "data-rule-required" => true,
-                        "data-msg-required" => app_lang("field_required")
-                    ));
-                    ?>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="assignee" class="<?php echo $label_column; ?>"><?php echo app_lang('assignee'); ?>
+            </div></div>
+            <div class="col-md-6">        <div class="form-group">
+                <div class="row">
+                    <label for="assignee" class="strong"><?php echo app_lang('assignee'); ?>
                     <span class="help" data-container="body" data-bs-toggle="tooltip" title="<?php echo app_lang('the_person_who_will_manage_this_client') ?>"><i data-feather="help-circle" class="icon-16"></i></span>
                 </label>
                 <div class="<?php echo $field_column; ?>">
@@ -937,14 +905,18 @@
                         "name" => "assignee",
                         "value" => isset($model_info->assignee) ? $model_info->assignee : '',
                         "class" => "form-control",
-                        "placeholder" => app_lang('assignee'),
                         "data-rule-required" => true,
                         "data-msg-required" => app_lang("field_required")
                     ));
                     ?>
                 </div>
             </div>
-        </div>
+        </div></div>
+
+        
+        
+
+
         <!-- <div class="form-group">
             <div class="row">
                 <label for="assignee-manager" class="<?php echo $label_column; ?> assignee_manager_section"><?php echo app_lang('assignee'); ?></label>
@@ -962,125 +934,125 @@
                 </div>
             </div>
         </div> -->
-        <div class="form-group">
-            <div class="row">
-                <label for="client_labels" class="<?php echo $label_column; ?> tag_name_section"><?php echo app_lang('tag_name'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_input(array(
-                        "id" => "client_labels",
-                        "name" => "tag_name",
-                        "value" => isset($model_info->tag_name) ? $model_info->tag_name : '',
-                        "class" => "form-control company_name_input_section",
-                        "placeholder" => app_lang('tag_name'),
+        
+        <div class="col-md-6">        <div class="form-group">
+            
+            <label for="client_labels" class="strong tag_name_section"><?php echo app_lang('tag_name'); ?></label>
+            <div class="<?php echo $field_column; ?>">
+                <?php
+                echo form_input(array(
+                    "id" => "client_labels",
+                    "name" => "tag_name",
+                    "value" => isset($model_info->tag_name) ? $model_info->tag_name : '',
+                    "class" => "form-control company_name_input_section",
 
-                    ));
-                    ?>
-                </div>
+                ));
+                ?>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="row">
-                <label for="source" class="<?php echo $label_column; ?> source_section"><?php echo app_lang('source'); ?></label>
-                <div class="<?php echo $field_column; ?>">
-                    <?php
-                    echo form_input(array(
-                        "id" => "source",
-                        "name" => "source",
-                        "value" => isset($model_info->source) ? $model_info->source : '',
-                        "class" => "form-control",
-                        "placeholder" => app_lang('source'),
-                    ));
-                    ?>
-                </div>
+        </div></div>
+        <div class="col-md-6">        <div class="form-group">
+            <label for="source" class="strong source_section"><?php echo app_lang('source'); ?></label>
+            <div class="<?php echo $field_column; ?>">
+                <?php
+                echo form_input(array(
+                    "id" => "source",
+                    "name" => "source",
+                    "value" => isset($model_info->source) ? $model_info->source : '',
+                    "class" => "form-control",
+                ));
+                ?>
             </div>
-        </div>
-        <?php echo '</div>' ?>
+        </div></div>
+        <div class="col-md-6"></div>
 
     </div>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
+    <?php echo '</div>' ?>
+
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#visa_expiry_container").show();
+        if ($('#visa_type').val()) {
             $("#visa_expiry_container").show();
-            if ($('#visa_type').val()) {
-                $("#visa_expiry_container").show();
-            }
+        }
 
-            $('[data-bs-toggle="tooltip"]').tooltip();
+        $('[data-bs-toggle="tooltip"]').tooltip();
 
-            setDatePicker("#visa_expiry");
+        setDatePicker("#visa_expiry");
 
-            $('#visa_type').select2({
-                data: <?php echo $visa_type_dropdown; ?>
-            }).on('change', function() {
-                value = $(this).val();
-                if (value == 'Standard Business Sponsorship') {
+        $('#visa_type').select2({
+            data: <?php echo $visa_type_dropdown; ?>
+        }).on('change', function() {
+            value = $(this).val();
+            if (value == 'Standard Business Sponsorship') {
                     //$("#visa_expiry_container").show();
-                } else {
+            } else {
                     //$("#visa_expiry_container").hide();
-                }
-            });
-
-            <?php if (isset($currency_dropdown)) { ?>
-                if ($('#currency').length) {
-                    $('#currency').select2({
-                        data: <?php echo json_encode($currency_dropdown); ?>
-                    });
-                }
-            <?php } ?>
-
-            <?php if (isset($groups_dropdown)) { ?>
-                $("#group_ids").select2({
-                    multiple: true,
-                    data: <?php echo json_encode($groups_dropdown); ?>
-                });
-            <?php } ?>
-
-            <?php if ($login_user->is_admin || get_array_value($login_user->permissions, "client") === "all") { ?>
-                $('#assignee').select2({
-                    data: <?php echo $team_members_dropdown; ?>
-                });
-                $('#assignee-manager').select2({
-                    data: <?php echo $team_members_dropdown; ?>
-                });
-            <?php } ?>
-
-            <?php if ($login_user->is_admin || get_array_value($login_user->permissions, "client") === "all") { ?>
-                $('#created_by').select2({
-                    data: <?php echo $team_members_dropdown; ?>
-                });
-            <?php } ?>
-
-            <?php if ($login_user->user_type === "staff") { ?>
-                $("#client_labels").select2({
-                    multiple: true,
-                    data: <?php echo json_encode($label_suggestions); ?>
-                });
-                $('#source').select2({
-                    data: <?php echo $sources_dropdown; ?>
-                });
-                $('#location_id').select2({
-                    data: <?php echo json_encode($locations_dropdown); ?>
-                });
-            <?php } ?>
-
-
-            $("#consultancy_type").select2({
-                data: <?php echo json_encode($account_types_dropdown); ?>
-            });
-
-            $('.account_type').click(function() {
-                var inputValue = $(this).attr("value");
-                if (inputValue === "person") {
-                    $(".company_name_section").html("Name");
-                    $(".company_name_input_section").attr("placeholder", "Name");
-                } else {
-                    $(".company_name_section").html("Company name");
-                    $(".company_name_input_section").attr("placeholder", "Company name");
-                }
-            });
-
-            $(".select2").select2();
-
+            }
         });
-    </script>
+
+        <?php if (isset($currency_dropdown)) { ?>
+            if ($('#currency').length) {
+                $('#currency').select2({
+                    data: <?php echo json_encode($currency_dropdown); ?>
+                });
+            }
+        <?php } ?>
+
+        <?php if (isset($groups_dropdown)) { ?>
+            $("#group_ids").select2({
+                multiple: true,
+                data: <?php echo json_encode($groups_dropdown); ?>
+            });
+        <?php } ?>
+
+        <?php if ($login_user->is_admin || get_array_value($login_user->permissions, "client") === "all") { ?>
+            $('#assignee').select2({
+                data: <?php echo $team_members_dropdown; ?>
+            });
+            $('#assignee-manager').select2({
+                data: <?php echo $team_members_dropdown; ?>
+            });
+        <?php } ?>
+
+        <?php if ($login_user->is_admin || get_array_value($login_user->permissions, "client") === "all") { ?>
+            $('#created_by').select2({
+                data: <?php echo $team_members_dropdown; ?>
+            });
+        <?php } ?>
+
+        <?php if ($login_user->user_type === "staff") { ?>
+            $("#client_labels").select2({
+                multiple: true,
+                data: <?php echo json_encode($label_suggestions); ?>
+            });
+            $('#source').select2({
+                data: <?php echo $sources_dropdown; ?>
+            });
+            $('#location_id').select2({
+                data: <?php echo json_encode($locations_dropdown); ?>
+            });
+        <?php } ?>
+
+
+        $("#consultancy_type").select2({
+            data: <?php echo json_encode($account_types_dropdown); ?>
+        });
+
+        $('.account_type').click(function() {
+            var inputValue = $(this).attr("value");
+            if (inputValue === "person") {
+                $(".company_name_section").html("Name");
+                $(".company_name_input_section").attr("placeholder", "Name");
+            } else {
+                $(".company_name_section").html("Company name");
+                $(".company_name_input_section").attr("placeholder", "Company name");
+            }
+        });
+
+        $(".select2").select2();
+
+    });
+</script>

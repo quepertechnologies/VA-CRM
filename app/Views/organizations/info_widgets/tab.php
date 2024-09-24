@@ -22,8 +22,8 @@ if (!is_object($client_info)) {
 if ($tab == "projects") {
     $card = "bg-info";
     $icon = "grid";
-    $tab = $client_info->tax_id_num; // This is not a language and going custom for now
-    $value = $client_info->company_name;
+    $value = "ABN: ".$client_info->tax_id_num; // This is not a language and going custom for now
+    $tab = $client_info->company_name;
     $link = "";
 } else if ($tab == "total_invoiced") {
     $card = "bg-primary";

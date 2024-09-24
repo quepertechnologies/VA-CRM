@@ -575,18 +575,26 @@ class Import extends Security_Controller
     {
         ini_set('max_execution_time', 500); //execute maximum 500 seconds 
 
-        $clients = $this->Clients_model->get_details(array('only_account_types' => '1,2,4', 'leads_only' => false))->getResult();
-
+        $clients = $this->Clients_model->get_details(array('only_account_types' => '4', 'leads_only' => false))->getResult();
         $succeeded = array();
         foreach ($clients as $client) {
             $created_date = new \DateTime($client->created_date);
             $name = $client->first_name . ' ' . $client->last_name;
             if ((int)$client->account_type == 4) {
-                $name = $client->company_name;
+                if($client->company_name == '')
+                {
+                   $name = $client->first_name . ' ' . $client->last_name;
+                }
+                else
+                {
+                   $name = $client->company_name;
+                }
+                
             }
 
             $client_data = array(
-                'unique_id' => _gen_va_uid($name, date_format($created_date, 'dmY'))
+                'unique_id' => _gen_va_uid($name, date_format($created_date, 'dmY')),
+                'company_name' => $name
             );
 
             $success = $this->Clients_model->ci_save($client_data, $client->id);

@@ -4254,8 +4254,8 @@ label {
 .general-form .form-control {
   box-sizing: border-box;
   font-size: 14px;
-  border-color: #f6f8f9;
-  background-color: #f6f8f9;
+  border-color: #f6f8f9 !important;
+  background-color: #f6f8f9 !important;
   color: #4e5e6a;
   box-shadow: none;
   transition: background 0.5s;
@@ -4281,7 +4281,7 @@ label {
   padding: 0 20px;
 }
 .general-form.white .select2-container .select2-choice {
-  background-color: #fff !important;
+  background-color: #f6f8f9 !important;
 }
 .form-control {
   height: 35px;

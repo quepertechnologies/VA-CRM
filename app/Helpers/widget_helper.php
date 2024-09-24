@@ -1250,6 +1250,7 @@ if (!function_exists('total_clients_widget')) {
 
     function total_clients_widget($show_own_clients_only_user_id = "", $allowed_client_groups = "", $other_options = array())
     {
+        $ci = new Security_Controller(false);
         $Clients_model = model("App\Models\Clients_model");
         $account_type = get_array_value($other_options, 'account_type');
         if ($account_type) {
@@ -1261,7 +1262,7 @@ if (!function_exists('total_clients_widget')) {
             "show_own_clients_only_user_id" => $show_own_clients_only_user_id,
             "client_groups" => $allowed_client_groups,
             'account_type' => $account_type,
-            "location_id" => get_ltm_opl_id(),
+            "location_id" => $ci->login_user->location_id,
             "is_lead" => 0
         );
 
