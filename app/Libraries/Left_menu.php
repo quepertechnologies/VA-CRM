@@ -145,10 +145,10 @@ class Left_menu
 
             if (get_setting("module_estimate") && ($this->ci->login_user->is_admin || $access_estimate)) {
 
-                $prospects_submenu["estimates"] = array("name" => "forms_list", "url" => "forms", "class" => "trello");
+                $prospects_submenu["estimates"] = array("name" => "estimate_list", "url" => "estimates", "class" => "trello");
 
                 if (get_setting("module_estimate_request")) {
-                    $prospects_submenu["estimate_requests"] = array("name" => "forms_list", "url" => "forms", "class" => "trello");
+                    $prospects_submenu["estimate_requests"] = array("name" => "estimate_requests", "url" => "estimate_requests", "class" => "trello");
                     $prospects_submenu["estimate_forms"] = array("name" => "estimate_forms", "url" => "jot_forms/forms", "class" => "trello");
                 }
             }
