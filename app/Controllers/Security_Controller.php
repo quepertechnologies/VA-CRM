@@ -761,7 +761,7 @@ class Security_Controller extends App_Controller
         if ($first_item_label) {
             $dropdown_list = array($first_key => $first_item_label);
         }
-        if (isset($this->login_user) && $this->login_user->user_type === 'staff') {
+        if (isset($this->login_user) && isset($this->login_user->user_type) && $this->login_user->user_type === 'staff') {
             $options = array();
             $list = $this->Location_model->get_details($options)->getResult();
 

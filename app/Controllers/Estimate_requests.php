@@ -389,7 +389,7 @@ class Estimate_requests extends Security_Controller
 
         $public = "";
         if ($data->public) {
-            $public = anchor("request_estimate/form/" . $data->id, app_lang("yes") . "<i data-feather='external-link' class='icon-16 ml10'></i>", array("target" => "_blank", "class" => ""));
+            $public = anchor("VAForms/" . $data->id, app_lang("yes") . "<i data-feather='external-link' class='icon-16 ml10'></i>", array("target" => "_blank", "class" => ""));
         } else {
             $public = app_lang("no");
         }

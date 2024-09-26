@@ -43,11 +43,11 @@
                     class: "w200",
                     options: quick_filters_dropdown
                 },
-                <?php if ($login_user->is_admin || get_array_value($login_user->permissions, "client") === "all") { ?> {
-                        name: "created_by",
-                        class: "w200",
-                        options: <?php echo $team_members_dropdown; ?>
-                    },
+                // <?php if ($login_user->is_admin || get_array_value($login_user->permissions, "client") === "all") { ?> {
+                //         name: "created_by",
+                //         class: "w200",
+                //         options: <?php echo $team_members_dropdown; ?>
+                //     },
                 <?php } ?> {
                     name: "account_type",
                     class: "w200",
@@ -113,10 +113,10 @@
                 {
                     title: "<?php echo app_lang("visa") ?>",
                 },
-                {
-                    title: "<?php echo app_lang("created_at") ?>",
-                    order_by: "created_at"
-                },
+                // {
+                //     title: "<?php echo app_lang("created_at") ?>",
+                //     order_by: "created_at"
+                // },
                 {
                     title: "<?php echo app_lang("phone") ?>",
                 },
