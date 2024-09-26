@@ -35,7 +35,7 @@ $routes->get('/', 'Dashboard::index');
 //this route will move 'about/any-text' to 'domain.com/about/index/any-text'
 $routes->add('about/(:any)', 'About::index/$1');
 
-$routes->get('VAForms/(:any)', 'request_estimate::form/$1');
+$routes->get('VAForms/(:any)', 'Request_estimate::form/$1');
 
 //add routing for controllers
 $excluded_controllers = array("About", "App_Controller", "Security_Controller");
