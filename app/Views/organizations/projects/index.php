@@ -158,11 +158,11 @@ if (!isset($project_labels_dropdown)) {
                     "class": "w10p",
                     visible: true
                 },
-                // {
-                //     title: '<?php echo app_lang("status") ?>',
-                //     "class": "w10p",
-                //     visible: true
-                // },
+                {
+                    title: '<?php echo app_lang("status") ?>',
+                    "class": "w10p",
+                    visible: true
+                },
                 {
                     title: '<?php echo app_lang("progress") ?>',
                     "class": "w10p",

@@ -3,7 +3,21 @@
     <div class="container-fluid">
         <input type="hidden" name="id" value="<?php echo $modal_info->id; ?>" />
         <input type="hidden" name="project_id" value="<?php echo $project_id; ?>" />
-
+        
+        <div class="form-group">
+                <div class="row">
+                    <label for="project-start-date" class=" col-md-3"><?php echo app_lang('set_start_date'); ?></label>
+                    <div class=" col-md-9">
+                        <?php
+                        echo form_input(
+                            "start_date",
+                            isset($modal_info->start_date) ? $modal_info->start_date : '',
+                            "class='form-control' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "' id='project-start-date'"
+                        );
+                        ?>
+                    </div>
+                </div>
+        </div>
         <div class="form-group">
             <div class="row">
                 <label for="project-deadline" class=" col-md-3"><?php echo app_lang('set_deadline'); ?></label>
@@ -38,24 +52,8 @@
                 </div>
             </div>
         </div>
-        <?php
-        if (is_dev_mode()) {
-        ?>
-            <div class="form-group">
-                <div class="row">
-                    <label for="project-start-date" class=" col-md-3"><?php echo app_lang('set_start_date'); ?></label>
-                    <div class=" col-md-9">
-                        <?php
-                        echo form_input(
-                            "start_date",
-                            isset($modal_info->start_date) ? $modal_info->start_date : '',
-                            "class='form-control' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "' id='project-start-date'"
-                        );
-                        ?>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
+
+
     </div>
 </div>
 
@@ -80,11 +78,8 @@
             $("#project-deadline").focus();
         }, 200);
 
-        <?php if (is_dev_mode()) { ?>
             setDatePicker("#project-deadline, #project-start-date");
-        <?php } else { ?>
-            setDatePicker("#project-deadline");
-        <?php } ?>
+       
 
     });
 </script>

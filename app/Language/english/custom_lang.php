@@ -1721,7 +1721,7 @@ $lang["estimate_color"] = "Estimate Color";
 $lang["initial_number_of_the_estimate"] = "Initial number of the estimate";
 $lang["the_estimates_id_must_be_larger_then_last_estimate_id"] = "The estimates ID must be larger then last estimate ID.";
 
-$lang["set_deadline"] = "Set Deadline";
+$lang["set_deadline"] = "Set Dates";
 $lang["send_email"] = "Send Email";
 $lang["send_to_client"] = "Send to client";
 $lang["estimate_sent_message"] = "The estimate has been sent!";

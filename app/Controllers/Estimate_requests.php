@@ -147,7 +147,11 @@ class Estimate_requests extends Security_Controller
     private function _make_estimate_request_row($data)
     {
         $assigned_to = "-";
-
+        $client = null;
+        if ($data->client_id) {
+            $client = $this->Clients_model->get_one($data->client_id);
+        }
+        
         if ($data->assigned_to) {
             $image_url = get_avatar($data->assigned_to_avatar);
             $assigned_to_user = "<span class='avatar avatar-xs mr10'><img src='$image_url' alt='...'></span> $data->assigned_to_user";
@@ -155,14 +159,24 @@ class Estimate_requests extends Security_Controller
         }
 
         $status = $this->_get_estimate_status_label($data->status, $data->is_archived);
-
-        $client = "";
-        if ($data->company_name) {
-            if ($data->is_lead) {
-                $client = anchor(get_uri("leads/view/" . $data->client_id), $data->company_name);
-            } else {
-                $client = anchor(get_uri("clients/view/" . $data->client_id), $data->company_name);
+        
+        $route_prefix = $this->get_client_view_route($data->client_id);
+        $client_name = "-";
+        if ($data->client_id) {
+            $full_name = $this->get_client_full_name($data->client_id, $client);
+            if ($full_name) {
+                $client_name = anchor(get_uri("$route_prefix/view/" . $data->client_id), $full_name);
             }
+        }
+
+        $phone = "-";
+        if ($client && $client->phone_code && $client->phone) {
+            $phone = $client->phone_code . ' ' . $client->phone;
+        }
+
+        $email = "-";
+        if ($client && $client->email) {
+            $email = $client->email;
         }
 
         $edit = '<li role="presentation">' . modal_anchor(get_uri("estimate_requests/edit_estimate_request_modal_form"), "<i data-feather='edit' class='icon-16'></i> " . app_lang('edit'), array("title" => app_lang('estimate_request'), "data-post-view" => "details", "data-post-id" => $data->id, "class" => "dropdown-item")) . '</li>';
@@ -183,7 +197,7 @@ class Estimate_requests extends Security_Controller
 
         return array(
             anchor(get_uri("estimate_requests/view_estimate_request/" . $data->id), app_lang("estimate_request") . " - " . $data->id),
-            $client,
+            $client_name.'<br>'.$phone.'<br>'.$email,
             $data->form_title,
             $assigned_to,
             $data->created_at,

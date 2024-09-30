@@ -80,13 +80,13 @@ if (!isset($project_labels_dropdown)) {
         }
 
 
-        $("#project-table").appTable({
+       $("#project-table").appTable({
             source: '<?php echo_uri("projects/projects_list_data_of_client/" . $client_id) ?>',
             order: [
                 [0, "desc"]
             ],
             hideTools: hideTools,
-            multiSelect: [{
+             multiSelect: [{
                 name: "status_id",
                 text: "<?php echo app_lang('status'); ?>",
                 options: <?php echo view("project_status/project_status_dropdown", array("project_statuses" => $project_statuses, "selected_status_key" => "open")); ?>
@@ -158,11 +158,11 @@ if (!isset($project_labels_dropdown)) {
                     "class": "w10p",
                     visible: true
                 },
-                // {
-                //     title: '<?php echo app_lang("status") ?>',
-                //     "class": "w10p",
-                //     visible: true
-                // },
+                {
+                    title: '<?php echo app_lang("status") ?>',
+                    "class": "w10p",
+                    visible: true
+                },
                 {
                     title: '<?php echo app_lang("progress") ?>',
                     "class": "w10p",

@@ -137,6 +137,7 @@ class Partners extends Security_Controller
             "address" => $this->request->getPost('address'),
             "city" => $this->request->getPost('city'),
             "state" => $this->request->getPost('state'),
+            "tax_id_num" => $this->request->getPost('tax_id_num'),
             "zip" => $this->request->getPost('zip'),
             "country" => $this->request->getPost('country'),
             "com_percentage" => $this->request->getPost('com_percentage'),

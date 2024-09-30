@@ -1560,10 +1560,18 @@ class Projects extends Security_Controller
             "custom_field_filter" => $this->prepare_custom_field_filter_values("projects", $this->login_user->is_admin, $this->login_user->user_type)
         );
 
+        $options_internal = array(
+            "client_id" => $client_id,
+            "status_ids" => $status_ids,
+            "project_label" => $this->request->getPost("project_label"),
+            "custom_fields" => $custom_fields,
+            "custom_field_filter" => $this->prepare_custom_field_filter_values("projects", $this->login_user->is_admin, $this->login_user->user_type)
+        );
+
         $client_info = $this->Clients_model->get_one($client_id);
 
         if ((int)$client_info->account_type == 3) {
-            $list_data = $this->Projects_model->own_projects($client_id)->getResult();
+            $list_data = $this->Projects_model->own_projects($client_id,$options_internal)->getResult();
             // var_dump($list_data);exit();
         } else {
             $options['client_id'] = $client_id;
@@ -1706,7 +1714,7 @@ class Projects extends Security_Controller
             $workflow,
             $current_stage,
             $partner,
-            //$status,
+            $status,
             $progress_bar
         );
 
@@ -2050,30 +2058,22 @@ class Projects extends Security_Controller
 
         $this->init_project_permission_checker($project_id);
 
-        if (is_dev_mode()) {
-            $this->validate_submitted_data(array(
+        $this->validate_submitted_data(array(
                 'deadline' => 'required',
                 'start_date' => 'required',
                 'note' => 'required'
             ));
-        } else {
-            $this->validate_submitted_data(array(
-                'deadline' => 'required',
-                'note' => 'required'
-            ));
-        }
 
         $project_data = array('deadline' => $deadline);
-        if (is_dev_mode()) {
-            $project_data['start_date'] = $start_date;
-        }
+        $project_data['start_date'] = $start_date;
+
 
         $save_id = $this->Projects_model->ci_save($project_data, $project_id);
 
         $note_data = array(
             'created_by' => $this->login_user->id,
             'created_at' => get_current_utc_time(),
-            'title' => 'Changed the deadline to ' . date_format(new \DateTime($deadline), 'l , F d Y'),
+            'title' => 'Changed the Dates to <strong>Deadline:</strong> '. date_format(new \DateTime($deadline), 'l , F d Y').' <strong>Start Date:</strong> '. date_format(new \DateTime($start_date), 'l , F d Y'),
             'description' => $note,
             'project_id' => $project_id,
             'milestone_id' => $this->get_current_milestone_id($project_id),

@@ -208,16 +208,23 @@ class Projects_model extends Crud_model
         }
     }
 
-    function own_projects($client_id = 0)
+    function own_projects($client_id = 0,$options = array())
     {
         $projects_table = $this->db->prefixTable('projects');
         $project_partners_table = $this->db->prefixTable('project_partners');
         $labels_table = $this->db->prefixTable('labels');
+        $where = "";
+
+        $status_ids = $this->_get_clean_value($options, "status_ids");
+        if ($status_ids) {
+            $where .= " AND (FIND_IN_SET($projects_table.status_id, '$status_ids')) ";
+        }
+
         $select_labels_data_query = "(SELECT GROUP_CONCAT($labels_table.id, '--::--', $labels_table.title, '--::--', $labels_table.color, ':--::--:') FROM $labels_table WHERE FIND_IN_SET($labels_table.id, $projects_table.labels)) AS labels_list";
         $sql = "SELECT $projects_table.*, $select_labels_data_query, $project_partners_table.full_name AS partner_full_name
         FROM $projects_table
         LEFT JOIN $project_partners_table ON $project_partners_table.project_id=$projects_table.id
-        WHERE $projects_table.deleted=0 AND $project_partners_table.partner_id = $client_id AND $project_partners_table.deleted=0
+        WHERE $projects_table.deleted=0 AND $project_partners_table.partner_id = $client_id AND $project_partners_table.deleted=0 $where
         ORDER BY $projects_table.title";
         return $this->db->query($sql);
     }

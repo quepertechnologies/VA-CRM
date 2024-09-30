@@ -16,7 +16,6 @@
                     "name" => "first_name",
                     "value" => isset($model_info->first_name) ? $model_info->first_name : '',
                     "class" => "form-control company_name_input_section",
-                    "autofocus" => true,
                     "data-rule-required" => true,
                     "data-msg-required" => app_lang("field_required"),
                 ));
@@ -32,9 +31,6 @@
                     "name" => "last_name",
                     "value" => isset($model_info->last_name) ? $model_info->last_name : '',
                     "class" => "form-control company_name_input_section",
-                    "autofocus" => true,
-                    "data-rule-required" => true,
-                    "data-msg-required" => app_lang("field_required"),
                 ));
                 ?>
             </div>
@@ -49,7 +45,6 @@
                     "name" => "email",
                     "value" => isset($model_info->email) ? $model_info->email : '',
                     "class" => "form-control company_name_input_section",
-                    "autofocus" => true,
                     "type" => 'email',
                     "data-rule-required" => true,
                     "data-msg-required" => app_lang("field_required"),
@@ -68,7 +63,6 @@
                     "name" => "unique_id",
                     "value" => isset($model_info->unique_id) && !empty($model_info->unique_id) ? $model_info->unique_id : '',
                     "class" => "form-control company_name_input_section",
-                    "autofocus" => true,
                     'disabled' => true,
                     'Hidden' => true,
                     'style' => "cursor: not-allowed"
@@ -127,12 +121,30 @@
                     "name" => "phone",
                     "value" => isset($model_info->phone) ? $model_info->phone : '',
                     "class" => "form-control company_name_input_section",
-                    "autofocus" => true,
                     "type" => 'number',
                 ));
                 ?>
             </div>
     </div></div>
+
+
+         <div class="col-md-6">    <div class="form-group">
+            <label for="tax_id_number" class="strong"><?php echo app_lang('tax_id_number'); ?></label>
+            <div class="<?php echo $field_column; ?>">
+                <?php
+                echo form_input(array(
+                    "id" => "tax_id_number",
+                    "name" => "tax_id_num",
+                    "value" => isset($model_info->tax_id_num) ? $model_info->tax_id_num : '',
+                    "class" => "form-control company_name_input_section",
+
+                    "data-rule-required" => true,
+                    "data-msg-required" => app_lang("field_required"),
+                ));
+                ?>
+            </div>
+        </div></div>
+
 
     </div>
 
@@ -688,7 +700,6 @@
                         "name" => "com_percentage",
                         "value" => isset($model_info->com_percentage) ? $model_info->com_percentage : '',
                         "class" => "form-control company_name_input_section",
-                        "autofocus" => true,
                         "type" => 'number'
                     ));
                     ?>
@@ -721,7 +732,6 @@
                         "name" => "tag_name",
                         "value" => isset($model_info->tag_name) ? $model_info->tag_name : '',
                         "class" => "form-control company_name_input_section",
-                        "autofocus" => true,
                     ));
                     ?>
                 </div>
