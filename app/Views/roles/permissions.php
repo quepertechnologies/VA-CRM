@@ -485,6 +485,40 @@
                         <span data-feather="key" class="icon-14 ml-20"></span>
                         <h5><?php echo app_lang("can_access_invoices"); ?></h5>
                         <div>
+                        <?php
+                        echo form_checkbox("can_manage_all_invoices", "1", $can_manage_all_invoices ? true : false, "id='can_manage_all_invoices' class='manage_invoice_section form-check-input'");
+                        ?>
+                        <label for="can_manage_all_invoices"><?php echo app_lang("can_manage_all_invoices"); ?></label>
+                        </div>
+                                           
+                        <div id="invoice_permission_details_area" class="<?php echo $can_manage_all_invoices ? "hide" : ""; ?>">
+                            <div class="hide">
+                                <?php
+                                echo form_checkbox("can_create_invoices", "0", $can_create_invoices ? true : false, "id='can_create_invoices' class='manage_invoice_section form-check-input'");
+                                ?>
+                                <label for="can_create_invoices"><?php echo app_lang("can_create_invoices"); ?></label>
+                            </div>
+                            <div>
+                                <?php
+                                echo form_checkbox("can_edit_invoices", "1", $can_edit_invoices ? true : false, "id='can_edit_invoices' class='manage_invoice_section form-check-input'");
+                                ?>
+                                <label for="can_edit_invoices"><?php echo app_lang("can_edit_invoices"); ?></label>
+                            </div>
+                            <div>
+                                <?php
+                                echo form_checkbox("can_delete_invoices", "1", $can_delete_invoices ? true : false, "id='can_delete_invoices' class='manage_invoice_section form-check-input'");
+                                ?>
+                                <label for="can_delete_invoices"><?php echo app_lang("can_delete_invoices"); ?></label>
+                            </div>
+                        </div>
+                         <div>
+                                <?php
+                                echo form_checkbox("do_not_show_incomesharing", "1", $do_not_show_incomesharing ? true : false, "id='do_not_show_incomesharing' class='manage_invoice_section form-check-input'");
+                                ?>
+                                <label for="do_not_show_incomesharing"><?php echo app_lang("do_not_show_incomesharing"); ?></label>
+                        </div>
+
+                        <div>
                             <?php
                             if (is_null($invoice)) {
                                 $invoice = "";
@@ -493,12 +527,12 @@
                                 "id" => "invoice_no",
                                 "name" => "invoice_permission",
                                 "value" => "",
-                                "class" => "form-check-input",
+                                "class" => "hide form-check-input",
                                     ), $invoice, ($invoice === "") ? true : false);
                             ?>
-                            <label for="invoice_no"><?php echo app_lang("no"); ?> </label>
+                            <!-- <label for="invoice_no hide"><?php echo app_lang("no"); ?> </label> -->
                         </div>
-                        <div>
+                       <!--  <div>
                             <?php
                             echo form_radio(array(
                                 "id" => "invoice_yes",
@@ -508,8 +542,8 @@
                                     ), $invoice, ($invoice === "all") ? true : false);
                             ?>
                             <label for="invoice_yes"><?php echo app_lang("yes"); ?></label>
-                        </div>
-                        <div>
+                        </div> -->
+                       <!--  <div>
                             <?php
                             echo form_radio(array(
                                 "id" => "invoice_read_only",
@@ -519,6 +553,37 @@
                                     ), $invoice, ($invoice === "read_only") ? true : false);
                             ?>
                             <label for="invoice_read_only"><?php echo app_lang("read_only"); ?></label>
+                        </div> -->
+                    </li>
+                <?php } ?>
+                                <?php if (get_setting("module_expense")) { ?>
+                    <li>
+                        <span data-feather="key" class="icon-14 ml-20"></span>
+                        <h5><?php echo app_lang("can_access_expenses"); ?></h5>
+                        <div>
+                            <?php
+                            if (is_null($expense)) {
+                                $expense = "";
+                            }
+                            echo form_radio(array(
+                                "id" => "expense_no",
+                                "name" => "expense_permission",
+                                "value" => "",
+                                "class" => "form-check-input",
+                                    ), $expense, ($expense === "") ? true : false);
+                            ?>
+                            <label for="expense_no"><?php echo app_lang("no"); ?> </label>
+                        </div>
+                        <div>
+                            <?php
+                            echo form_radio(array(
+                                "id" => "expense_yes",
+                                "name" => "expense_permission",
+                                "value" => "all",
+                                "class" => "form-check-input",
+                                    ), $expense, ($expense === "all") ? true : false);
+                            ?>
+                            <label for="expense_yes"><?php echo app_lang("yes"); ?></label>
                         </div>
                     </li>
                 <?php } ?>
@@ -626,37 +691,7 @@
                         </div>
                     </li>
                 <?php } ?>
-                <?php if (get_setting("module_expense")) { ?>
-                    <li>
-                        <span data-feather="key" class="icon-14 ml-20"></span>
-                        <h5><?php echo app_lang("can_access_expenses"); ?></h5>
-                        <div>
-                            <?php
-                            if (is_null($expense)) {
-                                $expense = "";
-                            }
-                            echo form_radio(array(
-                                "id" => "expense_no",
-                                "name" => "expense_permission",
-                                "value" => "",
-                                "class" => "form-check-input",
-                                    ), $expense, ($expense === "") ? true : false);
-                            ?>
-                            <label for="expense_no"><?php echo app_lang("no"); ?> </label>
-                        </div>
-                        <div>
-                            <?php
-                            echo form_radio(array(
-                                "id" => "expense_yes",
-                                "name" => "expense_permission",
-                                "value" => "all",
-                                "class" => "form-check-input",
-                                    ), $expense, ($expense === "all") ? true : false);
-                            ?>
-                            <label for="expense_yes"><?php echo app_lang("yes"); ?></label>
-                        </div>
-                    </li>
-                <?php } ?>
+
 
                 <li>
                     <span data-feather="key" class="icon-14 ml-20"></span>
@@ -1099,9 +1134,18 @@
             }
         });
 
+         $("#can_manage_all_invoices").click(function () {
+            if ($(this).is(":checked")) {
+                $("#invoice_permission_details_area").addClass("hide");
+            } else {
+                $("#invoice_permission_details_area").removeClass("hide");
+            }
+        });
+
         var manageProjectSection = "#can_manage_all_projects, #can_create_projects, #can_edit_projects, #can_delete_projects, #can_add_remove_project_members, #can_create_tasks";
         var manageAssignedTasks = "#show_assigned_tasks_only, #can_update_only_assigned_tasks_status";
         var manageAssignedTasksSection = "#show_assigned_tasks_only_section, #can_update_only_assigned_tasks_status_section";
+        var manageInvoiceSection = "#can_manage_all_invoices, #can_delete_invoices,#can_create_invoices,#can_edit_invoices,#do_not_show_incomesharing";
 
         if ($(manageProjectSection).is(':checked')) {
             $(manageAssignedTasksSection).addClass("hide");
@@ -1127,6 +1171,13 @@
 
         $('.manage_project_section').change(function () {
             var checkedStatus = $('.manage_project_section:checkbox:checked').length > 0;
+            if (!checkedStatus) {
+                $(manageAssignedTasksSection).removeClass("hide");
+            }
+        }).change();
+
+        $('.manage_invoice_section').change(function () {
+            var checkedStatus = $('.manage_invoice_section:checkbox:checked').length > 0;
             if (!checkedStatus) {
                 $(manageAssignedTasksSection).removeClass("hide");
             }

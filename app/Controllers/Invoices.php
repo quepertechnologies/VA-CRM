@@ -612,7 +612,7 @@ class Invoices extends Security_Controller
 
     function delete()
     {
-        if (!$this->can_edit_invoices()) {
+        if (!$this->can_delete_invoices()) {
             app_redirect("forbidden");
         }
 
@@ -710,7 +710,7 @@ class Invoices extends Security_Controller
         if (!$this->can_view_invoices($client_id)) {
             app_redirect("forbidden");
         }
-
+        
         validate_numeric_value($client_id);
         $custom_fields = $this->Custom_fields_model->get_available_fields_for_table("invoices", $this->login_user->is_admin, $this->login_user->user_type);
 
@@ -726,7 +726,7 @@ class Invoices extends Security_Controller
 
         //don't show draft invoices to client
         if ($this->login_user->user_type == "client") {
-            $options["exclude_draft"] = true;
+            //$options["exclude_draft"] = true;
         }
 
         $client_info = $this->Clients_model->get_one($client_id);
@@ -1100,6 +1100,10 @@ class Invoices extends Security_Controller
 
     function income_sharing()
     {
+        if (!$this->can_manage_incomesharing()) {
+            app_redirect("forbidden");
+        }
+
         $view_data["conversion_rate"] = $this->get_conversion_rate_with_currency_symbol();
         $view_data['team_member_dropdown'] = $this->get_team_members_dropdown(false, 'Paid By');
         $view_data['partners_dropdown'] = $this->get_partners_members_dropdown('subagent,referral', 'Partner');
@@ -1114,7 +1118,7 @@ class Invoices extends Security_Controller
 
     function income_list_data($status = 'not_initiated,initiated,claimed')
     {
-        if (!$this->can_view_invoices()) {
+        if (!$this->can_manage_incomesharing()) {
             app_redirect("forbidden");
         }
 
@@ -1276,11 +1280,13 @@ class Invoices extends Security_Controller
     //prepare options dropdown for invoices list
     private function _make_income_options_dropdown($data)
     {
-        $delete = $data->status == 'not_initiated' && $this->login_user->user_type == 'staff' ? '<li role="presentation">' . js_anchor("<i data-feather='x' class='icon-16'></i>" . app_lang('delete'), array('title' => app_lang('delete_invoice'), "class" => "delete dropdown-item", "data-id" => $data->id, "data-action-url" => get_uri("invoices/delete_income_payment"), "data-action" => "delete-confirmation")) . '</li>' : "";
+        $delete = $data->status == 'initiated' && $this->login_user->user_type == 'staff' ? '<li role="presentation">' . js_anchor("<i data-feather='x' class='icon-16'></i>" . app_lang('delete'), array('title' => app_lang('delete_invoice'), "class" => "delete dropdown-item", "data-id" => $data->id, "data-action-url" => get_uri("invoices/delete_income_payment"), "data-action" => "delete-confirmation")) . '</li>' : "";
 
         $mark_as_initiated = $data->status == 'not_initiated' ? '<li role="presentation">' . ajax_anchor(get_uri("invoices/change_income_status"), "<i data-feather='refresh-ccw' class='icon-16'></i> " . app_lang('mark_as_initiated'), array("title" => app_lang('mark_as_initiated'), "data-post-invoice_income_id" => $data->id, "data-post-status" => "initiated", "data-reload-on-success" => "1", "class" => "dropdown-item")) . '</li>' : '';
 
         $mark_as_claimed = $data->status == 'initiated' ? '<li role="presentation">' . ajax_anchor(get_uri("invoices/change_income_status"), "<i data-feather='refresh-ccw' class='icon-16'></i> " . app_lang('mark_as_claimed'), array("title" => app_lang('mark_as_claimed'), "data-post-invoice_income_id" => $data->id, "data-post-status" => "claimed", "data-reload-on-success" => "1", "class" => "dropdown-item")) . '</li>' : '';
+
+         $mark_as_unclaimed = $data->status == 'claimed' ? '<li role="presentation">' . ajax_anchor(get_uri("invoices/change_income_status"), "<i data-feather='refresh-ccw' class='icon-16'></i> " . app_lang('mark_as_unclaimed'), array("title" => app_lang('mark_as_unclaimed'), "data-post-invoice_income_id" => $data->id, "data-post-status" => "not_initiated", "data-reload-on-success" => "1", "class" => "dropdown-item")) . '</li>' : '';
 
         $add_payment = $data->status == 'claimed' ? '<li role="presentation">' . modal_anchor(get_uri("invoices/income_payment_modal_form"), "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('make_payment'), array("title" => app_lang('make_payment'), "data-post-invoice_income_id" => $data->id, "class" => "dropdown-item")) . '</li>' : '';
 
@@ -1288,7 +1294,7 @@ class Invoices extends Security_Controller
                     <button class="btn btn-default dropdown-toggle caret mt0 mb0" type="button" data-bs-toggle="dropdown" aria-expanded="true" data-bs-display="static">
                         <i data-feather="tool" class="icon-16"></i>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end" role="menu">' . $mark_as_initiated . $mark_as_claimed . $add_payment . $delete . '</ul>
+                    <ul class="dropdown-menu dropdown-menu-end" role="menu">' . $mark_as_initiated . $mark_as_claimed . $mark_as_unclaimed . $add_payment . $delete . '</ul>
                 </span>';
     }
 

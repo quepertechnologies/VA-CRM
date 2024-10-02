@@ -846,6 +846,7 @@ $lang["not_initiated"] = "Not Initiated";
 $lang["initiated"] = "Initiated";
 $lang["mark_as_initiated"] = "Mark as claimable";
 $lang["mark_as_claimed"] = "Mark as claimed";
+$lang["mark_as_unclaimed"] = "Mark as unclaimed";
 $lang["claimed"] = "Claimed";
 $lang["overdue"] = "Overdue";
 $lang["invoice_items"] = "Invoice items";
@@ -917,6 +918,12 @@ $lang["can_access_expenses"] = "Can access expenses?";
 $lang["can_access_clients_information"] = "Can access client's information?";
 $lang["can_access_tickets"] = "Can access tickets?";
 $lang["can_manage_announcements"] = "Can manage System Logs?";
+
+$lang["can_manage_all_invoices"] = "Can access invoices?";
+$lang["can_create_invoices"] = "--";
+$lang["can_edit_invoices"] = "Can create/edit invoices?";
+$lang["can_delete_invoices"] = "Can delete invoices?";
+$lang["do_not_show_incomesharing"] = "Can access income sharing?";
 
 /* timeline */
 $lang["post_placeholder_text"] = "Share an idea or documents...";

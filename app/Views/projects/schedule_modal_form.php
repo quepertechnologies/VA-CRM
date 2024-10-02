@@ -571,16 +571,17 @@
                 handleRemoveRow(rowId);
             });
 
-            $(document).on('input', '#amount,#discount', function(e) {
+            $(document).on('input','#amount','#discount', function(e) {
                 handleZeroVal(this);
                 handleTotal();
             });
 
-            $(document).on('input', '#commission', function(e) {
+
+            $(document).on('input','#amount','#commission', function(e) {
                 handleZeroVal(this, 100);
             });
 
-            $(document).on('blur', '#amount,#discount,#commission', function(e) {
+            $(document).on('blur', '#discount,#commission', function(e) {
                 handleZeroValSuffix(this);
             });
 

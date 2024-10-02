@@ -108,9 +108,13 @@ class Left_menu
             $show_payments_menu = false;
             $show_expenses_menu = false;
 
-            $sales_submenu = array();
 
-            if (get_setting("module_invoice") == "1" && ($this->ci->login_user->is_admin || $access_invoice)) {
+            $sales_submenu = array();
+            
+          //  var_dump(get_array_value($this->ci->login_user->permissions, "can_manage_all_invoices"));
+           // exit();
+
+            if (get_setting("module_invoice") == "1" && ($this->ci->login_user->is_admin || get_array_value($this->ci->login_user->permissions, "can_manage_all_invoices") == "1" || get_array_value($this->ci->login_user->permissions, "can_create_invoices") == "1" || get_array_value($this->ci->login_user->permissions, "can_edit_invoices") == "1" || get_array_value($this->ci->login_user->permissions, "can_delete_invoices") == "1")) {
                 $sales_submenu[] = array("name" => "invoices", "url" => "invoices", "class" => "file-text");
             }
 
@@ -119,7 +123,7 @@ class Left_menu
                 $sales_submenu[] = array("name" => "store", "url" => "store", "class" => "list");
             }
 
-            if (get_setting("module_invoice") == "1" && ($this->ci->login_user->is_admin || $access_invoice)) {
+            if (get_setting("module_invoice") == "1" && ($this->ci->login_user->is_admin || get_array_value($this->ci->login_user->permissions, "can_manage_all_invoices") == "1"  || get_array_value($this->ci->login_user->permissions, "can_create_invoices") == "1"  || get_array_value($this->ci->login_user->permissions, "can_edit_invoices") == "1"  || get_array_value($this->ci->login_user->permissions, "can_delete_invoices") == "1" )) {
                 $sales_submenu[] = array("name" => "invoice_payments", "url" => "invoice_payments", "class" => "dollar-sign");
                 $show_payments_menu = true;
             }
@@ -132,11 +136,11 @@ class Left_menu
                 $sales_submenu[] = array("name" => "contracts", "url" => "contracts", "class" => "lock");
             }
 
-            if (get_setting("module_invoice") == "1" && ($this->ci->login_user->is_admin || $access_invoice)) {
+            if (get_setting("module_invoice") == "1" && ($this->ci->login_user->is_admin || get_array_value($this->ci->login_user->permissions, "do_not_show_incomesharing") != NULL)) {
                 $sales_submenu[] = array("name" => "income_sharing", "url" => "invoices/income_sharing", "class" => "dollar-sign");
             }
 
-            if (count($sales_submenu)) {
+            if (count($sales_submenu) >= 1) {
                 $sidebar_menu["sales"] = array("name" => "sales", "class" => "dollar-sign", "submenu" => $sales_submenu);
             }
 
@@ -331,9 +335,9 @@ class Left_menu
 
             $sidebar_menu[] = $dashboard_menu;
 
-            if (get_setting("module_event") == "1" && !in_array("events", $hidden_menu)) {
-                $sidebar_menu[] = array("name" => "events", "url" => "events", "class" => "calendar");
-            }
+            // if (get_setting("module_event") == "1" && !in_array("events", $hidden_menu)) {
+            //     $sidebar_menu[] = array("name" => "events", "url" => "events", "class" => "calendar");
+            // }
 
             if (get_setting("module_note") == "1" && get_setting("client_can_access_notes")) {
                 $sidebar_menu[] = array("name" => "notes", "url" => "notes", "class" => "book");
@@ -344,34 +348,39 @@ class Left_menu
                 $sidebar_menu[] = array("name" => "messages", "url" => "messages", "class" => "message-circle", "badge" => count_unread_message());
             }
 
-            if (!in_array("projects", $hidden_menu)) {
-                $sidebar_menu[] = array("name" => "projects", "url" => "applications/all_applications", "class" => "command");
-            }
-
-            if (get_setting("module_contract") && !in_array("contracts", $hidden_menu)) {
-                $sidebar_menu[] = array("name" => "contracts", "url" => "contracts", "class" => "lock");
-            }
-
-            if (get_setting("module_proposal") && !in_array("proposals", $hidden_menu)) {
-                $sidebar_menu[] = array("name" => "proposals", "url" => "quotations", "class" => "file-text");
-            }
-
-            if (get_setting("module_estimate") && !in_array("estimates", $hidden_menu)) {
-                $sidebar_menu[] = array("name" => "estimates", "url" => "estimates", "class" => "trello");
-            }
-
-            if (get_setting("module_subscription") && !in_array("subscriptions", $hidden_menu)) {
-                $sidebar_menu["subscriptions"] = array("name" => "subscriptions", "url" => "subscriptions", "class" => "repeat");
-            }
-
-            if (get_setting("module_invoice") == "1") {
+             if (get_setting("module_invoice") == "1") {
                 if (!in_array("invoices", $hidden_menu)) {
                     $sidebar_menu[] = array("name" => "invoices", "url" => "invoices", "class" => "file-text");
                 }
                 if (!in_array("payments", $hidden_menu)) {
                     $sidebar_menu[] = array("name" => "invoice_payments", "url" => "invoice_payments", "class" => "dollar-sign");
+                    $sidebar_menu[] = array("name" => "income_sharing", "url" => "invoices/income_sharing", "class" => "briefcase");
                 }
             }
+            if (!in_array("projects", $hidden_menu)) {
+                $sidebar_menu[] = array("name" => "projects", "url" => "applications/all_applications", "class" => "command");
+            }
+
+            
+
+            if (get_setting("module_contract") && !in_array("contracts", $hidden_menu)) {
+                $sidebar_menu[] = array("name" => "contracts", "url" => "contracts", "class" => "lock");
+            }
+
+            // if (get_setting("module_proposal") && !in_array("proposals", $hidden_menu)) {
+            //     $sidebar_menu[] = array("name" => "proposals", "url" => "quotations", "class" => "file-text");
+            // }
+
+            // if (get_setting("module_estimate") && !in_array("estimates", $hidden_menu)) {
+            //     $sidebar_menu[] = array("name" => "estimates", "url" => "estimates", "class" => "trello");
+            // }
+
+            // if (get_setting("module_subscription") && !in_array("subscriptions", $hidden_menu)) {
+            //     $sidebar_menu["subscriptions"] = array("name" => "subscriptions", "url" => "subscriptions", "class" => "repeat");
+            // }
+
+
+
 
             if (!in_array("store", $hidden_menu) && get_setting("client_can_access_store")) {
                 $sidebar_menu[] = array("name" => "store", "url" => "store", "class" => "truck");
@@ -720,6 +729,7 @@ class Left_menu
     //position items for plugins
     private function position_items_for_default_left_menu($sidebar_menu = array())
     {
+
         foreach ($sidebar_menu as $key => $menu) {
             $position = get_array_value($menu, "position");
             if ($position) {

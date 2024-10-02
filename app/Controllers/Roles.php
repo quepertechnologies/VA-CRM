@@ -133,6 +133,12 @@ class Roles extends Security_Controller {
 
             $view_data['team_members_note_manage_permission'] = get_array_value($permissions, "team_members_note_manage_permission");
 
+            $view_data['can_manage_all_invoices'] = get_array_value($permissions, "can_manage_all_invoices");
+            $view_data['can_create_invoices'] = get_array_value($permissions, "can_create_invoices");
+            $view_data['can_edit_invoices'] = get_array_value($permissions, "can_edit_invoices");
+            $view_data['can_delete_invoices'] = get_array_value($permissions, "can_delete_invoices");
+            $view_data['do_not_show_incomesharing'] = get_array_value($permissions, "do_not_show_incomesharing");
+
             $view_data['permissions'] = $permissions;
 
             return $this->template->view("roles/permissions", $view_data);
@@ -206,6 +212,12 @@ class Roles extends Security_Controller {
             $client_specific = $this->request->getPost('client_permission_specific');
         }
 
+
+        $can_manage_all_invoices = $this->request->getPost('can_manage_all_invoices');
+        $can_create_invoices = $this->request->getPost('can_create_invoices');
+        $can_edit_invoices = $this->request->getPost('can_edit_invoices');
+        $can_delete_invoices = $this->request->getPost('can_delete_invoices');
+        $do_not_show_incomesharing = $this->request->getPost('do_not_show_incomesharing');
 
         $do_not_show_projects = $this->request->getPost('do_not_show_projects');
         $can_manage_all_projects = $this->request->getPost('can_manage_all_projects');
@@ -300,7 +312,7 @@ class Roles extends Security_Controller {
             "leave_specific" => $leave_specific,
             "attendance" => $attendance,
             "attendance_specific" => $attendance_specific,
-            "invoice" => $invoice,
+            //"invoice" => $invoice,
             "subscription" => $subscription,
             "estimate" => $estimate,
             "contract" => $contract,
@@ -313,7 +325,12 @@ class Roles extends Security_Controller {
             "ticket" => $ticket,
             "ticket_specific" => $ticket_specific,
             "announcement" => $announcement,
-            "help_and_knowledge_base" => $help_and_knowledge_base,
+            "help_and_knowledge_base" => $help_and_knowledge_base,      
+            "can_manage_all_invoices" => $can_manage_all_invoices,
+            "can_create_invoices" => $can_create_invoices,
+            "can_edit_invoices" => $can_edit_invoices,
+            "can_delete_invoices" => $can_delete_invoices,
+            "do_not_show_incomesharing" => $do_not_show_incomesharing,
             "do_not_show_projects" => $do_not_show_projects,
             "can_manage_all_projects" => $can_manage_all_projects,
             "can_create_projects" => $can_create_projects,

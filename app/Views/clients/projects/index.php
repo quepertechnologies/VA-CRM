@@ -89,7 +89,7 @@ if (!isset($project_labels_dropdown)) {
             multiSelect: [{
                 name: "status_id",
                 text: "<?php echo app_lang('status'); ?>",
-                options: <?php echo view("project_status/project_status_dropdown", array("project_statuses" => $project_statuses, "selected_status_key" => "open")); ?>
+                options: <?php echo view("project_status/project_status_dropdown", array("project_statuses" => $project_statuses, "selected_status_key" => "open,completed")); ?>
             }],
             filterDropdown: filters,
             //             columns: [
@@ -118,12 +118,12 @@ if (!isset($project_labels_dropdown)) {
                     "class": "all",
                     visible: true
                 },
-                {
-                    title: '<?php echo app_lang("deadline") ?>',
-                    "class": "w10p",
-                    "iDataSort": 2,
-                    visible: true
-                },
+                // {
+                //     title: '<?php echo app_lang("deadline") ?>',
+                //     "class": "w10p",
+                //     "iDataSort": 2,
+                //     visible: true
+                // },
                 {
                     title: '<?php echo app_lang("client") ?>',
                     "class": "w10p",

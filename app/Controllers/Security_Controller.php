@@ -39,6 +39,8 @@ class Security_Controller extends App_Controller
         //initialize login users required information
         $this->login_user = $this->Users_model->get_access_info($login_user_id);
 
+
+
         //initialize login users access permissions
         if ($this->login_user && $this->login_user->permissions) {
             $permissions = unserialize($this->login_user->permissions);
@@ -1002,7 +1004,11 @@ class Security_Controller extends App_Controller
     protected function can_view_invoices($client_id = 0)
     {
         if ($this->login_user->user_type == "staff") {
-            if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "invoice") === "all" || get_array_value($this->login_user->permissions, "invoice") === "read_only") {
+           if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "can_manage_all_invoices") == "1") {
+                return true;
+            } else if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "can_edit_invoices") == "1") {
+                return true;
+            } else if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "can_delete_invoices") == "1") {
                 return true;
             }
         } else {
@@ -1013,10 +1019,47 @@ class Security_Controller extends App_Controller
         }
     }
 
+    protected function can_manage_incomesharing($client_id = 0)
+    {
+        if ($this->login_user->user_type == "staff") {
+           if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "do_not_show_incomesharing") == "1") {
+                return true;
+        } else {
+            return false;
+                 }
+        } else {       
+            // if ($this->login_user->client_id === $client_id) {
+            if ($this->login_user->client_id) {
+                return true;
+            }
+        }
+    }
+
+    protected function can_delete_invoices($client_id = 0)
+    {
+        if ($this->login_user->user_type == "staff") {
+           if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "can_delete_invoices") == "1") {
+                return true;
+        } else {
+            return false;
+                 }
+        } else {       
+            return false;
+        }
+    }
+
     protected function can_edit_invoices()
     {
-        if ($this->login_user->user_type == "staff" && ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "invoice") === "all")) {
-            return true;
+        if ($this->login_user->user_type == "staff") {
+            if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "can_manage_all_invoices") == "1") {
+                return true;
+            } else if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "can_edit_invoices") == "1") {
+                return true;
+            } else if ($this->login_user->is_admin || get_array_value($this->login_user->permissions, "can_delete_invoices") == "1") {
+                return true;
+            }
+        } else {
+           return false;
         }
     }
 
@@ -1619,9 +1662,9 @@ class Security_Controller extends App_Controller
     {
         $invoice_info = is_object($_invoice) ? $_invoice : $this->Invoices_model->get_one($_invoice);
 
-        if (($invoice_info->va_invoice_id > 0 || $invoice_info->schedule_id) && $invoice_info->invoice_type !== 'general') {
-            return false;
-        }
+        // if (($invoice_info->va_invoice_id > 0) && $invoice_info->invoice_type !== 'general') {
+        //     return true;
+        // }
 
         if (get_setting("enable_invoice_lock_state")) {
             if (!$invoice_info->id || $is_clone) {

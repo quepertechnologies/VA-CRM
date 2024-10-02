@@ -8,9 +8,9 @@
 
     app_hooks()->do_action('app_hook_dashboard_announcement_extension');
     ?>
-    <div class="">
+    <!-- <div class="">
         <?php echo view("clients/info_widgets/index"); ?>
-    </div>
+    </div> -->
 
     <?php if (!in_array("projects", $hidden_menu)) { ?>
         <div class="">
