@@ -1587,7 +1587,7 @@ class Invoices extends Security_Controller
         $move_icon = "";
         $desc_style = "";
         if ($is_ediable) {
-            $move_icon = "<div class='float-start move-icon'><i data-feather='menu' class='icon-16'></i></div>";
+            $move_icon = "";//"<div class='float-start move-icon'><i data-feather='menu' class='icon-16'></i></div>";
             $desc_style = "style='margin-left:25px'";
         }
         $item = "<div class='item-row strong mb5' data-id='$data->id'>$move_icon $data->title</div>";
