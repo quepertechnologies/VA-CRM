@@ -1280,13 +1280,13 @@ class Invoices extends Security_Controller
     //prepare options dropdown for invoices list
     private function _make_income_options_dropdown($data)
     {
-        $delete = $data->status == 'initiated' && $this->login_user->user_type == 'staff' ? '<li role="presentation">' . js_anchor("<i data-feather='x' class='icon-16'></i>" . app_lang('delete'), array('title' => app_lang('delete_invoice'), "class" => "delete dropdown-item", "data-id" => $data->id, "data-action-url" => get_uri("invoices/delete_income_payment"), "data-action" => "delete-confirmation")) . '</li>' : "";
+        $delete = $this->login_user->user_type == 'staff' ? '<li role="presentation">' . js_anchor("<i data-feather='x' class='icon-16'></i>" . app_lang('delete'), array('title' => app_lang('delete_invoice'), "class" => "delete dropdown-item", "data-id" => $data->id, "data-action-url" => get_uri("invoices/delete_income_payment"), "data-action" => "delete-confirmation")) . '</li>' : "";
 
         $mark_as_initiated = $data->status == 'not_initiated' ? '<li role="presentation">' . ajax_anchor(get_uri("invoices/change_income_status"), "<i data-feather='refresh-ccw' class='icon-16'></i> " . app_lang('mark_as_initiated'), array("title" => app_lang('mark_as_initiated'), "data-post-invoice_income_id" => $data->id, "data-post-status" => "initiated", "data-reload-on-success" => "1", "class" => "dropdown-item")) . '</li>' : '';
 
         $mark_as_claimed = $data->status == 'initiated' ? '<li role="presentation">' . ajax_anchor(get_uri("invoices/change_income_status"), "<i data-feather='refresh-ccw' class='icon-16'></i> " . app_lang('mark_as_claimed'), array("title" => app_lang('mark_as_claimed'), "data-post-invoice_income_id" => $data->id, "data-post-status" => "claimed", "data-reload-on-success" => "1", "class" => "dropdown-item")) . '</li>' : '';
 
-         $mark_as_unclaimed = $data->status == 'claimed' ? '<li role="presentation">' . ajax_anchor(get_uri("invoices/change_income_status"), "<i data-feather='refresh-ccw' class='icon-16'></i> " . app_lang('mark_as_unclaimed'), array("title" => app_lang('mark_as_unclaimed'), "data-post-invoice_income_id" => $data->id, "data-post-status" => "not_initiated", "data-reload-on-success" => "1", "class" => "dropdown-item")) . '</li>' : '';
+         $mark_as_unclaimed = $data->status == 'claimed' ? '<li role="presentation">' . ajax_anchor(get_uri("invoices/change_income_status"), "<i data-feather='refresh-ccw' class='icon-16'></i> " . app_lang('mark_as_unclaimed'), array("title" => app_lang('mark_as_unclaimed'), "data-post-invoice_income_id" => $data->id, "data-post-status" => "initiated", "data-reload-on-success" => "1", "class" => "dropdown-item")) . '</li>' : '';
 
         $add_payment = $data->status == 'claimed' ? '<li role="presentation">' . modal_anchor(get_uri("invoices/income_payment_modal_form"), "<i data-feather='plus-circle' class='icon-16'></i> " . app_lang('make_payment'), array("title" => app_lang('make_payment'), "data-post-invoice_income_id" => $data->id, "class" => "dropdown-item")) . '</li>' : '';
 
