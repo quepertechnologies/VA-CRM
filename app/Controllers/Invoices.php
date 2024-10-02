@@ -2285,7 +2285,9 @@ class Invoices extends Security_Controller
 
             if ($view_data) {
                 $can_edit_invoices = false;
-                if ($this->can_edit_invoices() && $this->is_invoice_editable($invoice_id)) {
+                //var_dump($this->is_invoice_editable($invoice_id));
+                //exit();
+                if ($this->can_edit_invoices() || $this->is_invoice_editable($invoice_id)) {
                     $can_edit_invoices = true;
                 }
                 $view_data["can_edit_invoices"] = $can_edit_invoices;
