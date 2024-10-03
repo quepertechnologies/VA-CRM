@@ -1588,9 +1588,9 @@ class Invoices extends Security_Controller
         $desc_style = "";
         //if ($is_ediable) {
             $move_icon = "<div class='float-start move-icon'><i data-feather='menu' class='icon-16'></i></div>";
-            $desc_style = "style='margin-left:25px'";
+            $desc_style = "";
         //}
-        $item = "<div class='item-row strong mb5' data-id='$data->id'>$move_icon $data->title</div>";
+        $item = "<div class='item-row strong mb5' data-id='$data->id'>$data->title</div>";
         if ($data->description) {
             $item .= "<span class='text-wrap' $desc_style>" . nl2br($data->description) . "</span>";
         }
@@ -1637,7 +1637,7 @@ class Invoices extends Security_Controller
         }
 
         return array(
-            $data->sort,
+            $data->sort.$move_icon,
             $item,
             ucfirst($data->income_type),
             to_currency($data->rate, $cur),
