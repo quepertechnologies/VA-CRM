@@ -1322,9 +1322,9 @@ class Invoices extends Security_Controller
             app_redirect("forbidden");
         }
 
-        if (!$this->is_invoice_editable($invoice_id)) {
-            app_redirect("forbidden");
-        }
+        // if (!$this->is_invoice_editable($invoice_id)) {
+        //     app_redirect("forbidden");
+        // }
 
         $this->validate_submitted_data(array(
             "id" => "numeric"
@@ -1367,9 +1367,9 @@ class Invoices extends Security_Controller
             app_redirect("forbidden");
         }
 
-        if (!$this->is_invoice_editable($invoice_id)) {
-            app_redirect("forbidden");
-        }
+        // if (!$this->is_invoice_editable($invoice_id)) {
+        //     app_redirect("forbidden");
+        // }
 
         $id = $this->request->getPost('id');
         $rate = unformat_currency($this->request->getPost('invoice_item_rate'));
@@ -1586,10 +1586,10 @@ class Invoices extends Security_Controller
     {
         $move_icon = "";
         $desc_style = "";
-        if ($is_ediable) {
-            $move_icon = "";//"<div class='float-start move-icon'><i data-feather='menu' class='icon-16'></i></div>";
+        //if ($is_ediable) {
+            $move_icon = "<div class='float-start move-icon'><i data-feather='menu' class='icon-16'></i></div>";
             $desc_style = "style='margin-left:25px'";
-        }
+        //}
         $item = "<div class='item-row strong mb5' data-id='$data->id'>$move_icon $data->title</div>";
         if ($data->description) {
             $item .= "<span class='text-wrap' $desc_style>" . nl2br($data->description) . "</span>";
