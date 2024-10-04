@@ -577,7 +577,7 @@
             });
 
 
-            $(document).on('input','#amount','#commission', function(e) {
+            $(document).on('input','#commission', function(e) {
                 handleZeroVal(this, 100);
             });
 
