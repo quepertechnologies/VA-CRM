@@ -69,9 +69,8 @@
                     "iDataSort": 0
                 },
                 {
-                    targets: [1],
-                    visible: false,
-                    searchable: false
+                    title: "<?php echo app_lang("client") ?>",
+                    visible: true,
                 },
                 {
                     title: "<?php echo app_lang("project") ?>"

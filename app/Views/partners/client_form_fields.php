@@ -137,9 +137,6 @@
                     "name" => "tax_id_num",
                     "value" => isset($model_info->tax_id_num) ? $model_info->tax_id_num : '',
                     "class" => "form-control company_name_input_section",
-
-                    "data-rule-required" => true,
-                    "data-msg-required" => app_lang("field_required"),
                 ));
                 ?>
             </div>

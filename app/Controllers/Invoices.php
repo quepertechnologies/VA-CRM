@@ -1121,16 +1121,36 @@ class Invoices extends Security_Controller
         if (!$this->can_manage_incomesharing()) {
             app_redirect("forbidden");
         }
+        
+        //var_dump($this->login_user->client_id);
+        //exit();
+        if($this->login_user->user_type !== 'staff')
+        {
+            $options = array(
+                "only_status" => $status,
+                "bill_start_date" => $this->request->getPost("start_date"),
+                "end_date" => $this->request->getPost("end_date"),
+                "paid_by" => $this->request->getPost("paid_by"),
+                "partner_id" => $this->login_user->user_type !== 'staff' ? $this->login_user->client_id : $this->request->getPost("partner_id"),
+                "payment_method_id" => $this->request->getPost("payment_method_id"),
+                //"location_ids" => get_ltm_opl_id(false, ',')
+            );
+        }
+        else
+        {
+            $options = array(
+                "only_status" => $status,
+                "bill_start_date" => $this->request->getPost("start_date"),
+                "end_date" => $this->request->getPost("end_date"),
+                "paid_by" => $this->request->getPost("paid_by"),
+                "partner_id" => $this->login_user->user_type !== 'staff' ? $this->login_user->client_id : $this->request->getPost("partner_id"),
+                "payment_method_id" => $this->request->getPost("payment_method_id"),
+                "location_ids" => get_ltm_opl_id(false, ',')
+            ); 
+        }
 
-        $options = array(
-            "only_status" => $status,
-            "bill_start_date" => $this->request->getPost("start_date"),
-            "end_date" => $this->request->getPost("end_date"),
-            "paid_by" => $this->request->getPost("paid_by"),
-            "partner_id" => $this->login_user->user_type !== 'staff' ? $this->login_user->client_id : $this->request->getPost("partner_id"),
-            "payment_method_id" => $this->request->getPost("payment_method_id"),
-            "location_ids" => get_ltm_opl_id(false, ',')
-        );
+       // var_dump($options);
+       // exit();
 
         $all_options = append_server_side_filtering_commmon_params($options);
 

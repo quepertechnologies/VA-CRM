@@ -119,7 +119,7 @@ class Partners extends Security_Controller
         $this->validate_submitted_data(array(
             "id" => "numeric",
             "first_name" => "required",
-            "last_name" => "required"
+            //"last_name" => "required"
         ));
 
         $data = array(

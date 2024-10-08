@@ -361,6 +361,7 @@ class Students extends Security_Controller
             "label_id" => $this->request->getPost('label_id'),
             "visa_type" => $this->request->getPost('visa_type'),
             "expiry" => $this->request->getPost('expiry'),
+            "partner_id" => $this->request->getPost('partner_id'),
             'type' => 'person',
             'account_type' => '1'
         );
@@ -2451,8 +2452,8 @@ class Students extends Security_Controller
 
         $view_data['groups_dropdown'] = json_encode($this->_get_groups_dropdown_select2_data(true));
         $view_data['can_edit_clients'] = $this->can_edit_clients();
-        $view_data["team_members_dropdown"] = $this->get_team_members_dropdown(true);
-        $view_data["partners_members_dropdown"] = $this->get_partners_members_dropdown();
+        $view_data["team_members_dropdown"] = $this->get_team_members_dropdown(true,'Assignee');
+        $view_data["partners_members_dropdown"] = $this->get_partners_members_dropdown('subagent','Partner');
         $view_data["visa_types"] = $this->get_visa_types_filter_dropdown();
         $view_data['labels_dropdown'] = json_encode($this->make_labels_dropdown("client", "", true));
         $view_data['phases_dropdown'] = json_encode($this->make_phases_dropdown());

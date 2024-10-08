@@ -31,7 +31,7 @@
                 echo form_dropdown(
                     'student_onshore',
                     $list,
-                    $model_info->student_onshore ? $model_info->student_onshore : '',
+                    $model_info->student_onshore ? $model_info->student_onshore : 1,
                     "class='form-control validate-hidden' id='student-onshore' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "'"
                 );
                 ?>

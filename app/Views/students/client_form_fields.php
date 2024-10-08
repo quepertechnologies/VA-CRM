@@ -29,7 +29,7 @@
                     echo form_dropdown(
                         'student_onshore',
                         $list,
-                        $model_info->student_onshore ? $model_info->student_onshore : '',
+                        $model_info->student_onshore ? $model_info->student_onshore : 1,
                         "class='form-control validate-hidden' id='student-onshore' data-rule-required='true' data-msg-required='" . app_lang('field_required') . "'"
                     );
                     ?>
@@ -1349,7 +1349,8 @@ echo form_dropdown(
 
 <script type="text/javascript">
     $(document).ready(function() {
-
+         
+        //$("#student-onshore").val(1);
         $("#visa_2_field").show();
         $("#student-onshore, #select-phone-code, #nationality, #select-co-phone-code, #preferred_language, #currency, #timezone, #marriage_status, #country, #intended_dest_3, #intended_dest_2, #intended_dest_1, #intended_intake_year, #intended_intake_quarter, #intended_course_level, #area_of_study, #country_of_study, #lvl_of_edu").select2();
 
