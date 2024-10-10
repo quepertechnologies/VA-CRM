@@ -1708,7 +1708,7 @@ class Projects extends Security_Controller
             anchor(get_uri("projects/view/" . $data->id), $data->id),
             $title,
             //'<small>Starts: ' . $start_date . '</small><br>' . $dateline,
-            $client_name . '<br><small>' . $phone . '</small>',
+            $client_name,//'<br><small>' . $phone . '</small>',
             $lead_member_link,
             // $assignee,
             $workflow,

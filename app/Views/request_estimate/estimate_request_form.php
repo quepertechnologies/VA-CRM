@@ -26,6 +26,7 @@
         echo form_open(get_uri("request_estimate/save_estimate_request"), array("id" => "estimate-request-form", "class" => "general-form", "role" => "form"));
         echo "<input type='hidden' name='form_id' value='$model_info->id' />";
         echo "<input type='hidden' name='assigned_to' value='$model_info->assigned_to' />";
+        echo "<input type='hidden' name='json' value='0' />";
         ?>
 
         <div id="estimate-form-preview" class="card p15 no-border clearfix post-dropzone" style="max-width: 1000px; margin: auto;">

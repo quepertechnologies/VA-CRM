@@ -175,8 +175,8 @@ if (!isset($project_labels_dropdown)) {
                     visible: optionVisibility
                 }
             ],
-            printColumns: combineCustomFieldsColumns([0, 1, 2, 3, 5, 7, 9], '<?php echo $custom_field_headers; ?>'),
-            xlsColumns: combineCustomFieldsColumns([0, 1, 2, 3, 5, 7, 9], '<?php echo $custom_field_headers; ?>')
+            printColumns: combineCustomFieldsColumns([0, 2, 1, 3, 5, 7, 9], '<?php echo $custom_field_headers; ?>'),
+            xlsColumns: combineCustomFieldsColumns([0, 2, 1, 3, 5, 7, 9], '<?php echo $custom_field_headers; ?>')
         });
     });
 </script>

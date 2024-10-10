@@ -71,9 +71,9 @@ class Estimate_requests extends Security_Controller
 
         $view_data['lead_info'] = "";
 
-        if ($model_info->is_lead) {
+       // if ($model_info->is_lead) {
             $view_data['lead_info'] = $this->Clients_model->get_details(array("id" => $model_info->client_id))->getRow();
-        }
+       // }
 
 
         //hide some info from client
@@ -267,15 +267,38 @@ class Estimate_requests extends Security_Controller
         } else {
             show_404();
         }
-
-
-        $options = array("related_to_type" => "estimate_request", "related_to_id" => $id);
-        $list_data = $this->Custom_field_values_model->get_details($options)->getResult();
-
+        
         $result = array();
-        foreach ($list_data as $data) {
-            $result[] = $this->_make_estimate_request_field_row($data);
+        $count = 1;
+        if($model_info->json_status == 1)
+        {
+            $json_data = json_decode($model_info->json);
+          //  var_dump($json_data);
+           // exit();
+            foreach($json_data as $key => $value)
+            {
+                if($count > 9)
+                {
+                 $key = str_replace('_',' ',$key);
+                 $key = ucwords($key);
+                 $field = "<p class='clearfix'><i data-feather='check-circle' class='icon-16'></i><strong class=''>".$key."</strong></p>";
+                 $field .= "<div class='pl15'>".$value."</div>";
+                 $result[] = array($field,$count);
+                }
+               $count++;
+            }
         }
+        else
+        {
+            $options = array("related_to_type" => "estimate_request", "related_to_id" => $id);
+            $list_data = $this->Custom_field_values_model->get_details($options)->getResult();
+
+
+            foreach ($list_data as $data) {
+            $result[] = $this->_make_estimate_request_field_row($data);
+            }
+        }
+
         echo json_encode(array("data" => $result));
     }
 

@@ -286,8 +286,8 @@ if (isset($selected_priority_id) && $selected_priority_id) {
                     "class": "text-center option "
                 }
             ],
-            printColumns: combineCustomFieldsColumns([1, 2, 4, 6, 7, 8, 9, 10, 12], '<?php echo $custom_field_headers; ?>'),
-            xlsColumns: combineCustomFieldsColumns([1, 2, 4, 6, 7, 8, 9, 10, 12], '<?php echo $custom_field_headers; ?>'),
+            printColumns: combineCustomFieldsColumns([2, 4, 5, 6, 7, 8], '<?php echo $custom_field_headers; ?>'),
+            xlsColumns: combineCustomFieldsColumns([2, 4, 5, 6, 7, 8], '<?php echo $custom_field_headers; ?>'),
             rowCallback: tasksTableRowCallback, //load this function from the task_table_common_script.php 
             onRelaodCallback: function() {
                 hideBatchTasksBtn(true);

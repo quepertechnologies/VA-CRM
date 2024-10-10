@@ -20,7 +20,34 @@ class Request_estimate extends App_Controller
         $view_data['left_menu'] = false;
 
         $view_data["estimate_forms"] = $this->Estimate_forms_model->get_all_where(array("status" => "active", "public" => "1", "deleted" => 0))->getResult();
+
         return $this->template->rander("request_estimate/index", $view_data);
+    }
+    
+    function FreeAssessment()
+    {
+       $view_data['left_menu'] = false;
+       $view_data['topbar'] = "includes/public/topbar";
+
+       return $this->template->rander('request_estimate/free_assessment',$view_data);
+    }
+    
+    function save_free_assessment()
+    {
+        //$form_id = $this->request->getPost('form_id');
+        //$assigned_to = $this->request->getPost('assigned_to');
+
+        var_dump(json_encode($this->request->getPost()));
+        exit();
+
+        $this->validate_submitted_data(array(
+            "first_name" => "required",
+            "last_name" => "required",
+            "email" => "required",
+            "phone" => "required|numeric"
+        ));
+
+
     }
 
     function form($id = 0, $embedded = 0)
@@ -107,6 +134,18 @@ class Request_estimate extends App_Controller
         }
 
         $options = array("related_to" => "estimate_form-" . $form_id);
+
+        if($this->request->getPost('json') == 1)
+        {
+            $json_data = json_encode($this->request->getPost());
+            $json_status = 1;
+        }
+        else
+        {
+            $json_data = '';
+            $json_status = 0;
+        }
+
         $form_fields = $this->Custom_fields_model->get_details($options)->getResult();
 
         $target_path = get_setting("timeline_file_path");
@@ -124,6 +163,8 @@ class Request_estimate extends App_Controller
                 "created_at" => get_current_utc_time(),
                 "client_id" => $user_info->client_id ? $user_info->client_id : 0,
                 "lead_id" => 0,
+                "json_status" => $json_status,
+                "json" => $json_data,
                 "assigned_to" => $assigned_to ? $assigned_to : 0,
                 "status" => "new"
             );
@@ -187,6 +228,8 @@ class Request_estimate extends App_Controller
                 "created_at" => get_current_utc_time(),
                 "client_id" => $lead_id,
                 "lead_id" => 0,
+                "json_status" => $json_status,
+                "json" => $json_data,
                 "assigned_to" => $assigned_to ? $assigned_to : 0,
                 "status" => "new"
             );
