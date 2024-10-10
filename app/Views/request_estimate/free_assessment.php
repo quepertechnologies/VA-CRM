@@ -85,7 +85,7 @@
                 </div>
                 <section id="student_visa_section" class="hide">
                    <hr>    
-                   <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                   <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <h6>Are you inside Australia or outside?</h6>
                     <select id="location" name="location" class="form-control" required>
                         <option value="">Please select</option>
@@ -95,13 +95,13 @@
                 </div>
 
                 <!-- Date of Entry -->
-                <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <h6>When did you first come to Australia?</h6>
                     <input type="date" id="arrival-date" name="arrival_date" class="form-control" placeholder="DD-MM-YYYY" required>
                 </div>
 
                 <!-- New Student Visa Application Dropdown -->
-                <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
                  <h6>Is this a new Student Visa Application?</h6>
                  <select id="new_student_visa" class="form-control" name="new_student_visa" required>
                     <option value="">Please select</option>
@@ -111,7 +111,7 @@
             </div>
 
             <!-- Educational Background -->
-            <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
+            <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
                 <h6>Please share your qualifications and how they prepare you for your chosen course in Australia:</h6>
                 <div>
                     <textarea class="form-control"></textarea>
@@ -150,7 +150,7 @@
         </div>
 
         <br><!-- Financial Planning Dropdown -->
-        <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
+        <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <h6 for="financial_plan">Are you prepared to spend at least 10k to 15k AUD on your studies and do you have a bank balance of at least 40k AUD?</h6>
             <select id="financial_plan" name="financial_plan" class="form-control" required>
                 <option value="">Please select</option>
@@ -160,7 +160,7 @@
         </div>
 
         <!-- Motivation -->
-        <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
+        <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
             <h6>What motivates you to study in Australia and what do you envision doing after your studies?</h6>
             <div>
               <textarea class="form-control"></textarea>
@@ -168,7 +168,7 @@
       </div>
 
       <!-- Health Check and Legal Record Dropdown -->
-      <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
+      <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <h6 for="health_legal">Have you recently had a health check-up and do you have a clean legal record?</h6>
         <select id="health_legal" name="health_legal" class="form-control" required>
             <option value="">Please select</option>
@@ -178,7 +178,7 @@
     </div>
 
     <!-- Plan for Student Visa Dropdown -->
-    <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
+    <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <h6 for="visa_plan">When do you plan to apply for your student visa?</h6>
         <select id="visa_plan" name="visa_plan" class="form-control" required>
             <option value="">Please select</option>
@@ -195,6 +195,8 @@
     <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
         <h4>The points test is a critical component of Australia’s skilled migration program, designed to select applicants who have the skills and attributes beneficial to the Australian economy.</h4>
         <p>Please start answering the questions below to the best of your knowledge to know your eligibility.</p>
+        <p style="float:right; font-size: 24px;">Your Points: <span><font color="red" id="points">0</font></span></p>
+        <br>
     </div>
 
     <!-- Age Range -->
@@ -331,7 +333,7 @@
     </div>
 
     <!-- Points Calculation -->
-    <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
+    <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12 hide">
         <h6>Calculation</h6>
         <input type="number" class="form-control" id="calculation" name="calculation" placeholder="To be eligible you need to score greater than 60 points" required>
     </div>
@@ -418,6 +420,291 @@
 
 <script type="text/javascript">
     $( document ).ready(function() {
+    var agepoints = 0;
+    var finalpoints = 0;
+    var education_level = 0;
+    var degree = 0;
+
+    $("#education_level").change(function()
+    {
+      updatePoints();
+    }); 
+
+    $("#age_range").change(function()
+    {  
+      updatePoints();
+    }); 
+
+    $("#degree_from_australia").change(function()
+    { 
+      updatePoints();
+    });  
+
+    $("#regional_study").change(function()
+    { 
+      updatePoints();
+    });
+
+    $("#masters_degree").change(function()
+    { 
+      updatePoints();
+    });
+
+    $("#nominated_occupation_experience").change(function()
+    { 
+      updatePoints();
+    });
+
+    $("#nominated_experience").change(function()
+    { 
+      updatePoints();
+    });
+
+    $("#english_ability").change(function()
+    { 
+      updatePoints();
+    }); 
+
+    $("#partner_skills").change(function()
+    { 
+      updatePoints();
+    });
+
+    $("#naati_accreditation").change(function()
+    { 
+      updatePoints();
+    }); 
+
+    $("#professional_program").change(function()
+    { 
+      updatePoints();
+    });
+
+    $("#visa_subclass").change(function()
+    { 
+      updatePoints();
+    }); 
+
+    function updatePoints()
+    { 
+      finalpoints = 0;  
+      var ageValue = $('#age_range').find(":selected").val();
+      if(ageValue == '18_to_24')
+      {
+        agepoints = 25;
+      }
+      else if(ageValue == '25_to_32')
+      {
+        agepoints = 30;
+      }
+      else if(ageValue == '33_to_39')
+      {
+       agepoints = 25;
+      }
+      else if(ageValue == '40_to_44')
+      {
+       agepoints = 15;
+      }
+      else
+      {
+       agepoints = 0;
+      }
+
+      var VisaType = $('#visa_subclass').find(":selected").val();
+      if(VisaType == 'subclass_189')
+      {
+        VisaPoints = 0;
+      }
+      else if(VisaType == 'subclass_190')
+      {
+        VisaPoints = 5;
+      }
+      else if(VisaType == 'subclass_491')
+      {
+       VisaPoints = 15;
+      }
+      else
+      {
+       VisaPoints = 0;
+      }
+
+      var nomValue = $('#nominated_occupation_experience').find(":selected").val();
+      if(nomValue == '8_years_more')
+      {
+        nompoints = 15;
+      }
+      else if(nomValue == '5_years_more')
+      {
+        nompoints = 10;
+      }
+      else if(nomValue == '3_years_more')
+      {
+       nompoints = 05;
+      }
+      else if(nomValue == 'less_than_3_years')
+      {
+       nompoints = 0;
+      }
+      else
+      {
+       nompoints = 0;
+      }
+
+      var nomeValue = $('#nominated_experience').find(":selected").val();
+      if(nomeValue == '8_years_more')
+      {
+        nomepoints = 20;
+      }
+      else if(nomeValue == '5_years_more')
+      {
+        nomepoints = 15;
+      }
+      else if(nomeValue == '3_years_more')
+      {
+       nomepoints = 10;
+      }
+      else if(nomeValue == '1_year_more')
+      {
+       nomepoints = 5;
+      }
+      else
+      {
+       nomepoints = 0;
+      }
+
+      var eduValue = $('#education_level').find(":selected").val();
+      if(eduValue == 'phd')
+      {
+        education_level = 20;
+      }
+      else if(eduValue == 'bachelor')
+      {
+        education_level = 15;
+      }
+      else if(eduValue == 'diploma')
+      {
+       education_level = 10;
+      }
+      else if(eduValue == 'no_qualification')
+      {
+       education_level = 0;
+      }
+      else
+      {
+       education_level = 0;
+      }
+
+      var degreeValue = $('#degree_from_australia').find(":selected").val();
+      if(degreeValue == 'yes')
+      {
+        degree = 5;
+      }
+      else if(degreeValue == 'no')
+      {
+        degree = 0;
+      }
+      else
+      {
+       degree = 0;
+      }
+
+      var englishValue = $('#english_ability').find(":selected").val();
+      if(englishValue == 'competent')
+      {
+        engpoint = 0;
+      }
+      else if(englishValue == 'proficient')
+      {
+        engpoint = 10;
+      }
+      else if(englishValue == 'superior')
+      {
+        engpoint = 20;
+      }
+      else
+      {
+       engpoint = 0;
+      }
+
+      var englishPValue = $('#partner_skills').find(":selected").val();
+      if(englishPValue == 'meet_all_criteria')
+      {
+        engPpoint = 10;
+      }
+      else if(englishPValue == 'competent_english')
+      {
+        engPpoint = 5;
+      }
+      else if(englishPValue == 'australian_citizen')
+      {
+        engPpoint = 10;
+      }
+      else
+      {
+       engPpoint = 0;
+      }
+
+      var regValue = $('#regional_study').find(":selected").val();
+      if(regValue == 'yes')
+      {
+        regpoint = 5;
+      }
+      else if(regValue == 'no')
+      {
+        regpoint = 0;
+      }
+      else
+      {
+       regpoint = 0;
+      } 
+
+      var programValue = $('#professional_program').find(":selected").val();
+      if(programValue == 'yes')
+      {
+        programpoint = 5;
+      }
+      else if(programValue == 'no')
+      {
+        programpoint = 0;
+      }
+      else
+      {
+       programpoint = 0;
+      }  
+
+      var naatiValue = $('#naati_accreditation').find(":selected").val();
+      if(naatiValue == 'yes')
+      {
+        naatipoint = 5;
+      }
+      else if(naatiValue == 'no')
+      {
+        naatipoint = 0;
+      }
+      else
+      {
+       naatipoint = 0;
+      }  
+
+      var masterValue = $('#masters_degree').find(":selected").val();
+      if(masterValue == 'yes')
+      {
+        masterpoint = 10;
+      }
+      else if(masterValue == 'no')
+      {
+        masterpoint = 0;
+      }
+      else
+      {
+       masterpoint = 0;
+      }  
+
+      finalpoints = agepoints + education_level + degree + regpoint + masterpoint + nompoints + nomepoints + engpoint + engPpoint + naatipoint + programpoint + VisaPoints;
+      //alert(finalpoints);
+      $( "#points" ).html(finalpoints);
+      $("#calculation").val(finalpoints);
+    }
 
     $("#free_assessment").appForm({
             isModal: false,
