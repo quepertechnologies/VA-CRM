@@ -17,6 +17,7 @@ class Projects extends Security_Controller
         parent::__construct();
         if ($this->has_all_projects_restricted_role()) {
             app_redirect("forbidden");
+            //Test
         }
 
         $this->Project_settings_model = model('App\Models\Project_settings_model');
