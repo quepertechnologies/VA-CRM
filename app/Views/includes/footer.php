@@ -7,7 +7,7 @@
             ?>
 
             <div class="float-start">
-                <?php echo $footer_copyright_text; ?>
+                <?php echo $footer_copyright_text; ?> - Proudly Developed & Maintained by<a href="https://queper.com.au"><b>Queper Technologies</b></a>
             </div>
 
         <?php } ?>
