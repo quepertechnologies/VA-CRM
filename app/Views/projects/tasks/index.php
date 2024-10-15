@@ -174,7 +174,10 @@ foreach ($task_statuses as $status) {
                 },
                  {
                     title: '<?php echo app_lang("title") ?>',
-                    class: "w300",
+                    class: "w200",
+                },
+                {
+                    title: '<?php echo app_lang("labels") ?>',
                 },
                 {
                     title: '<?php echo app_lang("client") ?>',
@@ -233,8 +236,8 @@ foreach ($task_statuses as $status) {
                     "class": "text-center option "
                 }
             ],
-                printColumns: combineCustomFieldsColumns([1, 2, 4, 6, 7, 9, 10, 12], '<?php echo $custom_field_headers; ?>'),
-                xlsColumns: combineCustomFieldsColumns([1, 2, 4, 6, 8, 9, 10], '<?php echo $custom_field_headers; ?>'),
+                printColumns: combineCustomFieldsColumns([2, 3 , 4, 5, 6, 7, 8, 9], '<?php echo $custom_field_headers; ?>'),
+                xlsColumns: combineCustomFieldsColumns([2, 3 , 4, 5, 6, 7, 8, 9], '<?php echo $custom_field_headers; ?>'),
                 rowCallback: tasksTableRowCallback, //load this function from the task_table_common_script.php 
                 onRelaodCallback: function () {
                     hideBatchTasksBtn();

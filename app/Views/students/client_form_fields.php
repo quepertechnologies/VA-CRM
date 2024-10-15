@@ -219,7 +219,6 @@
                             "name" => "visa_2",
                             "value" => isset($model_info->visa_2) ? $model_info->visa_2 : '',
                             "class" => "form-control select2",
-                            "required" => "required"
                         ));
                         ?>
                     </div>

@@ -1340,6 +1340,8 @@ class Tasks extends Security_Controller
         $unread_comments_class = "";
         $icon = "";
         $client = "N/A";
+        $task_labels_html = "";
+        $task_labels = "";
         if (isset($data->unread) && $data->unread && $data->unread != "0") {
             $unread_comments_class = "unread-comments-of-tasks";
             $icon = "<i data-feather='message-circle' class='icon-16 ml5 unread-comments-of-tasks-icon'></i>";
@@ -1377,17 +1379,18 @@ class Tasks extends Security_Controller
         }
         $title .= "<span class='float-end ml5'>" . $task_point . "</span>";
 
+        
+        $task_labels = make_labels_view_data($data->labels_list, true);
+
+        $task_labels_html .= "<span class=''>" . $task_labels . "</span>";
+
         if ($data->priority_id) {
-            $title .= "<br><span class='' title='" . app_lang('priority') . ": " . $data->priority_title . "'>
+            $task_labels_html .= "<span class='' title='" . app_lang('priority') . ": " . $data->priority_title . "'>
                             <span class='sub-task-icon priority-badge' style='background: $data->priority_color'><i data-feather='$data->priority_icon' class='icon-14'></i></span> $toggle_sub_task_icon
                       </span>";
         } else {
-            $title .= "<br>";
-        }
-
-        $task_labels = make_labels_view_data($data->labels_list, true);
-
-        $title .= "<span class=''>" . $task_labels . "</span>";
+            $task_labels_html .= "<br>";
+        }     
 
         // if ($data->project_id) {
         //     $context_title = anchor(get_uri("projects/view/" . $data->project_id), $data->project_title ? $data->project_title : "");
@@ -1516,6 +1519,7 @@ class Tasks extends Security_Controller
             $data->status_color,
             $check_status,
             $title,
+            $task_labels_html,
             $client,
             $data->deadline,
             "<small>" . $start_date . "</small><br>" . $deadline_text,
