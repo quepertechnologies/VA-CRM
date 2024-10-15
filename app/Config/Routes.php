@@ -39,6 +39,8 @@ $routes->get('VAForms/(:any)', 'Request_estimate::form/$1');
 
 $routes->get('FreeAssessment', 'Request_estimate::FreeAssessment');
 
+$routes->get('FreeAssessment/(:any)/(:any)', 'Request_estimate::FreeAssessment/$1/$1');
+
 //add routing for controllers
 $excluded_controllers = array("About", "App_Controller", "Security_Controller");
 $controller_dropdown = array();

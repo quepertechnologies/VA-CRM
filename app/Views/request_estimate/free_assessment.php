@@ -13,8 +13,9 @@
              <small>The form is designed to assess and determine the appropriate Visa Subclass for applicants based on their eligibility criteria</small>
               <?php echo form_open("request_estimate/save_estimate_request", array("id" => "free_assessment", "class" => "general-form", "role" => "form")); 
               
-              echo "<input type='hidden' name='form_id' value='14' />";
-              echo "<input type='hidden' name='assigned_to' value='7114' />";
+              echo "<input type='hidden' name='form_id' value='$model_info->id' />";
+              echo "<input type='hidden' name='assigned_to' value='$model_info->assigned_to' />";
+              echo "<input type='hidden' name='location_id' value='$model_info->location_id' />";
               echo "<input type='hidden' name='json' value='1' />";
 
               ?>
@@ -124,28 +125,28 @@
             <br>
             <div class="row">
                 <div class="col-md-3">
-                    <input type="number" class="form-control" name="reading_score" placeholder="Reading">
+                    <input type="number" class="form-control" name="reading_score" placeholder="Reading" required>
                 </div>
                 <div class="col-md-3">
-                    <input type="number" class="form-control" name="listening_score" placeholder="Listening">
+                    <input type="number" class="form-control" name="listening_score" placeholder="Listening" required>
                 </div>
                 <div class="col-md-3">
-                    <input type="number" class="form-control" name="speaking_score" placeholder="Speaking">
+                    <input type="number" class="form-control" name="speaking_score" placeholder="Speaking" required>
                 </div>
                 <div class="col-md-3">
-                    <input type="number" class="form-control" name="writing_score" placeholder="Writing">
+                    <input type="number" class="form-control" name="writing_score" placeholder="Writing" required>
                 </div>
             </div>
             <br>
             <div class="row">
                <div class="col-md-4">
                 <label>Overall Score</label>
-                <input type="number" class="form-control" name="overall_score">
+                <input type="number" class="form-control" name="overall_score" required>
             </div>
 
             <div class="col-md-4">
                 <label>Test Date</label>
-                <input type="date" id="test-date" class="form-control" name="test_date" placeholder="DD-MM-YYYY">
+                <input type="date" id="test-date" class="form-control" name="test_date" placeholder="DD-MM-YYYY" required>
             </div>
         </div>
 

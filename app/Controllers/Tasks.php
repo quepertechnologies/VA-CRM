@@ -1339,6 +1339,7 @@ class Tasks extends Security_Controller
     {
         $unread_comments_class = "";
         $icon = "";
+        $client = "N/A";
         if (isset($data->unread) && $data->unread && $data->unread != "0") {
             $unread_comments_class = "unread-comments-of-tasks";
             $icon = "<i data-feather='message-circle' class='icon-16 ml5 unread-comments-of-tasks-icon'></i>";
@@ -1367,7 +1368,7 @@ class Tasks extends Security_Controller
         $client_full_name = get_array_value($view_data, 'client_full_name');
 
         if ($client_id) {
-            $title .= '<br>Client Name: <b>' . anchor(get_uri("clients/view/" . $client_id), $client_full_name) . '</b><br>';
+            $client = anchor(get_uri("clients/view/" . $client_id), $client_full_name);
         }
 
         $task_point = "";
@@ -1515,6 +1516,7 @@ class Tasks extends Security_Controller
             $data->status_color,
             $check_status,
             $title,
+            $client,
             $data->deadline,
             "<small>" . $start_date . "</small><br>" . $deadline_text,
             // $data->deadline,

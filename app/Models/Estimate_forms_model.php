@@ -20,6 +20,11 @@ class Estimate_forms_model extends Crud_model {
             $where .= " AND $estimate_forms_table.id=$id";
         }
 
+        $location_ids = $this->_get_clean_value($options, "location_ids");
+        if ($location_ids) {
+            $where .= " AND $estimate_forms_table.location_id IN ($location_ids)";
+        }
+
 
         $sql = "SELECT $estimate_forms_table.*
         FROM $estimate_forms_table

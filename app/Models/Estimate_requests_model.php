@@ -41,6 +41,11 @@ class Estimate_requests_model extends Crud_model
             $where .= " AND $estimate_requests_table.assigned_to=$assigned_to";
         }
 
+        $location_ids = $this->_get_clean_value($options, "location_ids");
+        if ($location_ids) {
+            $where .= " AND $estimate_forms_table.location_id IN ($location_ids)";
+        }
+
         $is_archived = $this->_get_clean_value($options, "is_archived");
         if ($is_archived) {
             $where .= " AND $estimate_requests_table.is_archived='$is_archived'";

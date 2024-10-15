@@ -24,12 +24,25 @@ class Request_estimate extends App_Controller
         return $this->template->rander("request_estimate/index", $view_data);
     }
     
-    function FreeAssessment()
+    function FreeAssessment($id = 0, $assigned_to = 0)
     {
        $view_data['left_menu'] = false;
        $view_data['topbar'] = "includes/public/topbar";
+       
+       if($id == 0)
+       {
+         $id = 11;
+         $assigned_to = 7114;
+       }
 
-       return $this->template->rander('request_estimate/free_assessment',$view_data);
+       $model_info = $this->Estimate_forms_model->get_one_where(array("id" => $id, "public" => "1", "status" => "active", "deleted" => 0));
+
+       if (get_setting("module_estimate_request") && $model_info->id) {
+            $view_data['model_info'] = $model_info;
+            return $this->template->rander('request_estimate/free_assessment',$view_data);
+        } else {
+            show_404();
+        }
     }
     
     function save_free_assessment()
@@ -107,11 +120,13 @@ class Request_estimate extends App_Controller
     {
         $form_id = $this->request->getPost('form_id');
         $assigned_to = $this->request->getPost('assigned_to');
+        $location_id = $this->request->getPost('location_id');
 
         $this->validate_submitted_data(array(
             "first_name" => "required",
             "last_name" => "required",
             "email" => "required",
+            "location_id" => "required|numeric",
             "form_id" => "required|numeric"
         ));
 
@@ -159,6 +174,7 @@ class Request_estimate extends App_Controller
             //created by existing client/lead
             $request_data = array(
                 "estimate_form_id" => $form_id,
+                "location_id" => $location_id,
                 "created_by" => $user_info->id,
                 "created_at" => get_current_utc_time(),
                 "client_id" => $user_info->client_id ? $user_info->client_id : 0,
@@ -224,6 +240,7 @@ class Request_estimate extends App_Controller
 
             $request_data = array(
                 "estimate_form_id" => $form_id,
+                "location_id" => $location_id,
                 "created_by" => $lead_contact_id,
                 "created_at" => get_current_utc_time(),
                 "client_id" => $lead_id,

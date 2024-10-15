@@ -42,6 +42,24 @@
                 </div>
             </div>
         </div>
+
+        <div class="form-group">       
+            <div class="row">
+               <label for="description" class=" col-md-3"><?php echo app_lang('location'); ?></label>
+                <div class="col-md-9">
+                    <?php
+                    echo form_input(array(
+                        "id" => "location_id",
+                        "name" => "location_id",
+                        "value" => isset($model_info->location_id) ? $model_info->location_id : '',
+                        "class" => "form-control",
+                        "data-rule-required" => true,
+                        "data-msg-required" => app_lang("field_required")
+                    ));
+                    ?>
+                </div>
+        </div></div>
+
         <div class="form-group">
             <div class="row">
                 <label for="status" class=" col-md-3"><?php echo app_lang('status'); ?></label>
@@ -113,6 +131,10 @@
         });
 
         $("#estimate-form .select2").select2();
+
+        $('#location_id').select2({
+                data: <?php echo json_encode($locations_dropdown); ?>
+         });
 
     });
 </script>

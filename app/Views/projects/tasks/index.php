@@ -172,10 +172,12 @@ foreach ($task_statuses as $status) {
                     "class": idColumnClass,
                     order_by: "id"
                 },
-                {
+                 {
                     title: '<?php echo app_lang("title") ?>',
                     class: "w300",
-                    order_by: "title"
+                },
+                {
+                    title: '<?php echo app_lang("client") ?>',
                 },
                 {
                     visible: false,

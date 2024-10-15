@@ -107,7 +107,7 @@ class Estimate_requests extends Security_Controller
     {
         $this->access_only_allowed_members();
 
-        $options = array("assigned_to" => $this->request->getPost("assigned_to"), "status" => $this->request->getPost("status"), 'is_archived' => $is_archived);
+        $options = array("location_ids" => get_ltm_opl_id(false, ','), "assigned_to" => $this->request->getPost("assigned_to"), "status" => $this->request->getPost("status"), 'is_archived' => $is_archived);
         $list_data = $this->Estimate_requests_model->get_details($options)->getResult();
         $result = array();
         foreach ($list_data as $data) {
@@ -331,6 +331,7 @@ class Estimate_requests extends Security_Controller
 
         //prepare assign to list
         $assigned_to_dropdown = array("" => "-") + $this->Users_model->get_dropdown_list(array("first_name", "last_name"), "id", array("deleted" => 0, "user_type" => "staff"));
+        $view_data["locations_dropdown"] = $this->get_locations_dropdown_for_filter("Location");
         $view_data['assigned_to_dropdown'] = $assigned_to_dropdown;
 
         return $this->template->view('estimate_requests/estimate_request_modal_form', $view_data);
@@ -361,6 +362,7 @@ class Estimate_requests extends Security_Controller
             "status" => $this->request->getPost('status'),
             "assigned_to" => $this->request->getPost('assigned_to'),
             "public" => $public ? 1 : 0,
+            "location_id" => $this->request->getPost('location_id'),
             "enable_attachment" => $enable_attachment ? 1 : 0
         );
 
@@ -402,8 +404,10 @@ class Estimate_requests extends Security_Controller
     function estimate_forms_list_data()
     {
         $this->access_only_allowed_members();
+        
+        $options = array("location_ids" => get_ltm_opl_id(false, ','));
 
-        $list_data = $this->Estimate_forms_model->get_details()->getResult();
+        $list_data = $this->Estimate_forms_model->get_details($options)->getResult();
         $result = array();
         foreach ($list_data as $data) {
             $result[] = $this->_make_form_row($data);

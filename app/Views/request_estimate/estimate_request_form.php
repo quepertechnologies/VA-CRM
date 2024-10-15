@@ -26,6 +26,7 @@
         echo form_open(get_uri("request_estimate/save_estimate_request"), array("id" => "estimate-request-form", "class" => "general-form", "role" => "form"));
         echo "<input type='hidden' name='form_id' value='$model_info->id' />";
         echo "<input type='hidden' name='assigned_to' value='$model_info->assigned_to' />";
+        echo "<input type='hidden' name='location_id' value='$model_info->location_id' />";
         echo "<input type='hidden' name='json' value='0' />";
         ?>
 
