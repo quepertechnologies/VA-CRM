@@ -331,7 +331,7 @@ class Estimate_requests extends Security_Controller
 
         //prepare assign to list
         $assigned_to_dropdown = array("" => "-") + $this->Users_model->get_dropdown_list(array("first_name", "last_name"), "id", array("deleted" => 0, "user_type" => "staff"));
-        $view_data["locations_dropdown"] = $this->get_locations_dropdown_for_filter("Location");
+        $view_data["locations_dropdown"] = $this->make_locations_dropdown("Location");
         $view_data['assigned_to_dropdown'] = $assigned_to_dropdown;
 
         return $this->template->view('estimate_requests/estimate_request_modal_form', $view_data);
