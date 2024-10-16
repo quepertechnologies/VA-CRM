@@ -236,8 +236,8 @@ foreach ($task_statuses as $status) {
                     "class": "text-center option "
                 }
             ],
-                printColumns: combineCustomFieldsColumns([2, 3 , 4, 5, 6, 7, 8, 9], '<?php echo $custom_field_headers; ?>'),
-                xlsColumns: combineCustomFieldsColumns([2, 3 , 4, 5, 6, 7, 8, 9], '<?php echo $custom_field_headers; ?>'),
+                printColumns: combineCustomFieldsColumns([2, 3 , 4, 5, 6, 7, 8, 9, 10], '<?php echo $custom_field_headers; ?>'),
+                xlsColumns: combineCustomFieldsColumns([2, 3 , 4, 5, 6, 7, 8, 9, 10], '<?php echo $custom_field_headers; ?>'),
                 rowCallback: tasksTableRowCallback, //load this function from the task_table_common_script.php 
                 onRelaodCallback: function () {
                     hideBatchTasksBtn();
