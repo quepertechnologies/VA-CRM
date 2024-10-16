@@ -44,6 +44,12 @@
                     order_by: "title"
                 },
                 {
+                    title: '<?php echo app_lang("client") ?>',
+                },
+                {
+                    title: '<?php echo app_lang("labels") ?>',
+                },
+                {
                     visible: false,
                     searchable: false,
                     order_by: "start_date"
