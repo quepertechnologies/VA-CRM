@@ -69,6 +69,11 @@
                     order_by: "deadline"
                 },
                 {
+                    visible: false,
+                    searchable: false,
+                    order_by: "deadline"
+                },
+                {
                     title: '<?php echo app_lang("deadline") ?>',
                     "iDataSort": 3,
                     // visible: showOption,
